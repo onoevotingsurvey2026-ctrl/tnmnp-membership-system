@@ -12,19 +12,74 @@ body{
    MAIN CONTAINER
 ========================= */
 .container{
-  max-width:600px;
+  max-width:950px;
   margin:auto;
   background:white;
   padding:20px;
   border-radius:10px;
   box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   HEADER LAYOUT (FIXED)
+========================= */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:2px solid #000;
+  padding-bottom:10px;
+}
+
+/* LEFT LOGO */
+.left-logo{
+  flex:0 0 120px;
+  text-align:left;
+}
+
+.left-logo img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border:1px solid #ccc;
+  border-radius:8px;
+}
+
+/* CENTER INFO */
+.center-info{
+  flex:1;
   text-align:center;
+  padding:0 10px;
+}
+
+.party-title{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.tamil-title{
+  font-size:18px;
+  color:#333;
+}
+
+/* RIGHT PHOTO */
+.right-photo{
+  flex:0 0 120px;
+  text-align:right;
+}
+
+.right-photo img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border:1px solid #ccc;
+  border-radius:8px;
 }
 
 /* =========================
    INPUT + BUTTON
 ========================= */
-input, button{
+input, button, textarea{
   width:100%;
   padding:12px;
   margin-top:10px;
@@ -43,6 +98,22 @@ button{
 
 button:hover{
   background:#0056b3;
+}
+
+/* =========================
+   FORM SECTION
+========================= */
+.form-section{
+  margin-top:20px;
+}
+
+label{
+  font-weight:bold;
+}
+
+.row{
+  display:flex;
+  gap:10px;
 }
 
 /* =========================
@@ -67,7 +138,6 @@ button:hover{
   background:linear-gradient(white,#eef5ff);
   box-shadow:0 8px 20px rgba(0,0,0,0.15);
   text-align:left;
-  font-family: Arial;
 }
 
 .card h2{
@@ -89,7 +159,28 @@ button:hover{
 }
 
 /* =========================
-   GOVERNMENT STYLE POPUP
+   DECLARATION BOX
+========================= */
+.declaration-box{
+  border:1px solid #000;
+  padding:10px;
+  margin-top:10px;
+  background:#fafafa;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer{
+  margin-top:20px;
+  border-top:2px solid #000;
+  padding-top:10px;
+  font-size:14px;
+  text-align:center;
+}
+
+/* =========================
+   POPUP SYSTEM
 ========================= */
 .popup{
   padding:20px;
@@ -110,7 +201,6 @@ button:hover{
   color:#fff;
 }
 
-/* POPUP ANIMATION */
 @keyframes fadeIn{
   from{
     opacity:0;
@@ -126,7 +216,7 @@ button:hover{
    SCANNER APP FULL SCREEN
 ========================= */
 .scanner-app{
-  position: fixed;
+  position:fixed;
   top:0;
   left:0;
   width:100%;
@@ -151,7 +241,6 @@ button:hover{
   color:#00ff88;
 }
 
-/* CAMERA BOX */
 .camera-box{
   width:320px;
   margin-top:20px;
@@ -160,7 +249,6 @@ button:hover{
   overflow:hidden;
 }
 
-/* SCAN FRAME */
 .scan-frame{
   position:absolute;
   width:250px;
@@ -179,7 +267,6 @@ button:hover{
   100%{box-shadow:0 0 10px #00ff88;}
 }
 
-/* SCAN RESULT */
 .scan-result{
   margin-top:20px;
   width:90%;
@@ -197,7 +284,7 @@ button:hover{
 }
 
 /* =========================
-   SCANNER BOX (OLD UI)
+   SCANNER BOX
 ========================= */
 .scanner-box{
   margin-top:30px;
@@ -211,7 +298,7 @@ button:hover{
 /* =========================
    PRINT MODE
 ========================= */
-@media print {
+@media print{
 
   body{
     background:white;
