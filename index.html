@@ -2,254 +2,108 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>TNMNP Official Membership Portal</title>
-
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership Form</title>
 
 <style>
-/* ===== HEADER ===== */
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+/* HEADER CONTAINER */
 .header{
-  background:#0b5ed7;
-  color:white;
-  padding:20px;
-  text-align:center;
-  border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:white;
+    padding:15px;
+    border-bottom:3px solid #0a7d3b;
 }
 
-.logo{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  background:white;
-  object-fit:cover;
-  margin-bottom:10px;
+/* LEFT PHOTO */
+.left img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+    border:2px solid #ccc;
 }
 
-.tagline{
-  font-weight:bold;
-  margin-top:10px;
+/* CENTER PARTY NAME */
+.center{
+    text-align:center;
+    flex:1;
 }
 
-/* ===== BOX ===== */
-.box{
-  background:white;
-  padding:15px;
-  margin-top:15px;
-  border-radius:10px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+.center h1{
+    margin:0;
+    font-size:22px;
+    color:#0a7d3b;
 }
 
-/* ===== GRID ===== */
-.grid{
-  display:grid;
-  gap:15px;
+.center p{
+    margin:5px 0 0;
+    font-size:14px;
 }
 
-@media(min-width:700px){
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
+/* RIGHT LOGO */
+.right img{
+    width:120px;
+    height:120px;
+    object-fit:contain;
 }
 
-/* ===== SCANNER FRAME ===== */
-.scan-frame{
-  position:absolute;
-  width:250px;
-  height:250px;
-  border:2px solid #00ff88;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  border-radius:12px;
-  animation:pulse 1.2s infinite;
+/* FORM BODY */
+.form{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    padding:20px;
 }
 
-@keyframes pulse{
-  0%{box-shadow:0 0 10px #00ff88;}
-  50%{box-shadow:0 0 25px #00ff88;}
-  100%{box-shadow:0 0 10px #00ff88;}
-}
-
-/* ===== POPUP ===== */
-.popup{
-  padding:20px;
-  border-radius:12px;
-  margin-top:20px;
-  text-align:center;
-  font-weight:bold;
-  animation:fadeIn 0.4s ease-in;
-}
-
-.popup.green{
-  background:#0f2;
-  color:#000;
-}
-
-.popup.red{
-  background:#ff3b3b;
-  color:#fff;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:scale(0.9);}
-  to{opacity:1; transform:scale(1);}
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
 }
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
-
-<!-- ================= HEADER ================= -->
+<!-- HEADER -->
 <div class="header">
 
-  <!-- PARTY LOGO -->
-  <img src="logo.png" class="logo">
+    <!-- LEFT IMAGE -->
+    <div class="left">
+        <img src="/mnt/data/file_000000009d247207a7862d30f9525400" alt="Profile Photo">
+    </div>
 
-  <h1>
-    TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam<br>
-    தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-  </h1>
+    <!-- CENTER TEXT -->
+    <div class="center">
+        <h1>TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</h1>
+        <p>Membership Registration Form</p>
+    </div>
 
-  <h3>
-    Party President / General Secretary: <b>N RAMAN</b><br>
-    தலைவர் / பொதுச் செயலாளர்: <b>ந ராமன்</b>
-  </h3>
-
-  <p class="tagline">
-    “People First | Transparency | Development | Equality”
-  </p>
-
-</div>
-
-<!-- ================= INTRO ================= -->
-<div class="box">
-  <h2>🏛️ Party Introduction</h2>
-
-  <p>
-    TNMNP is a democratic people-oriented political movement committed to social justice,
-    education development, rural upliftment and transparent governance.
-  </p>
-
-  <p>
-    அடிப்படைக் கொள்கை: நேர்மை, நலன், நம்பிக்கை.<br>
-    தாரக மந்திரம்: வாய்மையே வெல்லும்.
-  </p>
-</div>
-
-<!-- ================= ADDRESS ================= -->
-<div class="box">
-  <h2>📍 Head Office</h2>
-
-  <p>
-    No. 9, 2nd Cross Street,<br>
-    Gomathipuram, Thiruninravur R.S,<br>
-    Pincode - 602024,<br>
-    Thiruvallur District,<br>
-    Avadi Constituency
-  </p>
-
-  <p>
-    <b>Regional Office:</b> Chennai State Headquarters
-  </p>
-
-  <p>
-    📧 tnmakkalnalvazhvuperiyakkam@gmail.com<br>
-    📞 +91 89393 24309 | +91 93846095599
-  </p>
-</div>
-
-<!-- ================= REGISTRATION ================= -->
-<div class="box">
-  <h2>📝 Membership Registration</h2>
-
-  <form id="registerForm">
-
-    <input type="text" id="voterid" placeholder="Voter ID *" required>
-    <input type="tel" id="phone" placeholder="Mobile Number *" required>
-    <input type="email" id="email" placeholder="Email ID *" required>
-    <input type="file" id="photo">
-
-    <label>
-      <input type="checkbox" id="declaration" required>
-
-      <b>வாக்காளர் உறுதிமொழி</b><br><br>
-
-      நான் "தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்" கட்சியில் உறுப்பினராக சேர விரும்புகிறேன் என்பதை உறுதிப்படுத்துகிறேன்.<br><br>
-
-      கட்சியின் வளர்ச்சி மற்றும் மக்கள் சேவையில் ஈடுபடுவேன்.
-    </label>
-
-    <br><br>
-
-    <button type="submit">Register Member</button>
-
-  </form>
-</div>
-
-<!-- ================= SUCCESS POPUP ================= -->
-<div id="acknowledgement" class="box" style="display:none;"></div>
-
-<!-- ================= CARD ================= -->
-<div id="card" class="box card" style="display:none; margin-top:15px;">
-  <h2>MEMBERSHIP CARD</h2>
-
-  <p><b>Reg No:</b> <span id="c_regNo"></span></p>
-  <p><b>Voter ID:</b> <span id="c_voter"></span></p>
-  <p><b>Mobile:</b> <span id="c_mobile"></span></p>
-  <p><b>Email:</b> <span id="c_email"></span></p>
-
-  <div id="qrcode"></div>
-</div>
-
-<!-- ================= ADMIN ================= -->
-<div class="box">
-  <h2>🖥️ Admin Panel</h2>
-
-  <input type="text" id="search" placeholder="Search Reg No">
-  <button onclick="searchMember()">Search</button>
-
-  <div id="result"></div>
-</div>
-
-<!-- ================= SCANNER ================= -->
-<div id="scannerApp" class="scanner-app" style="display:none;">
-
-  <div class="scanner-header">
-    <h2>🔳 MEMBER VERIFICATION SCANNER</h2>
-    <p>Align QR inside frame</p>
-  </div>
-
-  <div id="reader" class="camera-box"></div>
-
-  <div id="scanResult" class="scan-result"></div>
+    <!-- RIGHT LOGO -->
+    <div class="right">
+        <img src="/mnt/data/file_00000000dff471faa32560a54f83bbc6" alt="Party Logo">
+    </div>
 
 </div>
 
+<!-- FORM BODY -->
+<div class="form">
+    <h3>Personal Details</h3>
+
+    <input type="text" placeholder="Full Name">
+    <input type="text" placeholder="Mobile Number">
+    <input type="text" placeholder="Address">
+    <textarea placeholder="Remarks"></textarea>
+
 </div>
-
-<!-- ================= FIREBASE ================= -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-<script src="https://unpkg.com/html5-qrcode"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_PROJECT"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-</script>
-
-<script src="script.js"></script>
 
 </body>
 </html>
