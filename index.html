@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TNMNP Membership System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>
+    Political Party Membership Enrollment<br>
+    அரசியல் கட்சி உறுப்பினர் பதிவு
+  </h2>
+
+  <!-- FORM -->
+  <form id="registerForm">
+
+    <label>Voter ID *</label>
+    <input type="text" id="voterid" required>
+
+    <label>Mobile Number *</label>
+    <input type="tel" id="phone" required>
+
+    <label>Gmail ID *</label>
+    <input type="email" id="email" required>
+
+    <label>Photo (Optional)</label>
+    <input type="file" id="photo" accept="image/*">
+
+    <label class="declaration">
+      <input type="checkbox" id="declaration" required>
+      I confirm all details are true<br>
+      நான் வழங்கிய தகவல்கள் சரியானவை
+    </label>
+
+    <button type="submit">Enroll Now / பதிவு செய்க</button>
+
+  </form>
+
+  <!-- ACKNOWLEDGEMENT -->
+  <div id="acknowledgement" class="ack"></div>
+
+  <!-- 🎴 MEMBERSHIP CARD -->
+  <div id="card" class="card" style="display:none;">
+
+    <h2>TNMNP MEMBERSHIP ID CARD</h2>
+    <h3>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h3>
+
+    <!-- PHOTO -->
+    <img id="cardPhoto"
+         style="width:120px;height:120px;border-radius:10px;display:block;margin:10px auto;border:2px solid #007bff;" />
+
+    <!-- QR CODE -->
+    <div id="qrcode" style="margin:auto;display:flex;justify-content:center;"></div>
+
+    <p><b>Registration No:</b> <span id="c_regNo"></span></p>
+    <p><b>Voter ID:</b> <span id="c_voter"></span></p>
+    <p><b>Mobile:</b> <span id="c_mobile"></span></p>
+    <p><b>Email:</b> <span id="c_email"></span></p>
+    <p><b>Date:</b> <span id="c_date"></span></p>
+
+  </div>
+
+  <!-- BUTTONS -->
+  <button id="downloadCard" style="display:none;">Download Card</button>
+  <button id="whatsappShare" style="display:none;">Share WhatsApp</button>
+
+  <!-- 🖥️ ADMIN DASHBOARD -->
+  <div class="admin">
+    <h2>Admin Dashboard</h2>
+    <input type="text" id="search" placeholder="Search by Reg No">
+    <button onclick="searchMember()">Search</button>
+
+    <div id="result"></div>
+  </div>
+
+  <!-- 📷 QR SCANNER SECTION (FINAL CLEAN VERSION) -->
+  <div class="scanner-box">
+    <h2>QR Scanner</h2>
+
+    <div id="reader" style="width:300px;margin:auto;"></div>
+
+    <div id="scanResult" style="margin-top:20px;"></div>
+  </div>
+
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<!-- QR CODE GENERATOR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<!-- PDF LIBRARIES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- 📷 QR SCANNER LIBRARY -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<!-- Firebase Config -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+    authDomain: "tnmnp-membership-system.firebaseapp.com",
+    projectId: "tnmnp-membership-system",
+    storageBucket: "tnmnp-membership-system.firebasestorage.app",
+    messagingSenderId: "616857466202",
+    appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
+    measurementId: "G-Q7RYMTMLC7"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+
+<!-- MAIN SCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
