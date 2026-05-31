@@ -1,132 +1,165 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>TNMNP Membership System</title>
+<title>Party Membership Form</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f2f2f2;
+}
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://unpkg.com/html5-qrcode"></script>
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  background:white;
+  border-bottom:2px solid #ccc;
+}
+
+.side{
+  width:120px;
+  text-align:center;
+}
+
+.side img{
+  width:80px;
+  height:80px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid #aaa;
+}
+
+.center{
+  flex:1;
+  text-align:center;
+}
+
+/* FORM */
+.container{
+  width:80%;
+  margin:20px auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
+
+input, button{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+}
+
+/* MAP */
+#map{
+  height:150px;
+  background:#ddd;
+  margin-top:10px;
+}
+</style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+<div class="header">
+
+  <!-- LEFT LOGO -->
+  <div class="side">
+    <img id="logoPreview">
+    <input type="file" accept="image/*" onchange="loadLogo(event)">
+  </div>
+
+  <!-- CENTER -->
+  <div class="center">
+    <h2>PARTY MEMBERSHIP FORM</h2>
+    <p id="partyAddress">No.9, Gomathipuram, Chennai, Tamilnadu</p>
+    <div id="map">Live Google Map</div>
+  </div>
+
+  <!-- RIGHT LEADER -->
+  <div class="side">
+    <img id="leaderPreview">
+    <input type="file" accept="image/*" onchange="loadLeader(event)">
+  </div>
+
+</div>
+
+<!-- FORM -->
 <div class="container">
 
-<!-- 🏛️ CENTER GOVERNMENT PANEL -->
-<div class="gov-panel">
+<form>
 
-  <h1>TNMNP</h1>
-  <h2>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h2>
+<input type="text" id="name" placeholder="Name">
+<input type="text" id="phone" placeholder="Phone">
+<input type="text" id="regno" placeholder="Membership ID" readonly>
 
-  <p class="tagline">
-    “People First | Transparency | Development | Equality”
-  </p>
-
-  <p><b>Leader:</b> N RAMAN (President / General Secretary)</p>
-
-  <p class="eci">
-    🏛️ ECI Registration No: 56/219/2018-2021
-  </p>
-
-  <div class="address">
-    📍 No.9, 2nd Cross Street, Gomathipuram,<br>
-    Thiruninravur R.S, Pincode - 602024,<br>
-    Thiruvallur District, Tamil Nadu, India
-  </div>
-
-  <div class="contact">
-    📞 +91 89393 24309 | +91 9384695599<br>
-    📧 tnmakkalnalvazhvuperiyakkam@gmail.com
-  </div>
-
-  <div class="map">
-    <iframe
-      src="https://www.google.com/maps?q=No.9,2nd+Cross+Street,Gomathipuram,Thiruninravur&output=embed"
-      loading="lazy">
-    </iframe>
-  </div>
-
-</div>
-
-<!-- ⚙️ AUTOFILL PANEL -->
-<div id="autoFillPanel" style="display:none;">
-
-  <h3>⚙️ Autofill Settings</h3>
-
-  <input type="text" id="default_voter" placeholder="Default Voter ID">
-  <input type="text" id="default_mobile" placeholder="Default Mobile">
-  <input type="email" id="default_email" placeholder="Default Email">
-
-  <button type="button" onclick="saveDefaults()">💾 Save Defaults</button>
-</div>
-
-<!-- 📝 REGISTRATION FORM -->
-<form id="memberForm">
-
-<h3>📝 Membership Registration</h3>
-
-<input id="voterid" placeholder="Voter ID *" oninput="checkAutoFill(this.value)" required>
-
-<input id="phone" placeholder="Mobile Number *" required>
-
-<input id="email" placeholder="Email ID *" required>
-
-<button type="submit">Register Member</button>
+<button type="submit">Submit</button>
 
 </form>
 
-<div id="msg"></div>
-
-<!-- 🖥️ ADMIN PANEL -->
-<div class="admin">
-
-<h3>Admin Panel</h3>
-
-<input id="search" placeholder="Search Reg No">
-<button onclick="searchMember()">Search</button>
-
-<div id="result"></div>
+<!-- QR -->
+<div id="reader"></div>
 
 </div>
 
-<!-- 📷 SCANNER -->
-<div class="scanner-box">
+<!-- QR LIBRARY -->
+<script src="https://unpkg.com/html5-qrcode"></script>
 
-<h3>QR Scanner</h3>
-
-<div id="reader" style="width:300px;margin:auto;"></div>
-
-<button onclick="startScanner()">Start Camera Scan</button>
-
-<div id="scanResult"></div>
-
-</div>
-
-</div>
-
-<!-- FIREBASE -->
 <script>
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-  authDomain: "tnmnp-membership-system.firebaseapp.com",
-  projectId: "tnmnp-membership-system",
-  storageBucket: "tnmnp-membership-system.firebasestorage.app",
-  messagingSenderId: "616857466202",
-  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
-  measurementId: "G-Q7RYMTMLC7"
-};
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+/* IMAGE UPLOAD */
+function loadLogo(event){
+  document.getElementById("logoPreview").src =
+  URL.createObjectURL(event.target.files[0]);
+}
+
+function loadLeader(event){
+  document.getElementById("leaderPreview").src =
+  URL.createObjectURL(event.target.files[0]);
+}
+
+/* REG ID AUTO GENERATE */
+function generateRegID(){
+  let id = localStorage.getItem("regid") || 1000;
+  id++;
+  localStorage.setItem("regid", id);
+  document.getElementById("regno").value = "MBR" + id;
+}
+
+/* FORM SUBMIT */
+document.querySelector("form").addEventListener("submit", function(e){
+  e.preventDefault();
+  generateRegID();
+  alert("Form Submitted Successfully");
+});
+
+/* QR SCANNER */
+function startQR(){
+  let scanner = new Html5Qrcode("reader");
+
+  Html5Qrcode.getCameras().then(devices => {
+    if(devices.length){
+      scanner.start(
+        devices[0].id,
+        { fps: 10, qrbox: 250 },
+        (text) => {
+          alert("QR: " + text);
+          scanner.stop();
+        }
+      );
+    }
+  });
+}
+
+/* AUTO START QR */
+startQR();
+
 </script>
-
-<!-- SCRIPT -->
-<script src="script.js"></script>
 
 </body>
 </html>
