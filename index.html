@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>TNMNP Official Dashboard</title>
+<title>TNMNP Official Membership Portal</title>
+
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* ===== DASHBOARD HEADER ===== */
+/* ===== HEADER ===== */
 .header{
   background:#0b5ed7;
   color:white;
@@ -15,50 +16,83 @@
   border-radius:10px;
 }
 
-.header h1{
-  margin:0;
-  font-size:22px;
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:white;
+  object-fit:cover;
+  margin-bottom:10px;
 }
 
-.header p{
-  margin:5px 0 0;
-  font-size:14px;
+.tagline{
+  font-weight:bold;
+  margin-top:10px;
 }
 
-/* ===== INFO SECTION ===== */
-.info-box{
-  background:#f8f9ff;
-  padding:20px;
-  margin-top:15px;
-  border-left:5px solid #0b5ed7;
-  border-radius:10px;
-}
-
-/* ===== POLICY BOX ===== */
-.policy{
+/* ===== BOX ===== */
+.box{
   background:white;
   padding:15px;
   margin-top:15px;
   border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-.policy h3{
-  color:#0b5ed7;
-}
-
-/* ===== DASHBOARD GRID ===== */
+/* ===== GRID ===== */
 .grid{
   display:grid;
-  grid-template-columns:1fr;
   gap:15px;
-  margin-top:15px;
 }
 
 @media(min-width:700px){
   .grid{
     grid-template-columns:1fr 1fr;
   }
+}
+
+/* ===== SCANNER FRAME ===== */
+.scan-frame{
+  position:absolute;
+  width:250px;
+  height:250px;
+  border:2px solid #00ff88;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:12px;
+  animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 10px #00ff88;}
+  50%{box-shadow:0 0 25px #00ff88;}
+  100%{box-shadow:0 0 10px #00ff88;}
+}
+
+/* ===== POPUP ===== */
+.popup{
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px;
+  text-align:center;
+  font-weight:bold;
+  animation:fadeIn 0.4s ease-in;
+}
+
+.popup.green{
+  background:#0f2;
+  color:#000;
+}
+
+.popup.red{
+  background:#ff3b3b;
+  color:#fff;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.9);}
+  to{opacity:1; transform:scale(1);}
 }
 </style>
 
@@ -68,102 +102,147 @@
 
 <div class="container">
 
-<!-- ===== HEADER ===== -->
+<!-- ================= HEADER ================= -->
 <div class="header">
-  <h1>TNMNP – Tamilnadu Makkal Nalvazhvu Periyakkam தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்  Party President/General Secretary N RAMAN தலைவர்/பொதுச் செயலாளர் ந ராமன் </h1>
-  <p>“People First | Transparency | Development | Equality”</p>
-</div>
 
-<!-- ===== INTRO ===== -->
-<div class="info-box">
-  <h2>🏛️ Party Introduction</h2>
-  <p>
-    TNMNP is a democratic people-oriented political movement committed to social justice,
-    அடிப்படைக் கொள்கை நேர்மை நலன் நம்பிக்கை             கட்சியின் நோக்கம்  மக்களுக்காக மக்களால்                                             வெற்றி தாரக மந்திரம் வாய்மையே வெல்லும்.
+  <!-- PARTY LOGO -->
+  <img src="logo.png" class="logo">
+
+  <h1>
+    TNMNP – Tamilnadu Makkal Nalvazhvu Periyakkam<br>
+    தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+  </h1>
+
+  <h3>
+    Party President / General Secretary: <b>N RAMAN</b><br>
+    தலைவர் / பொதுச் செயலாளர்: <b>ந ராமன்</b>
+  </h3>
+
+  <p class="tagline">
+    “People First | Transparency | Development | Equality”
   </p>
 
-  <p><b>Head Office Address:</b><br>
-  No. 9,2nd Cross Street, Gomathipuram, Thiruninravur R.S,Pincode - 602024, Thiruvallur District, Avadi Legislative Assembly Constituency, Thiruvallur Parliament Assembly Constituency</p>
-
-  <p><b>Regional Office:</b><br>
-  Tamil Nadu State Headquarters, Chennai Division</p>
-
-  <p><b>Contact:</b> Gmail: tnmakkalnalvazhvuperiyakkam@gmail.com |                                                        +91 89393 24309, +91 93846095599</p>
 </div>
 
-<!-- ===== REGISTRATION FORM ===== -->
-<div class="policy">
-  <h3>📝 Membership Registration</h3>
+<!-- ================= INTRO ================= -->
+<div class="box">
+  <h2>🏛️ Party Introduction</h2>
+
+  <p>
+    TNMNP is a democratic people-oriented political movement committed to social justice,
+    education development, rural upliftment and transparent governance.
+  </p>
+
+  <p>
+    அடிப்படைக் கொள்கை: நேர்மை, நலன், நம்பிக்கை.<br>
+    தாரக மந்திரம்: வாய்மையே வெல்லும்.
+  </p>
+</div>
+
+<!-- ================= ADDRESS ================= -->
+<div class="box">
+  <h2>📍 Head Office</h2>
+
+  <p>
+    No. 9, 2nd Cross Street,<br>
+    Gomathipuram, Thiruninravur R.S,<br>
+    Pincode - 602024,<br>
+    Thiruvallur District,<br>
+    Avadi Constituency
+  </p>
+
+  <p>
+    <b>Regional Office:</b> Chennai State Headquarters
+  </p>
+
+  <p>
+    📧 tnmakkalnalvazhvuperiyakkam@gmail.com<br>
+    📞 +91 89393 24309 | +91 93846095599
+  </p>
+</div>
+
+<!-- ================= REGISTRATION ================= -->
+<div class="box">
+  <h2>📝 Membership Registration</h2>
 
   <form id="registerForm">
 
-    <input type="text" id="voterid" placeholder="Voter ID" required>
-
-    <input type="tel" id="phone" placeholder="Mobile Number" required>
-
-    <input type="email" id="email" placeholder="Email ID" required>
-
-    <input type="file" id="photo" accept="image/*">
+    <input type="text" id="voterid" placeholder="Voter ID *" required>
+    <input type="tel" id="phone" placeholder="Mobile Number *" required>
+    <input type="email" id="email" placeholder="Email ID *" required>
+    <input type="file" id="photo">
 
     <label>
       <input type="checkbox" id="declaration" required>
-      I confirm all details are correct
+
+      <b>வாக்காளர் உறுதிமொழி</b><br><br>
+
+      நான் "தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்" கட்சியில் உறுப்பினராக சேர விரும்புகிறேன் என்பதை உறுதிப்படுத்துகிறேன்.<br><br>
+
+      கட்சியின் வளர்ச்சி மற்றும் மக்கள் சேவையில் ஈடுபடுவேன்.
     </label>
+
+    <br><br>
 
     <button type="submit">Register Member</button>
 
   </form>
 </div>
 
-<!-- ===== DASHBOARD OUTPUT ===== -->
-<div class="grid">
+<!-- ================= SUCCESS POPUP ================= -->
+<div id="acknowledgement" class="box" style="display:none;"></div>
 
-  <!-- ACK -->
-  <div id="acknowledgement" class="ack"></div>
+<!-- ================= CARD ================= -->
+<div id="card" class="box card" style="display:none; margin-top:15px;">
+  <h2>MEMBERSHIP CARD</h2>
 
-  <!-- CARD -->
-  <div id="card" class="card" style="display:none;">
-    <h2>MEMBERSHIP CARD</h2>
-    <h3>TNMNP Official ID</h3>
+  <p><b>Reg No:</b> <span id="c_regNo"></span></p>
+  <p><b>Voter ID:</b> <span id="c_voter"></span></p>
+  <p><b>Mobile:</b> <span id="c_mobile"></span></p>
+  <p><b>Email:</b> <span id="c_email"></span></p>
 
-    <img id="cardPhoto" style="width:100px;height:100px;border-radius:10px;margin:auto;display:block;">
-
-    <p><b>Reg No:</b> <span id="c_regNo"></span></p>
-    <p><b>Voter ID:</b> <span id="c_voter"></span></p>
-    <p><b>Mobile:</b> <span id="c_mobile"></span></p>
-    <p><b>Email:</b> <span id="c_email"></span></p>
-
-    <div id="qrcode"></div>
-  </div>
-
+  <div id="qrcode"></div>
 </div>
 
-<!-- ===== ADMIN ===== -->
-<div class="policy">
-  <h3>🖥️ Admin Panel</h3>
+<!-- ================= ADMIN ================= -->
+<div class="box">
+  <h2>🖥️ Admin Panel</h2>
+
   <input type="text" id="search" placeholder="Search Reg No">
   <button onclick="searchMember()">Search</button>
+
   <div id="result"></div>
 </div>
 
+<!-- ================= SCANNER ================= -->
+<div id="scannerApp" class="scanner-app" style="display:none;">
+
+  <div class="scanner-header">
+    <h2>🔳 MEMBER VERIFICATION SCANNER</h2>
+    <p>Align QR inside frame</p>
+  </div>
+
+  <div id="reader" class="camera-box"></div>
+
+  <div id="scanResult" class="scan-result"></div>
+
 </div>
 
-<!-- FIREBASE -->
+</div>
+
+<!-- ================= FIREBASE ================= -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
+<script src="https://unpkg.com/html5-qrcode"></script>
+
 <script>
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-  authDomain: "tnmnp-membership-system.firebaseapp.com",
-  projectId: "tnmnp-membership-system",
-  storageBucket: "tnmnp-membership-system.firebasestorage.app",
-  messagingSenderId: "616857466202",
-  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
-  measurementId: "G-Q7RYMTMLC7"
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT"
 };
 
 firebase.initializeApp(firebaseConfig);
