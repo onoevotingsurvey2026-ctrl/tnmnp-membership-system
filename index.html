@@ -2,7 +2,7 @@
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
-<title>TMNP Membership Form</title>
+<title>TMNP Membership System</title>
 
 <style>
 body{
@@ -13,7 +13,7 @@ body{
 }
 
 .container{
-    max-width:950px;
+    max-width:1000px;
     margin:auto;
     background:white;
     padding:20px;
@@ -25,39 +25,18 @@ body{
 .header{
     display:flex;
     justify-content:space-between;
-    align-items:center;
     border-bottom:2px solid #000;
     padding-bottom:10px;
 }
 
-.left-logo,.right-photo{
-    flex:0 0 120px;
-}
-
-.left-logo img,.right-photo img{
+.box img{
     width:120px;
     height:120px;
     object-fit:cover;
     border:1px solid #ccc;
-    border-radius:8px;
-}
-
-.center-info{
-    flex:1;
-    text-align:center;
-}
-
-.eci-info{
-    margin-top:8px;
-    font-size:13px;
-    color:#444;
 }
 
 /* FORM */
-.form-section{
-    margin-top:20px;
-}
-
 input,textarea{
     width:100%;
     padding:10px;
@@ -70,15 +49,22 @@ input,textarea{
     gap:10px;
 }
 
+.section-title{
+    margin-top:20px;
+    font-weight:bold;
+    color:#2e7d32;
+}
+
 /* BUTTON */
 button{
-    padding:12px;
     width:100%;
+    padding:12px;
     background:#2e7d32;
     color:white;
     border:none;
-    cursor:pointer;
     font-size:16px;
+    cursor:pointer;
+    border-radius:6px;
 }
 
 #msg{
@@ -95,39 +81,57 @@ button{
 <!-- HEADER -->
 <div class="header">
 
-    <div class="left-logo">
+    <div class="box">
         <img id="logoPreview">
+        <input type="file" onchange="loadLogo(event)">
     </div>
 
-    <div class="center-info">
-        <h3>TMNP MEMBERSHIP FORM</h3>
-        <div class="eci-info">
-            Election Commission of India Registered Party
-        </div>
+    <div style="text-align:center;">
+        <h2>TMNP - Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
+        <p>ECI Registered Political Party</p>
+        <p><b>Leader: N RAMAN</b></p>
+        <p>ECI Reg No: 56/219/2018-2021</p>
     </div>
 
-    <div class="right-photo">
+    <div class="box">
         <img id="leaderPreview">
+        <input type="file" onchange="loadLeader(event)">
     </div>
 
 </div>
 
 <!-- FORM -->
-<div class="form-section">
-
 <form id="memberForm">
 
-<textarea id="address" placeholder="Full Address"></textarea>
+<div class="section-title">MEMBER DETAILS</div>
+
+<input id="name" placeholder="Full Name">
+<input id="address" placeholder="Full Address">
 
 <div class="row">
     <input id="voter" placeholder="Voter ID">
     <input id="phone" placeholder="Mobile">
 </div>
 
-<input id="email" placeholder="Email">
-<input id="eci" placeholder="ECI Reg No">
+<input id="email" placeholder="Gmail ID">
 
-<button type="submit">Save / Submit</button>
+<div class="section-title">MEMBER PHOTO</div>
+<input type="file" onchange="loadPhoto(event)">
+<img id="photoPreview" style="width:120px;height:140px;object-fit:cover;border:1px solid #000;">
+
+<div class="section-title">DECLARATION</div>
+
+<p>
+<input type="checkbox" required>
+I agree Membership Declaration
+</p>
+
+<p>
+<input type="checkbox" required>
+I agree Party Rules & Declaration
+</p>
+
+<button type="submit">SAVE / SUBMIT</button>
 
 </form>
 
@@ -135,9 +139,7 @@ button{
 
 </div>
 
-</div>
-
-<!-- FIREBASE + JS -->
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
 
@@ -156,6 +158,23 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
+/* IMAGE UPLOAD */
+function loadLogo(e){
+    document.getElementById("logoPreview").src =
+    URL.createObjectURL(e.target.files[0]);
+}
+
+function loadLeader(e){
+    document.getElementById("leaderPreview").src =
+    URL.createObjectURL(e.target.files[0]);
+}
+
+function loadPhoto(e){
+    document.getElementById("photoPreview").src =
+    URL.createObjectURL(e.target.files[0]);
+}
+
+/* SUBMIT */
 document.getElementById("memberForm").addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -163,11 +182,11 @@ document.getElementById("memberForm").addEventListener("submit", function(e){
 
     let data = {
         id:id,
+        name:document.getElementById("name").value,
         address:document.getElementById("address").value,
-        phone:document.getElementById("phone").value,
         voter:document.getElementById("voter").value,
+        phone:document.getElementById("phone").value,
         email:document.getElementById("email").value,
-        eci:document.getElementById("eci").value,
         status:"pending"
     };
 
