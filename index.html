@@ -2,7 +2,7 @@
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
-<title>Membership Form</title>
+<title>Party Membership Form</title>
 
 <style>
 body{
@@ -13,7 +13,7 @@ body{
 }
 
 .container{
-    max-width:900px;
+    max-width:950px;
     margin:auto;
     background:white;
     padding:20px;
@@ -30,7 +30,8 @@ body{
     padding-bottom:10px;
 }
 
-.logo img, .photo img{
+.logo img,
+.leader img{
     width:120px;
     height:120px;
     object-fit:cover;
@@ -44,12 +45,12 @@ body{
     padding:0 10px;
 }
 
-.party-name{
+.party-title{
     font-size:20px;
     font-weight:bold;
 }
 
-.tamil-name{
+.tamil-title{
     font-size:18px;
     color:#333;
 }
@@ -59,21 +60,29 @@ body{
     margin-top:20px;
 }
 
-.row{
-    display:flex;
-    gap:10px;
+label{
+    font-weight:bold;
 }
 
 input, textarea{
     width:100%;
     padding:10px;
-    margin-top:8px;
-    margin-bottom:8px;
+    margin-top:6px;
+    margin-bottom:12px;
     box-sizing:border-box;
 }
 
-label{
-    font-weight:bold;
+.row{
+    display:flex;
+    gap:10px;
+}
+
+/* DECLARATION */
+.declaration-box{
+    border:1px solid #000;
+    padding:10px;
+    margin-top:10px;
+    background:#fafafa;
 }
 
 /* FOOTER */
@@ -82,86 +91,90 @@ label{
     border-top:2px solid #000;
     padding-top:10px;
     font-size:14px;
-}
-
-.declaration{
-    font-weight:bold;
     text-align:center;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- HEADER -->
-    <div class="header">
+<!-- HEADER -->
+<div class="header">
 
-        <!-- LOGO (LEFT - FIXED) -->
-        <div class="logo">
-            <img src="logo.png" alt="Party Logo">
-        </div>
-
-        <!-- PARTY INFO -->
-        <div class="party-info">
-            <div class="party-name">
-                TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
-            </div>
-            <div class="tamil-name">
-                தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-            </div>
-
-            <div>
-                President / General Secretary:<br>
-                <b>N RAMAN</b><br>
-                தலைவர் / பொதுச் செயலாளர் ந ராமன்
-            </div>
-        </div>
-
-        <!-- PHOTO (RIGHT - FIXED) -->
-        <div class="photo">
-            <img src="photo.jpg" alt="Member Photo">
-        </div>
-
+    <!-- LEFT LOGO FIXED -->
+    <div class="logo">
+        <img src="logo.png" alt="Party Logo">
     </div>
 
-    <!-- FORM BODY -->
-    <div class="form-section">
-
-        <label>Address</label>
-        <textarea placeholder="Full Address"></textarea>
-
-        <div class="row">
-            <div>
-                <label>Mobile</label>
-                <input type="text" placeholder="Mobile Number">
-            </div>
-
-            <div>
-                <label>Email</label>
-                <input type="email" placeholder="Email">
-            </div>
+    <!-- CENTER PARTY INFO -->
+    <div class="party-info">
+        <div class="party-title">
+            TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
+        </div>
+        <div class="tamil-title">
+            தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
         </div>
 
-        <label>ECI Registration Number</label>
-        <input type="text" placeholder="ECI Reg No">
-
-        <label>Party / Constituency Details</label>
-        <textarea placeholder="Details"></textarea>
-
-    </div>
-
-    <!-- FOOTER -->
-    <div class="footer">
-        <div>ECI Registered Party Form</div>
-
-        <div class="declaration">
-            VOTER DECLARATION:<br>
-            I hereby declare that all information provided is true and correct.
+        <div>
+            President / General Secretary <br>
+            <b>N RAMAN</b><br>
+            தலைவர் / பொதுச் செயலாளர் ந ராமன்
         </div>
     </div>
+
+    <!-- RIGHT LEADER PHOTO FIXED -->
+    <div class="leader">
+        <img src="leader.jpg" alt="Leader Photo">
+    </div>
+
+</div>
+
+<!-- FORM BODY -->
+<div class="form-section">
+
+    <label>Full Address</label>
+    <textarea placeholder="Enter Address"></textarea>
+
+    <div class="row">
+        <div>
+            <label>Voter ID</label>
+            <input type="text" placeholder="Voter ID Number">
+        </div>
+
+        <div>
+            <label>Mobile Number</label>
+            <input type="text" placeholder="Mobile Number">
+        </div>
+    </div>
+
+    <label>Email (Gmail)</label>
+    <input type="email" placeholder="Email ID">
+
+    <label>Member Photo Upload</label>
+    <input type="file">
+
+    <label>ECI Registration Number</label>
+    <input type="text" placeholder="ECI Reg No">
+
+</div>
+
+<!-- DECLARATIONS -->
+<div class="declaration-box">
+    <b>Membership Declaration:</b><br>
+    I hereby confirm that all the information provided is true and I agree to become a member of the party voluntarily.
+</div>
+
+<div class="declaration-box">
+    <b>Political Party Declaration:</b><br>
+    I accept the rules, ideology, and constitution of the party and will follow all lawful instructions of the organization.
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    ✔ Official Party Membership Form  
+</div>
 
 </div>
 
