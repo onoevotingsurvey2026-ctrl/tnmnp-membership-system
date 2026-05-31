@@ -1,107 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Membership Form</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial, sans-serif;
-    background:#f4f4f4;
+    padding:20px;
+    font-family:Arial;
+    background:#f2f2f2;
 }
 
-/* HEADER CONTAINER */
-.header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:white;
-    padding:15px;
-    border-bottom:3px solid #0a7d3b;
-}
-
-/* LEFT PHOTO */
-.left img{
-    width:120px;
-    height:120px;
-    object-fit:cover;
-    border-radius:10px;
-    border:2px solid #ccc;
-}
-
-/* CENTER PARTY NAME */
-.center{
-    text-align:center;
-    flex:1;
-}
-
-.center h1{
-    margin:0;
-    font-size:22px;
-    color:#0a7d3b;
-}
-
-.center p{
-    margin:5px 0 0;
-    font-size:14px;
-}
-
-/* RIGHT LOGO */
-.right img{
-    width:120px;
-    height:120px;
-    object-fit:contain;
-}
-
-/* FORM BODY */
-.form{
-    max-width:800px;
+.container{
+    max-width:900px;
     margin:auto;
     background:white;
     padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:2px solid #000;
+    padding-bottom:10px;
+}
+
+.logo img, .photo img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.party-info{
+    text-align:center;
+    flex:1;
+    padding:0 10px;
+}
+
+.party-name{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.tamil-name{
+    font-size:18px;
+    color:#333;
+}
+
+/* FORM */
+.form-section{
+    margin-top:20px;
+}
+
+.row{
+    display:flex;
+    gap:10px;
 }
 
 input, textarea{
     width:100%;
     padding:10px;
-    margin-top:10px;
+    margin-top:8px;
+    margin-bottom:8px;
+    box-sizing:border-box;
+}
+
+label{
+    font-weight:bold;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:20px;
+    border-top:2px solid #000;
+    padding-top:10px;
+    font-size:14px;
+}
+
+.declaration{
+    font-weight:bold;
+    text-align:center;
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
+<div class="container">
 
-    <!-- LEFT IMAGE -->
-    <div class="left">
-        <img src="/mnt/data/file_000000009d247207a7862d30f9525400" alt="Profile Photo">
+    <!-- HEADER -->
+    <div class="header">
+
+        <!-- LOGO (LEFT - FIXED) -->
+        <div class="logo">
+            <img src="logo.png" alt="Party Logo">
+        </div>
+
+        <!-- PARTY INFO -->
+        <div class="party-info">
+            <div class="party-name">
+                TNMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
+            </div>
+            <div class="tamil-name">
+                தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+            </div>
+
+            <div>
+                President / General Secretary:<br>
+                <b>N RAMAN</b><br>
+                தலைவர் / பொதுச் செயலாளர் ந ராமன்
+            </div>
+        </div>
+
+        <!-- PHOTO (RIGHT - FIXED) -->
+        <div class="photo">
+            <img src="photo.jpg" alt="Member Photo">
+        </div>
+
     </div>
 
-    <!-- CENTER TEXT -->
-    <div class="center">
-        <h1>TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</h1>
-        <p>Membership Registration Form</p>
+    <!-- FORM BODY -->
+    <div class="form-section">
+
+        <label>Address</label>
+        <textarea placeholder="Full Address"></textarea>
+
+        <div class="row">
+            <div>
+                <label>Mobile</label>
+                <input type="text" placeholder="Mobile Number">
+            </div>
+
+            <div>
+                <label>Email</label>
+                <input type="email" placeholder="Email">
+            </div>
+        </div>
+
+        <label>ECI Registration Number</label>
+        <input type="text" placeholder="ECI Reg No">
+
+        <label>Party / Constituency Details</label>
+        <textarea placeholder="Details"></textarea>
+
     </div>
 
-    <!-- RIGHT LOGO -->
-    <div class="right">
-        <img src="/mnt/data/file_00000000dff471faa32560a54f83bbc6" alt="Party Logo">
+    <!-- FOOTER -->
+    <div class="footer">
+        <div>ECI Registered Party Form</div>
+
+        <div class="declaration">
+            VOTER DECLARATION:<br>
+            I hereby declare that all information provided is true and correct.
+        </div>
     </div>
-
-</div>
-
-<!-- FORM BODY -->
-<div class="form">
-    <h3>Personal Details</h3>
-
-    <input type="text" placeholder="Full Name">
-    <input type="text" placeholder="Mobile Number">
-    <input type="text" placeholder="Address">
-    <textarea placeholder="Remarks"></textarea>
 
 </div>
 
