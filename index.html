@@ -21,7 +21,9 @@ body{
     box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-/* HEADER FIXED */
+/* =========================
+   HEADER FIXED (UPLOAD MODE)
+========================= */
 .header{
     display:flex;
     justify-content:space-between;
@@ -42,6 +44,8 @@ body{
     object-fit:cover;
     border:1px solid #ccc;
     border-radius:8px;
+    display:block;
+    margin-bottom:5px;
 }
 
 /* CENTER INFO */
@@ -77,9 +81,13 @@ body{
     object-fit:cover;
     border:1px solid #ccc;
     border-radius:8px;
+    display:block;
+    margin-bottom:5px;
 }
 
-/* FORM */
+/* =========================
+   FORM SECTION
+========================= */
 .form-section{
     margin-top:20px;
 }
@@ -101,7 +109,9 @@ input, textarea{
     gap:10px;
 }
 
-/* DECLARATION */
+/* =========================
+   DECLARATION
+========================= */
 .declaration-box{
     border:1px solid #000;
     padding:10px;
@@ -109,7 +119,9 @@ input, textarea{
     background:#fafafa;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 .footer{
     margin-top:20px;
     border-top:2px solid #000;
@@ -124,15 +136,16 @@ input, textarea{
 
 <div class="container">
 
-<!-- HEADER (FIXED MERGED) -->
+<!-- HEADER (UPLOAD ENABLED) -->
 <div class="header">
 
-    <!-- LEFT: LOGO -->
+    <!-- LEFT: LOGO UPLOAD -->
     <div class="left-logo">
-        <img src="logo.png" alt="Party Logo">
+        <img id="logoPreview" src="" alt="Upload Logo">
+        <input type="file" accept="image/*" onchange="loadLogo(event)">
     </div>
 
-    <!-- CENTER: PARTY INFO -->
+    <!-- CENTER -->
     <div class="center-info">
 
         <div class="party-title">
@@ -151,9 +164,10 @@ input, textarea{
 
     </div>
 
-    <!-- RIGHT: LEADER PHOTO -->
+    <!-- RIGHT: LEADER PHOTO UPLOAD -->
     <div class="right-photo">
-        <img src="leader.jpg" alt="Leader Photo">
+        <img id="leaderPreview" src="" alt="Upload Leader Photo">
+        <input type="file" accept="image/*" onchange="loadLeader(event)">
     </div>
 
 </div>
@@ -204,6 +218,33 @@ input, textarea{
 </div>
 
 </div>
+
+<!-- =========================
+     JAVASCRIPT FOR UPLOAD
+========================= -->
+<script>
+function loadLogo(event){
+    const file = event.target.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(){
+            document.getElementById("logoPreview").src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function loadLeader(event){
+    const file = event.target.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(){
+            document.getElementById("leaderPreview").src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+</script>
 
 </body>
 </html>
