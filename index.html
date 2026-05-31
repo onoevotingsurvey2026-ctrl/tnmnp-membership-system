@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Party Membership Form</title>
+<title>Membership System</title>
 
 <style>
 body{
@@ -22,13 +22,13 @@ body{
 }
 
 .side{
-  width:120px;
+  width:130px;
   text-align:center;
 }
 
 .side img{
-  width:80px;
-  height:80px;
+  width:85px;
+  height:85px;
   object-fit:cover;
   border-radius:10px;
   border:1px solid #aaa;
@@ -41,7 +41,7 @@ body{
 
 /* FORM */
 .container{
-  width:80%;
+  width:85%;
   margin:20px auto;
   background:white;
   padding:20px;
@@ -51,13 +51,13 @@ body{
 input, button{
   width:100%;
   padding:10px;
-  margin:8px 0;
+  margin:6px 0;
+  box-sizing:border-box;
 }
 
-/* MAP */
-#map{
-  height:150px;
-  background:#ddd;
+/* QR */
+#reader{
+  width:300px;
   margin-top:10px;
 }
 </style>
@@ -71,20 +71,24 @@ input, button{
   <!-- LEFT LOGO -->
   <div class="side">
     <img id="logoPreview">
-    <input type="file" accept="image/*" onchange="loadLogo(event)">
+    <input type="file" accept="image/*" onchange="loadImage(event,'logoPreview')">
   </div>
 
   <!-- CENTER -->
   <div class="center">
-    <h2>PARTY MEMBERSHIP FORM</h2>
-    <p id="partyAddress">No.9, Gomathipuram, Chennai, Tamilnadu</p>
-    <div id="map">Live Google Map</div>
+    <h2>MEMBERSHIP FORM</h2>
+
+    <h3 id="partyName">Party Name</h3>
+    <p id="partyAddress">Party Address - Chennai, Tamilnadu</p>
+    <p id="partyMobile">Mobile: 0000000000</p>
+
+    <input type="text" id="eciReg" placeholder="ECI Registration No">
   </div>
 
   <!-- RIGHT LEADER -->
   <div class="side">
     <img id="leaderPreview">
-    <input type="file" accept="image/*" onchange="loadLeader(event)">
+    <input type="file" accept="image/*" onchange="loadImage(event,'leaderPreview')">
   </div>
 
 </div>
@@ -92,10 +96,12 @@ input, button{
 <!-- FORM -->
 <div class="container">
 
-<form>
+<form id="form">
 
-<input type="text" id="name" placeholder="Name">
-<input type="text" id="phone" placeholder="Phone">
+<input type="text" id="name" placeholder="Name" autocomplete="name">
+<input type="tel" id="phone" placeholder="Phone" autocomplete="tel">
+<input type="text" id="address" placeholder="Address" autocomplete="street-address">
+
 <input type="text" id="regno" placeholder="Membership ID" readonly>
 
 <button type="submit">Submit</button>
@@ -103,27 +109,38 @@ input, button{
 </form>
 
 <!-- QR -->
+<h3>QR SCANNER</h3>
 <div id="reader"></div>
+
+<button onclick="startQR()">Start QR</button>
+<button onclick="stopQR()">Stop QR</button>
 
 </div>
 
-<!-- QR LIBRARY -->
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <script>
 
 /* IMAGE UPLOAD */
-function loadLogo(event){
-  document.getElementById("logoPreview").src =
+function loadImage(event,id){
+  document.getElementById(id).src =
   URL.createObjectURL(event.target.files[0]);
 }
 
-function loadLeader(event){
-  document.getElementById("leaderPreview").src =
-  URL.createObjectURL(event.target.files[0]);
+/* AUTO SAVE + AUTOFILL */
+document.addEventListener("input", function(e){
+  if(e.target.tagName === "INPUT"){
+    localStorage.setItem(e.target.id, e.target.value);
+  }
+});
+
+window.onload = function(){
+  document.querySelectorAll("input").forEach(i=>{
+    i.value = localStorage.getItem(i.id) || "";
+  });
 }
 
-/* REG ID AUTO GENERATE */
+/* REG ID GENERATE */
 function generateRegID(){
   let id = localStorage.getItem("regid") || 1000;
   id++;
@@ -132,15 +149,17 @@ function generateRegID(){
 }
 
 /* FORM SUBMIT */
-document.querySelector("form").addEventListener("submit", function(e){
+document.getElementById("form").addEventListener("submit", function(e){
   e.preventDefault();
   generateRegID();
-  alert("Form Submitted Successfully");
+  alert("Membership Registered Successfully");
 });
 
-/* QR SCANNER */
+/* QR */
+let scanner;
+
 function startQR(){
-  let scanner = new Html5Qrcode("reader");
+  scanner = new Html5Qrcode("reader");
 
   Html5Qrcode.getCameras().then(devices => {
     if(devices.length){
@@ -149,15 +168,17 @@ function startQR(){
         { fps: 10, qrbox: 250 },
         (text) => {
           alert("QR: " + text);
-          scanner.stop();
         }
       );
     }
   });
 }
 
-/* AUTO START QR */
-startQR();
+function stopQR(){
+  if(scanner){
+    scanner.stop().then(()=>scanner.clear());
+  }
+}
 
 </script>
 
