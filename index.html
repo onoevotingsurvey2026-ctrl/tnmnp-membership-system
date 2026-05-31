@@ -3,40 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <title>TNMNP Membership System</title>
+
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* ⚙️ AUTOFILL PANEL */
-.box{
-  background:#fff;
-  padding:15px;
-  margin:10px 0;
-  border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+body{
+  font-family: Arial;
+  background:#f2f2f2;
+  margin:0;
+  padding:20px;
 }
 
-.popup{
+.container{
+  max-width:700px;
+  margin:auto;
+  background:white;
   padding:20px;
-  border-radius:12px;
-  margin-top:20px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
   text-align:center;
-  font-weight:bold;
-  animation:fadeIn 0.4s ease-in;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:2px solid #000;
+  padding-bottom:10px;
+  margin-bottom:15px;
+}
+
+.logo-box img{
+  width:90px;
+  height:90px;
+  object-fit:cover;
+  border:1px solid #ccc;
+}
+
+.title h2{
+  margin:0;
+  color:#1b5e20;
+}
+
+.title p{
+  margin:5px 0;
+}
+
+/* INPUT */
+input, button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  box-sizing:border-box;
+}
+
+button{
+  background:#1b5e20;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#145a18;
+}
+
+/* POPUP */
+.popup{
+  padding:15px;
+  border-radius:10px;
+  margin-top:10px;
 }
 
 .popup.green{
-  background:#00ff66;
+  background:#00c853;
   color:#000;
 }
 
 .popup.red{
-  background:#ff3b3b;
+  background:#d50000;
   color:#fff;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:scale(0.9);}
-  to{opacity:1; transform:scale(1);}
+/* SCANNER */
+.scanner-box{
+  margin-top:20px;
+  padding:15px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.scanner-app{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  color:#fff;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  padding-top:20px;
+}
+
+.camera-box{
+  width:300px;
+  margin-top:20px;
+}
+
+.scan-result{
+  margin-top:20px;
+  background:#111;
+  padding:15px;
+  width:90%;
+  border-radius:10px;
 }
 </style>
 </head>
@@ -45,49 +128,59 @@
 
 <div class="container">
 
-<!-- 🏛️ PARTY HEADER -->
-<div class="box">
-  <h2>TNMNP - Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
-  <h3>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h3>
-  <p><b>Leader:</b> N RAMAN</p>
-  <p>“People First | Transparency | Development | Equality”</p>
-</div>
+  <!-- 🏛️ HEADER -->
+  <div class="header">
 
-<!-- ⚙️ SETTINGS PANEL -->
-<div class="box">
-  <h3>⚙️ Autofill Settings</h3>
+    <!-- LOGO LEFT ONLY -->
+    <div class="logo-box">
+      <input type="file" onchange="loadLogo(event)">
+      <img id="logoPreview">
+    </div>
 
-  <input type="text" id="default_voter" placeholder="Default Voter ID">
-  <input type="text" id="default_mobile" placeholder="Default Mobile">
-  <input type="email" id="default_email" placeholder="Default Email">
+    <!-- TAMIL PARTY NAME ONLY -->
+    <div class="title">
+      <h2>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h2>
+      <p><b>ECI Regn No:</b> 56/219/2018-2021</p>
+    </div>
 
-  <button type="button" onclick="saveDefaults()">💾 Save Defaults</button>
-</div>
+  </div>
 
-<!-- 📝 FORM -->
-<form id="registerForm">
+  <!-- ⚙️ AUTOFILL -->
+  <div>
+    <h3>⚙️ Autofill Settings</h3>
 
-  <input type="text" id="voterid"
-         placeholder="Voter ID *"
-         oninput="checkAutoFill(this.value)"
-         required>
+    <input id="default_voter" placeholder="Default Voter ID">
+    <input id="default_mobile" placeholder="Default Mobile">
+    <input id="default_email" placeholder="Default Email">
 
-  <input type="tel" id="phone" placeholder="Mobile Number *" required>
+    <button onclick="saveDefaults()">💾 Save Defaults</button>
+  </div>
 
-  <input type="email" id="email" placeholder="Gmail ID *" required>
+  <!-- 📝 FORM -->
+  <form id="registerForm">
 
-  <button type="submit">Register Member</button>
-</form>
+    <input id="voterid"
+           placeholder="Voter ID *"
+           oninput="checkAutoFill(this.value)"
+           required>
 
-<!-- ⚡ ACK -->
-<div id="ack"></div>
+    <input id="phone" placeholder="Mobile Number *" required>
 
-<!-- 📷 SCANNER -->
-<div class="scanner-box">
-  <h3>QR Scanner</h3>
-  <div id="reader"></div>
-  <div id="scanResult"></div>
-</div>
+    <input id="email" placeholder="Gmail ID *" required>
+
+    <button type="submit">Register Member</button>
+
+  </form>
+
+  <!-- REGISTER RESULT -->
+  <div id="ack"></div>
+
+  <!-- 📷 SCANNER -->
+  <div class="scanner-box">
+    <h3>QR Scanner</h3>
+    <div id="reader"></div>
+    <div id="scanResult"></div>
+  </div>
 
 </div>
 
@@ -95,11 +188,10 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
-<!-- QR -->
+<!-- QR SCANNER -->
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <script>
-/* ================= FIREBASE ================= */
 const firebaseConfig = {
   apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
   authDomain: "tnmnp-membership-system.firebaseapp.com",
@@ -112,63 +204,67 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-/* ================= AUTO FILL STORAGE ================= */
-function saveDefaults(){
-  localStorage.setItem("voter", document.getElementById("default_voter").value);
-  localStorage.setItem("mobile", document.getElementById("default_mobile").value);
-  localStorage.setItem("email", document.getElementById("default_email").value);
-
-  alert("Defaults Saved ✔");
+/* LOGO */
+function loadLogo(e){
+  document.getElementById("logoPreview").src =
+  URL.createObjectURL(e.target.files[0]);
 }
 
-/* ================= AUTO FILL LOGIC ================= */
-function checkAutoFill(value){
+/* AUTOFILL */
+function getDefaults(){
+  return JSON.parse(localStorage.getItem("tnmnp_defaults")) || {};
+}
 
-  if(value.length > 0){
-    document.getElementById("voterid").value =
-      localStorage.getItem("voter") || value;
+function saveDefaults(){
+  let data = {
+    voter: default_voter.value,
+    mobile: default_mobile.value,
+    email: default_email.value
+  };
 
-    document.getElementById("phone").value =
-      localStorage.getItem("mobile") || "";
+  localStorage.setItem("tnmnp_defaults", JSON.stringify(data));
+  alert("Saved ✔");
+}
 
-    document.getElementById("email").value =
-      localStorage.getItem("email") || "";
+function checkAutoFill(val){
+
+  let d = getDefaults();
+
+  if(val.length > 0){
+    voterid.value = d.voter || val;
+    phone.value = d.mobile || "";
+    email.value = d.email || "";
   }
 }
 
-/* ================= FORM SUBMIT ================= */
-document.getElementById("registerForm").addEventListener("submit", function(e){
+/* REGISTER */
+registerForm.addEventListener("submit", e=>{
   e.preventDefault();
 
   let regNo = "TNMNP-" + Date.now();
 
   db.collection("members").add({
-    regNo: regNo,
-    voterId: document.getElementById("voterid").value,
-    mobile: document.getElementById("phone").value,
-    email: document.getElementById("email").value
+    regNo,
+    voterId: voterid.value,
+    mobile: phone.value,
+    email: email.value
   });
 
-  document.getElementById("ack").innerHTML =
-  `<div class="popup green">✅ REGISTERED<br>${regNo}</div>`;
-
-  this.reset();
+  ack.innerHTML = `<div class="popup green">✅ REGISTERED<br>${regNo}</div>`;
+  registerForm.reset();
 });
 
-/* ================= SCANNER ================= */
+/* SCANNER */
 let scanner;
 
 function startScanner(){
-  scanner = new Html5QrcodeScanner("reader",
-    { fps: 10, qrbox: 250 });
-
+  scanner = new Html5QrcodeScanner("reader",{fps:10,qrbox:250});
   scanner.render(onScanSuccess);
 }
-
 startScanner();
 
-/* ================= SCAN RESULT ================= */
-function onScanSuccess(decodedText){
+/* SCAN RESULT */
+function onScanSuccess(text){
 
   let beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
   beep.play();
@@ -176,28 +272,25 @@ function onScanSuccess(decodedText){
   if(navigator.vibrate) navigator.vibrate(200);
 
   db.collection("members")
-  .where("regNo","==",decodedText)
+  .where("regNo","==",text)
   .get()
-  .then(snap => {
-
-    let r = document.getElementById("scanResult");
+  .then(snap=>{
 
     if(snap.empty){
-      r.innerHTML = `<div class="popup red">❌ INVALID MEMBER</div>`;
+      scanResult.innerHTML = `<div class="popup red">❌ INVALID</div>`;
       return;
     }
 
-    snap.forEach(doc => {
+    snap.forEach(doc=>{
       let d = doc.data();
 
-      r.innerHTML = `
+      scanResult.innerHTML = `
         <div class="popup green">
-          🏛️ VERIFIED MEMBER<br><br>
-          Reg No: ${d.regNo}<br>
-          Voter: ${d.voterId}<br>
-          Mobile: ${d.mobile}<br>
-          Email: ${d.email}<br><br>
-          STATUS: ACTIVE
+          🏛️ VERIFIED<br><br>
+          ${d.regNo}<br>
+          ${d.voterId}<br>
+          ${d.mobile}<br>
+          ${d.email}
         </div>
       `;
     });
