@@ -65,6 +65,15 @@ body{
     color:#333;
 }
 
+/* ✅ ECI FIXED ENTRY */
+.eci-info{
+    margin-top:8px;
+    font-size:13px;
+    color:#444;
+    line-height:1.4;
+}
+
+/* LEADER NAME */
 .leader-name{
     margin-top:8px;
 }
@@ -136,7 +145,7 @@ input, textarea{
 
 <div class="container">
 
-<!-- HEADER (UPLOAD ENABLED) -->
+<!-- HEADER -->
 <div class="header">
 
     <!-- LEFT: LOGO UPLOAD -->
@@ -154,6 +163,14 @@ input, textarea{
 
         <div class="tamil-title">
             தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+        </div>
+
+        <!-- ✅ ECI FIXED ENTRY ADDED -->
+        <div class="eci-info">
+            Election Commission of India, New Delhi<br>
+            இந்திய தேர்தல் ஆணையம்<br>
+            பதிவு எண்: 56/219/2018-2021/PPS-I<br>
+            Dated: 05th March 2021
         </div>
 
         <div class="leader-name">
@@ -209,7 +226,7 @@ input, textarea{
 
 <div class="declaration-box">
     <b>Political Party Declaration:</b><br>
-    I accept the rules, ideology, and constitution of the party and will follow all lawful instructions of the organization.
+    I accept the rules, ideology, and constitution of the organization and will follow all lawful instructions of the party.
 </div>
 
 <!-- FOOTER -->
@@ -220,7 +237,7 @@ input, textarea{
 </div>
 
 <!-- =========================
-     JAVASCRIPT FOR UPLOAD
+     JAVASCRIPT
 ========================= -->
 <script>
 function loadLogo(event){
