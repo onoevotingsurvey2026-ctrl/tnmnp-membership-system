@@ -1,0 +1,118 @@
+body{
+  font-family: Arial;
+  background:#f2f2f2;
+  margin:0;
+  padding:20px;
+}
+
+/* MAIN CONTAINER */
+.container{
+  max-width:600px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+/* INPUT + BUTTON */
+input, button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  margin-bottom:10px;
+  box-sizing:border-box;
+}
+
+/* BUTTON STYLE */
+button{
+  background:#007bff;
+  color:white;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#0056b3;
+}
+
+/* ACKNOWLEDGEMENT */
+.ack{
+  margin-top:20px;
+  padding:15px;
+  border:2px solid green;
+  display:none;
+}
+
+/* 🎴 FINAL GOVERNMENT STYLE MEMBERSHIP CARD */
+.card{
+  width:320px;
+  margin:20px auto;
+  padding:22px;
+  border-radius:14px;
+  border:2px solid #0b5ed7;
+  background:linear-gradient(white,#eef5ff);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  text-align:left;
+  font-family: Arial;
+}
+
+/* CARD HEADER */
+.card h2{
+  text-align:center;
+  color:#0b5ed7;
+  margin-bottom:5px;
+}
+
+/* SUB TITLE */
+.card h3{
+  text-align:center;
+  font-size:13px;
+  margin-bottom:15px;
+  color:#333;
+}
+
+/* CARD TEXT */
+.card p{
+  font-size:14px;
+  margin:6px 0;
+}
+
+/* 📷 QR SCANNER BOX */
+.scanner-box{
+  margin-top:30px;
+  padding:20px;
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+/* 📄 PRINT OPTIMIZATION (ONLY ONE CLEAN BLOCK) */
+@media print {
+
+  body{
+    background:white;
+  }
+
+  .container{
+    box-shadow:none;
+  }
+
+  button,
+  .admin,
+  form,
+  .ack,
+  .scanner-box{
+    display:none !important;
+  }
+
+  .card{
+    width:100%;
+    border:none;
+    box-shadow:none;
+  }
+
+}
