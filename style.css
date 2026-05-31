@@ -67,6 +67,16 @@ body{
   color:#333;
 }
 
+/* =========================
+   ECI INFO (ADDED)
+========================= */
+.eci-info{
+  margin-top:8px;
+  font-size:13px;
+  color:#444;
+  line-height:1.4;
+}
+
 /* RIGHT PHOTO */
 .right-photo{
   flex:0 0 120px;
