@@ -1,107 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>QR Verification System</title>
-  <style>
-    body{
-      font-family: Arial;
-      background:#f2f2f2;
-      text-align:center;
-      padding:30px;
-    }
-
-    .box{
-      background:white;
-      padding:20px;
-      border-radius:10px;
-      max-width:400px;
-      margin:auto;
-      box-shadow:0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    h2{
-      color:#0b5ed7;
-    }
-
-    .result{
-      margin-top:20px;
-      text-align:left;
-    }
-
-    .notfound{
-      color:red;
-      font-weight:bold;
-    }
-  </style>
+  <title>TMNP Verify</title>
 </head>
 
 <body>
 
-<div class="box">
-  <h2>TNMNP QR Verification</h2>
+<h2>TMNP Verification</h2>
 
-  <p>Scan QR or Enter Reg No</p>
+<div id="result">Loading...</div>
 
-  <input type="text" id="regInput" placeholder="Enter Registration No">
-  <button onclick="verify()">Verify</button>
-
-  <div id="result" class="result"></div>
-</div>
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
 
 <script>
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
   authDomain: "tnmnp-membership-system.firebaseapp.com",
   projectId: "tnmnp-membership-system",
-  storageBucket: "tnmnp-membership-system.appspot.com",
+  storageBucket: "tnmnp-membership-system.firebasestorage.app",
   messagingSenderId: "616857466202",
-  appId: "1:616857466202:web:0fb4fae39e938ec0edef63"
+  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
+  measurementId: "G-Q7RYMTMLC7"
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
 
-function verify(){
+let id = new URLSearchParams(window.location.search).get("id");
 
-  let regNo = document.getElementById("regInput").value.trim();
-  let resultDiv = document.getElementById("result");
+firebase.database().ref("members/" + id).once("value")
+.then((snap) => {
 
-  if(!regNo){
-    alert("Enter Registration Number");
-    return;
-  }
-
-  db.collection("members")
-    .where("regNo", "==", regNo)
-    .get()
-    .then(snapshot => {
-
-      if(snapshot.empty){
-        resultDiv.innerHTML = "<p class='notfound'>❌ Member Not Found</p>";
+    if(!snap.exists()){
+        document.getElementById("result").innerHTML =
+        "❌ NOT FOUND";
         return;
-      }
+    }
 
-      snapshot.forEach(doc => {
-        let data = doc.data();
+    let m = snap.val();
 
-        resultDiv.innerHTML = `
-          <h3>✅ VERIFIED MEMBER</h3>
-          <p><b>Reg No:</b> ${data.regNo}</p>
-          <p><b>Voter ID:</b> ${data.voterId}</p>
-          <p><b>Mobile:</b> ${data.mobile}</p>
-          <p><b>Email:</b> ${data.email}</p>
-          <p><b>Status:</b> ACTIVE MEMBER</p>
-        `;
-      });
+    if(m.status === "approved"){
+        document.getElementById("result").innerHTML =
+        "✅ VALID MEMBER<br>ID: " + m.id +
+        "<br>Name: " + m.name;
+    }
+    else if(m.status === "pending"){
+        document.getElementById("result").innerHTML =
+        "⏳ PENDING APPROVAL";
+    }
+    else{
+        document.getElementById("result").innerHTML =
+        "❌ REJECTED";
+    }
 
-    });
-
-}
+});
 </script>
 
 </body>
