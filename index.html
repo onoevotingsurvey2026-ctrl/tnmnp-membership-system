@@ -2,7 +2,7 @@
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
-<title>Party Membership Form</title>
+<title>TMNP Membership Form</title>
 
 <style>
 body{
@@ -21,9 +21,7 @@ body{
     box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-/* =========================
-   HEADER FIXED (UPLOAD MODE)
-========================= */
+/* HEADER */
 .header{
     display:flex;
     justify-content:space-between;
@@ -32,84 +30,38 @@ body{
     padding-bottom:10px;
 }
 
-/* LEFT LOGO */
-.left-logo{
+.left-logo,.right-photo{
     flex:0 0 120px;
-    text-align:left;
 }
 
-.left-logo img{
+.left-logo img,.right-photo img{
     width:120px;
     height:120px;
     object-fit:cover;
     border:1px solid #ccc;
     border-radius:8px;
-    display:block;
-    margin-bottom:5px;
 }
 
-/* CENTER INFO */
 .center-info{
     flex:1;
     text-align:center;
-    padding:0 10px;
 }
 
-.party-title{
-    font-size:20px;
-    font-weight:bold;
-}
-
-.tamil-title{
-    font-size:18px;
-    color:#333;
-}
-
-/* ✅ ECI FIXED ENTRY */
 .eci-info{
     margin-top:8px;
     font-size:13px;
     color:#444;
-    line-height:1.4;
 }
 
-/* LEADER NAME */
-.leader-name{
-    margin-top:8px;
-}
-
-/* RIGHT PHOTO */
-.right-photo{
-    flex:0 0 120px;
-    text-align:right;
-}
-
-.right-photo img{
-    width:120px;
-    height:120px;
-    object-fit:cover;
-    border:1px solid #ccc;
-    border-radius:8px;
-    display:block;
-    margin-bottom:5px;
-}
-
-/* =========================
-   FORM SECTION
-========================= */
+/* FORM */
 .form-section{
     margin-top:20px;
 }
 
-label{
-    font-weight:bold;
-}
-
-input, textarea{
+input,textarea{
     width:100%;
     padding:10px;
-    margin-top:6px;
-    margin-bottom:12px;
+    margin:6px 0 12px;
     box-sizing:border-box;
 }
 
@@ -118,25 +70,20 @@ input, textarea{
     gap:10px;
 }
 
-/* =========================
-   DECLARATION
-========================= */
-.declaration-box{
-    border:1px solid #000;
-    padding:10px;
-    margin-top:10px;
-    background:#fafafa;
+/* BUTTON */
+button{
+    padding:12px;
+    width:100%;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:16px;
 }
 
-/* =========================
-   FOOTER
-========================= */
-.footer{
-    margin-top:20px;
-    border-top:2px solid #000;
-    padding-top:10px;
-    font-size:14px;
-    text-align:center;
+#msg{
+    margin-top:15px;
+    font-weight:bold;
 }
 </style>
 </head>
@@ -148,119 +95,93 @@ input, textarea{
 <!-- HEADER -->
 <div class="header">
 
-    <!-- LEFT: LOGO UPLOAD -->
     <div class="left-logo">
-        <img id="logoPreview" src="" alt="Upload Logo">
-        <input type="file" accept="image/*" onchange="loadLogo(event)">
+        <img id="logoPreview">
     </div>
 
-    <!-- CENTER -->
     <div class="center-info">
-
-        <div class="party-title">
-            TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
-        </div>
-
-        <div class="tamil-title">
-            தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-        </div>
-
-        <!-- ✅ ECI FIXED ENTRY ADDED -->
+        <h3>TMNP MEMBERSHIP FORM</h3>
         <div class="eci-info">
-            Election Commission of India, New Delhi<br>
-            இந்திய தேர்தல் ஆணையம்<br>
-            பதிவு எண்: 56/219/2018-2021/PPS-I<br>
-            Dated: 05th March 2021
+            Election Commission of India Registered Party
         </div>
-
-        <div class="leader-name">
-            President / General Secretary<br>
-            <b>N RAMAN</b><br>
-            தலைவர் / பொதுச் செயலாளர் ந ராமன்
-        </div>
-
     </div>
 
-    <!-- RIGHT: LEADER PHOTO UPLOAD -->
     <div class="right-photo">
-        <img id="leaderPreview" src="" alt="Upload Leader Photo">
-        <input type="file" accept="image/*" onchange="loadLeader(event)">
+        <img id="leaderPreview">
     </div>
 
 </div>
 
-<!-- FORM BODY -->
+<!-- FORM -->
 <div class="form-section">
 
-    <label>Full Address</label>
-    <textarea placeholder="Enter Address"></textarea>
+<form id="memberForm">
 
-    <div class="row">
-        <div>
-            <label>Voter ID</label>
-            <input type="text" placeholder="Voter ID Number">
-        </div>
+<textarea id="address" placeholder="Full Address"></textarea>
 
-        <div>
-            <label>Mobile Number</label>
-            <input type="text" placeholder="Mobile Number">
-        </div>
-    </div>
-
-    <label>Email (Gmail)</label>
-    <input type="email" placeholder="Email ID">
-
-    <label>Member Photo Upload</label>
-    <input type="file">
-
-    <label>ECI Registration Number</label>
-    <input type="text" placeholder="ECI Reg No">
-
+<div class="row">
+    <input id="voter" placeholder="Voter ID">
+    <input id="phone" placeholder="Mobile">
 </div>
 
-<!-- DECLARATIONS -->
-<div class="declaration-box">
-    <b>Membership Declaration:</b><br>
-    I hereby confirm that all the information provided is true and I agree to become a member of the party voluntarily.
-</div>
+<input id="email" placeholder="Email">
+<input id="eci" placeholder="ECI Reg No">
 
-<div class="declaration-box">
-    <b>Political Party Declaration:</b><br>
-    I accept the rules, ideology, and constitution of the organization and will follow all lawful instructions of the party.
-</div>
+<button type="submit">Save / Submit</button>
 
-<!-- FOOTER -->
-<div class="footer">
-    ✔ Official Party Membership Form  
+</form>
+
+<div id="msg"></div>
+
 </div>
 
 </div>
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+<!-- FIREBASE + JS -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+
 <script>
-function loadLogo(event){
-    const file = event.target.files[0];
-    if(file){
-        const reader = new FileReader();
-        reader.onload = function(){
-            document.getElementById("logoPreview").src = reader.result;
-        }
-        reader.readAsDataURL(file);
-    }
-}
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+  authDomain: "tnmnp-membership-system.firebaseapp.com",
+  projectId: "tnmnp-membership-system",
+  storageBucket: "tnmnp-membership-system.firebasestorage.app",
+  messagingSenderId: "616857466202",
+  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
+  measurementId: "G-Q7RYMTMLC7"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-function loadLeader(event){
-    const file = event.target.files[0];
-    if(file){
-        const reader = new FileReader();
-        reader.onload = function(){
-            document.getElementById("leaderPreview").src = reader.result;
-        }
-        reader.readAsDataURL(file);
-    }
-}
+document.getElementById("memberForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let id = "TMNP" + Date.now();
+
+    let data = {
+        id:id,
+        address:document.getElementById("address").value,
+        phone:document.getElementById("phone").value,
+        voter:document.getElementById("voter").value,
+        email:document.getElementById("email").value,
+        eci:document.getElementById("eci").value,
+        status:"pending"
+    };
+
+    db.ref("members/"+id).set(data);
+
+    document.getElementById("msg").innerHTML =
+    "✅ Form Submitted Successfully<br>🆔 ID: "+id;
+
+    let wa =
+    "https://wa.me/?text="+encodeURIComponent("TMNP ID: "+id);
+
+    window.open(wa,"_blank");
+
+    this.reset();
+});
 </script>
 
 </body>
