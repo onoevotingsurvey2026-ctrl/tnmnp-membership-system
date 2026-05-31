@@ -2,74 +2,41 @@
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
-<title>TMNP Membership System</title>
+<title>TNMNP Membership System</title>
+<link rel="stylesheet" href="style.css">
 
 <style>
-body{
-    margin:0;
-    padding:20px;
-    font-family:Arial;
-    background:#f2f2f2;
+/* ⚙️ AUTOFILL PANEL */
+.box{
+  background:#fff;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
-.container{
-    max-width:1000px;
-    margin:auto;
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+.popup{
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px;
+  text-align:center;
+  font-weight:bold;
+  animation:fadeIn 0.4s ease-in;
 }
 
-/* HEADER */
-.header{
-    display:flex;
-    justify-content:space-between;
-    border-bottom:2px solid #000;
-    padding-bottom:10px;
+.popup.green{
+  background:#00ff66;
+  color:#000;
 }
 
-.box img{
-    width:120px;
-    height:120px;
-    object-fit:cover;
-    border:1px solid #ccc;
+.popup.red{
+  background:#ff3b3b;
+  color:#fff;
 }
 
-/* FORM */
-input,textarea{
-    width:100%;
-    padding:10px;
-    margin:6px 0 12px;
-    box-sizing:border-box;
-}
-
-.row{
-    display:flex;
-    gap:10px;
-}
-
-.section-title{
-    margin-top:20px;
-    font-weight:bold;
-    color:#2e7d32;
-}
-
-/* BUTTON */
-button{
-    width:100%;
-    padding:12px;
-    background:#2e7d32;
-    color:white;
-    border:none;
-    font-size:16px;
-    cursor:pointer;
-    border-radius:6px;
-}
-
-#msg{
-    margin-top:15px;
-    font-weight:bold;
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.9);}
+  to{opacity:1; transform:scale(1);}
 }
 </style>
 </head>
@@ -78,139 +45,165 @@ button{
 
 <div class="container">
 
-<!-- HEADER -->
-<div class="header">
-
-    <div class="box">
-        <img id="logoPreview">
-        <input type="file" onchange="loadLogo(event)">
-    </div>
-
-    <div style="text-align:center;">
-        <h2>TMNP - Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
-
-        <!-- TAMIL HEADING ADDED -->
-        <h3 style="margin:5px 0;color:#2e7d32;">
-            தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் (TMNP)
-        </h3>
-
-        <p>ECI Registered Political Party</p>
-        <p><b>Leader: N RAMAN</b></p>
-        <p>ECI Reg No: 56/219/2018-2021</p>
-    </div>
-
-    <div class="box">
-        <img id="leaderPreview">
-        <input type="file" onchange="loadLeader(event)">
-    </div>
-
+<!-- 🏛️ PARTY HEADER -->
+<div class="box">
+  <h2>TNMNP - Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
+  <h3>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h3>
+  <p><b>Leader:</b> N RAMAN</p>
+  <p>“People First | Transparency | Development | Equality”</p>
 </div>
 
-<!-- FORM -->
-<form id="memberForm" autocomplete="on">
+<!-- ⚙️ SETTINGS PANEL -->
+<div class="box">
+  <h3>⚙️ Autofill Settings</h3>
 
-<div class="section-title">MEMBER DETAILS</div>
+  <input type="text" id="default_voter" placeholder="Default Voter ID">
+  <input type="text" id="default_mobile" placeholder="Default Mobile">
+  <input type="email" id="default_email" placeholder="Default Email">
 
-<!-- AUTOFILL FIX ADDED -->
-<input id="name" autocomplete="name" placeholder="Full Name">
-
-<input id="address" autocomplete="street-address" placeholder="Full Address">
-
-<div class="row">
-    <input id="voter" autocomplete="off" placeholder="Voter ID">
-    <input id="phone" autocomplete="tel" placeholder="Mobile">
+  <button type="button" onclick="saveDefaults()">💾 Save Defaults</button>
 </div>
 
-<input id="email" autocomplete="email" placeholder="Gmail ID">
+<!-- 📝 FORM -->
+<form id="registerForm">
 
-<div class="section-title">MEMBER PHOTO</div>
-<input type="file" onchange="loadPhoto(event)">
-<img id="photoPreview" style="width:120px;height:140px;object-fit:cover;border:1px solid #000;">
+  <input type="text" id="voterid"
+         placeholder="Voter ID *"
+         oninput="checkAutoFill(this.value)"
+         required>
 
-<div class="section-title">DECLARATION</div>
+  <input type="tel" id="phone" placeholder="Mobile Number *" required>
 
-<p>
-<input type="checkbox" required>
-I agree Membership Declaration
-</p>
+  <input type="email" id="email" placeholder="Gmail ID *" required>
 
-<p>
-<input type="checkbox" required>
-I agree Party Rules & Declaration
-</p>
-
-<button type="submit">SAVE / SUBMIT</button>
-
+  <button type="submit">Register Member</button>
 </form>
 
-<div id="msg"></div>
+<!-- ⚡ ACK -->
+<div id="ack"></div>
+
+<!-- 📷 SCANNER -->
+<div class="scanner-box">
+  <h3>QR Scanner</h3>
+  <div id="reader"></div>
+  <div id="scanResult"></div>
+</div>
 
 </div>
 
 <!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<!-- QR -->
+<script src="https://unpkg.com/html5-qrcode"></script>
 
 <script>
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+/* ================= FIREBASE ================= */
 const firebaseConfig = {
   apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
   authDomain: "tnmnp-membership-system.firebaseapp.com",
   projectId: "tnmnp-membership-system",
   storageBucket: "tnmnp-membership-system.firebasestorage.app",
   messagingSenderId: "616857466202",
-  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
-  measurementId: "G-Q7RYMTMLC7"
+  appId: "1:616857466202:web:0fb4fae39e938ec0edef63"
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const db = firebase.firestore();
 
-/* IMAGE PREVIEW */
-function loadLogo(e){
-    document.getElementById("logoPreview").src =
-    URL.createObjectURL(e.target.files[0]);
+/* ================= AUTO FILL STORAGE ================= */
+function saveDefaults(){
+  localStorage.setItem("voter", document.getElementById("default_voter").value);
+  localStorage.setItem("mobile", document.getElementById("default_mobile").value);
+  localStorage.setItem("email", document.getElementById("default_email").value);
+
+  alert("Defaults Saved ✔");
 }
 
-function loadLeader(e){
-    document.getElementById("leaderPreview").src =
-    URL.createObjectURL(e.target.files[0]);
+/* ================= AUTO FILL LOGIC ================= */
+function checkAutoFill(value){
+
+  if(value.length > 0){
+    document.getElementById("voterid").value =
+      localStorage.getItem("voter") || value;
+
+    document.getElementById("phone").value =
+      localStorage.getItem("mobile") || "";
+
+    document.getElementById("email").value =
+      localStorage.getItem("email") || "";
+  }
 }
 
-function loadPhoto(e){
-    document.getElementById("photoPreview").src =
-    URL.createObjectURL(e.target.files[0]);
-}
+/* ================= FORM SUBMIT ================= */
+document.getElementById("registerForm").addEventListener("submit", function(e){
+  e.preventDefault();
 
-/* SUBMIT */
-document.getElementById("memberForm").addEventListener("submit", function(e){
-    e.preventDefault();
+  let regNo = "TNMNP-" + Date.now();
 
-    let id = "TMNP" + Date.now();
+  db.collection("members").add({
+    regNo: regNo,
+    voterId: document.getElementById("voterid").value,
+    mobile: document.getElementById("phone").value,
+    email: document.getElementById("email").value
+  });
 
-    let data = {
-        id: id,
-        name: document.getElementById("name").value,
-        address: document.getElementById("address").value,
-        voter: document.getElementById("voter").value,
-        phone: document.getElementById("phone").value,
-        email: document.getElementById("email").value,
-        status: "pending"
-    };
+  document.getElementById("ack").innerHTML =
+  `<div class="popup green">✅ REGISTERED<br>${regNo}</div>`;
 
-    db.ref("members/" + id).set(data);
-
-    document.getElementById("msg").innerHTML =
-    "✅ Form Submitted Successfully<br>🆔 ID: " + id;
-
-    let wa =
-    "https://wa.me/?text=" +
-    encodeURIComponent("TMNP Membership ID: " + id);
-
-    window.open(wa, "_blank");
-
-    this.reset();
+  this.reset();
 });
+
+/* ================= SCANNER ================= */
+let scanner;
+
+function startScanner(){
+  scanner = new Html5QrcodeScanner("reader",
+    { fps: 10, qrbox: 250 });
+
+  scanner.render(onScanSuccess);
+}
+
+startScanner();
+
+/* ================= SCAN RESULT ================= */
+function onScanSuccess(decodedText){
+
+  let beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+  beep.play();
+
+  if(navigator.vibrate) navigator.vibrate(200);
+
+  db.collection("members")
+  .where("regNo","==",decodedText)
+  .get()
+  .then(snap => {
+
+    let r = document.getElementById("scanResult");
+
+    if(snap.empty){
+      r.innerHTML = `<div class="popup red">❌ INVALID MEMBER</div>`;
+      return;
+    }
+
+    snap.forEach(doc => {
+      let d = doc.data();
+
+      r.innerHTML = `
+        <div class="popup green">
+          🏛️ VERIFIED MEMBER<br><br>
+          Reg No: ${d.regNo}<br>
+          Voter: ${d.voterId}<br>
+          Mobile: ${d.mobile}<br>
+          Email: ${d.email}<br><br>
+          STATUS: ACTIVE
+        </div>
+      `;
+    });
+
+  });
+}
 </script>
 
 </body>
