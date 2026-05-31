@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Verification System</title>
+  <style>
+    body{
+      font-family: Arial;
+      background:#f2f2f2;
+      text-align:center;
+      padding:30px;
+    }
+
+    .box{
+      background:white;
+      padding:20px;
+      border-radius:10px;
+      max-width:400px;
+      margin:auto;
+      box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    h2{
+      color:#0b5ed7;
+    }
+
+    .result{
+      margin-top:20px;
+      text-align:left;
+    }
+
+    .notfound{
+      color:red;
+      font-weight:bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>TNMNP QR Verification</h2>
+
+  <p>Scan QR or Enter Reg No</p>
+
+  <input type="text" id="regInput" placeholder="Enter Registration No">
+  <button onclick="verify()">Verify</button>
+
+  <div id="result" class="result"></div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "tnmnp-membership-system.firebaseapp.com",
+  projectId: "tnmnp-membership-system",
+  storageBucket: "tnmnp-membership-system.appspot.com",
+  messagingSenderId: "616857466202",
+  appId: "1:616857466202:web:0fb4fae39e938ec0edef63"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function verify(){
+
+  let regNo = document.getElementById("regInput").value.trim();
+  let resultDiv = document.getElementById("result");
+
+  if(!regNo){
+    alert("Enter Registration Number");
+    return;
+  }
+
+  db.collection("members")
+    .where("regNo", "==", regNo)
+    .get()
+    .then(snapshot => {
+
+      if(snapshot.empty){
+        resultDiv.innerHTML = "<p class='notfound'>❌ Member Not Found</p>";
+        return;
+      }
+
+      snapshot.forEach(doc => {
+        let data = doc.data();
+
+        resultDiv.innerHTML = `
+          <h3>✅ VERIFIED MEMBER</h3>
+          <p><b>Reg No:</b> ${data.regNo}</p>
+          <p><b>Voter ID:</b> ${data.voterId}</p>
+          <p><b>Mobile:</b> ${data.mobile}</p>
+          <p><b>Email:</b> ${data.email}</p>
+          <p><b>Status:</b> ACTIVE MEMBER</p>
+        `;
+      });
+
+    });
+
+}
+</script>
+
+</body>
+</html>
