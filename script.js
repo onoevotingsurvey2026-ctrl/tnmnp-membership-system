@@ -1,3 +1,8 @@
+<script>
+
+// =========================
+// QR SCAN RESULT FUNCTION
+// =========================
 function onScanSuccess(decodedText){
 
     // 🔊 Beep sound
@@ -9,6 +14,7 @@ function onScanSuccess(decodedText){
         navigator.vibrate(200);
     }
 
+    // Firebase DB check
     db.collection("members")
     .where("regNo", "==", decodedText)
     .get()
@@ -43,3 +49,35 @@ function onScanSuccess(decodedText){
 
     });
 }
+
+
+// =========================
+// LOGO UPLOAD PREVIEW
+// =========================
+function loadLogo(event){
+    const file = event.target.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(){
+            document.getElementById("logoPreview").src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+
+// =========================
+// LEADER PHOTO UPLOAD PREVIEW
+// =========================
+function loadLeader(event){
+    const file = event.target.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(){
+            document.getElementById("leaderPreview").src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+</script>
