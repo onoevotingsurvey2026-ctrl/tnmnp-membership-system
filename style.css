@@ -1,3 +1,4 @@
+
 /* =========================
    GLOBAL BODY STYLE
 ========================= */
@@ -31,18 +32,22 @@ body{
   padding-bottom:10px;
 }
 
-/* LEFT LOGO */
-.left-logo{
-  flex:0 0 120px;
-  text-align:left;
-}
-
-.left-logo img{
+/* LEFT LOGO + RIGHT PHOTO IMAGE STYLE */
+.left-logo img,
+.right-photo img{
   width:120px;
   height:120px;
   object-fit:cover;
   border:1px solid #ccc;
   border-radius:8px;
+  display:block;
+  margin-bottom:5px;
+}
+
+/* LEFT LOGO */
+.left-logo{
+  flex:0 0 120px;
+  text-align:left;
 }
 
 /* CENTER INFO */
@@ -68,18 +73,19 @@ body{
   text-align:right;
 }
 
-.right-photo img{
-  width:120px;
-  height:120px;
-  object-fit:cover;
-  border:1px solid #ccc;
-  border-radius:8px;
+/* =========================
+   FILE UPLOAD INPUT
+========================= */
+input[type="file"]{
+  font-size:12px;
 }
 
 /* =========================
-   INPUT + BUTTON
+   INPUT + TEXTAREA + BUTTON
 ========================= */
-input, button, textarea{
+input,
+textarea,
+button{
   width:100%;
   padding:12px;
   margin-top:10px;
@@ -166,17 +172,6 @@ label{
   padding:10px;
   margin-top:10px;
   background:#fafafa;
-}
-
-/* =========================
-   FOOTER
-========================= */
-.footer{
-  margin-top:20px;
-  border-top:2px solid #000;
-  padding-top:10px;
-  font-size:14px;
-  text-align:center;
 }
 
 /* =========================
