@@ -1,124 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TNMNP Membership System</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>TNMNP Official Dashboard</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ===== DASHBOARD HEADER ===== */
+.header{
+  background:#0b5ed7;
+  color:white;
+  padding:20px;
+  text-align:center;
+  border-radius:10px;
+}
+
+.header h1{
+  margin:0;
+  font-size:22px;
+}
+
+.header p{
+  margin:5px 0 0;
+  font-size:14px;
+}
+
+/* ===== INFO SECTION ===== */
+.info-box{
+  background:#f8f9ff;
+  padding:20px;
+  margin-top:15px;
+  border-left:5px solid #0b5ed7;
+  border-radius:10px;
+}
+
+/* ===== POLICY BOX ===== */
+.policy{
+  background:white;
+  padding:15px;
+  margin-top:15px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.policy h3{
+  color:#0b5ed7;
+}
+
+/* ===== DASHBOARD GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:15px;
+  margin-top:15px;
+}
+
+@media(min-width:700px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-  <h2>
-    Political Party Membership Enrollment<br>
-    அரசியல் கட்சி உறுப்பினர் பதிவு
-  </h2>
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>TNMNP – Tamil Nadu People's Movement Party</h1>
+  <p>“People First | Transparency | Development | Equality”</p>
+</div>
 
-  <!-- FORM -->
+<!-- ===== INTRO ===== -->
+<div class="info-box">
+  <h2>🏛️ Party Introduction</h2>
+  <p>
+    TNMNP is a democratic people-oriented political movement committed to social justice,
+    education development, rural upliftment, and transparent governance.
+  </p>
+
+  <p><b>Head Office Address:</b><br>
+  No. 12, Anna Salai, Chennai - 600002, Tamil Nadu, India</p>
+
+  <p><b>Regional Office:</b><br>
+  Tamil Nadu State Headquarters, Chennai Division</p>
+
+  <p><b>Contact:</b> support@tnmnp.org | +91 90000 00000</p>
+</div>
+
+<!-- ===== POLICY ===== -->
+<div class="policy">
+  <h3>📜 Party Policies</h3>
+  <ul>
+    <li>Free and quality education for all</li>
+    <li>Transparent digital governance system</li>
+    <li>Employment generation programs</li>
+    <li>Women empowerment & safety initiatives</li>
+    <li>Digital voting & citizen participation system</li>
+  </ul>
+</div>
+
+<!-- ===== REGISTRATION FORM ===== -->
+<div class="policy">
+  <h3>📝 Membership Registration</h3>
+
   <form id="registerForm">
 
-    <label>Voter ID *</label>
-    <input type="text" id="voterid" required>
+    <input type="text" id="voterid" placeholder="Voter ID" required>
 
-    <label>Mobile Number *</label>
-    <input type="tel" id="phone" required>
+    <input type="tel" id="phone" placeholder="Mobile Number" required>
 
-    <label>Gmail ID *</label>
-    <input type="email" id="email" required>
+    <input type="email" id="email" placeholder="Email ID" required>
 
-    <label>Photo (Optional)</label>
     <input type="file" id="photo" accept="image/*">
 
-    <label class="declaration">
+    <label>
       <input type="checkbox" id="declaration" required>
-      I confirm all details are true<br>
-      நான் வழங்கிய தகவல்கள் சரியானவை
+      I confirm all details are correct
     </label>
 
-    <button type="submit">Enroll Now / பதிவு செய்க</button>
+    <button type="submit">Register Member</button>
 
   </form>
+</div>
 
-  <!-- ACKNOWLEDGEMENT -->
+<!-- ===== DASHBOARD OUTPUT ===== -->
+<div class="grid">
+
+  <!-- ACK -->
   <div id="acknowledgement" class="ack"></div>
 
-  <!-- 🎴 MEMBERSHIP CARD -->
+  <!-- CARD -->
   <div id="card" class="card" style="display:none;">
+    <h2>MEMBERSHIP CARD</h2>
+    <h3>TNMNP Official ID</h3>
 
-    <h2>TNMNP MEMBERSHIP ID CARD</h2>
-    <h3>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h3>
+    <img id="cardPhoto" style="width:100px;height:100px;border-radius:10px;margin:auto;display:block;">
 
-    <!-- PHOTO -->
-    <img id="cardPhoto"
-         style="width:120px;height:120px;border-radius:10px;display:block;margin:10px auto;border:2px solid #007bff;" />
-
-    <!-- QR CODE -->
-    <div id="qrcode" style="margin:auto;display:flex;justify-content:center;"></div>
-
-    <p><b>Registration No:</b> <span id="c_regNo"></span></p>
+    <p><b>Reg No:</b> <span id="c_regNo"></span></p>
     <p><b>Voter ID:</b> <span id="c_voter"></span></p>
     <p><b>Mobile:</b> <span id="c_mobile"></span></p>
     <p><b>Email:</b> <span id="c_email"></span></p>
-    <p><b>Date:</b> <span id="c_date"></span></p>
 
-  </div>
-
-  <!-- BUTTONS -->
-  <button id="downloadCard" style="display:none;">Download Card</button>
-  <button id="whatsappShare" style="display:none;">Share WhatsApp</button>
-
-  <!-- 🖥️ ADMIN DASHBOARD -->
-  <div class="admin">
-    <h2>Admin Dashboard</h2>
-    <input type="text" id="search" placeholder="Search by Reg No">
-    <button onclick="searchMember()">Search</button>
-
-    <div id="result"></div>
-  </div>
-
-  <!-- 📷 QR SCANNER SECTION (FINAL CLEAN VERSION) -->
-  <div class="scanner-box">
-    <h2>QR Scanner</h2>
-
-    <div id="reader" style="width:300px;margin:auto;"></div>
-
-    <div id="scanResult" style="margin-top:20px;"></div>
+    <div id="qrcode"></div>
   </div>
 
 </div>
 
-<!-- Firebase -->
+<!-- ===== ADMIN ===== -->
+<div class="policy">
+  <h3>🖥️ Admin Panel</h3>
+  <input type="text" id="search" placeholder="Search Reg No">
+  <button onclick="searchMember()">Search</button>
+  <div id="result"></div>
+</div>
+
+</div>
+
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
-<!-- QR CODE GENERATOR -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-<!-- PDF LIBRARIES -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<!-- 📷 QR SCANNER LIBRARY -->
-<script src="https://unpkg.com/html5-qrcode"></script>
-
-<!-- Firebase Config -->
 <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-    authDomain: "tnmnp-membership-system.firebaseapp.com",
-    projectId: "tnmnp-membership-system",
-    storageBucket: "tnmnp-membership-system.firebasestorage.app",
-    messagingSenderId: "616857466202",
-    appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
-    measurementId: "G-Q7RYMTMLC7"
-  };
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+  authDomain: "tnmnp-membership-system.firebaseapp.com",
+  projectId: "tnmnp-membership-system",
+  storageBucket: "tnmnp-membership-system.firebasestorage.app",
+  messagingSenderId: "616857466202",
+  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
+  measurementId: "G-Q7RYMTMLC7"
+};
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 </script>
 
-<!-- MAIN SCRIPT -->
 <script src="script.js"></script>
 
 </body>
