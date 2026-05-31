@@ -1,7 +1,91 @@
-<script>
+// =========================
+// 💾 DEFAULT STORAGE
+// =========================
+function getDefaults(){
+    return JSON.parse(localStorage.getItem("tnmnp_defaults")) || {};
+}
 
 // =========================
-// QR SCAN RESULT FUNCTION
+// ⚙️ OPEN AUTOFILL PANEL
+// =========================
+function checkAutoFill(value){
+
+    if(value.length >= 1){
+        document.getElementById("autoFillPanel").style.display = "block";
+
+        let defaults = getDefaults();
+
+        document.getElementById("default_voter").value = defaults.voter || "";
+        document.getElementById("default_mobile").value = defaults.mobile || "";
+        document.getElementById("default_email").value = defaults.email || "";
+    }
+}
+
+// =========================
+// 💾 SAVE DEFAULT SETTINGS
+// =========================
+function saveDefaults(){
+
+    let data = {
+        voter: document.getElementById("default_voter").value,
+        mobile: document.getElementById("default_mobile").value,
+        email: document.getElementById("default_email").value
+    };
+
+    localStorage.setItem("tnmnp_defaults", JSON.stringify(data));
+
+    alert("Defaults Saved Successfully ✅");
+
+    document.getElementById("autoFillPanel").style.display = "none";
+}
+
+// =========================
+// ⚡ AUTO FILL ON PAGE LOAD
+// =========================
+window.addEventListener("load", function(){
+
+    let d = getDefaults();
+
+    if(d.voter){
+        document.getElementById("voterid").value = d.voter;
+    }
+
+    if(d.mobile){
+        document.getElementById("phone").value = d.mobile;
+    }
+
+    if(d.email){
+        document.getElementById("email").value = d.email;
+    }
+});
+
+
+// =========================
+// 🔳 SCANNER SETUP
+// =========================
+let html5QrcodeScanner;
+
+function startScanner(){
+
+    document.getElementById("scannerApp").style.display = "flex";
+
+    html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        {
+            fps: 10,
+            qrbox: 250,
+            rememberLastUsedCamera: true
+        }
+    );
+
+    html5QrcodeScanner.render(onScanSuccess);
+}
+
+startScanner();
+
+
+// =========================
+// 🔊 SCAN RESULT (UPGRADED)
 // =========================
 function onScanSuccess(decodedText){
 
@@ -9,12 +93,11 @@ function onScanSuccess(decodedText){
     let beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
     beep.play();
 
-    // 📳 Vibration (mobile)
+    // 📳 Vibration
     if(navigator.vibrate){
-        navigator.vibrate(200);
+        navigator.vibrate([200, 100, 200]);
     }
 
-    // Firebase DB check
     db.collection("members")
     .where("regNo", "==", decodedText)
     .get()
@@ -24,60 +107,32 @@ function onScanSuccess(decodedText){
 
         if(snapshot.empty){
             resultDiv.innerHTML = `
-                <h3 style="color:red;">❌ INVALID QR</h3>
-                <p>Member not found</p>
+              <div class="popup red">
+                ❌ INVALID QR<br>
+                Member Not Found
+              </div>
             `;
             return;
         }
 
         snapshot.forEach(doc => {
+
             let data = doc.data();
 
             resultDiv.innerHTML = `
-                <h3 style="color:#00ff88;">✅ VERIFIED MEMBER</h3>
+              <div class="popup green">
+                🏛️ VERIFIED MEMBER<br><br>
 
-                <p><b>Reg No:</b> ${data.regNo}</p>
-                <p><b>Voter ID:</b> ${data.voterId}</p>
-                <p><b>Mobile:</b> ${data.mobile}</p>
-                <p><b>Email:</b> ${data.email}</p>
+                <b>Reg No:</b> ${data.regNo}<br>
+                <b>Voter ID:</b> ${data.voterId}<br>
+                <b>Mobile:</b> ${data.mobile}<br>
+                <b>Email:</b> ${data.email}<br><br>
 
-                <p style="color:#00ff88;font-weight:bold;">
-                    STATUS: ACTIVE
-                </p>
+                <b style="color:#000;">STATUS: ACTIVE MEMBER</b>
+              </div>
             `;
         });
 
     });
+
 }
-
-
-// =========================
-// LOGO UPLOAD PREVIEW
-// =========================
-function loadLogo(event){
-    const file = event.target.files[0];
-    if(file){
-        const reader = new FileReader();
-        reader.onload = function(){
-            document.getElementById("logoPreview").src = reader.result;
-        }
-        reader.readAsDataURL(file);
-    }
-}
-
-
-// =========================
-// LEADER PHOTO UPLOAD PREVIEW
-// =========================
-function loadLeader(event){
-    const file = event.target.files[0];
-    if(file){
-        const reader = new FileReader();
-        reader.onload = function(){
-            document.getElementById("leaderPreview").src = reader.result;
-        }
-        reader.readAsDataURL(file);
-    }
-}
-
-</script>
