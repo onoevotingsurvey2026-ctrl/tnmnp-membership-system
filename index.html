@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ta">
 
@@ -39,7 +40,7 @@ border-bottom:2px solid #000;
 padding-bottom:10px;
 }
 
-/* LEFT + RIGHT */
+/* LOGO + PHOTO */
 
 .left-logo,
 .right-photo{
@@ -48,11 +49,13 @@ width:120px;
 
 .left-logo img,
 .right-photo img{
+
 width:120px;
 height:120px;
 object-fit:cover;
 border:1px solid #ccc;
 border-radius:8px;
+
 }
 
 /* CENTER */
@@ -66,62 +69,80 @@ text-align:center;
 .membership-title{
 
 font-size:22px;
-
 font-weight:bold;
-
 line-height:1.4;
-
-margin-bottom:10px;
 
 }
 
 .join-line{
 
-font-size:16px;
+display:block;
 
-font-weight:bold;
+margin-top:6px;
+
+font-size:16px;
 
 color:#0b5ed7;
 
-display:block;
+font-weight:bold;
+
+}
+
+.party-title{
+
+font-size:20px;
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+.tamil-title{
+
+font-size:18px;
 
 margin-top:5px;
 
 }
 
-.party-title{
-font-size:20px;
-font-weight:bold;
-}
-
-.tamil-title{
-font-size:18px;
-margin-top:4px;
-}
-
 .eci-info{
+
 margin-top:10px;
+
 font-size:13px;
-line-height:1.4;
+
+line-height:1.5;
+
 }
 
 .party-address{
+
 margin-top:10px;
+
 font-size:13px;
+
 line-height:1.5;
+
 }
 
 .header-columns{
+
 display:flex;
-gap:15px;
+
 justify-content:center;
-margin-top:12px;
+
+gap:15px;
+
+margin-top:15px;
+
 flex-wrap:wrap;
+
 }
 
 .column-box{
 
-width:320px;
+width:420px;
 
 padding:12px;
 
@@ -133,56 +154,79 @@ background:#fafafa;
 
 font-size:13px;
 
-white-space:nowrap;
+line-height:1.6;
 
-overflow:hidden;
+white-space:normal;
 
-text-overflow:ellipsis;
+overflow-wrap:anywhere;
 
 }
 
 /* FORM */
 
 .form-section{
+
 margin-top:20px;
+
 }
 
 input,
 textarea,
 button{
+
 width:100%;
+
 padding:10px;
+
 margin:8px 0;
+
 box-sizing:border-box;
+
 }
 
 .row{
+
 display:flex;
+
 gap:10px;
+
 }
 
 .declaration-box{
-border:1px solid #000;
-padding:10px;
-margin-top:10px;
-}
 
-.scanner-box{
-margin-top:20px;
-padding:15px;
-border:1px solid #ccc;
+border:1px solid #000;
+
+padding:10px;
+
+margin-top:10px;
+
 }
 
 .footer{
+
 margin-top:20px;
+
 text-align:center;
+
 border-top:1px solid #ccc;
+
 padding-top:15px;
+
+}
+
+button{
+
+background:#0b5ed7;
+
+color:white;
+
+border:none;
+
+cursor:pointer;
+
 }
 
 </style>
-
-<script src="https://unpkg.com/html5-qrcode"></script>
 
 </head>
 
@@ -192,7 +236,7 @@ padding-top:15px;
 
 <div class="header">
 
-<!-- LEFT -->
+<!-- LEFT LOGO -->
 
 <div class="left-logo">
 
@@ -204,6 +248,7 @@ accept="image/*"
 onchange="loadLogo(event)">
 
 </div>
+
 
 <!-- CENTER -->
 
@@ -225,6 +270,7 @@ Join Now As Membership
 
 </div>
 
+
 <div class="party-title">
 
 TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
@@ -236,6 +282,7 @@ TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
 தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
 
 </div>
+
 
 <div class="eci-info">
 
@@ -249,14 +296,17 @@ New Delhi
 <br>
 
 பதிவு எண்:
+
 56/219/2018-2021/PPS-I
 
 <br>
 
-Dated :
+Dated:
+
 05 March 2021
 
 </div>
+
 
 <div class="party-address">
 
@@ -275,7 +325,8 @@ Thiruninravur
 
 <br>
 
-Pincode :
+Pincode:
+
 602024
 
 </div>
@@ -298,11 +349,13 @@ N RAMAN
 <br>
 
 Mobile:
+
 +91 8939324309
 
 <br>
 
 Email:
+
 tnmakkalnalvazhvuperiyakkam@gmail.com
 
 </div>
@@ -318,15 +371,20 @@ Live Website
 
 <br>
 
+<span>
+
 https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
 
-</div>
+</span>
 
 </div>
 
 </div>
 
-<!-- RIGHT -->
+</div>
+
+
+<!-- RIGHT PHOTO -->
 
 <div class="right-photo">
 
@@ -352,11 +410,15 @@ Registration ID
 
 </label>
 
-<input id="regId" readonly>
+<input
+id="regId"
+readonly>
+
 
 <input
 autocomplete="name"
 placeholder="Member Name">
+
 
 <div class="row">
 
@@ -369,14 +431,18 @@ placeholder="Voter ID">
 
 </div>
 
+
 <input
 autocomplete="email"
 placeholder="Email">
 
+
 <textarea
 autocomplete="street-address"
 placeholder="Address">
+
 </textarea>
+
 
 <label>
 
@@ -390,11 +456,13 @@ accept="image/*">
 
 </div>
 
+
 <div class="declaration-box">
 
 Membership Declaration
 
 </div>
+
 
 <div class="declaration-box">
 
@@ -402,25 +470,13 @@ Political Party Declaration
 
 </div>
 
-<div class="scanner-box">
-
-<h3>
-
-QR Scanner
-
-</h3>
-
-<div id="reader"></div>
-
-<div id="scanResult"></div>
-
-</div>
 
 <button onclick="openAdmin()">
 
 Admin Dashboard
 
 </button>
+
 
 <div class="footer">
 
@@ -431,25 +487,40 @@ Official Party Membership Form
 </div>
 
 
-<!-- CONFIG -->
-
 <script>
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-  authDomain: "tnmnp-membership-system.firebaseapp.com",
-  projectId: "tnmnp-membership-system",
-  storageBucket: "tnmnp-membership-system.firebasestorage.app",
-  messagingSenderId: "616857466202",
-  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
-  measurementId: "G-Q7RYMTMLC7"
+/* CONFIG */
+
+const firebaseConfig={
+
+apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+
+authDomain:"tnmnp-membership-system.firebaseapp.com",
+
+projectId:"tnmnp-membership-system",
+
+storageBucket:"tnmnp-membership-system.firebasestorage.app",
+
+messagingSenderId:"616857466202",
+
+appId:"1:616857466202:web:0fb4fae39e938ec0edef63"
+
 };
+
+
+/* AUTO MEMBER ID */
 
 document
 .getElementById("regId")
 .value=
-"TMNP-"+Date.now();
+
+"TMNP-"+
+
+new Date().getFullYear()
+
++"-"+
+
+Date.now();
 
 
 function loadLogo(e){
@@ -462,7 +533,9 @@ const reader=new FileReader();
 
 reader.onload=()=>{
 
-logoPreview.src=reader.result;
+logoPreview.src=
+
+reader.result;
 
 };
 
@@ -481,7 +554,9 @@ const reader=new FileReader();
 
 reader.onload=()=>{
 
-leaderPreview.src=reader.result;
+leaderPreview.src=
+
+reader.result;
 
 };
 
@@ -492,30 +567,15 @@ reader.readAsDataURL(file);
 
 function openAdmin(){
 
-location.href="admin.html";
+location.href=
+
+"admin.html";
 
 }
-
-
-const scanner=
-new Html5Qrcode("reader");
-
-scanner.start(
-
-{facingMode:"environment"},
-
-{fps:10,qrbox:220},
-
-(txt)=>{
-
-scanResult.innerHTML=txt;
-
-}
-
-).catch(()=>{});
 
 </script>
 
 </body>
 
 </html>
+```
