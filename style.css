@@ -1,330 +1,525 @@
-
-/* =========================
-   GLOBAL BODY STYLE
-========================= */
 body{
-  font-family: Arial;
-  background:#f2f2f2;
-  margin:0;
-  padding:20px;
+
+margin:0;
+
+padding:20px;
+
+font-family:Arial;
+
+background:#f2f2f2;
+
 }
 
-/* =========================
-   MAIN CONTAINER
-========================= */
+
 .container{
-  max-width:950px;
-  margin:auto;
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+max-width:950px;
+
+margin:auto;
+
+background:#fff;
+
+padding:20px;
+
+border-radius:10px;
+
+box-shadow:0 0 10px rgba(0,0,0,.1);
+
 }
 
-/* =========================
-   HEADER LAYOUT (FIXED)
-========================= */
+
+/* HEADER */
+
 .header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:2px solid #000;
-  padding-bottom:10px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+
+border-bottom:2px solid #000;
+
+padding-bottom:10px;
+
+flex-wrap:wrap;
+
 }
 
-/* LEFT LOGO + RIGHT PHOTO IMAGE STYLE */
+
+/* LOGO */
+
+.left-logo,
+.right-photo{
+
+width:120px;
+
+}
+
+
 .left-logo img,
 .right-photo img{
-  width:120px;
-  height:120px;
-  object-fit:cover;
-  border:1px solid #ccc;
-  border-radius:8px;
-  display:block;
-  margin-bottom:5px;
+
+width:120px;
+
+height:120px;
+
+object-fit:cover;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
 }
 
-/* LEFT LOGO */
-.left-logo{
-  flex:0 0 120px;
-  text-align:left;
-}
 
-/* CENTER INFO */
+/* CENTER */
+
 .center-info{
-  flex:1;
-  text-align:center;
-  padding:0 10px;
+
+flex:1;
+
+padding:0 12px;
+
+text-align:center;
+
+min-width:300px;
+
 }
+
+
+.membership-title{
+
+font-size:22px;
+
+font-weight:bold;
+
+line-height:1.4;
+
+}
+
+
+.join-line{
+
+display:block;
+
+color:#0b5ed7;
+
+margin-top:5px;
+
+}
+
 
 .party-title{
-  font-size:20px;
-  font-weight:bold;
+
+font-size:20px;
+
+font-weight:bold;
+
 }
+
 
 .tamil-title{
-  font-size:18px;
-  color:#333;
+
+font-size:18px;
+
 }
 
-/* =========================
-   ECI INFO (ADDED)
-========================= */
-.eci-info{
-  margin-top:8px;
-  font-size:13px;
-  color:#444;
-  line-height:1.4;
+
+.eci-info,
+.party-address{
+
+font-size:13px;
+
+margin-top:10px;
+
+line-height:1.5;
+
 }
 
-/* RIGHT PHOTO */
-.right-photo{
-  flex:0 0 120px;
-  text-align:right;
+
+/* BOXES */
+
+.header-columns{
+
+display:flex;
+
+gap:15px;
+
+justify-content:center;
+
+margin-top:15px;
+
+flex-wrap:wrap;
+
 }
 
-/* =========================
-   FILE UPLOAD INPUT
-========================= */
-input[type="file"]{
-  font-size:12px;
+
+.column-box{
+
+width:360px;
+
+padding:12px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+background:#fafafa;
+
+font-size:13px;
+
+overflow-x:auto;
+
+white-space:nowrap;
+
 }
 
-/* =========================
-   INPUT + TEXTAREA + BUTTON
-========================= */
+
+/* FORM */
+
+.form-section{
+
+margin-top:20px;
+
+}
+
+
 input,
 textarea,
 button{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  margin-bottom:10px;
-  box-sizing:border-box;
+
+width:100%;
+
+padding:10px;
+
+margin:8px 0;
+
+box-sizing:border-box;
+
 }
 
-/* BUTTON STYLE */
-button{
-  background:#007bff;
-  color:white;
-  border:none;
-  font-size:16px;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#0056b3;
-}
-
-/* =========================
-   FORM SECTION
-========================= */
-.form-section{
-  margin-top:20px;
-}
-
-label{
-  font-weight:bold;
-}
 
 .row{
-  display:flex;
-  gap:10px;
+
+display:flex;
+
+gap:10px;
+
 }
 
-/* =========================
-   ACKNOWLEDGEMENT BOX
-========================= */
-.ack{
-  margin-top:20px;
-  padding:15px;
-  border:2px solid green;
-  display:none;
-}
 
-/* =========================
-   MEMBERSHIP CARD
-========================= */
-.card{
-  width:320px;
-  margin:20px auto;
-  padding:22px;
-  border-radius:14px;
-  border:2px solid #0b5ed7;
-  background:linear-gradient(white,#eef5ff);
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
-  text-align:left;
-}
-
-.card h2{
-  text-align:center;
-  color:#0b5ed7;
-  margin-bottom:5px;
-}
-
-.card h3{
-  text-align:center;
-  font-size:13px;
-  margin-bottom:15px;
-  color:#333;
-}
-
-.card p{
-  font-size:14px;
-  margin:6px 0;
-}
-
-/* =========================
-   DECLARATION BOX
-========================= */
 .declaration-box{
-  border:1px solid #000;
-  padding:10px;
-  margin-top:10px;
-  background:#fafafa;
+
+border:1px solid #000;
+
+padding:10px;
+
+margin-top:10px;
+
 }
 
-/* =========================
-   POPUP SYSTEM
-========================= */
-.popup{
-  padding:20px;
-  border-radius:12px;
-  margin-top:20px;
-  text-align:center;
-  font-weight:bold;
-  animation:fadeIn 0.4s ease-in;
-}
 
-.popup.green{
-  background:#00ff66;
-  color:#000;
-}
-
-.popup.red{
-  background:#ff3b3b;
-  color:#fff;
-}
-
-@keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:scale(0.9);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
-}
-
-/* =========================
-   SCANNER APP FULL SCREEN
-========================= */
-.scanner-app{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:#000;
-  color:white;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  padding:10px;
-  z-index:999;
-}
-
-.scanner-header{
-  text-align:center;
-  margin-top:10px;
-}
-
-.scanner-header h2{
-  font-size:18px;
-  color:#00ff88;
-}
-
-.camera-box{
-  width:320px;
-  margin-top:20px;
-  border:2px solid #00ff88;
-  border-radius:10px;
-  overflow:hidden;
-}
-
-.scan-frame{
-  position:absolute;
-  width:250px;
-  height:250px;
-  border:2px solid #00ff88;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  border-radius:12px;
-  animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-  0%{box-shadow:0 0 10px #00ff88;}
-  50%{box-shadow:0 0 25px #00ff88;}
-  100%{box-shadow:0 0 10px #00ff88;}
-}
-
-.scan-result{
-  margin-top:20px;
-  width:90%;
-  background:#111;
-  padding:15px;
-  border-radius:10px;
-  text-align:center;
-}
-
-/* =========================
-   ADMIN DASHBOARD
-========================= */
-.admin{
-  margin-top:20px;
-}
-
-/* =========================
-   SCANNER BOX
-========================= */
 .scanner-box{
-  margin-top:30px;
-  padding:20px;
-  background:white;
-  border-radius:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  text-align:center;
+
+margin-top:20px;
+
+padding:15px;
+
+border:1px solid #ccc;
+
 }
 
-/* =========================
-   PRINT MODE
-========================= */
-@media print{
 
-  body{
-    background:white;
-  }
+.footer{
 
-  .container{
-    box-shadow:none;
-  }
+margin-top:20px;
 
-  button,
-  .admin,
-  form,
-  .ack,
-  .scanner-box,
-  .scanner-app{
-    display:none !important;
-  }
+text-align:center;
 
-  .card{
-    width:100%;
-    border:none;
-    box-shadow:none;
-  }
+border-top:1px solid #ccc;
+
+padding-top:15px;
+
+}
+
+
+@media(max-width:700px){
+
+.row{
+
+flex-direction:column;
+
+}
+
+.header{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+}body{
+
+margin:0;
+
+padding:20px;
+
+font-family:Arial;
+
+background:#f2f2f2;
+
+}
+
+
+.container{
+
+max-width:950px;
+
+margin:auto;
+
+background:#fff;
+
+padding:20px;
+
+border-radius:10px;
+
+box-shadow:0 0 10px rgba(0,0,0,.1);
+
+}
+
+
+/* HEADER */
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+
+border-bottom:2px solid #000;
+
+padding-bottom:10px;
+
+flex-wrap:wrap;
+
+}
+
+
+/* LOGO */
+
+.left-logo,
+.right-photo{
+
+width:120px;
+
+}
+
+
+.left-logo img,
+.right-photo img{
+
+width:120px;
+
+height:120px;
+
+object-fit:cover;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+}
+
+
+/* CENTER */
+
+.center-info{
+
+flex:1;
+
+padding:0 12px;
+
+text-align:center;
+
+min-width:300px;
+
+}
+
+
+.membership-title{
+
+font-size:22px;
+
+font-weight:bold;
+
+line-height:1.4;
+
+}
+
+
+.join-line{
+
+display:block;
+
+color:#0b5ed7;
+
+margin-top:5px;
+
+}
+
+
+.party-title{
+
+font-size:20px;
+
+font-weight:bold;
+
+}
+
+
+.tamil-title{
+
+font-size:18px;
+
+}
+
+
+.eci-info,
+.party-address{
+
+font-size:13px;
+
+margin-top:10px;
+
+line-height:1.5;
+
+}
+
+
+/* BOXES */
+
+.header-columns{
+
+display:flex;
+
+gap:15px;
+
+justify-content:center;
+
+margin-top:15px;
+
+flex-wrap:wrap;
+
+}
+
+
+.column-box{
+
+width:360px;
+
+padding:12px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+background:#fafafa;
+
+font-size:13px;
+
+overflow-x:auto;
+
+white-space:nowrap;
+
+}
+
+
+/* FORM */
+
+.form-section{
+
+margin-top:20px;
+
+}
+
+
+input,
+textarea,
+button{
+
+width:100%;
+
+padding:10px;
+
+margin:8px 0;
+
+box-sizing:border-box;
+
+}
+
+
+.row{
+
+display:flex;
+
+gap:10px;
+
+}
+
+
+.declaration-box{
+
+border:1px solid #000;
+
+padding:10px;
+
+margin-top:10px;
+
+}
+
+
+.scanner-box{
+
+margin-top:20px;
+
+padding:15px;
+
+border:1px solid #ccc;
+
+}
+
+
+.footer{
+
+margin-top:20px;
+
+text-align:center;
+
+border-top:1px solid #ccc;
+
+padding-top:15px;
+
+}
+
+
+@media(max-width:700px){
+
+.row{
+
+flex-direction:column;
+
+}
+
+.header{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
 }
