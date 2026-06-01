@@ -1,83 +1,157 @@
 <!DOCTYPE html>
-<html>
+<html lang="ta">
 <head>
-  <title>TMNP Admin Dashboard</title>
+<meta charset="UTF-8">
+<title>TMNP Membership System</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family:Arial;
-      background:#f4f6f9;
-    }
+<style>
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial;
+    background:#f2f2f2;
+}
 
-    .header{
-      background:#2e7d32;
-      color:white;
-      padding:15px;
-      text-align:center;
-      font-size:20px;
-    }
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
 
-    .container{
-      padding:20px;
-    }
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:2px solid #000;
+    padding-bottom:10px;
+}
 
-    .card{
-      background:white;
-      padding:15px;
-      margin-bottom:15px;
-      border-radius:10px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
+.box img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border:1px solid #ccc;
+}
 
-    .info{
-      line-height:1.6;
-    }
+/* FORM */
+input,textarea{
+    width:100%;
+    padding:10px;
+    margin:6px 0 12px;
+    box-sizing:border-box;
+}
 
-    .btn{
-      padding:8px 12px;
-      border:none;
-      border-radius:6px;
-      cursor:pointer;
-      margin-left:5px;
-    }
+.row{
+    display:flex;
+    gap:10px;
+}
 
-    .approve{
-      background:#2e7d32;
-      color:white;
-    }
+.section-title{
+    margin-top:20px;
+    font-weight:bold;
+    color:#2e7d32;
+}
 
-    .reject{
-      background:#c62828;
-      color:white;
-    }
+/* BUTTON */
+button{
+    width:100%;
+    padding:12px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
+    border-radius:6px;
+}
 
-    .status{
-      font-weight:bold;
-    }
-
-  </style>
+#msg{
+    margin-top:15px;
+    font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
+<div class="container">
+
+<!-- HEADER -->
 <div class="header">
-  TMNP ADMIN DASHBOARD
+
+    <div class="box">
+        <img id="logoPreview">
+        <input type="file" onchange="loadLogo(event)">
+    </div>
+
+    <div style="text-align:center;">
+        <h2>TMNP - Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
+
+        <!-- TAMIL HEADING ADDED -->
+        <h3 style="margin:5px 0;color:#2e7d32;">
+            தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் (TMNP)
+        </h3>
+
+        <p>ECI Registered Political Party</p>
+        <p><b>Leader: N RAMAN</b></p>
+        <p>ECI Reg No: 56/219/2018-2021</p>
+    </div>
+
+    <div class="box">
+        <img id="leaderPreview">
+        <input type="file" onchange="loadLeader(event)">
+    </div>
+
 </div>
 
-<div class="container" id="adminList">
+<!-- FORM -->
+<form id="memberForm" autocomplete="on">
+
+<div class="section-title">MEMBER DETAILS</div>
+
+<!-- AUTOFILL FIX ADDED -->
+<input id="name" autocomplete="name" placeholder="Full Name">
+
+<input id="address" autocomplete="street-address" placeholder="Full Address">
+
+<div class="row">
+    <input id="voter" autocomplete="off" placeholder="Voter ID">
+    <input id="phone" autocomplete="tel" placeholder="Mobile">
+</div>
+
+<input id="email" autocomplete="email" placeholder="Gmail ID">
+
+<div class="section-title">MEMBER PHOTO</div>
+<input type="file" onchange="loadPhoto(event)">
+<img id="photoPreview" style="width:120px;height:140px;object-fit:cover;border:1px solid #000;">
+
+<div class="section-title">DECLARATION</div>
+
+<p>
+<input type="checkbox" required>
+I agree Membership Declaration
+</p>
+
+<p>
+<input type="checkbox" required>
+I agree Party Rules & Declaration
+</p>
+
+<button type="submit">SAVE / SUBMIT</button>
+
+</form>
+
+<div id="msg"></div>
 
 </div>
 
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
 
-<script>
-// FIREBASE CONFIG
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+<script>// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
   authDomain: "tnmnp-membership-system.firebaseapp.com",
@@ -87,54 +161,55 @@ const firebaseConfig = {
   appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
   measurementId: "G-Q7RYMTMLC7"
 };
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// LOAD DATA
-firebase.database().ref("members").on("value", (snapshot) => {
+/* IMAGE PREVIEW */
+function loadLogo(e){
+    document.getElementById("logoPreview").src =
+    URL.createObjectURL(e.target.files[0]);
+}
 
-    let data = snapshot.val();
-    let html = "";
+function loadLeader(e){
+    document.getElementById("leaderPreview").src =
+    URL.createObjectURL(e.target.files[0]);
+}
 
-    for(let id in data){
+function loadPhoto(e){
+    document.getElementById("photoPreview").src =
+    URL.createObjectURL(e.target.files[0]);
+}
 
-        let m = data[id];
+/* SUBMIT */
+document.getElementById("memberForm").addEventListener("submit", function(e){
+    e.preventDefault();
 
-        html += `
-        <div class="card">
+    let id = "TMNP" + Date.now();
 
-          <div class="info">
-            <div><b>${m.name}</b></div>
-            <div>ID: ${m.id}</div>
-            <div class="status">Status: ${m.status}</div>
-          </div>
+    let data = {
+        id: id,
+        name: document.getElementById("name").value,
+        address: document.getElementById("address").value,
+        voter: document.getElementById("voter").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        status: "pending"
+    };
 
-          <div>
-            <button class="btn approve" onclick="approve('${m.id}')">Approve</button>
-            <button class="btn reject" onclick="reject('${m.id}')">Reject</button>
-          </div>
+    db.ref("members/" + id).set(data);
 
-        </div>
-        `;
-    }
+    document.getElementById("msg").innerHTML =
+    "✅ Form Submitted Successfully<br>🆔 ID: " + id;
 
-    document.getElementById("adminList").innerHTML = html;
+    let wa =
+    "https://wa.me/?text=" +
+    encodeURIComponent("TMNP Membership ID: " + id);
+
+    window.open(wa, "_blank");
+
+    this.reset();
 });
-
-// APPROVE
-function approve(id){
-    firebase.database().ref("members/" + id).update({
-        status: "approved"
-    });
-}
-
-// REJECT
-function reject(id){
-    firebase.database().ref("members/" + id).update({
-        status: "rejected"
-    });
-}
-
 </script>
 
 </body>
