@@ -1,0 +1,519 @@
+```html
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+
+TMNP Admin Dashboard
+
+</title>
+
+<style>
+
+body{
+
+margin:0;
+
+font-family:Arial;
+
+background:#f2f2f2;
+
+padding:20px;
+
+}
+
+.container{
+
+max-width:1100px;
+
+margin:auto;
+
+background:white;
+
+padding:20px;
+
+border-radius:10px;
+
+box-shadow:0 0 10px rgba(0,0,0,.1);
+
+}
+
+/* LOGIN */
+
+.login-box{
+
+max-width:400px;
+
+margin:auto;
+
+padding:25px;
+
+background:white;
+
+border-radius:10px;
+
+box-shadow:0 0 10px rgba(0,0,0,.1);
+
+}
+
+input{
+
+width:100%;
+
+padding:12px;
+
+margin:10px 0;
+
+box-sizing:border-box;
+
+}
+
+button{
+
+padding:12px;
+
+border:none;
+
+background:#0b5ed7;
+
+color:white;
+
+cursor:pointer;
+
+border-radius:6px;
+
+}
+
+button:hover{
+
+opacity:.9;
+
+}
+
+.header{
+
+text-align:center;
+
+margin-bottom:20px;
+
+}
+
+.stats{
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+margin-bottom:20px;
+
+}
+
+.card{
+
+flex:1;
+
+min-width:220px;
+
+padding:20px;
+
+background:#0b5ed7;
+
+color:white;
+
+border-radius:10px;
+
+text-align:center;
+
+font-size:22px;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:20px;
+
+}
+
+table th,
+
+table td{
+
+border:1px solid #ccc;
+
+padding:10px;
+
+text-align:left;
+
+}
+
+.dashboard{
+
+display:none;
+
+}
+
+.actions{
+
+margin-top:20px;
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+}
+
+.search{
+
+margin-top:20px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div class="login-box" id="loginBox">
+
+<h2>
+
+Admin Login
+
+</h2>
+
+<input id="user"
+
+placeholder="Username">
+
+<input id="pass"
+
+type="password"
+
+placeholder="Password">
+
+<button onclick="login()">
+
+Login
+
+</button>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div class="container dashboard"
+
+id="dashboard">
+
+<div class="header">
+
+<h1>
+
+TMNP Admin Dashboard
+
+</h1>
+
+<p>
+
+Membership Management Panel
+
+</p>
+
+</div>
+
+
+<div class="stats">
+
+<div class="card">
+
+Members
+
+<br>
+
+<span id="memberCount">
+
+0
+
+</span>
+
+</div>
+
+<div class="card">
+
+Status
+
+<br>
+
+LIVE
+
+</div>
+
+<div class="card">
+
+System
+
+<br>
+
+ACTIVE
+
+</div>
+
+</div>
+
+
+<div class="search">
+
+<input
+
+id="search"
+
+placeholder="Search Member"
+
+onkeyup="searchTable()">
+
+</div>
+
+
+<table id="memberTable">
+
+<thead>
+
+<tr>
+
+<th>
+
+Reg ID
+
+</th>
+
+<th>
+
+Name
+
+</th>
+
+<th>
+
+Mobile
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+TMNP-2026-1001
+
+</td>
+
+<td>
+
+Sample Member
+
+</td>
+
+<td>
+
+9876543210
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+
+<div class="actions">
+
+<button onclick="goBack()">
+
+Back Membership Form
+
+</button>
+
+<button onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+const ADMIN_USER="admin";
+
+const ADMIN_PASS="123456";
+
+
+function login(){
+
+const u=
+
+document.getElementById(
+
+"user"
+
+).value;
+
+const p=
+
+document.getElementById(
+
+"pass"
+
+).value;
+
+if(
+
+u===ADMIN_USER
+
+&&
+
+p===ADMIN_PASS
+
+){
+
+document.getElementById(
+
+"loginBox"
+
+).style.display=
+
+"none";
+
+document.getElementById(
+
+"dashboard"
+
+).style.display=
+
+"block";
+
+updateCount();
+
+}
+
+else{
+
+alert(
+
+"Invalid Login"
+
+);
+
+}
+
+}
+
+
+function logout(){
+
+location.reload();
+
+}
+
+
+function goBack(){
+
+location.href=
+
+"index.html";
+
+}
+
+
+function updateCount(){
+
+let rows=
+
+document.querySelectorAll(
+
+"#memberTable tbody tr"
+
+).length;
+
+document.getElementById(
+
+"memberCount"
+
+).innerText=
+
+rows;
+
+}
+
+
+function searchTable(){
+
+let input=
+
+document.getElementById(
+
+"search"
+
+).value.toLowerCase();
+
+let rows=
+
+document.querySelectorAll(
+
+"#memberTable tbody tr"
+
+);
+
+rows.forEach(r=>{
+
+let txt=
+
+r.innerText.toLowerCase();
+
+r.style.display=
+
+txt.includes(input)
+
+?
+
+""
+
+:
+
+"none";
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>
+```
