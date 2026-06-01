@@ -1,183 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Party Membership System</title>
+  <title>TMNP Admin Dashboard</title>
 
-<style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:#f2f2f2;
-}
+  <style>
+    body{
+      margin:0;
+      font-family:Arial;
+      background:#f4f6f9;
+    }
 
-/* HEADER */
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px;
-  background:white;
-  border-bottom:2px solid #ccc;
-}
+    .header{
+      background:#2e7d32;
+      color:white;
+      padding:15px;
+      text-align:center;
+      font-size:20px;
+    }
 
-.side{
-  width:130px;
-  text-align:center;
-}
+    .container{
+      padding:20px;
+    }
 
-.side img{
-  width:85px;
-  height:85px;
-  object-fit:cover;
-  border-radius:10px;
-  border:1px solid #aaa;
-}
+    .card{
+      background:white;
+      padding:15px;
+      margin-bottom:15px;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
 
-.center{
-  flex:1;
-  text-align:center;
-}
+    .info{
+      line-height:1.6;
+    }
 
-/* FORM */
-.container{
-  width:85%;
-  margin:20px auto;
-  background:white;
-  padding:20px;
-  border-radius:10px;
-}
+    .btn{
+      padding:8px 12px;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      margin-left:5px;
+    }
 
-input, button{
-  width:100%;
-  padding:10px;
-  margin:6px 0;
-  box-sizing:border-box;
-}
+    .approve{
+      background:#2e7d32;
+      color:white;
+    }
 
-/* QR */
-#reader{
-  width:300px;
-  margin-top:10px;
-}
-</style>
+    .reject{
+      background:#c62828;
+      color:white;
+    }
+
+    .status{
+      font-weight:bold;
+    }
+
+  </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
+  TMNP ADMIN DASHBOARD
+</div>
 
-  <!-- LEFT LOGO -->
-  <div class="side">
-    <img id="logoPreview">
-    <input type="file" accept="image/*" onchange="loadImage(event,'logoPreview')">
-  </div>
-
-  <!-- CENTER -->
-  <div class="center">
-    <h2>Political Party MEMBERSHIP FORM அரசியல் கட்சி உறுப்பினர் சேர்க்கை</h2>
-
-    <h3 id="partyName">தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் Tamilnadu Makkal Nalvazhvu Periyakkam</h3>
-    <p id="partyAddress">Head Office: No.9, 1st Floor, 2nd Cross Street,Gomathipuram, Thiruninravur - 602024, Tamilnadu N.RAMAN President/General secretary</p>
-    <p id="partyMobile">Mobile: +91 8939324309 Live Website: onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/</p>
-
-    <input type="text" id="eciReg" placeholder="ECI Registration No">
-  </div>
-
-  <!-- RIGHT LEADER -->
-  <div class="side">
-    <img id="leaderPreview">
-    <input type="file" accept="image/*" onchange="loadImage(event,'leaderPreview')">
-  </div>
+<div class="container" id="adminList">
 
 </div>
 
-<!-- FORM -->
-<div class="container">
-
-<form id="form">
-
-<input type="text" id="name" placeholder="Name" autocomplete="name">
-<input type="tel" id="phone" placeholder="Phone" autocomplete="tel">
-<input type="text" id="address" placeholder="Address" autocomplete="street-address">
-
-<input type="text" id="regno" placeholder="Membership ID" readonly>
-
-<button type="submit">Submit</button>
-
-</form>
-
-<!-- QR -->
-<h3>QR SCANNER</h3>
-<div id="reader"></div>
-
-<button onclick="startQR()">Start QR</button>
-<button onclick="stopQR()">Stop QR</button>
-
-</div>
-
-<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
 
 <script>
+// FIREBASE CONFIG
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+  authDomain: "tnmnp-membership-system.firebaseapp.com",
+  projectId: "tnmnp-membership-system",
+  storageBucket: "tnmnp-membership-system.firebasestorage.app",
+  messagingSenderId: "616857466202",
+  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
+  measurementId: "G-Q7RYMTMLC7"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-/* IMAGE UPLOAD */
-function loadImage(event,id){
-  document.getElementById(id).src =
-  URL.createObjectURL(event.target.files[0]);
-}
+// LOAD DATA
+firebase.database().ref("members").on("value", (snapshot) => {
 
-/* AUTO SAVE + AUTOFILL */
-document.addEventListener("input", function(e){
-  if(e.target.tagName === "INPUT"){
-    localStorage.setItem(e.target.id, e.target.value);
-  }
-});
+    let data = snapshot.val();
+    let html = "";
 
-window.onload = function(){
-  document.querySelectorAll("input").forEach(i=>{
-    i.value = localStorage.getItem(i.id) || "";
-  });
-}
+    for(let id in data){
 
-/* REG ID GENERATE */
-function generateRegID(){
-  let id = localStorage.getItem("regid") || 1000;
-  id++;
-  localStorage.setItem("regid", id);
-  document.getElementById("regno").value = "MBR" + id;
-}
+        let m = data[id];
 
-/* FORM SUBMIT */
-document.getElementById("form").addEventListener("submit", function(e){
-  e.preventDefault();
-  generateRegID();
-  alert("Membership Registered Successfully");
-});
+        html += `
+        <div class="card">
 
-/* QR */
-let scanner;
+          <div class="info">
+            <div><b>${m.name}</b></div>
+            <div>ID: ${m.id}</div>
+            <div class="status">Status: ${m.status}</div>
+          </div>
 
-function startQR(){
-  scanner = new Html5Qrcode("reader");
+          <div>
+            <button class="btn approve" onclick="approve('${m.id}')">Approve</button>
+            <button class="btn reject" onclick="reject('${m.id}')">Reject</button>
+          </div>
 
-  Html5Qrcode.getCameras().then(devices => {
-    if(devices.length){
-      scanner.start(
-        devices[0].id,
-        { fps: 10, qrbox: 250 },
-        (text) => {
-          alert("QR: " + text);
-        }
-      );
+        </div>
+        `;
     }
-  });
+
+    document.getElementById("adminList").innerHTML = html;
+});
+
+// APPROVE
+function approve(id){
+    firebase.database().ref("members/" + id).update({
+        status: "approved"
+    });
 }
 
-function stopQR(){
-  if(scanner){
-    scanner.stop().then(()=>scanner.clear());
-  }
+// REJECT
+function reject(id){
+    firebase.database().ref("members/" + id).update({
+        status: "rejected"
+    });
 }
 
 </script>
