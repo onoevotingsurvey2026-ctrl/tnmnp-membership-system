@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ta">
 
@@ -6,7 +5,11 @@
 
 <meta charset="UTF-8">
 
-<title>TMNP Membership Form</title>
+<title>
+
+TMNP Membership Form
+
+</title>
 
 <style>
 
@@ -18,7 +21,7 @@ background:#f2f2f2;
 }
 
 .container{
-max-width:1100px;
+max-width:950px;
 margin:auto;
 background:white;
 padding:20px;
@@ -29,110 +32,96 @@ box-shadow:0 0 10px rgba(0,0,0,.1);
 /* HEADER */
 
 .header{
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:flex-start;
-
 border-bottom:2px solid #000;
-
-padding-bottom:15px;
-
+padding-bottom:10px;
 }
 
 /* LEFT + RIGHT */
 
 .left-logo,
 .right-photo{
-
-width:130px;
-
+width:120px;
 }
 
 .left-logo img,
 .right-photo img{
-
-width:130px;
-
-height:130px;
-
+width:120px;
+height:120px;
 object-fit:cover;
-
 border:1px solid #ccc;
-
 border-radius:8px;
-
 }
 
 /* CENTER */
 
 .center-info{
-
 flex:1;
-
-padding:0 15px;
-
+padding:0 12px;
 text-align:center;
-
 }
 
-.party-title{
+.membership-title{
 
 font-size:22px;
 
 font-weight:bold;
 
+line-height:1.4;
+
+margin-bottom:10px;
+
 }
 
-.tamil-title{
+.join-line{
 
-font-size:19px;
+font-size:16px;
+
+font-weight:bold;
+
+color:#0b5ed7;
+
+display:block;
 
 margin-top:5px;
 
 }
 
+.party-title{
+font-size:20px;
+font-weight:bold;
+}
+
+.tamil-title{
+font-size:18px;
+margin-top:4px;
+}
+
 .eci-info{
-
 margin-top:10px;
-
 font-size:13px;
-
-line-height:1.5;
-
+line-height:1.4;
 }
 
 .party-address{
-
 margin-top:10px;
-
 font-size:13px;
-
-line-height:1.6;
-
+line-height:1.5;
 }
 
-/* FIXED BOXES */
-
 .header-columns{
-
 display:flex;
-
 gap:15px;
-
 justify-content:center;
-
-margin-top:15px;
-
+margin-top:12px;
 flex-wrap:wrap;
-
 }
 
 .column-box{
 
-min-width:420px;
+width:320px;
 
 padding:12px;
 
@@ -144,92 +133,51 @@ background:#fafafa;
 
 font-size:13px;
 
-line-height:1.6;
-
 white-space:nowrap;
 
-overflow:auto;
+overflow:hidden;
+
+text-overflow:ellipsis;
 
 }
 
 /* FORM */
 
 .form-section{
-
 margin-top:20px;
-
 }
 
 input,
 textarea,
 button{
-
 width:100%;
-
 padding:10px;
-
 margin:8px 0;
-
 box-sizing:border-box;
-
 }
 
 .row{
-
 display:flex;
-
 gap:10px;
-
 }
-
-/* DECLARATIONS */
 
 .declaration-box{
-
 border:1px solid #000;
-
-padding:12px;
-
+padding:10px;
 margin-top:10px;
-
-background:#fafafa;
-
 }
-
-/* QR */
 
 .scanner-box{
-
 margin-top:20px;
-
-padding:20px;
-
+padding:15px;
 border:1px solid #ccc;
-
-border-radius:8px;
-
 }
-
-#reader{
-
-width:320px;
-
-margin:auto;
-
-}
-
-/* FOOTER */
 
 .footer{
-
 margin-top:20px;
-
 text-align:center;
-
 border-top:1px solid #ccc;
-
 padding-top:15px;
-
 }
 
 </style>
@@ -244,18 +192,38 @@ padding-top:15px;
 
 <div class="header">
 
+<!-- LEFT -->
+
 <div class="left-logo">
 
 <img id="logoPreview">
 
-<input type="file"
+<input
+type="file"
 accept="image/*"
 onchange="loadLogo(event)">
 
 </div>
 
+<!-- CENTER -->
 
 <div class="center-info">
+
+<div class="membership-title">
+
+Political Party Membership Form
+
+<br>
+
+அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
+
+<span class="join-line">
+
+Join Now As Membership
+
+</span>
+
+</div>
 
 <div class="party-title">
 
@@ -269,10 +237,10 @@ TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
 
 </div>
 
-
 <div class="eci-info">
 
-Election Commission of India, New Delhi
+Election Commission of India,
+New Delhi
 
 <br>
 
@@ -285,28 +253,29 @@ Election Commission of India, New Delhi
 
 <br>
 
-Dated:
+Dated :
 05 March 2021
 
 </div>
 
-
 <div class="party-address">
 
-<b>Party Office Address</b>
+<b>
+
+Party Office Address
+
+</b>
 
 <br>
 
 No.9,
 2nd Cross Street,
-
 Gomathipuram,
-
 Thiruninravur
 
 <br>
 
-Pincode:
+Pincode :
 602026
 
 </div>
@@ -357,12 +326,14 @@ https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
 
 </div>
 
+<!-- RIGHT -->
 
 <div class="right-photo">
 
 <img id="leaderPreview">
 
-<input type="file"
+<input
+type="file"
 accept="image/*"
 onchange="loadLeader(event)">
 
@@ -371,9 +342,15 @@ onchange="loadLeader(event)">
 </div>
 
 
+<!-- FORM -->
+
 <div class="form-section">
 
-<label>Registration ID</label>
+<label>
+
+Registration ID
+
+</label>
 
 <input id="regId" readonly>
 
@@ -398,14 +375,20 @@ placeholder="Email">
 
 <textarea
 autocomplete="street-address"
-placeholder="Address"></textarea>
+placeholder="Address">
+</textarea>
 
-<label>Member Photo</label>
+<label>
 
-<input type="file" accept="image/*">
+Member Photo
+
+</label>
+
+<input
+type="file"
+accept="image/*">
 
 </div>
-
 
 <div class="declaration-box">
 
@@ -413,17 +396,19 @@ Membership Declaration
 
 </div>
 
-
 <div class="declaration-box">
 
 Political Party Declaration
 
 </div>
 
-
 <div class="scanner-box">
 
-<h3>QR Scanner</h3>
+<h3>
+
+QR Scanner
+
+</h3>
 
 <div id="reader"></div>
 
@@ -431,13 +416,11 @@ Political Party Declaration
 
 </div>
 
-
 <button onclick="openAdmin()">
 
 Admin Dashboard
 
 </button>
-
 
 <div class="footer">
 
@@ -448,7 +431,20 @@ Official Party Membership Form
 </div>
 
 
+<!-- CONFIG -->
+
 <script>
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+  authDomain: "tnmnp-membership-system.firebaseapp.com",
+  projectId: "tnmnp-membership-system",
+  storageBucket: "tnmnp-membership-system.firebasestorage.app",
+  messagingSenderId: "616857466202",
+  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
+  measurementId: "G-Q7RYMTMLC7"
+};
 
 document
 .getElementById("regId")
@@ -458,30 +454,38 @@ document
 
 function loadLogo(e){
 
-const f=e.target.files[0];
+const file=e.target.files[0];
 
-if(!f)return;
+if(!file)return;
 
-const r=new FileReader();
+const reader=new FileReader();
 
-r.onload=()=>logoPreview.src=r.result;
+reader.onload=()=>{
 
-r.readAsDataURL(f);
+logoPreview.src=reader.result;
+
+};
+
+reader.readAsDataURL(file);
 
 }
 
 
 function loadLeader(e){
 
-const f=e.target.files[0];
+const file=e.target.files[0];
 
-if(!f)return;
+if(!file)return;
 
-const r=new FileReader();
+const reader=new FileReader();
 
-r.onload=()=>leaderPreview.src=r.result;
+reader.onload=()=>{
 
-r.readAsDataURL(f);
+leaderPreview.src=reader.result;
+
+};
+
+reader.readAsDataURL(file);
 
 }
 
@@ -493,8 +497,6 @@ location.href="admin.html";
 }
 
 
-/* QR */
-
 const scanner=
 new Html5Qrcode("reader");
 
@@ -502,26 +504,18 @@ scanner.start(
 
 {facingMode:"environment"},
 
-{fps:10,qrbox:250},
+{fps:10,qrbox:220},
 
 (txt)=>{
 
-scanResult.innerHTML=
-
-"<b>QR Result:</b> "+txt;
+scanResult.innerHTML=txt;
 
 }
 
-).catch(err=>{
-
-scanResult.innerHTML=
-"Camera Permission Required";
-
-});
+).catch(()=>{});
 
 </script>
 
 </body>
 
 </html>
-```
