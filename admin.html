@@ -1,6 +1,7 @@
 ```html
 <!DOCTYPE html>
-<html lang="ta">
+
+<html>
 
 <head>
 
@@ -8,15 +9,13 @@
 
 <title>
 
-TMNP Admin Dashboard
+TMNP Admin
 
 </title>
 
 <style>
 
 body{
-
-margin:0;
 
 font-family:Arial;
 
@@ -26,9 +25,9 @@ padding:20px;
 
 }
 
-.container{
+.box{
 
-max-width:1100px;
+max-width:700px;
 
 margin:auto;
 
@@ -37,26 +36,6 @@ background:white;
 padding:20px;
 
 border-radius:10px;
-
-box-shadow:0 0 10px rgba(0,0,0,.1);
-
-}
-
-/* LOGIN */
-
-.login-box{
-
-max-width:400px;
-
-margin:auto;
-
-padding:25px;
-
-background:white;
-
-border-radius:10px;
-
-box-shadow:0 0 10px rgba(0,0,0,.1);
 
 }
 
@@ -68,115 +47,37 @@ padding:12px;
 
 margin:10px 0;
 
-box-sizing:border-box;
-
 }
 
 button{
 
+width:100%;
+
 padding:12px;
+
+background:#0b5ed7;
+
+color:white;
 
 border:none;
 
-background:#0b5ed7;
-
-color:white;
-
-cursor:pointer;
-
-border-radius:6px;
-
 }
 
-button:hover{
+#dashboard{
 
-opacity:.9;
-
-}
-
-.header{
-
-text-align:center;
-
-margin-bottom:20px;
-
-}
-
-.stats{
-
-display:flex;
-
-gap:15px;
-
-flex-wrap:wrap;
-
-margin-bottom:20px;
-
-}
-
-.card{
-
-flex:1;
-
-min-width:220px;
-
-padding:20px;
-
-background:#0b5ed7;
-
-color:white;
-
-border-radius:10px;
-
-text-align:center;
-
-font-size:22px;
-
-}
-
-table{
-
-width:100%;
-
-border-collapse:collapse;
+display:none;
 
 margin-top:20px;
 
 }
 
-table th,
-
-table td{
+.member{
 
 border:1px solid #ccc;
 
 padding:10px;
 
-text-align:left;
-
-}
-
-.dashboard{
-
-display:none;
-
-}
-
-.actions{
-
-margin-top:20px;
-
-display:flex;
-
-gap:10px;
-
-flex-wrap:wrap;
-
-}
-
-.search{
-
-margin-top:20px;
+margin:10px 0;
 
 }
 
@@ -186,9 +87,8 @@ margin-top:20px;
 
 <body>
 
-<!-- LOGIN -->
 
-<div class="login-box" id="loginBox">
+<div class="box">
 
 <h2>
 
@@ -196,15 +96,17 @@ Admin Login
 
 </h2>
 
-<input id="user"
 
-placeholder="Username">
+<input
+id="adminEmail"
+placeholder="Gmail ID">
 
-<input id="pass"
 
+<input
+id="adminPassword"
 type="password"
-
 placeholder="Password">
+
 
 <button onclick="login()">
 
@@ -212,221 +114,89 @@ Login
 
 </button>
 
-</div>
 
+<div id="dashboard">
 
-<!-- DASHBOARD -->
+<h2>
 
-<div class="container dashboard"
+Members List
 
-id="dashboard">
+</h2>
 
-<div class="header">
+<div id="members">
 
-<h1>
-
-TMNP Admin Dashboard
-
-</h1>
-
-<p>
-
-Membership Management Panel
-
-</p>
-
-</div>
-
-
-<div class="stats">
-
-<div class="card">
-
-Members
-
-<br>
-
-<span id="memberCount">
-
-0
-
-</span>
-
-</div>
-
-<div class="card">
-
-Status
-
-<br>
-
-LIVE
-
-</div>
-
-<div class="card">
-
-System
-
-<br>
-
-ACTIVE
+Loading...
 
 </div>
 
 </div>
 
 
-<div class="search">
-
-<input
-
-id="search"
-
-placeholder="Search Member"
-
-onkeyup="searchTable()">
-
 </div>
 
 
-<table id="memberTable">
 
-<thead>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 
-<tr>
-
-<th>
-
-Reg ID
-
-</th>
-
-<th>
-
-Name
-
-</th>
-
-<th>
-
-Mobile
-
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<td>
-
-TMNP-2026-1001
-
-</td>
-
-<td>
-
-Sample Member
-
-</td>
-
-<td>
-
-9876543210
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-
-<div class="actions">
-
-<button onclick="goBack()">
-
-Back Membership Form
-
-</button>
-
-<button onclick="logout()">
-
-Logout
-
-</button>
-
-</div>
-
-</div>
-
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <script>
 
-const ADMIN_USER="admin";
 
-const ADMIN_PASS="123456";
+const ADMIN_EMAIL=
+
+"tnmakkalnalvazhvuperiyakkam@gmail.com";
+
+
+const ADMIN_PASSWORD=
+
+"nraman131069";
+
+
+
+firebase.initializeApp({
+
+apiKey:
+"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+
+authDomain:
+"tnmnp-membership-system.firebaseapp.com",
+
+databaseURL:
+"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
+
+projectId:
+"tnmnp-membership-system"
+
+});
+
+
+const db=
+firebase.database();
+
 
 
 function login(){
 
-const u=
-
-document.getElementById(
-
-"user"
-
-).value;
-
-const p=
-
-document.getElementById(
-
-"pass"
-
-).value;
-
 if(
 
-u===ADMIN_USER
+adminEmail.value===ADMIN_EMAIL &&
 
-&&
-
-p===ADMIN_PASS
+adminPassword.value===ADMIN_PASSWORD
 
 ){
 
-document.getElementById(
-
-"loginBox"
-
-).style.display=
-
-"none";
-
-document.getElementById(
-
-"dashboard"
-
-).style.display=
-
+dashboard.style.display=
 "block";
 
-updateCount();
+loadMembers();
 
 }
 
 else{
 
 alert(
-
 "Invalid Login"
-
 );
 
 }
@@ -434,80 +204,61 @@ alert(
 }
 
 
-function logout(){
 
-location.reload();
+function loadMembers(){
 
-}
+db.ref(
+"members"
+).on(
 
+"value",
 
-function goBack(){
+snap=>{
 
-location.href=
-
-"index.html";
-
-}
+let html="";
 
 
-function updateCount(){
+snap.forEach(x=>{
 
-let rows=
-
-document.querySelectorAll(
-
-"#memberTable tbody tr"
-
-).length;
-
-document.getElementById(
-
-"memberCount"
-
-).innerText=
-
-rows;
-
-}
+let d=
+x.val();
 
 
-function searchTable(){
+html+=`
 
-let input=
+<div class="member">
 
-document.getElementById(
+<b>
 
-"search"
+${d.name}
 
-).value.toLowerCase();
+</b>
 
-let rows=
+<br>
 
-document.querySelectorAll(
+${d.mobile}
 
-"#memberTable tbody tr"
+<br>
 
-);
+${d.id}
 
-rows.forEach(r=>{
+<br>
 
-let txt=
+${d.status}
 
-r.innerText.toLowerCase();
+</div>
 
-r.style.display=
-
-txt.includes(input)
-
-?
-
-""
-
-:
-
-"none";
+`;
 
 });
+
+
+members.innerHTML=
+html;
+
+}
+
+);
 
 }
 
