@@ -1,61 +1,107 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-  <title>TMNP Verify</title>
+
+<title>
+
+TMNP Verify
+
+</title>
+
+<meta charset="UTF-8">
+
+<style>
+
+body{
+
+font-family:Arial;
+
+padding:40px;
+
+text-align:center;
+
+}
+
+.box{
+
+max-width:500px;
+
+margin:auto;
+
+padding:20px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h2>TMNP Verification</h2>
+<div class="box">
 
-<div id="result">Loading...</div>
+<h2>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+TMNP Member Verification
+
+</h2>
+
+<div id="result">
+
+Checking...
+
+</div>
+
+</div>
+
 
 <script>
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-  authDomain: "tnmnp-membership-system.firebaseapp.com",
-  projectId: "tnmnp-membership-system",
-  storageBucket: "tnmnp-membership-system.firebasestorage.app",
-  messagingSenderId: "616857466202",
-  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
-  measurementId: "G-Q7RYMTMLC7"
-};
 
-firebase.initializeApp(firebaseConfig);
+let id=
 
-let id = new URLSearchParams(window.location.search).get("id");
+new URLSearchParams(
 
-firebase.database().ref("members/" + id).once("value")
-.then((snap) => {
+window.location.search
 
-    if(!snap.exists()){
-        document.getElementById("result").innerHTML =
-        "❌ NOT FOUND";
-        return;
-    }
+).get("id");
 
-    let m = snap.val();
 
-    if(m.status === "approved"){
-        document.getElementById("result").innerHTML =
-        "✅ VALID MEMBER<br>ID: " + m.id +
-        "<br>Name: " + m.name;
-    }
-    else if(m.status === "pending"){
-        document.getElementById("result").innerHTML =
-        "⏳ PENDING APPROVAL";
-    }
-    else{
-        document.getElementById("result").innerHTML =
-        "❌ REJECTED";
-    }
+if(!id){
 
-});
+document.getElementById(
+
+"result"
+
+).innerHTML=
+
+"❌ Invalid Link";
+
+}
+
+else{
+
+document.getElementById(
+
+"result"
+
+).innerHTML=
+
+"✅ Member ID : "
+
++id+
+
+"<br><br>Verification Ready";
+
+}
+
 </script>
 
 </body>
+
 </html>
