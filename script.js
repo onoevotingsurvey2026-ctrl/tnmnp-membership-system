@@ -1,138 +1,114 @@
-// =========================
-// 💾 DEFAULT STORAGE
-// =========================
-function getDefaults(){
-    return JSON.parse(localStorage.getItem("tnmnp_defaults")) || {};
+// Registration ID Auto Generate
+
+window.onload=function(){
+
+let reg=document.getElementById("regId");
+
+if(reg){
+
+reg.value="TMNP-"+Date.now();
+
 }
 
-// =========================
-// ⚙️ OPEN AUTOFILL PANEL
-// =========================
-function checkAutoFill(value){
+};
 
-    if(value.length >= 1){
-        document.getElementById("autoFillPanel").style.display = "block";
 
-        let defaults = getDefaults();
+// Logo Upload
 
-        document.getElementById("default_voter").value = defaults.voter || "";
-        document.getElementById("default_mobile").value = defaults.mobile || "";
-        document.getElementById("default_email").value = defaults.email || "";
-    }
+function loadLogo(e){
+
+const file=e.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(){
+
+document.getElementById(
+"logoPreview"
+).src=reader.result;
+
+};
+
+reader.readAsDataURL(file);
+
 }
 
-// =========================
-// 💾 SAVE DEFAULT SETTINGS
-// =========================
-function saveDefaults(){
 
-    let data = {
-        voter: document.getElementById("default_voter").value,
-        mobile: document.getElementById("default_mobile").value,
-        email: document.getElementById("default_email").value
-    };
 
-    localStorage.setItem("tnmnp_defaults", JSON.stringify(data));
+// Leader Upload
 
-    alert("Defaults Saved Successfully ✅");
+function loadLeader(e){
 
-    document.getElementById("autoFillPanel").style.display = "none";
+const file=e.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(){
+
+document.getElementById(
+"leaderPreview"
+).src=reader.result;
+
+};
+
+reader.readAsDataURL(file);
+
 }
 
-// =========================
-// ⚡ AUTO FILL ON PAGE LOAD
-// =========================
-window.addEventListener("load", function(){
 
-    let d = getDefaults();
 
-    if(d.voter){
-        document.getElementById("voterid").value = d.voter;
-    }
+// Open Admin Dashboard
 
-    if(d.mobile){
-        document.getElementById("phone").value = d.mobile;
-    }
+function openAdmin(){
 
-    if(d.email){
-        document.getElementById("email").value = d.email;
-    }
+window.location.href=
+"admin.html";
+
+}
+
+
+
+// QR Scanner Optional
+
+if(document.getElementById("reader")){
+
+const scanner=
+new Html5Qrcode("reader");
+
+scanner.start(
+
+{facingMode:"environment"},
+
+{
+
+fps:10,
+
+qrbox:220
+
+},
+
+(txt)=>{
+
+document.getElementById(
+"scanResult"
+).innerHTML=
+
+"QR Result : "+txt;
+
+}
+
+).catch(()=>{
+
+document.getElementById(
+"scanResult"
+).innerHTML=
+
+"QR Camera Not Active";
+
 });
-
-
-// =========================
-// 🔳 SCANNER SETUP
-// =========================
-let html5QrcodeScanner;
-
-function startScanner(){
-
-    document.getElementById("scannerApp").style.display = "flex";
-
-    html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader",
-        {
-            fps: 10,
-            qrbox: 250,
-            rememberLastUsedCamera: true
-        }
-    );
-
-    html5QrcodeScanner.render(onScanSuccess);
-}
-
-startScanner();
-
-
-// =========================
-// 🔊 SCAN RESULT (UPGRADED)
-// =========================
-function onScanSuccess(decodedText){
-
-    // 🔊 Beep sound
-    let beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
-    beep.play();
-
-    // 📳 Vibration
-    if(navigator.vibrate){
-        navigator.vibrate([200, 100, 200]);
-    }
-
-    db.collection("members")
-    .where("regNo", "==", decodedText)
-    .get()
-    .then(snapshot => {
-
-        let resultDiv = document.getElementById("scanResult");
-
-        if(snapshot.empty){
-            resultDiv.innerHTML = `
-              <div class="popup red">
-                ❌ INVALID QR<br>
-                Member Not Found
-              </div>
-            `;
-            return;
-        }
-
-        snapshot.forEach(doc => {
-
-            let data = doc.data();
-
-            resultDiv.innerHTML = `
-              <div class="popup green">
-                🏛️ VERIFIED MEMBER<br><br>
-
-                <b>Reg No:</b> ${data.regNo}<br>
-                <b>Voter ID:</b> ${data.voterId}<br>
-                <b>Mobile:</b> ${data.mobile}<br>
-                <b>Email:</b> ${data.email}<br><br>
-
-                <b style="color:#000;">STATUS: ACTIVE MEMBER</b>
-              </div>
-            `;
-        });
-
-    });
 
 }
