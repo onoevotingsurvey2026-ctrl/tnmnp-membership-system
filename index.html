@@ -1,20 +1,173 @@
-```html
 <!DOCTYPE html>
 <html lang="ta">
 
 <head>
 
 <meta charset="UTF-8">
+<title>TMNP Membership Form</title>
 
-<title>
+<style>
 
-TMNP Membership Form
+body{
+margin:0;
+padding:20px;
+font-family:Arial;
+background:#f2f2f2;
+}
 
-</title>
+.container{
+max-width:950px;
+margin:auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
 
-<link rel="stylesheet" href="style.css">
+/* HEADER */
 
-<script src="https://unpkg.com/html5-qrcode"></script>
+.header{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+border-bottom:2px solid #000;
+padding-bottom:10px;
+}
+
+.left-logo,
+.right-photo{
+width:120px;
+}
+
+.left-logo img,
+.right-photo img{
+width:120px;
+height:120px;
+object-fit:cover;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+.center-info{
+flex:1;
+padding:0 15px;
+text-align:center;
+}
+
+.membership-title{
+font-size:22px;
+font-weight:bold;
+line-height:1.5;
+}
+
+.join-line{
+color:blue;
+font-weight:bold;
+}
+
+.party-title{
+font-size:20px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.tamil-title{
+font-size:18px;
+}
+
+.eci-info{
+margin-top:10px;
+font-size:13px;
+line-height:1.5;
+}
+
+.party-address{
+margin-top:10px;
+font-size:13px;
+}
+
+.header-columns{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:15px;
+flex-wrap:wrap;
+}
+
+.column-box{
+
+width:330px;
+
+padding:12px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+background:#fafafa;
+
+font-size:13px;
+
+overflow-x:auto;
+
+white-space:nowrap;
+
+}
+
+/* FORM */
+
+.form-section{
+margin-top:25px;
+}
+
+input,
+textarea,
+button{
+
+width:100%;
+
+padding:10px;
+
+margin-top:8px;
+
+margin-bottom:10px;
+
+box-sizing:border-box;
+
+}
+
+.row{
+display:flex;
+gap:10px;
+}
+
+button{
+
+background:#0b5ed7;
+
+color:white;
+
+border:none;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+.footer{
+
+margin-top:20px;
+
+border-top:1px solid #ccc;
+
+padding-top:15px;
+
+text-align:center;
+
+}
+
+</style>
 
 </head>
 
@@ -23,6 +176,8 @@ TMNP Membership Form
 <div class="container">
 
 <div class="header">
+
+<!-- LEFT -->
 
 <div class="left-logo">
 
@@ -36,6 +191,8 @@ onchange="loadLogo(event)">
 </div>
 
 
+<!-- CENTER -->
+
 <div class="center-info">
 
 <div class="membership-title">
@@ -46,13 +203,14 @@ Political Party Membership Form
 
 அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
 
-<span class="join-line">
+<div class="join-line">
 
 Join Now As Membership
 
-</span>
+</div>
 
 </div>
+
 
 <div class="party-title">
 
@@ -66,13 +224,14 @@ TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
 
 </div>
 
+
 <div class="eci-info">
 
-Election Commission of India, New Delhi
+Election Commission of India
 
 <br>
 
-இந்திய தேர்தல் ஆணையம்
+New Delhi
 
 <br>
 
@@ -87,11 +246,21 @@ Election Commission of India, New Delhi
 
 <div class="party-address">
 
-No.9,
+<b>
 
-2nd Cross Street,
+Party Office Address
 
-Gomathipuram,
+</b>
+
+<br>
+
+No.9, 2nd Cross Street
+
+<br>
+
+Gomathipuram
+
+<br>
 
 Thiruninravur
 
@@ -101,8 +270,57 @@ Pincode 602024
 
 </div>
 
+
+<div class="header-columns">
+
+
+<div class="column-box">
+
+<b>
+
+Party Leader / General Secretary
+
+</b>
+
+<br><br>
+
+N RAMAN
+
+<br>
+
+Mobile :
+
++91 8939324309
+
+<br>
+
+Email :
+
+tnmakkalnalvazhvuperiyakkam@gmail.com
+
 </div>
 
+
+<div class="column-box">
+
+<b>
+
+Live Website
+
+</b>
+
+<br><br>
+
+https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RIGHT -->
 
 <div class="right-photo">
 
@@ -118,6 +336,7 @@ onchange="loadLeader(event)">
 </div>
 
 
+<!-- FORM -->
 
 <div class="form-section">
 
@@ -127,13 +346,10 @@ Registration ID
 
 </label>
 
-<input
-id="regId"
-readonly>
+<input id="regId" readonly>
 
 
 <input
-id="name"
 placeholder="Member Name"
 autocomplete="name">
 
@@ -141,33 +357,23 @@ autocomplete="name">
 <div class="row">
 
 <input
-id="mobile"
 placeholder="Mobile Number"
 autocomplete="tel">
 
-
 <input
-id="voter"
 placeholder="Voter ID">
-
 
 </div>
 
 
 <input
-id="email"
 placeholder="Email"
 autocomplete="email">
 
 
 <textarea
-
-id="address"
-
 placeholder="Address"
-
 autocomplete="street-address">
-
 </textarea>
 
 
@@ -182,30 +388,13 @@ type="file"
 accept="image/*">
 
 
-<button onclick="saveMember()">
+<button>
 
 Submit Membership
 
 </button>
 
 </div>
-
-
-
-<div class="scanner-box">
-
-<h3>
-
-QR Section
-
-</h3>
-
-<div id="reader"></div>
-
-<div id="scanResult"></div>
-
-</div>
-
 
 
 <button onclick="openAdmin()">
@@ -224,13 +413,89 @@ Official Party Membership Form
 </div>
 
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+/* AUTO REGISTRATION ID */
 
-<script src="script.js"></script>
+document.getElementById("regId").value=
+
+"TMNP-"+
+
+new Date().getFullYear()
+
++
+
+Math.floor(
+
+100000+
+
+Math.random()*900000
+
+);
+
+
+/* LOGO */
+
+function loadLogo(e){
+
+const file=e.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(){
+
+document.getElementById(
+
+"logoPreview"
+
+).src=reader.result;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* LEADER */
+
+function loadLeader(e){
+
+const file=e.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(){
+
+document.getElementById(
+
+"leaderPreview"
+
+).src=reader.result;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* ADMIN */
+
+function openAdmin(){
+
+window.location.href=
+
+"admin.html";
+
+}
+
+</script>
 
 </body>
 
 </html>
-```
