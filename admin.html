@@ -1,11 +1,8 @@
-```html
 <!DOCTYPE html>
 
 <html>
 
 <head>
-
-<meta charset="UTF-8">
 
 <title>
 
@@ -19,63 +16,15 @@ body{
 
 font-family:Arial;
 
-background:#f2f2f2;
-
 padding:20px;
 
 }
 
-.box{
-
-max-width:700px;
-
-margin:auto;
-
-background:white;
-
-padding:20px;
-
-border-radius:10px;
-
-}
-
-input{
-
-width:100%;
-
-padding:12px;
-
-margin:10px 0;
-
-}
-
-button{
-
-width:100%;
-
-padding:12px;
-
-background:#0b5ed7;
-
-color:white;
-
-border:none;
-
-}
-
-#dashboard{
-
-display:none;
-
-margin-top:20px;
-
-}
-
-.member{
+.card{
 
 border:1px solid #ccc;
 
-padding:10px;
+padding:15px;
 
 margin:10px 0;
 
@@ -86,36 +35,6 @@ margin:10px 0;
 </head>
 
 <body>
-
-
-<div class="box">
-
-<h2>
-
-Admin Login
-
-</h2>
-
-
-<input
-id="adminEmail"
-placeholder="Gmail ID">
-
-
-<input
-id="adminPassword"
-type="password"
-placeholder="Password">
-
-
-<button onclick="login()">
-
-Login
-
-</button>
-
-
-<div id="dashboard">
 
 <h2>
 
@@ -129,122 +48,92 @@ Loading...
 
 </div>
 
-</div>
+
+<script type="module">
+
+import {
+
+initializeApp
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import {
+
+getDatabase,
+
+ref,
+
+onValue
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 
-</div>
+const firebaseConfig={
 
+apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
 
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-<script>
-
-
-const ADMIN_EMAIL=
-
-"tnmakkalnalvazhvuperiyakkam@gmail.com";
-
-
-const ADMIN_PASSWORD=
-
-"nraman131069";
-
-
-
-firebase.initializeApp({
-
-apiKey:
-"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-
-authDomain:
-"tnmnp-membership-system.firebaseapp.com",
+authDomain:"tnmnp-membership-system.firebaseapp.com",
 
 databaseURL:
 "https://tnmnp-membership-system-default-rtdb.firebaseio.com",
 
-projectId:
-"tnmnp-membership-system"
+projectId:"tnmnp-membership-system",
 
-});
+storageBucket:
+"tnmnp-membership-system.firebasestorage.app",
 
+messagingSenderId:"616857466202",
+
+appId:
+"1:616857466202:web:0fb4fae39e938ec0edef63"
+
+};
+
+
+const app=
+
+initializeApp(firebaseConfig);
 
 const db=
-firebase.database();
+
+getDatabase(app);
 
 
+onValue(
 
-function login(){
+ref(db,"members"),
 
-if(
-
-adminEmail.value===ADMIN_EMAIL &&
-
-adminPassword.value===ADMIN_PASSWORD
-
-){
-
-dashboard.style.display=
-"block";
-
-loadMembers();
-
-}
-
-else{
-
-alert(
-"Invalid Login"
-);
-
-}
-
-}
-
-
-
-function loadMembers(){
-
-db.ref(
-"members"
-).on(
-
-"value",
-
-snap=>{
+(snapshot)=>{
 
 let html="";
 
+snapshot.forEach((x)=>{
 
-snap.forEach(x=>{
-
-let d=
-x.val();
-
+let m=x.val();
 
 html+=`
 
-<div class="member">
+<div class="card">
 
-<b>
-
-${d.name}
-
-</b>
+<b>${m.id}</b>
 
 <br>
 
-${d.mobile}
+${m.name}
 
 <br>
 
-${d.id}
+${m.mobile}
 
 <br>
 
-${d.status}
+${m.email}
 
 </div>
 
@@ -252,19 +141,18 @@ ${d.status}
 
 });
 
+document
+.getElementById("members")
+.innerHTML=
 
-members.innerHTML=
 html;
 
 }
 
 );
 
-}
-
 </script>
 
 </body>
 
 </html>
-```
