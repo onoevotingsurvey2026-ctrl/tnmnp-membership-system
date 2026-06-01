@@ -1,114 +1,144 @@
-// Registration ID Auto Generate
+```javascript
+
+const firebaseConfig={
+
+apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+
+authDomain:
+"tnmnp-membership-system.firebaseapp.com",
+
+databaseURL:
+"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
+
+projectId:
+"tnmnp-membership-system"
+
+};
+
+firebase.initializeApp(
+firebaseConfig
+);
+
+const db=
+firebase.database();
+
+
 
 window.onload=function(){
 
-let reg=document.getElementById("regId");
+document.getElementById(
+"regId"
+).value=
 
-if(reg){
-
-reg.value="TMNP-"+Date.now();
-
-}
+"TMNP-"+Date.now();
 
 };
 
 
-// Logo Upload
 
-function loadLogo(e){
+function saveMember(){
 
-const file=e.target.files[0];
-
-if(!file)return;
-
-const reader=new FileReader();
-
-reader.onload=function(){
-
+let id=
 document.getElementById(
-"logoPreview"
-).src=reader.result;
+"regId"
+).value;
+
+
+let data={
+
+id:id,
+
+name:
+name.value,
+
+mobile:
+mobile.value,
+
+voter:
+voter.value,
+
+email:
+email.value,
+
+address:
+address.value,
+
+status:
+"pending"
 
 };
 
-reader.readAsDataURL(file);
 
-}
+db.ref(
+"members/"+id
+).set(data)
 
+.then(()=>{
 
+alert(
+"Membership Saved Successfully"
+);
 
-// Leader Upload
+})
 
-function loadLeader(e){
+.catch(e=>{
 
-const file=e.target.files[0];
-
-if(!file)return;
-
-const reader=new FileReader();
-
-reader.onload=function(){
-
-document.getElementById(
-"leaderPreview"
-).src=reader.result;
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-
-
-// Open Admin Dashboard
-
-function openAdmin(){
-
-window.location.href=
-"admin.html";
-
-}
-
-
-
-// QR Scanner Optional
-
-if(document.getElementById("reader")){
-
-const scanner=
-new Html5Qrcode("reader");
-
-scanner.start(
-
-{facingMode:"environment"},
-
-{
-
-fps:10,
-
-qrbox:220
-
-},
-
-(txt)=>{
-
-document.getElementById(
-"scanResult"
-).innerHTML=
-
-"QR Result : "+txt;
-
-}
-
-).catch(()=>{
-
-document.getElementById(
-"scanResult"
-).innerHTML=
-
-"QR Camera Not Active";
+alert(
+e.message
+);
 
 });
 
 }
+
+
+
+function loadLogo(e){
+
+const reader=
+new FileReader();
+
+reader.onload=
+()=>{
+
+logoPreview.src=
+reader.result;
+
+};
+
+reader.readAsDataURL(
+e.target.files[0]
+);
+
+}
+
+
+
+function loadLeader(e){
+
+const reader=
+new FileReader();
+
+reader.onload=
+()=>{
+
+leaderPreview.src=
+reader.result;
+
+};
+
+reader.readAsDataURL(
+e.target.files[0]
+);
+
+}
+
+
+
+function openAdmin(){
+
+location.href=
+"admin.html";
+
+}
+```
