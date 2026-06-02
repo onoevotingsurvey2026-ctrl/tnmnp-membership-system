@@ -1,3 +1,5 @@
+<script type="module">
+
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
@@ -38,19 +40,18 @@ appId:
 
 /* INITIALIZE */
 
-const app =
+const app=
 initializeApp(firebaseConfig);
 
-const db =
+const db=
 getDatabase(app);
-
 
 
 /* AUTO ID */
 
 function generateID(){
 
-return "TMNP-" + Date.now();
+return "TMNP-"+Date.now();
 
 }
 
@@ -74,7 +75,6 @@ generateID();
 );
 
 
-
 /* LOGO PREVIEW */
 
 window.loadLogo=function(e){
@@ -92,7 +92,6 @@ file
 );
 
 };
-
 
 
 /* LEADER PREVIEW */
@@ -114,12 +113,16 @@ file
 };
 
 
-
 /* SUBMIT MEMBERSHIP */
 
 window.submitMembership=
 
 function(){
+
+const photoFile=
+document.getElementById(
+"photo"
+).files[0];
 
 const member={
 
@@ -149,9 +152,16 @@ document.getElementById(
 ).value,
 
 address:
-document.querySelector(
-"textarea"
+document.getElementById(
+"address"
 ).value,
+
+photo:
+photoFile
+?
+photoFile.name
+:
+"",
 
 created:
 new Date()
@@ -160,7 +170,7 @@ new Date()
 };
 
 
-/* SAVE */
+/* SAVE TO FIREBASE */
 
 set(
 
@@ -175,6 +185,12 @@ member
 
 .then(()=>{
 
+downloadCSV(
+[
+member
+]
+);
+
 alert(
 
 "Membership Registered Successfully ✅\n\n"
@@ -185,32 +201,6 @@ member.id
 
 );
 
-
-/* CLEAR */
-
-document.getElementById(
-"name"
-).value="";
-
-document.getElementById(
-"phone"
-).value="";
-
-document.getElementById(
-"voter"
-).value="";
-
-document.getElementById(
-"email"
-).value="";
-
-document.querySelector(
-"textarea"
-).value="";
-
-
-/* NEW ID */
-
 document.getElementById(
 "regId"
 ).value=
@@ -219,18 +209,85 @@ generateID();
 
 })
 
-.catch(error=>{
+.catch(err=>{
 
 alert(
-
-"Save Failed\n"
-
-+
-
-error.message
-
+"Error : "+err
 );
 
 });
 
 };
+
+
+
+/* CSV EXPORT */
+
+function downloadCSV(data){
+
+let csvContent=
+
+"ID,Name,Mobile,Voter ID,Gmail,Address,Photo URL\n";
+
+data.forEach(row=>{
+
+csvContent+=
+
+`"${row.id}",
+"${row.name}",
+"${row.mobile}",
+"${row.voter}",
+"${row.email || ''}",
+"${row.address || ''}",
+"${row.photo || ''}"\n`;
+
+});
+
+
+const blob=
+
+new Blob(
+
+[
+"\uFEFF"+csvContent
+],
+
+{
+
+type:
+"text/csv;charset=utf-8;"
+
+}
+
+);
+
+
+const link=
+
+document.createElement(
+"a"
+);
+
+link.href=
+
+URL.createObjectURL(
+blob
+);
+
+link.download=
+
+"TMNP-membership-report.csv";
+
+document.body.appendChild(
+link
+);
+
+link.click();
+
+document.body.removeChild(
+link
+);
+
+}
+
+</script>
