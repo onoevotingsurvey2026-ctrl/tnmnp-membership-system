@@ -1,25 +1,52 @@
-<script type="module">
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import {
+getDatabase,
+ref,
+set
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig={
+
 apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-authDomain:"tnmnp-membership-system.firebaseapp.com",
-databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
-projectId:"tnmnp-membership-system",
-storageBucket:"tnmnp-membership-system.firebasestorage.app",
-messagingSenderId:"616857466202",
-appId:"1:616857466202:web:0fb4fae39e938ec0edef63"
+
+authDomain:
+"tnmnp-membership-system.firebaseapp.com",
+
+databaseURL:
+"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
+
+projectId:
+"tnmnp-membership-system",
+
+storageBucket:
+"tnmnp-membership-system.firebasestorage.app",
+
+messagingSenderId:
+"616857466202",
+
+appId:
+"1:616857466202:web:0fb4fae39e938ec0edef63"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+
+/* INITIALIZE */
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
 
 
-/* ===========================
-   AUTO REGISTRATION ID FIX
-=========================== */
+
+/* AUTO ID */
 
 function generateID(){
 
@@ -27,81 +54,183 @@ return "TMNP-" + Date.now();
 
 }
 
-/* Activate ID immediately on page load */
 
-document.addEventListener("DOMContentLoaded",()=>{
+/* PAGE LOAD */
 
-document.getElementById("regId").value = generateID();
+window.addEventListener(
 
-});
+"load",
+
+function(){
+
+document.getElementById(
+"regId"
+).value=
+
+generateID();
+
+}
+
+);
 
 
-/* ===========================
-   MEMBERSHIP SUBMIT
-=========================== */
 
-window.submitMembership=function(){
+/* LOGO PREVIEW */
 
-const id=document.getElementById("regId").value;
+window.loadLogo=function(e){
 
-const name=document.getElementById("name").value;
+const file=e.target.files[0];
 
-const phone=document.getElementById("phone").value;
+if(!file)return;
 
-const voter=document.getElementById("voter").value;
+document.getElementById(
+"logoPreview"
+).src=
 
-const email=document.getElementById("email").value;
+URL.createObjectURL(
+file
+);
 
-const address=document.querySelector("textarea").value;
+};
 
+
+
+/* LEADER PREVIEW */
+
+window.loadLeader=function(e){
+
+const file=e.target.files[0];
+
+if(!file)return;
+
+document.getElementById(
+"leaderPreview"
+).src=
+
+URL.createObjectURL(
+file
+);
+
+};
+
+
+
+/* SUBMIT MEMBERSHIP */
+
+window.submitMembership=
+
+function(){
+
+const member={
+
+id:
+document.getElementById(
+"regId"
+).value,
+
+name:
+document.getElementById(
+"name"
+).value,
+
+mobile:
+document.getElementById(
+"phone"
+).value,
+
+voter:
+document.getElementById(
+"voter"
+).value,
+
+email:
+document.getElementById(
+"email"
+).value,
+
+address:
+document.querySelector(
+"textarea"
+).value,
+
+created:
+new Date()
+.toLocaleString()
+
+};
+
+
+/* SAVE */
 
 set(
-ref(db,"members/"+id),
-{
-id:id,
-name:name,
-mobile:phone,
-voter:voter,
-email:email,
-address:address,
-time:new Date().toLocaleString()
-}
+
+ref(
+db,
+"members/"+member.id
+),
+
+member
 
 )
 
 .then(()=>{
 
-alert("Saved Successfully\n\n"+id);
+alert(
 
-/* Generate next ID automatically */
+"Membership Registered Successfully ✅\n\n"
 
-document.getElementById("regId").value = generateID();
++
+
+member.id
+
+);
+
+
+/* CLEAR */
+
+document.getElementById(
+"name"
+).value="";
+
+document.getElementById(
+"phone"
+).value="";
+
+document.getElementById(
+"voter"
+).value="";
+
+document.getElementById(
+"email"
+).value="";
+
+document.querySelector(
+"textarea"
+).value="";
+
+
+/* NEW ID */
+
+document.getElementById(
+"regId"
+).value=
+
+generateID();
+
+})
+
+.catch(error=>{
+
+alert(
+
+"Save Failed\n"
+
++
+
+error.message
+
+);
 
 });
 
-}
-
-
-/* ===========================
-   IMAGE PREVIEW
-=========================== */
-
-window.loadLogo=function(e){
-
-logoPreview.src=
-URL.createObjectURL(
-e.target.files[0]
-);
-
-}
-
-window.loadLeader=function(e){
-
-leaderPreview.src=
-URL.createObjectURL(
-e.target.files[0]
-);
-
-}
-
-</script>
+};
