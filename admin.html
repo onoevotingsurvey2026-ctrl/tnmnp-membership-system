@@ -1,158 +1,125 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-
-<title>
-
-TMNP Admin
-
-</title>
+<meta charset="UTF-8">
+<title>TMNP Admin Dashboard</title>
 
 <style>
-
-body{
-
-font-family:Arial;
-
-padding:20px;
-
-}
-
-.card{
-
-border:1px solid #ccc;
-
-padding:15px;
-
-margin:10px 0;
-
-}
-
+body{font-family:Arial;background:#f2f2f2;padding:20px}
+.container{max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:10px}
+input,button{width:100%;padding:10px;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin-top:20px}
+th,td{border:1px solid #ccc;padding:8px;text-align:left}
+button{background:#0b5ed7;color:#fff;border:none;cursor:pointer}
 </style>
-
 </head>
 
 <body>
 
-<h2>
+<div class="container">
 
-Members List
+<h2>Admin Login</h2>
 
-</h2>
+<div id="loginBox">
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+</div>
 
-<div id="members">
+<div id="dashboard" style="display:none">
 
-Loading...
+<h3>Membership Records</h3>
+
+<button onclick="downloadCSV()">Download CSV</button>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Mobile</th>
+<th>Voter</th>
+<th>Email</th>
+</tr>
+</thead>
+<tbody id="dataBody"></tbody>
+</table>
 
 </div>
 
+</div>
 
 <script type="module">
 
-import {
-
-initializeApp
-
-}
-
-from
-"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-
-import {
-
-getDatabase,
-
-ref,
-
-onValue
-
-}
-
-from
-"https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig={
-
 apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-
 authDomain:"tnmnp-membership-system.firebaseapp.com",
-
-databaseURL:
-"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
-
-projectId:"tnmnp-membership-system",
-
-storageBucket:
-"tnmnp-membership-system.firebasestorage.app",
-
-messagingSenderId:"616857466202",
-
-appId:
-"1:616857466202:web:0fb4fae39e938ec0edef63"
-
+databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
+projectId:"tnmnp-membership-system"
 };
 
+const app=initializeApp(firebaseConfig);
+const db=getDatabase(app);
 
-const app=
+let allData=[];
 
-initializeApp(firebaseConfig);
+window.login=function(){
+const u=document.getElementById("user").value;
+const p=document.getElementById("pass").value;
 
-const db=
-
-getDatabase(app);
-
-
-onValue(
-
-ref(db,"members"),
-
-(snapshot)=>{
-
-let html="";
-
-snapshot.forEach((x)=>{
-
-let m=x.val();
-
-html+=`
-
-<div class="card">
-
-<b>${m.id}</b>
-
-<br>
-
-${m.name}
-
-<br>
-
-${m.mobile}
-
-<br>
-
-${m.email}
-
-</div>
-
-`;
-
-});
-
-document
-.getElementById("members")
-.innerHTML=
-
-html;
-
+if(u==="admin" && p==="admin123"){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("dashboard").style.display="block";
+loadData();
+}else{
+alert("Invalid Login");
+}
 }
 
-);
+function loadData(){
+get(ref(db,"members")).then(snapshot=>{
+allData=[];
+let html="";
+
+snapshot.forEach(child=>{
+const d=child.val();
+allData.push(d);
+
+html+=`
+<tr>
+<td>${d.id}</td>
+<td>${d.name}</td>
+<td>${d.mobile}</td>
+<td>${d.voter}</td>
+<td>${d.email}</td>
+</tr>`;
+});
+
+document.getElementById("dataBody").innerHTML=html;
+});
+}
+
+window.downloadCSV=function(){
+
+let csv="ID,Name,Mobile,Voter,Email\n";
+
+allData.forEach(d=>{
+csv+=`${d.id},${d.name},${d.mobile},${d.voter},${d.email}\n`;
+});
+
+const blob=new Blob([csv],{type:"text/csv"});
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+a.href=url;
+a.download="TMNP-membership-report.csv";
+a.click();
+}
 
 </script>
 
 </body>
-
 </html>
