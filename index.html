@@ -44,21 +44,15 @@ border-radius:8px;
 object-fit:cover;
 }
 
-.center-info{
-flex:1;
-text-align:center;
-}
+.center-info{flex:1;text-align:center;}
 
-.membership-title{
-font-size:24px;
-font-weight:bold;
-}
+.membership-title{font-size:24px;font-weight:bold;}
 
 .join-line{
 color:#0b5ed7;
 font-weight:bold;
-margin-top:5px;
 display:block;
+margin-top:5px;
 }
 
 .party-title{
@@ -81,7 +75,6 @@ padding:15px;
 border:1px solid #ccc;
 border-radius:10px;
 background:#fafafa;
-word-break:break-word;
 }
 
 input,textarea,button{
@@ -91,10 +84,7 @@ margin:10px 0;
 box-sizing:border-box;
 }
 
-.row{
-display:flex;
-gap:10px;
-}
+.row{display:flex;gap:10px;}
 
 button{
 background:#0b5ed7;
@@ -103,10 +93,7 @@ color:white;
 cursor:pointer;
 }
 
-.footer{
-text-align:center;
-margin-top:30px;
-}
+.footer{text-align:center;margin-top:30px;}
 
 @media(max-width:900px){
 .header{flex-direction:column;}
@@ -132,8 +119,7 @@ margin-top:30px;
 
 <div class="membership-title">
 Political Party Membership Form
-<br>
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
+<br>அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
 <span class="join-line">Join Now As Membership</span>
 </div>
 
@@ -142,34 +128,6 @@ TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
 </div>
 
 <div>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</div>
-
-<br>
-
-Election Commission of India<br>
-56/219/2018-2021/PPS-I<br>
-05 March 2021<br><br>
-
-<b>Party Office Address</b><br>
-No.9, 2nd Cross Street<br>
-Gomathipuram<br>
-Thiruninravur<br>
-Pincode 602024
-
-<div class="header-columns">
-
-<div class="column-box">
-<b>Party Leader / General Secretary</b><br>
-N RAMAN<br>
-Mobile: +91 8939324309<br>
-Email: tnmakkalnalvazhvuperiyakkam@gmail.com
-</div>
-
-<div class="column-box">
-<b>Live Website</b><br>
-https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
-</div>
-
-</div>
 
 </div>
 
@@ -196,8 +154,6 @@ https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
 <button onclick="submitMembership()">Submit Membership</button>
 <button onclick="location.href='admin.html'">Admin Dashboard</button>
 
-<div class="footer">Official Party Membership Form</div>
-
 </div>
 
 <script type="module">
@@ -218,36 +174,53 @@ appId:"1:616857466202:web:0fb4fae39e938ec0edef63"
 const app=initializeApp(firebaseConfig);
 const db=getDatabase(app);
 
-// ✅ Improved Auto ID
+/* ✅ FINAL AUTO ID */
 function generateID(){
-const rand=Math.floor(1000+Math.random()*9000);
-const time=Date.now().toString().slice(-6);
-return "TMNP-"+time+rand;
+const rand = Math.floor(1000 + Math.random() * 9000);
+const time = Date.now().toString().slice(-6);
+return "TMNP-" + time + rand;
 }
 
-document.getElementById("regId").value=generateID();
+document.getElementById("regId").value = generateID();
 
-window.submitMembership=function(){
+/* ✅ FIXED SUBMIT FUNCTION */
+window.submitMembership = function () {
 
-const id=document.getElementById("regId").value;
-const name=document.getElementById("name").value;
-const phone=document.getElementById("phone").value;
-const voter=document.getElementById("voter").value;
-const email=document.getElementById("email").value;
-const address=document.querySelector("textarea").value;
+const id = document.getElementById("regId").value;
+const name = document.getElementById("name").value;
+const phone = document.getElementById("phone").value;
+const voter = document.getElementById("voter").value;
+const email = document.getElementById("email").value;
+const address = document.querySelector("textarea").value;
 
-set(ref(db,"members/"+id),{
-id:id,
-name:name,
-mobile:phone,
-voter:voter,
-email:email,
-address:address,
-time:new Date().toLocaleString()
+if (!name || !phone) {
+alert("Name and Mobile required!");
+return;
+}
+
+set(ref(db, "members/" + id), {
+id: id,
+name: name,
+mobile: phone,
+voter: voter,
+email: email,
+address: address,
+createdAt: new Date().toISOString()
 })
-.then(()=>{
-alert("Saved Successfully\n\n"+id);
-document.getElementById("regId").value=generateID();
+.then(() => {
+
+alert("Saved Successfully\n\n" + id);
+
+/* regenerate ID */
+document.getElementById("regId").value = generateID();
+
+/* clear form */
+document.getElementById("name").value = "";
+document.getElementById("phone").value = "";
+document.getElementById("voter").value = "";
+document.getElementById("email").value = "";
+document.querySelector("textarea").value = "";
+
 });
 
 }
