@@ -11,7 +11,7 @@ from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 /* FIREBASE CONFIG */
 
-const firebaseConfig={
+const firebaseConfig = {
 
 apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
 
@@ -45,6 +45,7 @@ const db =
 getDatabase(app);
 
 
+
 /* AUTO ID */
 
 function generateID(){
@@ -54,22 +55,23 @@ return "TMNP-" + Date.now();
 }
 
 
+
 /* PAGE LOAD */
 
 window.addEventListener(
 
 "load",
 
-()=>{
+function(){
 
-const reg =
+const regField =
 document.getElementById(
 "regId"
 );
 
-if(reg){
+if(regField){
 
-reg.value =
+regField.value =
 generateID();
 
 }
@@ -82,7 +84,7 @@ generateID();
 
 /* LOGO PREVIEW */
 
-window.loadLogo=(e)=>{
+window.loadLogo = function(e){
 
 const file =
 e.target.files[0];
@@ -103,7 +105,7 @@ file
 
 /* LEADER PREVIEW */
 
-window.loadLeader=(e)=>{
+window.loadLeader = function(e){
 
 const file =
 e.target.files[0];
@@ -124,14 +126,14 @@ file
 
 /* SUBMIT MEMBERSHIP */
 
-window.submitMembership=()=>{
+window.submitMembership = function(){
 
 const photoInput =
 document.getElementById(
 "photo"
 );
 
-const member={
+const member = {
 
 id:
 
@@ -172,7 +174,7 @@ document.getElementById(
 photo:
 
 photoInput &&
-photoInput.files[0]
+photoInput.files.length>0
 
 ?
 
@@ -183,6 +185,7 @@ photoInput.files[0].name
 ""
 
 };
+
 
 
 set(
@@ -198,12 +201,7 @@ member
 
 .then(()=>{
 
-downloadCSV(
-[
-member
-]
-);
-
+downloadCSV(member);
 
 alert(
 
@@ -215,10 +213,9 @@ member.id
 
 );
 
-
 document.getElementById(
 "regId"
-).value=
+).value =
 
 generateID();
 
@@ -238,21 +235,15 @@ alert(
 
 /* CSV EXPORT */
 
-function downloadCSV(data){
+function downloadCSV(member){
 
-let csvContent=
+let csvContent =
 
 "ID,Name,Mobile,Voter ID,Gmail,Address,Photo URL\n";
 
-
-data.forEach(row=>{
-
 csvContent +=
 
-`"${row.id}","${row.name}","${row.mobile}","${row.voter}","${row.email || ""}","${row.address || ""}","${row.photo || ""}"\n`;
-
-});
-
+`"${member.id}","${member.name}","${member.mobile}","${member.voter}","${member.email}","${member.address}","${member.photo}"`;
 
 const blob =
 
@@ -278,26 +269,21 @@ document.createElement(
 "a"
 );
 
-
 link.href =
 
 URL.createObjectURL(
 blob
 );
 
-
 link.download =
 
 "TMNP-membership-report.csv";
-
 
 document.body.appendChild(
 link
 );
 
-
 link.click();
-
 
 document.body.removeChild(
 link
