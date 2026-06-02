@@ -5,12 +5,55 @@
 <title>TMNP Admin Dashboard</title>
 
 <style>
-body{font-family:Arial;background:#f2f2f2;padding:20px}
-.container{max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:10px}
-input,button{width:100%;padding:10px;margin:10px 0}
-table{width:100%;border-collapse:collapse;margin-top:20px}
-th,td{border:1px solid #ccc;padding:8px;text-align:left}
-button{background:#0b5ed7;color:#fff;border:none;cursor:pointer}
+body{
+font-family:Arial;
+background:#f2f2f2;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+input,button{
+width:100%;
+padding:10px;
+margin:10px 0;
+box-sizing:border-box;
+}
+
+button{
+background:#0b5ed7;
+color:#fff;
+border:none;
+cursor:pointer;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:8px;
+text-align:left;
+font-size:14px;
+}
+
+h2,h3{
+text-align:center;
+}
+
+#dashboard{
+display:none;
+}
 </style>
 </head>
 
@@ -18,19 +61,21 @@ button{background:#0b5ed7;color:#fff;border:none;cursor:pointer}
 
 <div class="container">
 
-<h2>Admin Login</h2>
+<h2>TMNP Admin Login</h2>
 
+<!-- LOGIN BOX -->
 <div id="loginBox">
-<input id="user" placeholder="Username">
+<input id="user" placeholder="Email ID">
 <input id="pass" type="password" placeholder="Password">
 <button onclick="login()">Login</button>
 </div>
 
-<div id="dashboard" style="display:none">
+<!-- DASHBOARD -->
+<div id="dashboard">
 
 <h3>Membership Records</h3>
 
-<button onclick="downloadCSV()">Download CSV</button>
+<button onclick="downloadCSV()">Download CSV Report</button>
 
 <table>
 <thead>
@@ -38,7 +83,7 @@ button{background:#0b5ed7;color:#fff;border:none;cursor:pointer}
 <th>ID</th>
 <th>Name</th>
 <th>Mobile</th>
-<th>Voter</th>
+<th>Voter ID</th>
 <th>Email</th>
 </tr>
 </thead>
@@ -54,69 +99,87 @@ button{background:#0b5ed7;color:#fff;border:none;cursor:pointer}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-const firebaseConfig={
-apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-authDomain:"tnmnp-membership-system.firebaseapp.com",
-databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
-projectId:"tnmnp-membership-system"
+const firebaseConfig = {
+apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+authDomain: "tnmnp-membership-system.firebaseapp.com",
+databaseURL: "https://tnmnp-membership-system-default-rtdb.firebaseio.com",
+projectId: "tnmnp-membership-system",
+storageBucket: "tnmnp-membership-system.firebasestorage.app",
+messagingSenderId: "616857466202",
+appId: "1:616857466202:web:0fb4fae39e938ec0edef63"
 };
 
-const app=initializeApp(firebaseConfig);
-const db=getDatabase(app);
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-let allData=[];
+let allData = [];
 
-window.login=function(){
-const u=document.getElementById("user").value;
-const p=document.getElementById("pass").value;
+/* 🔐 LOGIN (UPDATED CREDENTIALS) */
+window.login = function () {
 
-if(u==="admin" && p==="admin123"){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("dashboard").style.display="block";
+const u = document.getElementById("user").value;
+const p = document.getElementById("pass").value;
+
+// ✅ Updated login credentials
+const validEmail = "onoe.voting.survey2026@gmail.com";
+const validPass = "nraman131069";
+
+if (u === validEmail && p === validPass) {
+document.getElementById("loginBox").style.display = "none";
+document.getElementById("dashboard").style.display = "block";
 loadData();
-}else{
+} else {
 alert("Invalid Login");
 }
+
 }
 
-function loadData(){
-get(ref(db,"members")).then(snapshot=>{
-allData=[];
-let html="";
+/* 📥 LOAD FIREBASE DATA */
+function loadData() {
 
-snapshot.forEach(child=>{
-const d=child.val();
+get(ref(db, "members")).then(snapshot => {
+
+allData = [];
+let html = "";
+
+snapshot.forEach(child => {
+const d = child.val();
 allData.push(d);
 
-html+=`
+html += `
 <tr>
-<td>${d.id}</td>
-<td>${d.name}</td>
-<td>${d.mobile}</td>
-<td>${d.voter}</td>
-<td>${d.email}</td>
-</tr>`;
+<td>${d.id || ""}</td>
+<td>${d.name || ""}</td>
+<td>${d.mobile || ""}</td>
+<td>${d.voter || ""}</td>
+<td>${d.email || ""}</td>
+</tr>
+`;
 });
 
-document.getElementById("dataBody").innerHTML=html;
+document.getElementById("dataBody").innerHTML = html;
+
 });
+
 }
 
-window.downloadCSV=function(){
+/* 📊 DOWNLOAD CSV */
+window.downloadCSV = function () {
 
-let csv="ID,Name,Mobile,Voter,Email\n";
+let csv = "ID,Name,Mobile,Voter,Email\n";
 
-allData.forEach(d=>{
-csv+=`${d.id},${d.name},${d.mobile},${d.voter},${d.email}\n`;
+allData.forEach(d => {
+csv += `${d.id || ""},${d.name || ""},${d.mobile || ""},${d.voter || ""},${d.email || ""}\n`;
 });
 
-const blob=new Blob([csv],{type:"text/csv"});
-const url=URL.createObjectURL(blob);
+const blob = new Blob([csv], { type: "text/csv" });
+const url = URL.createObjectURL(blob);
 
-const a=document.createElement("a");
-a.href=url;
-a.download="TMNP-membership-report.csv";
+const a = document.createElement("a");
+a.href = url;
+a.download = "TMNP-membership-report.csv";
 a.click();
+
 }
 
 </script>
