@@ -38,22 +38,20 @@ appId:
 
 /* INITIALIZE */
 
-const app=
+const app =
 initializeApp(firebaseConfig);
 
-const db=
+const db =
 getDatabase(app);
 
 
-
-/* GENERATE ID */
+/* AUTO ID */
 
 function generateID(){
 
-return "TMNP-"+Date.now();
+return "TMNP-" + Date.now();
 
 }
-
 
 
 /* PAGE LOAD */
@@ -64,11 +62,17 @@ window.addEventListener(
 
 ()=>{
 
+const reg =
 document.getElementById(
 "regId"
-).value=
+);
 
+if(reg){
+
+reg.value =
 generateID();
+
+}
 
 }
 
@@ -80,13 +84,14 @@ generateID();
 
 window.loadLogo=(e)=>{
 
-const file=e.target.files[0];
+const file =
+e.target.files[0];
 
 if(!file)return;
 
 document.getElementById(
 "logoPreview"
-).src=
+).src =
 
 URL.createObjectURL(
 file
@@ -100,13 +105,14 @@ file
 
 window.loadLeader=(e)=>{
 
-const file=e.target.files[0];
+const file =
+e.target.files[0];
 
 if(!file)return;
 
 document.getElementById(
 "leaderPreview"
-).src=
+).src =
 
 URL.createObjectURL(
 file
@@ -120,12 +126,10 @@ file
 
 window.submitMembership=()=>{
 
-const photoFile=
-
+const photoInput =
 document.getElementById(
 "photo"
-).files[0];
-
+);
 
 const member={
 
@@ -167,19 +171,18 @@ document.getElementById(
 
 photo:
 
-photoFile
+photoInput &&
+photoInput.files[0]
+
 ?
-photoFile.name
+
+photoInput.files[0].name
+
 :
-"",
 
-created:
-
-new Date()
-.toLocaleString()
+""
 
 };
-
 
 
 set(
@@ -200,6 +203,7 @@ downloadCSV(
 member
 ]
 );
+
 
 alert(
 
@@ -250,7 +254,7 @@ csvContent +=
 });
 
 
-const blob=
+const blob =
 
 new Blob(
 
@@ -268,27 +272,32 @@ type:
 );
 
 
-const link=
+const link =
 
 document.createElement(
 "a"
 );
 
-link.href=
+
+link.href =
 
 URL.createObjectURL(
 blob
 );
 
-link.download=
+
+link.download =
 
 "TMNP-membership-report.csv";
+
 
 document.body.appendChild(
 link
 );
 
+
 link.click();
+
 
 document.body.removeChild(
 link
