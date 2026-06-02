@@ -1,5 +1,3 @@
-<script type="module">
-
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
@@ -47,7 +45,8 @@ const db=
 getDatabase(app);
 
 
-/* AUTO ID */
+
+/* GENERATE ID */
 
 function generateID(){
 
@@ -56,13 +55,14 @@ return "TMNP-"+Date.now();
 }
 
 
+
 /* PAGE LOAD */
 
 window.addEventListener(
 
 "load",
 
-function(){
+()=>{
 
 document.getElementById(
 "regId"
@@ -75,9 +75,10 @@ generateID();
 );
 
 
+
 /* LOGO PREVIEW */
 
-window.loadLogo=function(e){
+window.loadLogo=(e)=>{
 
 const file=e.target.files[0];
 
@@ -94,9 +95,10 @@ file
 };
 
 
+
 /* LEADER PREVIEW */
 
-window.loadLeader=function(e){
+window.loadLeader=(e)=>{
 
 const file=e.target.files[0];
 
@@ -113,50 +115,58 @@ file
 };
 
 
+
 /* SUBMIT MEMBERSHIP */
 
-window.submitMembership=
-
-function(){
+window.submitMembership=()=>{
 
 const photoFile=
+
 document.getElementById(
 "photo"
 ).files[0];
 
+
 const member={
 
 id:
+
 document.getElementById(
 "regId"
 ).value,
 
 name:
+
 document.getElementById(
 "name"
 ).value,
 
 mobile:
+
 document.getElementById(
 "phone"
 ).value,
 
 voter:
+
 document.getElementById(
 "voter"
 ).value,
 
 email:
+
 document.getElementById(
 "email"
 ).value,
 
 address:
+
 document.getElementById(
 "address"
 ).value,
 
 photo:
+
 photoFile
 ?
 photoFile.name
@@ -164,13 +174,13 @@ photoFile.name
 "",
 
 created:
+
 new Date()
 .toLocaleString()
 
 };
 
 
-/* SAVE TO FIREBASE */
 
 set(
 
@@ -193,13 +203,14 @@ member
 
 alert(
 
-"Membership Registered Successfully ✅\n\n"
+"Membership Registered Successfully\n\n"
 
 +
 
 member.id
 
 );
+
 
 document.getElementById(
 "regId"
@@ -209,7 +220,7 @@ generateID();
 
 })
 
-.catch(err=>{
+.catch((err)=>{
 
 alert(
 "Error : "+err
@@ -229,17 +240,12 @@ let csvContent=
 
 "ID,Name,Mobile,Voter ID,Gmail,Address,Photo URL\n";
 
+
 data.forEach(row=>{
 
-csvContent+=
+csvContent +=
 
-`"${row.id}",
-"${row.name}",
-"${row.mobile}",
-"${row.voter}",
-"${row.email || ''}",
-"${row.address || ''}",
-"${row.photo || ''}"\n`;
+`"${row.id}","${row.name}","${row.mobile}","${row.voter}","${row.email || ""}","${row.address || ""}","${row.photo || ""}"\n`;
 
 });
 
@@ -289,5 +295,3 @@ link
 );
 
 }
-
-</script>
