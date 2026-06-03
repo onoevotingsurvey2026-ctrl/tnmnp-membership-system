@@ -1,12 +1,18 @@
-```html
 <!DOCTYPE html>
 <html lang="ta">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>TMNP Membership Form</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+
+TMNP Membership Form
+
+</title>
 
 <style>
 
@@ -29,6 +35,7 @@ box-shadow:0 0 10px rgba(0,0,0,.1);
 .header{
 display:flex;
 justify-content:space-between;
+align-items:flex-start;
 gap:20px;
 border-bottom:2px solid black;
 padding-bottom:20px;
@@ -42,11 +49,13 @@ text-align:center;
 
 .left-logo img,
 .right-photo img{
+
 width:130px;
 height:130px;
 border:1px solid #ccc;
 border-radius:8px;
 object-fit:cover;
+
 }
 
 .center-info{
@@ -55,55 +64,67 @@ text-align:center;
 }
 
 .membership-title{
+
 font-size:24px;
 font-weight:bold;
+
 }
 
 .party-title{
+
 font-size:28px;
 font-weight:bold;
 margin-top:10px;
+
 }
 
 .tamil-title{
+
 font-size:22px;
 margin-top:10px;
+
 }
 
-.eci-info{
-margin-top:15px;
-line-height:1.7;
-}
-
+.eci-info,
 .party-address{
+
 margin-top:15px;
 line-height:1.7;
+
 }
 
 .header-columns{
+
 display:flex;
 gap:20px;
 justify-content:center;
 flex-wrap:wrap;
 margin-top:20px;
+
 }
 
 .column-box{
+
 width:380px;
 padding:15px;
 border:1px solid #ccc;
 border-radius:10px;
 background:#fafafa;
+
 }
 
 .form-section{
+
 margin-top:25px;
+
 }
 
 label{
-font-weight:bold;
+
 display:block;
+font-weight:bold;
 margin-top:10px;
+
 }
 
 input,
@@ -128,15 +149,15 @@ gap:10px;
 button{
 
 background:#0b5ed7;
-color:white;
 border:none;
+color:white;
 cursor:pointer;
 
 }
 
 .footer{
 
-margin-top:20px;
+margin-top:25px;
 text-align:center;
 padding-top:15px;
 border-top:1px solid #ccc;
@@ -219,17 +240,24 @@ Election Commission of India
 
 </div>
 
+
 <div class="party-address">
 
 <b>Party Office Address</b>
 
 <br>
 
-No.9 2nd Cross Street,
+No.9 2nd Cross Street
 
-Gomathipuram,
+<br>
 
-Thiruninravur,
+Gomathipuram
+
+<br>
+
+Thiruninravur
+
+<br>
 
 Pincode 602024
 
@@ -248,13 +276,13 @@ N RAMAN
 
 <br>
 
-Mobile :
+Mobile:
 
 8939324309
 
 <br>
 
-Email :
+Email:
 
 tnmakkalnalvazhvuperiyakkam@gmail.com
 
@@ -298,15 +326,17 @@ onchange="loadLeader(event)">
 id="regId"
 readonly>
 
+
 <label>Member Name</label>
 
 <input id="name">
+
 
 <div class="row">
 
 <div style="flex:1">
 
-<label>Mobile Number</label>
+<label>Mobile</label>
 
 <input id="phone">
 
@@ -347,15 +377,7 @@ Submit Membership
 
 </button>
 
-
-<button onclick="location.href='admin.html'">
-
-Admin Dashboard
-
-</button>
-
 </div>
-
 
 <div class="footer">
 
@@ -370,4 +392,3 @@ Official Party Membership Form
 </body>
 
 </html>
-```
