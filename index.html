@@ -1,33 +1,32 @@
-<div class="dashboard">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TMNP Registration</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-<h1>TMNP Admin Dashboard</h1>
+<body>
 
-<div class="stats">
-<div class="card">
-<h3 id="totalCount">0</h3>
-<p>Total Members</p>
+<div class="container">
+
+<h1>TMNP Membership Registration</h1>
+
+<input id="regId" readonly>
+<input id="name" placeholder="Full Name">
+
+<div class="row">
+<input id="mobile" placeholder="Mobile">
+<input id="voter" placeholder="Voter ID">
 </div>
-</div>
 
-<div class="controls">
+<input id="email" placeholder="Email">
+<textarea id="address" placeholder="Address"></textarea>
 
-<input id="search" placeholder="Search by Name / Mobile" onkeyup="filterData()">
-
-<button onclick="downloadCSV()">Export CSV</button>
-
-</div>
-
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>Mobile</th>
-<th>Email</th>
-</tr>
-</thead>
-
-<tbody id="dataBody"></tbody>
-</table>
+<button onclick="submitForm()">REGISTER</button>
 
 </div>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
