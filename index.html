@@ -3,58 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <title>TNMNP Membership System</title>
-
 <link rel="stylesheet" href="style.css">
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://unpkg.com/html5-qrcode"></script>
+<style>
+/* ⚙️ AUTOFILL PANEL */
+.box{
+  background:#fff;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.popup{
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px;
+  text-align:center;
+  font-weight:bold;
+  animation:fadeIn 0.4s ease-in;
+}
+
+.popup.green{
+  background:#00ff66;
+  color:#000;
+}
+
+.popup.red{
+  background:#ff3b3b;
+  color:#fff;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.9);}
+  to{opacity:1; transform:scale(1);}
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-<!-- 🏛️ CENTER GOVERNMENT PANEL -->
-<div class="gov-panel">
-
-  <h1>TNMNP</h1>
-  <h2>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h2>
-
-  <p class="tagline">
-    “People First | Transparency | Development | Equality”
-  </p>
-
-  <p><b>Leader:</b> N RAMAN (President / General Secretary)</p>
-
-  <p class="eci">
-    🏛️ ECI Registration No: 56/219/2018-2021
-  </p>
-
-  <div class="address">
-    📍 No.9, 2nd Cross Street, Gomathipuram,<br>
-    Thiruninravur R.S, Pincode - 602024,<br>
-    Thiruvallur District, Tamil Nadu, India
-  </div>
-
-  <div class="contact">
-    📞 +91 89393 24309 | +91 9384695599<br>
-    📧 tnmakkalnalvazhvuperiyakkam@gmail.com
-  </div>
-
-  <div class="map">
-    <iframe
-      src="https://www.google.com/maps?q=No.9,2nd+Cross+Street,Gomathipuram,Thiruninravur&output=embed"
-      loading="lazy">
-    </iframe>
-  </div>
-
+<!-- 🏛️ PARTY HEADER -->
+<div class="box">
+  <h2>TNMNP - Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
+  <h3>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h3>
+  <p><b>Leader:</b> N RAMAN</p>
+  <p>“People First | Transparency | Development | Equality”</p>
 </div>
 
-<!-- ⚙️ AUTOFILL PANEL -->
-<div id="autoFillPanel" style="display:none;">
-
+<!-- ⚙️ SETTINGS PANEL -->
+<div class="box">
   <h3>⚙️ Autofill Settings</h3>
 
   <input type="text" id="default_voter" placeholder="Default Voter ID">
@@ -64,69 +64,147 @@
   <button type="button" onclick="saveDefaults()">💾 Save Defaults</button>
 </div>
 
-<!-- 📝 REGISTRATION FORM -->
-<form id="memberForm">
+<!-- 📝 FORM -->
+<form id="registerForm">
 
-<h3>📝 Membership Registration</h3>
+  <input type="text" id="voterid"
+         placeholder="Voter ID *"
+         oninput="checkAutoFill(this.value)"
+         required>
 
-<input id="voterid" placeholder="Voter ID *" oninput="checkAutoFill(this.value)" required>
+  <input type="tel" id="phone" placeholder="Mobile Number *" required>
 
-<input id="phone" placeholder="Mobile Number *" required>
+  <input type="email" id="email" placeholder="Gmail ID *" required>
 
-<input id="email" placeholder="Email ID *" required>
-
-<button type="submit">Register Member</button>
-
+  <button type="submit">Register Member</button>
 </form>
 
-<div id="msg"></div>
-
-<!-- 🖥️ ADMIN PANEL -->
-<div class="admin">
-
-<h3>Admin Panel</h3>
-
-<input id="search" placeholder="Search Reg No">
-<button onclick="searchMember()">Search</button>
-
-<div id="result"></div>
-
-</div>
+<!-- ⚡ ACK -->
+<div id="ack"></div>
 
 <!-- 📷 SCANNER -->
 <div class="scanner-box">
-
-<h3>QR Scanner</h3>
-
-<div id="reader" style="width:300px;margin:auto;"></div>
-
-<button onclick="startScanner()">Start Camera Scan</button>
-
-<div id="scanResult"></div>
-
+  <h3>QR Scanner</h3>
+  <div id="reader"></div>
+  <div id="scanResult"></div>
 </div>
 
 </div>
 
 <!-- FIREBASE -->
-<script>// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<!-- QR -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+/* ================= FIREBASE ================= */
 const firebaseConfig = {
   apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
   authDomain: "tnmnp-membership-system.firebaseapp.com",
-  databaseURL: "https://tnmnp-membership-system-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "tnmnp-membership-system",
   storageBucket: "tnmnp-membership-system.firebasestorage.app",
   messagingSenderId: "616857466202",
-  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
-  measurementId: "G-Q7RYMTMLC7"
+  appId: "1:616857466202:web:0fb4fae39e938ec0edef63"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-</script>
 
-<!-- SCRIPT -->
-<script src="script.js"></script>
+/* ================= AUTO FILL STORAGE ================= */
+function saveDefaults(){
+  localStorage.setItem("voter", document.getElementById("default_voter").value);
+  localStorage.setItem("mobile", document.getElementById("default_mobile").value);
+  localStorage.setItem("email", document.getElementById("default_email").value);
+
+  alert("Defaults Saved ✔");
+}
+
+/* ================= AUTO FILL LOGIC ================= */
+function checkAutoFill(value){
+
+  if(value.length > 0){
+    document.getElementById("voterid").value =
+      localStorage.getItem("voter") || value;
+
+    document.getElementById("phone").value =
+      localStorage.getItem("mobile") || "";
+
+    document.getElementById("email").value =
+      localStorage.getItem("email") || "";
+  }
+}
+
+/* ================= FORM SUBMIT ================= */
+document.getElementById("registerForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let regNo = "TNMNP-" + Date.now();
+
+  db.collection("members").add({
+    regNo: regNo,
+    voterId: document.getElementById("voterid").value,
+    mobile: document.getElementById("phone").value,
+    email: document.getElementById("email").value
+  });
+
+  document.getElementById("ack").innerHTML =
+  `<div class="popup green">✅ REGISTERED<br>${regNo}</div>`;
+
+  this.reset();
+});
+
+/* ================= SCANNER ================= */
+let scanner;
+
+function startScanner(){
+  scanner = new Html5QrcodeScanner("reader",
+    { fps: 10, qrbox: 250 });
+
+  scanner.render(onScanSuccess);
+}
+
+startScanner();
+
+/* ================= SCAN RESULT ================= */
+function onScanSuccess(decodedText){
+
+  let beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+  beep.play();
+
+  if(navigator.vibrate) navigator.vibrate(200);
+
+  db.collection("members")
+  .where("regNo","==",decodedText)
+  .get()
+  .then(snap => {
+
+    let r = document.getElementById("scanResult");
+
+    if(snap.empty){
+      r.innerHTML = `<div class="popup red">❌ INVALID MEMBER</div>`;
+      return;
+    }
+
+    snap.forEach(doc => {
+      let d = doc.data();
+
+      r.innerHTML = `
+        <div class="popup green">
+          🏛️ VERIFIED MEMBER<br><br>
+          Reg No: ${d.regNo}<br>
+          Voter: ${d.voterId}<br>
+          Mobile: ${d.mobile}<br>
+          Email: ${d.email}<br><br>
+          STATUS: ACTIVE
+        </div>
+      `;
+    });
+
+  });
+}
+</script>
 
 </body>
 </html>
