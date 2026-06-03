@@ -1,46 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>TMNP Admin Dashboard</title>
-
-<style>
-body{font-family:Arial;background:#f2f2f2;padding:20px;}
-.container{max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:10px;}
-input,button{width:100%;padding:10px;margin:10px 0;}
-button{background:#0b5ed7;color:#fff;border:none;cursor:pointer;}
-table{width:100%;border-collapse:collapse;margin-top:20px;}
-th,td{border:1px solid #ccc;padding:8px;text-align:left;}
-#dashboard{display:none;}
-</style>
+<title>TMNP Admin</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="container">
 
-<h2>TMNP Admin Login</h2>
+<h2>Admin Login</h2>
 
 <div id="loginBox">
-<input id="user" placeholder="Email ID">
+<input id="user" placeholder="Email">
 <input id="pass" type="password" placeholder="Password">
 <button onclick="login()">Login</button>
 </div>
 
-<div id="dashboard">
+<div id="dashboard" style="display:none">
 
-<h3>Membership Records</h3>
+<h3>Members</h3>
 
-<button onclick="downloadCSV()">Download CSV Report</button>
+<button onclick="downloadCSV()">Download CSV</button>
 
 <table>
 <thead>
 <tr>
-<th>ID</th>
-<th>Name</th>
-<th>Mobile</th>
-<th>Voter ID</th>
-<th>Email</th>
+<th>ID</th><th>Name</th><th>Mobile</th><th>Email</th>
 </tr>
 </thead>
 <tbody id="dataBody"></tbody>
@@ -51,97 +37,70 @@ th,td{border:1px solid #ccc;padding:8px;text-align:left;}
 </div>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-const firebaseConfig={
+const app = initializeApp({
 apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-authDomain:"tnmnp-membership-system.firebaseapp.com",
 databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
-projectId:"tnmnp-membership-system",
-storageBucket:"tnmnp-membership-system.firebasestorage.app",
-messagingSenderId:"616857466202",
-appId:"1:616857466202:web:0fb4fae39e938ec0edef63"
+projectId:"tnmnp-membership-system"
+});
+
+const db = getDatabase(app);
+
+let allData = [];
+
+/* LOGIN */
+window.login = function(){
+if(
+document.getElementById("user").value==="onoe.voting.survey2026@gmail.com" &&
+document.getElementById("pass").value==="nraman131069"
+){
+loginBox.style.display="none";
+dashboard.style.display="block";
+loadData();
+}else alert("Invalid login");
 };
 
-const app=initializeApp(firebaseConfig);
-const db=getDatabase(app);
-
-let allData=[];
-
-/* 🔐 LOGIN */
-window.login=function(){
-
-const u=document.getElementById("user").value;
-const p=document.getElementById("pass").value;
-
-const validEmail="onoe.voting.survey2026@gmail.com";
-const validPass="nraman131069";
-
-if(u===validEmail && p===validPass){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("dashboard").style.display="block";
-loadData();
-}else{
-alert("Invalid Login");
-}
-
-}
-
-/* 📥 LOAD DATA */
+/* REALTIME DATA */
 function loadData(){
-
-get(ref(db,"members")).then(snapshot=>{
-
+onValue(ref(db,"members"), snap=>{
 allData=[];
 let html="";
 
-snapshot.forEach(child=>{
-const d=child.val();
+snap.forEach(s=>{
+const d=s.val();
+allData.push(d);
 
-allData.push({
-id:d.id||"",
-name:d.name||"",
-mobile:d.mobile||"",
-voter:d.voter||"",
-email:d.email||""
-});
-
-html+=`
+html += `
 <tr>
-<td>${d.id||""}</td>
-<td>${d.name||""}</td>
-<td>${d.mobile||""}</td>
-<td>${d.voter||""}</td>
-<td>${d.email||""}</td>
+<td>${d.id}</td>
+<td>${d.name}</td>
+<td>${d.mobile}</td>
+<td>${d.email}</td>
 </tr>`;
 });
 
-document.getElementById("dataBody").innerHTML=html;
-
+dataBody.innerHTML = html;
 });
-
 }
 
-/* 📊 CSV DOWNLOAD */
-window.downloadCSV=function(){
+/* CSV ALL DATA */
+window.downloadCSV = function(){
 
-let csv="ID,Name,Mobile,Voter,Email\n";
+let csv="ID,Name,Mobile,Email\n";
 
 allData.forEach(d=>{
-csv+=`${d.id},${d.name},${d.mobile},${d.voter},${d.email}\n`;
+csv+=`${d.id},${d.name},${d.mobile},${d.email}\n`;
 });
 
 const blob=new Blob([csv],{type:"text/csv"});
-const url=URL.createObjectURL(blob);
-
 const a=document.createElement("a");
-a.href=url;
-a.download="TMNP-membership-report.csv";
-a.click();
 
-}
+a.href=URL.createObjectURL(blob);
+a.download="TMNP-Members.csv";
+a.click();
+};
 
 </script>
 
