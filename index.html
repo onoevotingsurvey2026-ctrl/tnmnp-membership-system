@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ta">
 
@@ -42,6 +43,7 @@ padding-bottom:15px;
 .left-logo,
 .right-photo{
 width:140px;
+min-width:140px;
 text-align:center;
 }
 
@@ -59,11 +61,13 @@ margin:auto;
 .center-info{
 flex:1;
 text-align:center;
+padding:0 20px;
 }
 
 .membership-title{
 font-size:24px;
 font-weight:bold;
+line-height:1.5;
 }
 
 .join-line{
@@ -76,11 +80,34 @@ font-weight:bold;
 .party-title{
 font-size:28px;
 font-weight:bold;
-margin-top:10px;
+margin-top:15px;
 }
 
 .tamil-title{
 font-size:22px;
+margin-top:5px;
+}
+
+.eci-info,
+.party-address{
+margin-top:15px;
+line-height:1.7;
+}
+
+.header-columns{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.column-box{
+width:380px;
+padding:15px;
+border:1px solid #ccc;
+border-radius:10px;
+background:#fafafa;
 }
 
 .form-section{
@@ -88,8 +115,8 @@ margin-top:25px;
 }
 
 label{
-display:block;
 font-weight:bold;
+display:block;
 margin-top:10px;
 }
 
@@ -111,15 +138,16 @@ gap:10px;
 button{
 background:#0b5ed7;
 border:none;
-color:#fff;
+color:white;
 cursor:pointer;
+font-size:16px;
 }
 
 .footer{
-margin-top:20px;
+margin-top:25px;
 text-align:center;
-border-top:1px solid #ccc;
 padding-top:15px;
+border-top:1px solid #ccc;
 }
 
 @media(max-width:900px){
@@ -156,7 +184,6 @@ onchange="loadLogo(event)">
 
 </div>
 
-
 <div class="center-info">
 
 <div class="membership-title">
@@ -175,7 +202,6 @@ Join Now As Membership
 
 </div>
 
-
 <div class="party-title">
 
 TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
@@ -188,8 +214,31 @@ TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
 
 </div>
 
+<div class="eci-info">
+
+Election Commission of India
+
+<br>
+
+56/219/2018-2021/PPS-I
+
 </div>
 
+<div class="party-address">
+
+<b>Party Office Address</b>
+
+<br>
+
+No.9, 2nd Cross Street,
+
+Gomathipuram,
+
+Thiruninravur
+
+</div>
+
+</div>
 
 <div class="right-photo">
 
@@ -213,12 +262,10 @@ onchange="loadLeader(event)">
 id="regId"
 readonly>
 
-
 <label>Member Name</label>
 
 <input
 id="name">
-
 
 <div class="row">
 
@@ -240,16 +287,13 @@ id="name">
 
 </div>
 
-
 <label>Email</label>
 
 <input id="email">
 
-
 <label>Address</label>
 
 <textarea id="address"></textarea>
-
 
 <label>Member Photo</label>
 
@@ -258,13 +302,11 @@ id="photo"
 type="file"
 accept="image/*">
 
-
 <button onclick="submitMembership()">
 
 Submit Membership
 
 </button>
-
 
 <button onclick="location.href='admin.html'">
 
@@ -282,7 +324,6 @@ Official Party Membership Form
 
 </div>
 
-
 <script
 type="module"
 src="script.js">
@@ -291,3 +332,4 @@ src="script.js">
 </body>
 
 </html>
+```
