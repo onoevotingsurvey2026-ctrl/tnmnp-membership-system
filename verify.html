@@ -1,107 +1,45 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
-<title>
-
-TMNP Verify
-
-</title>
-
-<meta charset="UTF-8">
-
-<style>
-
-body{
-
-font-family:Arial;
-
-padding:40px;
-
-text-align:center;
-
-}
-
-.box{
-
-max-width:500px;
-
-margin:auto;
-
-padding:20px;
-
-border:1px solid #ccc;
-
-border-radius:10px;
-
-}
-
-</style>
-
+<title>TMNP Verify</title>
 </head>
 
-<body>
+<body style="font-family:Arial;text-align:center;padding:40px">
 
-<div class="box">
+<h2>Member Verification</h2>
+<div id="result">Checking...</div>
 
-<h2>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-TMNP Member Verification
+const app = initializeApp({
+databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com"
+});
 
-</h2>
+const db = getDatabase(app);
 
-<div id="result">
-
-Checking...
-
-</div>
-
-</div>
-
-
-<script>
-
-let id=
-
-new URLSearchParams(
-
-window.location.search
-
-).get("id");
-
+const id = new URLSearchParams(location.search).get("id");
 
 if(!id){
+result.innerHTML="Invalid ID";
+}else{
 
-document.getElementById(
-
-"result"
-
-).innerHTML=
-
-"❌ Invalid Link";
+get(ref(db,"members/"+id)).then(snap=>{
+if(snap.exists()){
+const d=snap.val();
+result.innerHTML=
+`✔ VERIFIED<br>
+ID:${d.id}<br>
+Name:${d.name}<br>
+Mobile:${d.mobile}`;
+}else{
+result.innerHTML="❌ NOT FOUND";
+}
+});
 
 }
-
-else{
-
-document.getElementById(
-
-"result"
-
-).innerHTML=
-
-"✅ Member ID : "
-
-+id+
-
-"<br><br>Verification Ready";
-
-}
-
 </script>
 
 </body>
-
 </html>
