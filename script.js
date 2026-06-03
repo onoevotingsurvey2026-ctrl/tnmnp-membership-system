@@ -8,7 +8,7 @@ databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com"
 
 const db = getDatabase(app);
 
-/* ID */
+/* ID GENERATOR */
 function genID(){
 return "TMNP-" + Date.now();
 }
@@ -18,10 +18,8 @@ document.getElementById("regId").value = genID();
 /* SUBMIT */
 window.submitForm = function(){
 
-const id = document.getElementById("regId").value;
-
 const data = {
-id,
+id: regId.value,
 name: name.value,
 mobile: mobile.value,
 voter: voter.value,
@@ -31,21 +29,23 @@ time: Date.now()
 };
 
 if(!data.name || !data.mobile){
-alert("Required fields missing");
+alert("Fill required fields");
 return;
 }
 
-set(ref(db,"members/"+id), data)
+set(ref(db,"members/"+data.id), data)
 .then(()=>{
-alert("Registered Successfully");
 
-document.getElementById("name").value="";
-document.getElementById("mobile").value="";
-document.getElementById("voter").value="";
-document.getElementById("email").value="";
-document.getElementById("address").value="";
+alert("Registered Successfully ✔");
 
-document.getElementById("regId").value = genID();
+name.value="";
+mobile.value="";
+voter.value="";
+email.value="";
+address.value="";
+
+regId.value = genID();
 
 });
+
 };
