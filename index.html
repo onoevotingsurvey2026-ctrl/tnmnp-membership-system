@@ -1,37 +1,345 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
+
 <head>
+
 <meta charset="UTF-8">
-<title>TMNP Registration v5</title>
-<link rel="stylesheet" href="style.css">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+TMNP Membership Form
+</title>
+
+<style>
+
+body{
+margin:0;
+padding:20px;
+font-family:Arial;
+background:#f2f2f2;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+
+gap:20px;
+
+border-bottom:2px solid #000;
+
+padding-bottom:20px;
+
+flex-wrap:wrap;
+
+}
+
+.left-logo,
+.right-photo{
+
+width:140px;
+text-align:center;
+
+}
+
+.left-logo img,
+.right-photo img{
+
+width:130px;
+
+height:130px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+object-fit:cover;
+
+}
+
+.center-info{
+
+flex:1;
+
+text-align:center;
+
+min-width:320px;
+
+}
+
+.membership-title{
+
+font-size:24px;
+
+font-weight:bold;
+
+}
+
+.party-title{
+
+font-size:28px;
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+.tamil-title{
+
+font-size:22px;
+
+margin-top:10px;
+
+}
+
+.party-address,
+.eci-info{
+
+margin-top:12px;
+
+line-height:1.7;
+
+}
+
+.form-section{
+
+margin-top:25px;
+
+}
+
+label{
+
+font-weight:bold;
+
+display:block;
+
+margin-top:10px;
+
+}
+
+input,
+textarea,
+button{
+
+width:100%;
+
+padding:12px;
+
+margin-top:6px;
+
+margin-bottom:12px;
+
+box-sizing:border-box;
+
+}
+
+.row{
+
+display:flex;
+
+gap:10px;
+
+}
+
+button{
+
+background:#0b5ed7;
+
+border:none;
+
+color:white;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+.footer{
+
+margin-top:20px;
+
+text-align:center;
+
+border-top:1px solid #ccc;
+
+padding-top:15px;
+
+}
+
+@media(max-width:850px){
+
+.header{
+flex-direction:column;
+align-items:center;
+}
+
+.row{
+flex-direction:column;
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>TMNP Membership Registration</h1>
+<div class="header">
 
-<div class="card-form">
+<div class="left-logo">
 
-<input id="regId" readonly>
+<img id="logoPreview">
 
-<input id="name" placeholder="Full Name">
+<input
+type="file"
+accept="image/*"
+onchange="loadLogo(event)">
 
-<div class="row">
-<input id="mobile" placeholder="Mobile">
-<input id="voter" placeholder="Voter ID">
 </div>
 
-<input id="email" placeholder="Email">
-<textarea id="address" placeholder="Address"></textarea>
 
-<button onclick="submitForm()">REGISTER</button>
+<div class="center-info">
+
+<div class="membership-title">
+
+Political Party Membership Form
+
+<br>
+
+அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
+
+</div>
+
+<div class="party-title">
+
+TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
+
+</div>
+
+<div class="tamil-title">
+
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+
+</div>
+
+<div class="eci-info">
+
+Election Commission Registration
+
+<br>
+
+56/219/2018-2021/PPS-I
+
+</div>
+
+<div class="party-address">
+
+No.9 2nd Cross Street
+
+<br>
+
+Gomathipuram
+
+<br>
+
+Thiruninravur
+
+</div>
+
+</div>
+
+
+<div class="right-photo">
+
+<img id="leaderPreview">
+
+<input
+type="file"
+accept="image/*"
+onchange="loadLeader(event)">
+
+</div>
+
+</div>
+
+
+<div class="form-section">
+
+<label>Registration ID</label>
+
+<input
+id="regId"
+readonly>
+
+<label>Member Name</label>
+
+<input id="name">
+
+<div class="row">
+
+<input
+id="phone"
+placeholder="Mobile">
+
+<input
+id="voter"
+placeholder="Voter ID">
+
+</div>
+
+<input
+id="email"
+placeholder="Email">
+
+<textarea
+id="address"
+placeholder="Address"></textarea>
+
+<label>Member Photo</label>
+
+<input
+id="photo"
+type="file"
+accept="image/*">
+
+<button onclick="submitMembership()">
+
+Submit Membership
+
+</button>
+
+</div>
+
+
+<div class="footer">
+
+Official Party Membership Portal
 
 </div>
 
 </div>
 
 <script type="module" src="script.js"></script>
+
 </body>
+
 </html>
