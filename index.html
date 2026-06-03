@@ -1,187 +1,10 @@
 <!DOCTYPE html>
 <html lang="ta">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>
-
-TMNP Membership Form
-
-</title>
-
-<style>
-
-body{
-margin:0;
-padding:20px;
-font-family:Arial;
-background:#f2f2f2;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-background:#fff;
-padding:20px;
-border-radius:12px;
-box-shadow:0 0 10px rgba(0,0,0,.1);
-}
-
-.header{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-gap:20px;
-border-bottom:2px solid black;
-padding-bottom:20px;
-}
-
-.left-logo,
-.right-photo{
-width:140px;
-text-align:center;
-}
-
-.left-logo img,
-.right-photo img{
-
-width:130px;
-height:130px;
-border:1px solid #ccc;
-border-radius:8px;
-object-fit:cover;
-
-}
-
-.center-info{
-flex:1;
-text-align:center;
-}
-
-.membership-title{
-
-font-size:24px;
-font-weight:bold;
-
-}
-
-.party-title{
-
-font-size:28px;
-font-weight:bold;
-margin-top:10px;
-
-}
-
-.tamil-title{
-
-font-size:22px;
-margin-top:10px;
-
-}
-
-.eci-info,
-.party-address{
-
-margin-top:15px;
-line-height:1.7;
-
-}
-
-.header-columns{
-
-display:flex;
-gap:20px;
-justify-content:center;
-flex-wrap:wrap;
-margin-top:20px;
-
-}
-
-.column-box{
-
-width:380px;
-padding:15px;
-border:1px solid #ccc;
-border-radius:10px;
-background:#fafafa;
-
-}
-
-.form-section{
-
-margin-top:25px;
-
-}
-
-label{
-
-display:block;
-font-weight:bold;
-margin-top:10px;
-
-}
-
-input,
-textarea,
-button{
-
-width:100%;
-padding:12px;
-margin-top:6px;
-margin-bottom:12px;
-box-sizing:border-box;
-
-}
-
-.row{
-
-display:flex;
-gap:10px;
-
-}
-
-button{
-
-background:#0b5ed7;
-border:none;
-color:white;
-cursor:pointer;
-
-}
-
-.footer{
-
-margin-top:25px;
-text-align:center;
-padding-top:15px;
-border-top:1px solid #ccc;
-
-}
-
-@media(max-width:900px){
-
-.header{
-
-flex-direction:column;
-
-}
-
-.row{
-
-flex-direction:column;
-
-}
-
-}
-
-</style>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TMNP Membership Form</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -191,204 +14,39 @@ flex-direction:column;
 <div class="header">
 
 <div class="left-logo">
-
 <img id="logoPreview">
-
-<input
-type="file"
-accept="image/*"
-onchange="loadLogo(event)">
-
+<input type="file" accept="image/*" onchange="loadLogo(event)">
 </div>
-
 
 <div class="center-info">
+<h2>TMNP Membership Registration</h2>
 
-<div class="membership-title">
+<input id="regId" readonly>
 
-Political Party Membership Form
-
-<br>
-
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-
-</div>
-
-<div class="party-title">
-
-TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
-
-</div>
-
-<div class="tamil-title">
-
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-
-</div>
-
-<div class="eci-info">
-
-Election Commission of India
-
-<br>
-
-56/219/2018-2021/PPS-I
-
-<br>
-
-05 March 2021
-
-</div>
-
-
-<div class="party-address">
-
-<b>Party Office Address</b>
-
-<br>
-
-No.9 2nd Cross Street
-
-<br>
-
-Gomathipuram
-
-<br>
-
-Thiruninravur
-
-<br>
-
-Pincode 602024
-
-</div>
-
-
-<div class="header-columns">
-
-<div class="column-box">
-
-<b>Party Leader / General Secretary</b>
-
-<br>
-
-N RAMAN
-
-<br>
-
-Mobile:
-
-8939324309
-
-<br>
-
-Email:
-
-tnmakkalnalvazhvuperiyakkam@gmail.com
-
-</div>
-
-
-<div class="column-box">
-
-<b>Website</b>
-
-<br><br>
-
-https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="right-photo">
-
-<img id="leaderPreview">
-
-<input
-type="file"
-accept="image/*"
-onchange="loadLeader(event)">
-
-</div>
-
-</div>
-
-
-<div class="form-section">
-
-<label>Registration ID</label>
-
-<input
-id="regId"
-readonly>
-
-
-<label>Member Name</label>
-
-<input id="name">
-
+<input id="name" placeholder="Member Name">
 
 <div class="row">
-
-<div style="flex:1">
-
-<label>Mobile</label>
-
-<input id="phone">
-
+<input id="phone" placeholder="Mobile">
+<input id="voter" placeholder="Voter ID">
 </div>
 
-<div style="flex:1">
+<input id="email" placeholder="Email">
+<textarea id="address" placeholder="Address"></textarea>
 
-<label>Voter ID</label>
+<input id="photo" type="file" accept="image/*">
 
-<input id="voter">
-
+<button onclick="submitMembership()">Submit</button>
 </div>
 
+<div class="right-photo">
+<img id="leaderPreview">
+<input type="file" accept="image/*" onchange="loadLeader(event)">
 </div>
-
-
-<label>Email</label>
-
-<input id="email">
-
-
-<label>Address</label>
-
-<textarea id="address"></textarea>
-
-
-<label>Member Photo</label>
-
-<input
-id="photo"
-type="file"
-accept="image/*">
-
-
-<button onclick="submitMembership()">
-
-Submit Membership
-
-</button>
-
-</div>
-
-<div class="footer">
-
-Official Party Membership Form
 
 </div>
 
 </div>
 
 <script type="module" src="script.js"></script>
-
 </body>
-
 </html>
