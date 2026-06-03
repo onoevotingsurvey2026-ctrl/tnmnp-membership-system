@@ -9,9 +9,7 @@ const db = getDatabase(app);
 
 let DATA = [];
 
-/* LOAD */
-function load(){
-
+/* LOAD REALTIME */
 onValue(ref(db,"members"), snap=>{
 
 DATA = [];
@@ -23,9 +21,6 @@ DATA.push(s.val());
 render(DATA);
 
 });
-
-}
-load();
 
 /* RENDER */
 function render(list){
@@ -43,7 +38,7 @@ count.innerText = list.length;
 }
 
 /* SEARCH */
-window.filter = function(){
+window.filterData = function(){
 
 let v = search.value.toLowerCase();
 
@@ -68,6 +63,6 @@ let blob = new Blob([csv]);
 let a = document.createElement("a");
 
 a.href = URL.createObjectURL(blob);
-a.download = "TMNP.csv";
+a.download = "TMNP-Members-v5.csv";
 a.click();
 };
