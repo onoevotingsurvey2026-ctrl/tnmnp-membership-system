@@ -10,27 +10,22 @@ content="width=device-width,initial-scale=1">
 
 <title>
 
-TNMNP Membership System
+TMNP Membership Registration
 
 </title>
 
 <style>
 
 body{
-
 margin:0;
-
 padding:20px;
-
 font-family:Arial;
-
 background:#f2f2f2;
-
 }
 
 .container{
 
-max-width:1100px;
+max-width:1000px;
 
 margin:auto;
 
@@ -52,21 +47,17 @@ display:flex;
 
 justify-content:space-between;
 
-align-items:flex-start;
-
-gap:20px;
+align-items:center;
 
 border-bottom:2px solid #ddd;
 
 padding-bottom:20px;
 
-flex-wrap:wrap;
-
 }
 
 .side{
 
-width:180px;
+width:160px;
 
 text-align:center;
 
@@ -74,17 +65,15 @@ text-align:center;
 
 .side img{
 
-width:150px;
+width:120px;
 
-height:150px;
-
-border:1px solid #ccc;
+height:120px;
 
 border-radius:10px;
 
-object-fit:cover;
+border:1px solid #ccc;
 
-background:#fafafa;
+object-fit:cover;
 
 }
 
@@ -94,46 +83,49 @@ flex:1;
 
 text-align:center;
 
-min-width:300px;
+padding:0 20px;
+
+}
+
+.center h1{
+
+margin:5px;
+
+font-size:28px;
+
+color:#0b5ed7;
 
 }
 
 .center h2{
 
-margin:5px 0;
+margin:5px;
+
+font-size:22px;
+
+color:#2e7d32;
 
 }
 
-.party-address{
+.center p{
 
-margin-top:10px;
-
-font-size:14px;
-
-line-height:1.6;
+margin:5px;
 
 }
 
-.form-box{
-
-margin-top:25px;
-
-padding:20px;
-
-background:#fafafa;
-
-border-radius:10px;
-
-}
+/* FORM */
 
 input,
+textarea,
 button{
 
 width:100%;
 
 padding:12px;
 
-margin-top:10px;
+margin-top:8px;
+
+margin-bottom:12px;
 
 box-sizing:border-box;
 
@@ -143,59 +135,39 @@ button{
 
 background:#0b5ed7;
 
+border:none;
+
 color:white;
 
-border:none;
+font-size:16px;
 
 cursor:pointer;
 
-font-size:16px;
+border-radius:8px;
 
 }
 
 button:hover{
 
-background:#0849a5;
+background:#084298;
 
 }
 
-.popup{
-
-padding:20px;
+.section{
 
 margin-top:20px;
 
-border-radius:10px;
+padding-top:20px;
+
+border-top:1px solid #ddd;
+
+}
+
+#msg{
 
 font-weight:bold;
 
-text-align:center;
-
-}
-
-.green{
-
-background:#00dd66;
-
-color:black;
-
-}
-
-@media(max-width:800px){
-
-.header{
-
-flex-direction:column;
-
-align-items:center;
-
-}
-
-.side{
-
-width:100%;
-
-}
+margin-top:20px;
 
 }
 
@@ -222,46 +194,25 @@ type="file"
 accept="image/*"
 onchange="loadLogo(event)">
 
-<p>
-
-Party Logo Upload
-
-</p>
+<p>Party Logo</p>
 
 </div>
 
-
-<!-- CENTER DETAILS -->
+<!-- CENTER -->
 
 <div class="center">
 
-<h2>
-
-TNMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
-
-</h2>
-
-<h2>
+<h1>
 
 தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
 
+</h1>
+
+<h2>
+
+TMNP
+
 </h2>
-
-<h3>
-
-Party President / General Secretary
-
-<br>
-
-N RAMAN
-
-</h3>
-
-<p>
-
-People First | Transparency | Development | Equality
-
-</p>
 
 <p>
 
@@ -269,13 +220,27 @@ People First | Transparency | Development | Equality
 
 ECI Registration No:
 
-</b>
+56/219/2018-2021/PPS-I
 
-56/219/2018-2021
+</b>
 
 </p>
 
-<div class="party-address">
+<p>
+
+Party President / General Secretary
+
+<br>
+
+<b>
+
+N RAMAN
+
+</b>
+
+</p>
+
+<p>
 
 No.9, 1st Floor,
 
@@ -285,7 +250,7 @@ Gomathipuram,
 
 Thiruninravur R.S,
 
-Pincode : 602024
+Pincode:602024,
 
 Thiruvallur District,
 
@@ -293,24 +258,41 @@ Tamil Nadu,
 
 India
 
-<br><br>
+</p>
 
-📞 +91 8939324309
+<p>
 
-<br>
+📧
 
-📞 +91 9384695599
+tnmakkalnalvazhvuperiyakkam@gmail.com
 
-<br>
+</p>
 
-📧 tnmakkalnalvazhvuperiyakkam@gmail.com
+<p>
+
+🌐
+
+www.tnmnp.org
+
+</p>
+
+<p>
+
+📍
+
+<a
+target="_blank"
+href="https://maps.google.com/?q=No.9+Gomathipuram+Thiruninravur">
+
+Open Google Location Map
+
+</a>
+
+</p>
 
 </div>
 
-</div>
-
-
-<!-- RIGHT LEADER PHOTO -->
+<!-- RIGHT PHOTO -->
 
 <div class="side">
 
@@ -321,20 +303,15 @@ type="file"
 accept="image/*"
 onchange="loadLeader(event)">
 
-<p>
-
-Leader Photo Upload
-
-</p>
+<p>Leader Photo</p>
 
 </div>
 
 </div>
-
 
 <!-- MEMBERSHIP FORM -->
 
-<div class="form-box">
+<div class="section">
 
 <h2>
 
@@ -342,26 +319,50 @@ Membership Registration
 
 </h2>
 
-<form id="registerForm">
+<form
+id="memberForm">
 
 <input
-id="voterid"
-placeholder="Voter ID *"
+placeholder="Voter ID"
 required>
 
 <input
-id="phone"
-placeholder="Mobile Number *"
+placeholder="Mobile Number"
 required>
 
 <input
-id="email"
-placeholder="Gmail Address *"
+placeholder="Gmail Address"
 required>
 
 <input
-id="website"
-placeholder="Website Address">
+placeholder="Vote Name"
+required>
+
+<textarea
+placeholder="Full Address"
+rows="4">
+
+</textarea>
+
+<label>
+
+Member Photo Upload
+
+</label>
+
+<input
+type="file"
+accept="image/*">
+
+<label>
+
+<input
+type="checkbox"
+required>
+
+I Confirm All Details Are Correct
+
+</label>
 
 <button>
 
@@ -371,120 +372,61 @@ Register Member
 
 </form>
 
-<div id="ack"></div>
+<div id="msg">
 
 </div>
 
 </div>
 
-
-<!-- FIREBASE -->
-
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</div>
 
 <script>
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-  authDomain: "tnmnp-membership-system.firebaseapp.com",
-  databaseURL: "https://tnmnp-membership-system-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "tnmnp-membership-system",
-  storageBucket: "tnmnp-membership-system.firebasestorage.app",
-  messagingSenderId: "616857466202",
-  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
-  measurementId: "G-Q7RYMTMLC7"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const db=firebase.firestore();
-
-
-/* IMAGE PREVIEW */
-
 function loadLogo(e){
 
-logoPreview.src=
-
+document
+.getElementById("logoPreview")
+.src=
 URL.createObjectURL(
-
 e.target.files[0]
-
 );
 
 }
 
 function loadLeader(e){
 
-leaderPreview.src=
-
+document
+.getElementById("leaderPreview")
+.src=
 URL.createObjectURL(
-
 e.target.files[0]
-
 );
 
 }
 
-
-/* FORM SUBMIT */
-
-registerForm.addEventListener(
-
+document
+.getElementById(
+"memberForm"
+)
+.addEventListener(
 "submit",
-
 function(e){
 
 e.preventDefault();
 
-let regNo=
+let id=
+"TNMNP-"+
+Date.now();
 
-"TNMNP-"+Date.now();
+document
+.getElementById(
+"msg"
+)
+.innerHTML=
 
-db.collection(
-
-"members"
-
-).add({
-
-regNo:regNo,
-
-voterId:voterid.value,
-
-mobile:phone.value,
-
-email:email.value,
-
-website:website.value,
-
-createdAt:new Date()
-
-})
-
-.then(()=>{
-
-ack.innerHTML=
-
-`<div class="popup green">
-
-✅ REGISTERED SUCCESSFULLY
-
-<br><br>
-
-Registration ID:
-
-<br>
-
-${regNo}
-
-</div>`;
+"✅ Registered Successfully <br><br> ID : <b>"+id+"</b>";
 
 this.reset();
-
-});
 
 });
 
