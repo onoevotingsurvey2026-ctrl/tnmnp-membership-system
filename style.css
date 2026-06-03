@@ -1,74 +1,64 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-const firebaseConfig = {
-apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-authDomain:"tnmnp-membership-system.firebaseapp.com",
-databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
-projectId:"tnmnp-membership-system",
-storageBucket:"tnmnp-membership-system.firebasestorage.app",
-messagingSenderId:"616857466202",
-appId:"1:616857466202:web:0fb4fae39e938ec0edef63"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-/* ID GENERATOR */
-function genID(){
-return "TMNP-" + Date.now();
+body{
+font-family:Arial;
+background:#f2f2f2;
+margin:0;
+padding:20px;
 }
 
-document.getElementById("regId").value = genID();
-
-/* IMAGE PREVIEW */
-window.loadLogo = e => {
-document.getElementById("logoPreview").src =
-URL.createObjectURL(e.target.files[0]);
-};
-
-window.loadLeader = e => {
-document.getElementById("leaderPreview").src =
-URL.createObjectURL(e.target.files[0]);
-};
-
-/* SUBMIT */
-window.submitMembership = function(){
-
-const id = document.getElementById("regId").value;
-
-const data = {
-id,
-name: document.getElementById("name").value,
-mobile: document.getElementById("phone").value,
-voter: document.getElementById("voter").value,
-email: document.getElementById("email").value,
-address: document.getElementById("address").value,
-time: Date.now()
-};
-
-if(!data.name || !data.mobile){
-alert("Name & Mobile required");
-return;
+.container{
+max-width:1000px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
 }
 
-/* SAVE TO FIREBASE */
-set(ref(db,"members/"+id), data)
-.then(()=>{
+h1{
+text-align:center;
+}
 
-alert("Registration Successful ✔");
+input,textarea,button{
+width:100%;
+padding:10px;
+margin:8px 0;
+}
 
-document.getElementById("name").value="";
-document.getElementById("phone").value="";
-document.getElementById("voter").value="";
-document.getElementById("email").value="";
-document.getElementById("address").value="";
+.row{
+display:flex;
+gap:10px;
+}
 
-document.getElementById("regId").value = genID();
+.stats{
+display:flex;
+justify-content:center;
+}
 
-})
-.catch(err=>{
-alert("Error: " + err.message);
-});
+.card{
+background:#0b5ed7;
+color:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+width:200px;
+}
 
-};
+.controls{
+display:flex;
+gap:10px;
+margin:10px 0;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+}
+
+th{
+background:#eee;
+}
