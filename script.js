@@ -1,4 +1,3 @@
-```javascript
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
@@ -8,6 +7,7 @@ ref,
 set
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
 
 const firebaseConfig={
 
@@ -33,17 +33,20 @@ appId:
 
 };
 
+
 const app=
 initializeApp(firebaseConfig);
 
 const db=
 getDatabase(app);
 
+
 function generateID(){
 
 return "TMNP-"+Date.now();
 
 }
+
 
 window.addEventListener(
 
@@ -61,11 +64,12 @@ generateID();
 
 );
 
+
 window.loadLogo=(e)=>{
 
 const file=e.target.files[0];
 
-if(file){
+if(!file)return;
 
 document.getElementById(
 "logoPreview"
@@ -73,15 +77,14 @@ document.getElementById(
 
 URL.createObjectURL(file);
 
-}
-
 };
+
 
 window.loadLeader=(e)=>{
 
 const file=e.target.files[0];
 
-if(file){
+if(!file)return;
 
 document.getElementById(
 "leaderPreview"
@@ -89,13 +92,13 @@ document.getElementById(
 
 URL.createObjectURL(file);
 
-}
-
 };
+
 
 window.submitMembership=()=>{
 
 const photoFile=
+
 document.getElementById(
 "photo"
 ).files[0];
@@ -141,6 +144,7 @@ photoFile.name
 
 };
 
+
 set(
 
 ref(
@@ -156,21 +160,28 @@ member
 
 alert(
 
-"Membership Registered Successfully\n\n"+
+"Membership Registered Successfully\n\n"
+
++
 
 member.id
 
 );
+
+document.getElementById(
+"regId"
+).value=
+
+generateID();
 
 })
 
 .catch(err=>{
 
 alert(
-"Error : "+err
+err
 );
 
 });
 
 };
-```
