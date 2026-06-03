@@ -1,52 +1,33 @@
-<!DOCTYPE html>
-<html lang="ta">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TMNP Membership Form</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<div class="dashboard">
 
-<body>
+<h1>TMNP Admin Dashboard</h1>
 
-<div class="container">
-
-<div class="header">
-
-<div class="left-logo">
-<img id="logoPreview">
-<input type="file" accept="image/*" onchange="loadLogo(event)">
+<div class="stats">
+<div class="card">
+<h3 id="totalCount">0</h3>
+<p>Total Members</p>
+</div>
 </div>
 
-<div class="center-info">
-<h2>TMNP Membership Registration</h2>
+<div class="controls">
 
-<input id="regId" readonly>
+<input id="search" placeholder="Search by Name / Mobile" onkeyup="filterData()">
 
-<input id="name" placeholder="Member Name">
-
-<div class="row">
-<input id="phone" placeholder="Mobile">
-<input id="voter" placeholder="Voter ID">
-</div>
-
-<input id="email" placeholder="Email">
-<textarea id="address" placeholder="Address"></textarea>
-
-<input id="photo" type="file" accept="image/*">
-
-<button onclick="submitMembership()">Submit</button>
-</div>
-
-<div class="right-photo">
-<img id="leaderPreview">
-<input type="file" accept="image/*" onchange="loadLeader(event)">
-</div>
+<button onclick="downloadCSV()">Export CSV</button>
 
 </div>
 
-</div>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Mobile</th>
+<th>Email</th>
+</tr>
+</thead>
 
-<script type="module" src="script.js"></script>
-</body>
-</html>
+<tbody id="dataBody"></tbody>
+</table>
+
+</div>
