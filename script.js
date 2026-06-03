@@ -9,7 +9,6 @@ set
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-
 const firebaseConfig={
 
 apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
@@ -34,13 +33,11 @@ appId:
 
 };
 
-
 const app=
 initializeApp(firebaseConfig);
 
 const db=
 getDatabase(app);
-
 
 function generateID(){
 
@@ -48,6 +45,11 @@ return "TMNP-"+Date.now();
 
 }
 
+window.addEventListener(
+
+"load",
+
+()=>{
 
 document.getElementById(
 "regId"
@@ -55,12 +57,45 @@ document.getElementById(
 
 generateID();
 
+}
 
+);
 
-window.submitMembership=function(){
+window.loadLogo=(e)=>{
 
-const photo=
+const file=e.target.files[0];
 
+if(file){
+
+document.getElementById(
+"logoPreview"
+).src=
+
+URL.createObjectURL(file);
+
+}
+
+};
+
+window.loadLeader=(e)=>{
+
+const file=e.target.files[0];
+
+if(file){
+
+document.getElementById(
+"leaderPreview"
+).src=
+
+URL.createObjectURL(file);
+
+}
+
+};
+
+window.submitMembership=()=>{
+
+const photoFile=
 document.getElementById(
 "photo"
 ).files[0];
@@ -98,15 +133,13 @@ document.getElementById(
 ).value,
 
 photo:
-photo
+photoFile
 ?
-photo.name
+photoFile.name
 :
 ""
 
 };
-
-
 
 set(
 
@@ -121,70 +154,23 @@ member
 
 .then(()=>{
 
-downloadCSV(member);
-
 alert(
-"Membership Saved\n\n"+
+
+"Membership Registered Successfully\n\n"+
+
 member.id
+
 );
-
-document.getElementById(
-"regId"
-).value=
-
-generateID();
 
 })
 
 .catch(err=>{
 
-alert(err);
+alert(
+"Error : "+err
+);
 
 });
 
 };
-
-
-
-function downloadCSV(member){
-
-let csv=
-
-"ID,Name,Mobile,Voter ID,Gmail,Address,Photo URL\n";
-
-csv +=
-
-`"${member.id}","${member.name}","${member.mobile}","${member.voter}","${member.email}","${member.address}","${member.photo}"`;
-
-const blob=
-
-new Blob(
-
-["\uFEFF"+csv],
-
-{
-
-type:
-"text/csv;charset=utf-8"
-
-}
-
-);
-
-const a=
-document.createElement(
-"a"
-);
-
-a.href=
-URL.createObjectURL(
-blob
-);
-
-a.download=
-"TMNP-membership-report.csv";
-
-a.click();
-
-}
 ```
