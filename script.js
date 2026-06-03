@@ -1,3 +1,4 @@
+```javascript
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
@@ -9,9 +10,7 @@ set
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 
-/* FIREBASE CONFIG */
-
-const firebaseConfig = {
+const firebaseConfig={
 
 apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
 
@@ -36,152 +35,73 @@ appId:
 };
 
 
-/* INITIALIZE */
-
-const app =
+const app=
 initializeApp(firebaseConfig);
 
-const db =
+const db=
 getDatabase(app);
 
 
-
-/* AUTO ID */
-
 function generateID(){
 
-return "TMNP-" + Date.now();
+return "TMNP-"+Date.now();
 
 }
 
 
-
-/* PAGE LOAD */
-
-window.addEventListener(
-
-"load",
-
-function(){
-
-const regField =
 document.getElementById(
 "regId"
-);
+).value=
 
-if(regField){
-
-regField.value =
 generateID();
 
-}
-
-}
-
-);
 
 
+window.submitMembership=function(){
 
-/* LOGO PREVIEW */
+const photo=
 
-window.loadLogo = function(e){
-
-const file =
-e.target.files[0];
-
-if(!file)return;
-
-document.getElementById(
-"logoPreview"
-).src =
-
-URL.createObjectURL(
-file
-);
-
-};
-
-
-
-/* LEADER PREVIEW */
-
-window.loadLeader = function(e){
-
-const file =
-e.target.files[0];
-
-if(!file)return;
-
-document.getElementById(
-"leaderPreview"
-).src =
-
-URL.createObjectURL(
-file
-);
-
-};
-
-
-
-/* SUBMIT MEMBERSHIP */
-
-window.submitMembership = function(){
-
-const photoInput =
 document.getElementById(
 "photo"
-);
+).files[0];
 
-const member = {
+const member={
 
 id:
-
 document.getElementById(
 "regId"
 ).value,
 
 name:
-
 document.getElementById(
 "name"
 ).value,
 
 mobile:
-
 document.getElementById(
 "phone"
 ).value,
 
 voter:
-
 document.getElementById(
 "voter"
 ).value,
 
 email:
-
 document.getElementById(
 "email"
 ).value,
 
 address:
-
 document.getElementById(
 "address"
 ).value,
 
 photo:
-
-photoInput &&
-photoInput.files.length>0
-
+photo
 ?
-
-photoInput.files[0].name
-
+photo.name
 :
-
 ""
 
 };
@@ -204,28 +124,21 @@ member
 downloadCSV(member);
 
 alert(
-
-"Membership Registered Successfully\n\n"
-
-+
-
+"Membership Saved\n\n"+
 member.id
-
 );
 
 document.getElementById(
 "regId"
-).value =
+).value=
 
 generateID();
 
 })
 
-.catch((err)=>{
+.catch(err=>{
 
-alert(
-"Error : "+err
-);
+alert(err);
 
 });
 
@@ -233,60 +146,45 @@ alert(
 
 
 
-/* CSV EXPORT */
-
 function downloadCSV(member){
 
-let csvContent =
+let csv=
 
 "ID,Name,Mobile,Voter ID,Gmail,Address,Photo URL\n";
 
-csvContent +=
+csv +=
 
 `"${member.id}","${member.name}","${member.mobile}","${member.voter}","${member.email}","${member.address}","${member.photo}"`;
 
-const blob =
+const blob=
 
 new Blob(
 
-[
-"\uFEFF"+csvContent
-],
+["\uFEFF"+csv],
 
 {
 
 type:
-"text/csv;charset=utf-8;"
+"text/csv;charset=utf-8"
 
 }
 
 );
 
-
-const link =
-
+const a=
 document.createElement(
 "a"
 );
 
-link.href =
-
+a.href=
 URL.createObjectURL(
 blob
 );
 
-link.download =
-
+a.download=
 "TMNP-membership-report.csv";
 
-document.body.appendChild(
-link
-);
-
-link.click();
-
-document.body.removeChild(
-link
-);
+a.click();
 
 }
+```
