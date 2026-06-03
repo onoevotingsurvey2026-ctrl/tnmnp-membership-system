@@ -1,54 +1,140 @@
 <!DOCTYPE html>
 <html lang="ta">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>TNMNP Membership System</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
 
-<link rel="stylesheet" href="style.css">
+<title>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+TNMNP Membership System
 
-<script src="https://unpkg.com/html5-qrcode"></script>
+</title>
 
 <style>
 
 body{
+
 margin:0;
+
 padding:20px;
+
 font-family:Arial;
+
 background:#f2f2f2;
+
 }
 
 .container{
-max-width:900px;
+
+max-width:1100px;
+
 margin:auto;
+
 background:white;
+
 padding:20px;
+
 border-radius:12px;
+
 box-shadow:0 0 15px rgba(0,0,0,.1);
+
 }
 
-.panel{
-padding:20px;
+/* HEADER */
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+
+gap:20px;
+
+border-bottom:2px solid #ddd;
+
+padding-bottom:20px;
+
+flex-wrap:wrap;
+
+}
+
+.side{
+
+width:180px;
+
+text-align:center;
+
+}
+
+.side img{
+
+width:150px;
+
+height:150px;
+
+border:1px solid #ccc;
+
 border-radius:10px;
-margin-bottom:20px;
-background:white;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+object-fit:cover;
+
+background:#fafafa;
+
 }
 
 .center{
+
+flex:1;
+
 text-align:center;
+
+min-width:300px;
+
 }
 
-input,button{
+.center h2{
+
+margin:5px 0;
+
+}
+
+.party-address{
+
+margin-top:10px;
+
+font-size:14px;
+
+line-height:1.6;
+
+}
+
+.form-box{
+
+margin-top:25px;
+
+padding:20px;
+
+background:#fafafa;
+
+border-radius:10px;
+
+}
+
+input,
+button{
 
 width:100%;
+
 padding:12px;
+
 margin-top:10px;
+
 box-sizing:border-box;
 
 }
@@ -56,48 +142,60 @@ box-sizing:border-box;
 button{
 
 background:#0b5ed7;
-border:none;
+
 color:white;
+
+border:none;
+
 cursor:pointer;
 
-}
-
-.map iframe{
-
-width:100%;
-height:250px;
-border:0;
-border-radius:10px;
+font-size:16px;
 
 }
 
-#reader{
+button:hover{
 
-width:100%;
-max-width:350px;
-margin:auto;
+background:#0849a5;
 
 }
 
 .popup{
 
 padding:20px;
+
+margin-top:20px;
+
 border-radius:10px;
+
 font-weight:bold;
-margin-top:15px;
+
+text-align:center;
 
 }
 
 .green{
 
-background:#00ff66;
+background:#00dd66;
+
+color:black;
 
 }
 
-.red{
+@media(max-width:800px){
 
-background:#ff4d4d;
-color:white;
+.header{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+.side{
+
+width:100%;
+
+}
 
 }
 
@@ -111,29 +209,53 @@ color:white;
 
 <!-- HEADER -->
 
-<div class="panel center">
+<div class="header">
 
-<h2>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h2>
+<!-- LEFT LOGO -->
 
-<h3>TNMNP</h3>
+<div class="side">
+
+<img id="logoPreview">
+
+<input
+type="file"
+accept="image/*"
+onchange="loadLogo(event)">
 
 <p>
+
+Party Logo Upload
+
+</p>
+
+</div>
+
+
+<!-- CENTER DETAILS -->
+
+<div class="center">
+
+<h2>
+
+TNMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
+
+</h2>
+
+<h2>
+
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+
+</h2>
+
+<h3>
 
 Party President / General Secretary
 
 <br>
 
-<b>N RAMAN</b>
+N RAMAN
 
-</p>
-
-<p>
-
-ECI Registration No:
-
-56/219/2018-2021
-
-</p>
+</h3>
 
 <p>
 
@@ -143,89 +265,103 @@ People First | Transparency | Development | Equality
 
 <p>
 
+<b>
+
+ECI Registration No:
+
+</b>
+
+56/219/2018-2021
+
+</p>
+
+<div class="party-address">
+
 No.9, 1st Floor,
 
 2nd Cross Street,
 
 Gomathipuram,
 
-Thiruninravur R.S
+Thiruninravur R.S,
 
-602024
+Pincode : 602024
 
-Tamil Nadu
+Thiruvallur District,
+
+Tamil Nadu,
 
 India
 
-</p>
+<br><br>
+
+📞 +91 8939324309
+
+<br>
+
+📞 +91 9384695599
+
+<br>
+
+📧 tnmakkalnalvazhvuperiyakkam@gmail.com
+
+</div>
+
+</div>
+
+
+<!-- RIGHT LEADER PHOTO -->
+
+<div class="side">
+
+<img id="leaderPreview">
+
+<input
+type="file"
+accept="image/*"
+onchange="loadLeader(event)">
 
 <p>
 
-+91 8939324309
-
-<br>
-
-+91 9384695599
-
-<br>
-
-tnmakkalnalvazhvuperiyakkam@gmail.com
+Leader Photo Upload
 
 </p>
 
-<div class="map">
-
-<iframe
-src="https://www.google.com/maps?q=No.9,2nd+Cross+Street,Gomathipuram,Thiruninravur&output=embed">
-</iframe>
-
 </div>
 
 </div>
 
-<!-- AUTOFILL -->
 
-<div class="panel">
+<!-- MEMBERSHIP FORM -->
 
-<h3>Autofill Settings</h3>
+<div class="form-box">
 
-<input id="default_voter" placeholder="Default Voter">
+<h2>
 
-<input id="default_mobile" placeholder="Default Mobile">
+Membership Registration
 
-<input id="default_email" placeholder="Default Email">
-
-<button onclick="saveDefaults()">
-
-Save Defaults
-
-</button>
-
-</div>
-
-<!-- FORM -->
-
-<div class="panel">
-
-<h3>Membership Registration</h3>
+</h2>
 
 <form id="registerForm">
 
 <input
 id="voterid"
-placeholder="Voter ID"
-oninput="checkAutoFill(this.value)"
+placeholder="Voter ID *"
 required>
 
 <input
 id="phone"
-placeholder="Mobile Number"
+placeholder="Mobile Number *"
 required>
 
 <input
 id="email"
-placeholder="Email ID"
+placeholder="Gmail Address *"
 required>
+
+<input
+id="website"
+placeholder="Website Address">
 
 <button>
 
@@ -239,109 +375,62 @@ Register Member
 
 </div>
 
-<!-- QR CAMERA -->
-
-<div class="panel center">
-
-<h3>
-
-QR Camera Verification
-
-</h3>
-
-<div id="reader"></div>
-
-<div id="scanResult"></div>
-
 </div>
 
-</div>
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
 
-const firebaseConfig={
-
-apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-
-authDomain:"tnmnp-membership-system.firebaseapp.com",
-
-projectId:"tnmnp-membership-system"
-
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+  authDomain: "tnmnp-membership-system.firebaseapp.com",
+  databaseURL: "https://tnmnp-membership-system-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "tnmnp-membership-system",
+  storageBucket: "tnmnp-membership-system.firebasestorage.app",
+  messagingSenderId: "616857466202",
+  appId: "1:616857466202:web:0fb4fae39e938ec0edef63",
+  measurementId: "G-Q7RYMTMLC7"
 };
 
 firebase.initializeApp(firebaseConfig);
 
 const db=firebase.firestore();
 
-function saveDefaults(){
 
-localStorage.setItem(
+/* IMAGE PREVIEW */
 
-"tnmnp_defaults",
+function loadLogo(e){
 
-JSON.stringify({
+logoPreview.src=
 
-voter:default_voter.value,
+URL.createObjectURL(
 
-mobile:default_mobile.value,
-
-email:default_email.value
-
-})
+e.target.files[0]
 
 );
 
-alert("Saved");
+}
+
+function loadLeader(e){
+
+leaderPreview.src=
+
+URL.createObjectURL(
+
+e.target.files[0]
+
+);
 
 }
 
-function checkAutoFill(v){
 
-let d=
-
-JSON.parse(
-
-localStorage.getItem(
-
-"tnmnp_defaults"
-
-)
-
-)||{};
-
-if(v.length>0){
-
-voterid.value=d.voter||v;
-
-phone.value=d.mobile||"";
-
-email.value=d.email||"";
-
-}
-
-}
-
-window.onload=function(){
-
-let d=
-
-JSON.parse(
-
-localStorage.getItem(
-
-"tnmnp_defaults"
-
-)
-
-)||{};
-
-if(d.voter)voterid.value=d.voter;
-
-if(d.mobile)phone.value=d.mobile;
-
-if(d.email)email.value=d.email;
-
-};
+/* FORM SUBMIT */
 
 registerForm.addEventListener(
 
@@ -355,17 +444,23 @@ let regNo=
 
 "TNMNP-"+Date.now();
 
-db.collection("members")
+db.collection(
 
-.add({
+"members"
 
-regNo,
+).add({
+
+regNo:regNo,
 
 voterId:voterid.value,
 
 mobile:phone.value,
 
-email:email.value
+email:email.value,
+
+website:website.value,
+
+createdAt:new Date()
 
 })
 
@@ -375,7 +470,11 @@ ack.innerHTML=
 
 `<div class="popup green">
 
-REGISTERED
+✅ REGISTERED SUCCESSFULLY
+
+<br><br>
+
+Registration ID:
 
 <br>
 
@@ -383,101 +482,14 @@ ${regNo}
 
 </div>`;
 
-});
-
-});
-
-function onScanSuccess(decodedText){
-
-let beep=
-
-new Audio(
-
-"https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
-
-);
-
-beep.play();
-
-db.collection("members")
-
-.where(
-
-"regNo",
-
-"==",
-
-decodedText
-
-)
-
-.get()
-
-.then(s=>{
-
-if(s.empty){
-
-scanResult.innerHTML=
-
-`<div class='popup red'>
-
-INVALID MEMBER
-
-</div>`;
-
-return;
-
-}
-
-s.forEach(doc=>{
-
-let d=doc.data();
-
-scanResult.innerHTML=
-
-`<div class='popup green'>
-
-VERIFIED MEMBER
-
-<br><br>
-
-${d.regNo}
-
-<br>
-
-${d.voterId}
-
-<br>
-
-${d.mobile}
-
-</div>`;
+this.reset();
 
 });
 
 });
-
-}
-
-new Html5QrcodeScanner(
-
-"reader",
-
-{
-
-fps:10,
-
-qrbox:250
-
-}
-
-).render(
-
-onScanSuccess
-
-);
 
 </script>
 
 </body>
+
 </html>
