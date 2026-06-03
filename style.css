@@ -1,6 +1,6 @@
 body{
 font-family:Arial;
-background:#f2f2f2;
+background:#eef1f5;
 margin:0;
 padding:20px;
 }
@@ -17,7 +17,9 @@ h1{
 text-align:center;
 }
 
-input,textarea,button{
+.card-form input,
+.card-form textarea,
+button{
 width:100%;
 padding:10px;
 margin:8px 0;
@@ -31,6 +33,7 @@ gap:10px;
 .stats{
 display:flex;
 justify-content:center;
+margin:20px 0;
 }
 
 .card{
@@ -38,8 +41,8 @@ background:#0b5ed7;
 color:white;
 padding:20px;
 border-radius:10px;
-text-align:center;
 width:200px;
+text-align:center;
 }
 
 .controls{
@@ -51,7 +54,6 @@ margin:10px 0;
 table{
 width:100%;
 border-collapse:collapse;
-background:white;
 }
 
 th,td{
@@ -60,5 +62,5 @@ padding:10px;
 }
 
 th{
-background:#eee;
+background:#f0f0f0;
 }
