@@ -1,51 +1,138 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-const app = initializeApp({
-apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com"
-});
-
-const db = getDatabase(app);
-
-/* ID GENERATOR */
-function genID(){
-return "TMNP-" + Date.now();
+// =========================
+// 💾 DEFAULT STORAGE
+// =========================
+function getDefaults(){
+    return JSON.parse(localStorage.getItem("tnmnp_defaults")) || {};
 }
 
-document.getElementById("regId").value = genID();
+// =========================
+// ⚙️ OPEN AUTOFILL PANEL
+// =========================
+function checkAutoFill(value){
 
-/* SUBMIT */
-window.submitForm = function(){
+    if(value.length >= 1){
+        document.getElementById("autoFillPanel").style.display = "block";
 
-const data = {
-id: regId.value,
-name: name.value,
-mobile: mobile.value,
-voter: voter.value,
-email: email.value,
-address: address.value,
-time: Date.now()
-};
+        let defaults = getDefaults();
 
-if(!data.name || !data.mobile){
-alert("Fill required fields");
-return;
+        document.getElementById("default_voter").value = defaults.voter || "";
+        document.getElementById("default_mobile").value = defaults.mobile || "";
+        document.getElementById("default_email").value = defaults.email || "";
+    }
 }
 
-set(ref(db,"members/"+data.id), data)
-.then(()=>{
+// =========================
+// 💾 SAVE DEFAULT SETTINGS
+// =========================
+function saveDefaults(){
 
-alert("Registered Successfully ✔");
+    let data = {
+        voter: document.getElementById("default_voter").value,
+        mobile: document.getElementById("default_mobile").value,
+        email: document.getElementById("default_email").value
+    };
 
-name.value="";
-mobile.value="";
-voter.value="";
-email.value="";
-address.value="";
+    localStorage.setItem("tnmnp_defaults", JSON.stringify(data));
 
-regId.value = genID();
+    alert("Defaults Saved Successfully ✅");
 
+    document.getElementById("autoFillPanel").style.display = "none";
+}
+
+// =========================
+// ⚡ AUTO FILL ON PAGE LOAD
+// =========================
+window.addEventListener("load", function(){
+
+    let d = getDefaults();
+
+    if(d.voter){
+        document.getElementById("voterid").value = d.voter;
+    }
+
+    if(d.mobile){
+        document.getElementById("phone").value = d.mobile;
+    }
+
+    if(d.email){
+        document.getElementById("email").value = d.email;
+    }
 });
 
-};
+
+// =========================
+// 🔳 SCANNER SETUP
+// =========================
+let html5QrcodeScanner;
+
+function startScanner(){
+
+    document.getElementById("scannerApp").style.display = "flex";
+
+    html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        {
+            fps: 10,
+            qrbox: 250,
+            rememberLastUsedCamera: true
+        }
+    );
+
+    html5QrcodeScanner.render(onScanSuccess);
+}
+
+startScanner();
+
+
+// =========================
+// 🔊 SCAN RESULT (UPGRADED)
+// =========================
+function onScanSuccess(decodedText){
+
+    // 🔊 Beep sound
+    let beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+    beep.play();
+
+    // 📳 Vibration
+    if(navigator.vibrate){
+        navigator.vibrate([200, 100, 200]);
+    }
+
+    db.collection("members")
+    .where("regNo", "==", decodedText)
+    .get()
+    .then(snapshot => {
+
+        let resultDiv = document.getElementById("scanResult");
+
+        if(snapshot.empty){
+            resultDiv.innerHTML = `
+              <div class="popup red">
+                ❌ INVALID QR<br>
+                Member Not Found
+              </div>
+            `;
+            return;
+        }
+
+        snapshot.forEach(doc => {
+
+            let data = doc.data();
+
+            resultDiv.innerHTML = `
+              <div class="popup green">
+                🏛️ VERIFIED MEMBER<br><br>
+
+                <b>Reg No:</b> ${data.regNo}<br>
+                <b>Voter ID:</b> ${data.voterId}<br>
+                <b>Mobile:</b> ${data.mobile}<br>
+                <b>Email:</b> ${data.email}<br><br>
+
+                <b style="color:#000;">STATUS: ACTIVE MEMBER</b>
+              </div>
+            `;
+        });
+
+    });
+
+}
