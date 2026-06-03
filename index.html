@@ -1,17 +1,12 @@
 ```html
 <!DOCTYPE html>
 <html lang="ta">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>
-TMNP Membership Form
-</title>
+<title>TMNP Membership Form</title>
 
 <style>
 
@@ -34,16 +29,14 @@ box-shadow:0 0 10px rgba(0,0,0,.1);
 .header{
 display:flex;
 justify-content:space-between;
-align-items:flex-start;
 gap:20px;
-border-bottom:2px solid #000;
-padding-bottom:15px;
+border-bottom:2px solid black;
+padding-bottom:20px;
 }
 
 .left-logo,
 .right-photo{
 width:140px;
-min-width:140px;
 text-align:center;
 }
 
@@ -54,41 +47,34 @@ height:130px;
 border:1px solid #ccc;
 border-radius:8px;
 object-fit:cover;
-display:block;
-margin:auto;
 }
 
 .center-info{
 flex:1;
 text-align:center;
-padding:0 20px;
 }
 
 .membership-title{
 font-size:24px;
-font-weight:bold;
-line-height:1.5;
-}
-
-.join-line{
-display:block;
-margin-top:5px;
-color:#0b5ed7;
 font-weight:bold;
 }
 
 .party-title{
 font-size:28px;
 font-weight:bold;
-margin-top:15px;
+margin-top:10px;
 }
 
 .tamil-title{
 font-size:22px;
-margin-top:5px;
+margin-top:10px;
 }
 
-.eci-info,
+.eci-info{
+margin-top:15px;
+line-height:1.7;
+}
+
 .party-address{
 margin-top:15px;
 line-height:1.7;
@@ -96,8 +82,8 @@ line-height:1.7;
 
 .header-columns{
 display:flex;
-justify-content:center;
 gap:20px;
+justify-content:center;
 flex-wrap:wrap;
 margin-top:20px;
 }
@@ -123,42 +109,52 @@ margin-top:10px;
 input,
 textarea,
 button{
+
 width:100%;
 padding:12px;
 margin-top:6px;
 margin-bottom:12px;
 box-sizing:border-box;
+
 }
 
 .row{
+
 display:flex;
 gap:10px;
+
 }
 
 button{
+
 background:#0b5ed7;
-border:none;
 color:white;
+border:none;
 cursor:pointer;
-font-size:16px;
+
 }
 
 .footer{
-margin-top:25px;
+
+margin-top:20px;
 text-align:center;
 padding-top:15px;
 border-top:1px solid #ccc;
+
 }
 
 @media(max-width:900px){
 
 .header{
+
 flex-direction:column;
-align-items:center;
+
 }
 
 .row{
+
 flex-direction:column;
+
 }
 
 }
@@ -184,6 +180,7 @@ onchange="loadLogo(event)">
 
 </div>
 
+
 <div class="center-info">
 
 <div class="membership-title">
@@ -193,12 +190,6 @@ Political Party Membership Form
 <br>
 
 அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-
-<span class="join-line">
-
-Join Now As Membership
-
-</span>
 
 </div>
 
@@ -222,6 +213,10 @@ Election Commission of India
 
 56/219/2018-2021/PPS-I
 
+<br>
+
+05 March 2021
+
 </div>
 
 <div class="party-address">
@@ -230,15 +225,56 @@ Election Commission of India
 
 <br>
 
-No.9, 2nd Cross Street,
+No.9 2nd Cross Street,
 
 Gomathipuram,
 
-Thiruninravur
+Thiruninravur,
+
+Pincode 602024
+
+</div>
+
+
+<div class="header-columns">
+
+<div class="column-box">
+
+<b>Party Leader / General Secretary</b>
+
+<br>
+
+N RAMAN
+
+<br>
+
+Mobile :
+
+8939324309
+
+<br>
+
+Email :
+
+tnmakkalnalvazhvuperiyakkam@gmail.com
+
+</div>
+
+
+<div class="column-box">
+
+<b>Website</b>
+
+<br><br>
+
+https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
 
 </div>
 
 </div>
+
+</div>
+
 
 <div class="right-photo">
 
@@ -264,8 +300,7 @@ readonly>
 
 <label>Member Name</label>
 
-<input
-id="name">
+<input id="name">
 
 <div class="row">
 
@@ -287,13 +322,16 @@ id="name">
 
 </div>
 
+
 <label>Email</label>
 
 <input id="email">
 
+
 <label>Address</label>
 
 <textarea id="address"></textarea>
+
 
 <label>Member Photo</label>
 
@@ -302,11 +340,13 @@ id="photo"
 type="file"
 accept="image/*">
 
+
 <button onclick="submitMembership()">
 
 Submit Membership
 
 </button>
+
 
 <button onclick="location.href='admin.html'">
 
@@ -316,6 +356,7 @@ Admin Dashboard
 
 </div>
 
+
 <div class="footer">
 
 Official Party Membership Form
@@ -324,10 +365,7 @@ Official Party Membership Form
 
 </div>
 
-<script
-type="module"
-src="script.js">
-</script>
+<script type="module" src="script.js"></script>
 
 </body>
 
