@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ta">
 
@@ -9,300 +10,52 @@
 content="width=device-width,initial-scale=1">
 
 <title>
-
 TMNP Membership Form
-
 </title>
 
 <style>
 
 body{
-
 margin:0;
-
 padding:20px;
-
 font-family:Arial;
-
 background:#f2f2f2;
-
 }
 
 .container{
-
-max-width:1100px;
-
+max-width:800px;
 margin:auto;
-
 background:#fff;
-
 padding:20px;
-
-border-radius:12px;
-
-box-shadow:0 0 10px rgba(0,0,0,.1);
-
-}
-
-/* HEADER */
-
-.header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:flex-start;
-
-gap:20px;
-
-border-bottom:2px solid #000;
-
-padding-bottom:15px;
-
-}
-
-.left-logo,
-.right-photo{
-
-width:140px;
-
-min-width:140px;
-
-text-align:center;
-
-}
-
-.left-logo img,
-.right-photo img{
-
-width:130px;
-
-height:130px;
-
-border:1px solid #ccc;
-
-border-radius:8px;
-
-object-fit:cover;
-
-display:block;
-
-margin:auto;
-
-}
-
-.center-info{
-
-flex:1;
-
-text-align:center;
-
-padding:0 20px;
-
-}
-
-.membership-title{
-
-font-size:24px;
-
-font-weight:bold;
-
-line-height:1.5;
-
-}
-
-.join-line{
-
-display:block;
-
-margin-top:5px;
-
-color:#0b5ed7;
-
-font-weight:bold;
-
-}
-
-.party-title{
-
-font-size:28px;
-
-font-weight:bold;
-
-margin-top:15px;
-
-}
-
-.tamil-title{
-
-font-size:22px;
-
-margin-top:5px;
-
-}
-
-.eci-info{
-
-margin-top:15px;
-
-font-size:14px;
-
-line-height:1.7;
-
-}
-
-.party-address{
-
-margin-top:15px;
-
-font-size:14px;
-
-line-height:1.7;
-
-}
-
-.header-columns{
-
-display:flex;
-
-justify-content:center;
-
-gap:20px;
-
-flex-wrap:wrap;
-
-margin-top:20px;
-
-}
-
-.column-box{
-
-width:380px;
-
-padding:15px;
-
-border:1px solid #ccc;
-
 border-radius:10px;
-
-background:#fafafa;
-
-font-size:14px;
-
-line-height:1.8;
-
-word-break:break-word;
-
-}
-
-.website-link{
-
-word-break:break-all;
-
-}
-
-/* FORM */
-
-.form-section{
-
-margin-top:25px;
-
-}
-
-label{
-
-font-weight:bold;
-
-display:block;
-
-margin-top:10px;
-
 }
 
 input,
 textarea,
 button{
-
 width:100%;
-
 padding:12px;
-
-margin-top:6px;
-
+margin-top:8px;
 margin-bottom:12px;
-
 box-sizing:border-box;
-
-}
-
-.row{
-
-display:flex;
-
-gap:10px;
-
 }
 
 button{
-
 background:#0b5ed7;
-
+color:#fff;
 border:none;
-
-color:white;
-
-font-size:16px;
-
 cursor:pointer;
-
-}
-
-button:hover{
-
-opacity:.9;
-
-}
-
-.footer{
-
-margin-top:25px;
-
-text-align:center;
-
-padding-top:15px;
-
-border-top:1px solid #ccc;
-
-}
-
-@media(max-width:900px){
-
-.header{
-
-flex-direction:column;
-
-align-items:center;
-
 }
 
 .row{
+display:flex;
+gap:10px;
+}
 
+@media(max-width:700px){
+
+.row{
 flex-direction:column;
-
-}
-
-.left-logo,
-.right-photo{
-
-width:100%;
-
-}
-
-.column-box{
-
-width:100%;
-
 }
 
 }
@@ -315,169 +68,12 @@ width:100%;
 
 <div class="container">
 
-<div class="header">
-
-<!-- LEFT -->
-
-<div class="left-logo">
-
-<img id="logoPreview">
-
-<input
-type="file"
-accept="image/*"
-onchange="loadLogo(event)">
-
-</div>
-
-
-<!-- CENTER -->
-
-<div class="center-info">
-
-<div class="membership-title">
-
-Political Party Membership Form
-
-<br>
-
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-
-<span class="join-line">
-
-Join Now As Membership
-
-</span>
-
-</div>
-
-
-<div class="party-title">
-
-TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
-
-</div>
-
-<div class="tamil-title">
-
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-
-</div>
-
-
-<div class="eci-info">
-
-Election Commission of India, New Delhi
-
-<br>
-
-இந்திய தேர்தல் ஆணையம்
-
-<br>
-
-56/219/2018-2021/PPS-I
-
-<br>
-
-05 March 2021
-
-</div>
-
-
-<div class="party-address">
-
-<b>Party Office Address</b>
-
-<br>
-
-No.9, 2nd Cross Street,
-
-Gomathipuram,
-
-Thiruninravur
-
-<br>
-
-Pincode : 602024
-
-</div>
-
-
-<div class="header-columns">
-
-<div class="column-box">
-
-<b>
-
-Party Leader / General Secretary
-
-</b>
-
-<br>
-
-N RAMAN
-
-<br>
-
-Mobile :
-
-+91 8939324309
-
-<br>
-
-Email :
-
-tnmakkalnalvazhvuperiyakkam@gmail.com
-
-</div>
-
-
-<div class="column-box">
-
-<b>
-
-Live Website
-
-</b>
-
-<br><br>
-
-<div class="website-link">
-
-https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- RIGHT -->
-
-<div class="right-photo">
-
-<img id="leaderPreview">
-
-<input
-type="file"
-accept="image/*"
-onchange="loadLeader(event)">
-
-</div>
-
-</div>
-
-
-
-<div class="form-section">
+<h2>
+TMNP Membership Form
+</h2>
 
 <label>
-
 Registration ID
-
 </label>
 
 <input
@@ -486,14 +82,11 @@ readonly>
 
 
 <label>
-
-Member Name
-
+Name
 </label>
 
 <input
-id="name"
-autocomplete="name">
+id="name">
 
 
 <div class="row">
@@ -501,148 +94,70 @@ autocomplete="name">
 <div style="flex:1">
 
 <label>
-
-Mobile Number
-
+Mobile
 </label>
 
 <input
-id="phone"
-autocomplete="tel">
+id="phone">
 
 </div>
-
 
 <div style="flex:1">
 
 <label>
-
 Voter ID
-
-</label>
-
-<input id="voter">
-
-</div>
-
-</div>
-
-
-<label>
-
-Email
-
 </label>
 
 <input
-id="email"
-autocomplete="email">
+id="voter">
+
+</div>
+
+</div>
 
 
 <label>
+Email
+</label>
 
+<input
+id="email">
+
+
+<label>
 Address
-
 </label>
 
 <textarea
-autocomplete="street-address">
-
+id="address">
 </textarea>
 
 
 <label>
-
 Member Photo
-
 </label>
 
 <input
+id="photo"
 type="file"
 accept="image/*">
 
 
-<button onclick="submitMembership()">
+<button
+onclick="submitMembership()">
 
 Submit Membership
 
 </button>
 
-
-<button onclick="location.href='admin.html'">
-
-Admin Dashboard
-
-</button>
-
 </div>
 
-
-<div class="footer">
-
-Official Party Membership Form
-
-</div>
-
-</div>
-
-
-<script>
-
-document.getElementById("regId").value=
-
-"TMNP-"+Date.now();
-
-function loadLogo(e){
-
-const file=e.target.files[0];
-
-if(!file)return;
-
-const reader=new FileReader();
-
-reader.onload=()=>{
-
-logoPreview.src=reader.result;
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-function loadLeader(e){
-
-const file=e.target.files[0];
-
-if(!file)return;
-
-const reader=new FileReader();
-
-reader.onload=()=>{
-
-leaderPreview.src=reader.result;
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-function submitMembership(){
-
-alert(
-
-"Membership Submitted Successfully\n\nRegistration ID:\n"+
-
-document.getElementById("regId").value
-
-);
-
-}
-
+<script
+type="module"
+src="script.js">
 </script>
 
 </body>
 
 </html>
+```
