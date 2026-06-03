@@ -1,61 +1,74 @@
-body{
-margin:0;
-padding:20px;
-font-family:Arial;
-background:#f2f2f2;
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+authDomain:"tnmnp-membership-system.firebaseapp.com",
+databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
+projectId:"tnmnp-membership-system",
+storageBucket:"tnmnp-membership-system.firebasestorage.app",
+messagingSenderId:"616857466202",
+appId:"1:616857466202:web:0fb4fae39e938ec0edef63"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+/* ID GENERATOR */
+function genID(){
+return "TMNP-" + Date.now();
 }
 
-.container{
-max-width:1000px;
-margin:auto;
-background:#fff;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,.1);
+document.getElementById("regId").value = genID();
+
+/* IMAGE PREVIEW */
+window.loadLogo = e => {
+document.getElementById("logoPreview").src =
+URL.createObjectURL(e.target.files[0]);
+};
+
+window.loadLeader = e => {
+document.getElementById("leaderPreview").src =
+URL.createObjectURL(e.target.files[0]);
+};
+
+/* SUBMIT */
+window.submitMembership = function(){
+
+const id = document.getElementById("regId").value;
+
+const data = {
+id,
+name: document.getElementById("name").value,
+mobile: document.getElementById("phone").value,
+voter: document.getElementById("voter").value,
+email: document.getElementById("email").value,
+address: document.getElementById("address").value,
+time: Date.now()
+};
+
+if(!data.name || !data.mobile){
+alert("Name & Mobile required");
+return;
 }
 
-.header{
-display:flex;
-gap:20px;
-justify-content:space-between;
-flex-wrap:wrap;
-}
+/* SAVE TO FIREBASE */
+set(ref(db,"members/"+id), data)
+.then(()=>{
 
-.left-logo,.right-photo{
-width:120px;
-}
+alert("Registration Successful ✔");
 
-.left-logo img,.right-photo img{
-width:120px;
-height:120px;
-border:1px solid #ccc;
-object-fit:cover;
-}
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("voter").value="";
+document.getElementById("email").value="";
+document.getElementById("address").value="";
 
-.center-info{
-flex:1;
-text-align:center;
-}
+document.getElementById("regId").value = genID();
 
-input,textarea,button{
-width:100%;
-padding:10px;
-margin:8px 0;
-}
+})
+.catch(err=>{
+alert("Error: " + err.message);
+});
 
-.row{
-display:flex;
-gap:10px;
-}
-
-button{
-background:#0b5ed7;
-color:#fff;
-border:none;
-cursor:pointer;
-}
-
-@media(max-width:700px){
-.row{flex-direction:column;}
-.header{flex-direction:column;}
-}
+};
