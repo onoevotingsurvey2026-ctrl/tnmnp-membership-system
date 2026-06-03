@@ -1,10 +1,16 @@
-```html
 <!DOCTYPE html>
 <html lang="ta">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TMNP Membership Form</title>
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+TMNP Membership Form
+</title>
 
 <style>
 
@@ -33,9 +39,9 @@ border-bottom:2px solid #000;
 padding-bottom:15px;
 }
 
-.left-logo,.right-photo{
+.left-logo,
+.right-photo{
 width:140px;
-min-width:140px;
 text-align:center;
 }
 
@@ -53,13 +59,11 @@ margin:auto;
 .center-info{
 flex:1;
 text-align:center;
-padding:0 20px;
 }
 
 .membership-title{
 font-size:24px;
 font-weight:bold;
-line-height:1.5;
 }
 
 .join-line{
@@ -72,35 +76,11 @@ font-weight:bold;
 .party-title{
 font-size:28px;
 font-weight:bold;
-margin-top:15px;
+margin-top:10px;
 }
 
 .tamil-title{
 font-size:22px;
-margin-top:5px;
-}
-
-.eci-info,
-.party-address{
-margin-top:15px;
-font-size:14px;
-line-height:1.7;
-}
-
-.header-columns{
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-margin-top:20px;
-}
-
-.column-box{
-width:380px;
-padding:15px;
-border:1px solid #ccc;
-border-radius:10px;
-background:#fafafa;
 }
 
 .form-section{
@@ -108,8 +88,8 @@ margin-top:25px;
 }
 
 label{
-font-weight:bold;
 display:block;
+font-weight:bold;
 margin-top:10px;
 }
 
@@ -131,15 +111,15 @@ gap:10px;
 button{
 background:#0b5ed7;
 border:none;
-color:white;
+color:#fff;
 cursor:pointer;
 }
 
 .footer{
-margin-top:25px;
+margin-top:20px;
 text-align:center;
-padding-top:15px;
 border-top:1px solid #ccc;
+padding-top:15px;
 }
 
 @media(max-width:900px){
@@ -166,37 +146,60 @@ flex-direction:column;
 <div class="header">
 
 <div class="left-logo">
+
 <img id="logoPreview">
-<input type="file" accept="image/*" onchange="loadLogo(event)">
+
+<input
+type="file"
+accept="image/*"
+onchange="loadLogo(event)">
+
 </div>
+
 
 <div class="center-info">
 
 <div class="membership-title">
 
 Political Party Membership Form
+
 <br>
+
 அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
 
 <span class="join-line">
+
 Join Now As Membership
+
 </span>
 
 </div>
 
+
 <div class="party-title">
+
 TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
+
 </div>
 
 <div class="tamil-title">
+
 தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+
 </div>
 
 </div>
+
 
 <div class="right-photo">
+
 <img id="leaderPreview">
-<input type="file" accept="image/*" onchange="loadLeader(event)">
+
+<input
+type="file"
+accept="image/*"
+onchange="loadLeader(event)">
+
 </div>
 
 </div>
@@ -205,16 +208,24 @@ TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
 <div class="form-section">
 
 <label>Registration ID</label>
-<input id="regId" readonly>
+
+<input
+id="regId"
+readonly>
+
 
 <label>Member Name</label>
-<input id="name">
+
+<input
+id="name">
+
 
 <div class="row">
 
 <div style="flex:1">
 
 <label>Mobile Number</label>
+
 <input id="phone">
 
 </div>
@@ -222,27 +233,43 @@ TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
 <div style="flex:1">
 
 <label>Voter ID</label>
+
 <input id="voter">
 
 </div>
 
 </div>
 
+
 <label>Email</label>
+
 <input id="email">
 
+
 <label>Address</label>
+
 <textarea id="address"></textarea>
 
+
 <label>Member Photo</label>
-<input id="photo" type="file" accept="image/*">
+
+<input
+id="photo"
+type="file"
+accept="image/*">
+
 
 <button onclick="submitMembership()">
+
 Submit Membership
+
 </button>
 
+
 <button onclick="location.href='admin.html'">
+
 Admin Dashboard
+
 </button>
 
 </div>
@@ -255,8 +282,12 @@ Official Party Membership Form
 
 </div>
 
-<script type="module" src="script.js"></script>
+
+<script
+type="module"
+src="script.js">
+</script>
 
 </body>
+
 </html>
-```
