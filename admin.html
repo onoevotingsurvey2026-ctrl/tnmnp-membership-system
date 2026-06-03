@@ -3,123 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>TMNP Admin Dashboard</title>
-
-<style>
-body{
-font-family:Arial;
-background:#f2f2f2;
-margin:0;
-padding:20px;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-background:#fff;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,.1);
-}
-
-/* LOGIN */
-input,button{
-width:100%;
-padding:10px;
-margin:8px 0;
-}
-
-/* DASHBOARD HEADER */
-h1{
-text-align:center;
-margin-bottom:10px;
-}
-
-/* STATS CARD */
-.stats{
-display:flex;
-justify-content:center;
-margin:20px 0;
-}
-
-.card{
-background:#0b5ed7;
-color:white;
-padding:20px;
-border-radius:10px;
-text-align:center;
-width:200px;
-}
-
-/* CONTROLS */
-.controls{
-display:flex;
-gap:10px;
-margin-bottom:15px;
-}
-
-.controls input{
-flex:1;
-padding:10px;
-}
-
-/* TABLE */
-table{
-width:100%;
-border-collapse:collapse;
-background:white;
-}
-
-th,td{
-border:1px solid #ddd;
-padding:10px;
-}
-
-th{
-background:#f0f0f0;
-}
-
-/* SECTIONS */
-#dashboard{
-display:none;
-}
-
-#loading{
-text-align:center;
-padding:10px;
-color:gray;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="container">
 
-<h2>TMNP Admin Login</h2>
-
-<div id="loginBox">
-<input id="user" placeholder="Email">
-<input id="pass" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
-</div>
-
-<div id="dashboard">
-
-<h1>TMNP Dashboard</h1>
+<h1>Government Dashboard v4</h1>
 
 <div class="stats">
 <div class="card">
-<h2 id="totalCount">0</h2>
+<h2 id="count">0</h2>
 <p>Total Members</p>
 </div>
 </div>
 
 <div class="controls">
-<input id="search" placeholder="Search Name / Mobile" onkeyup="filterData()">
-<button onclick="downloadCSV()">Export CSV</button>
+<input id="search" placeholder="Search..." onkeyup="filter()">
+<button onclick="exportCSV()">Export CSV</button>
 </div>
-
-<div id="loading">Loading data...</div>
 
 <table>
 <thead>
@@ -130,124 +33,11 @@ color:gray;
 <th>Email</th>
 </tr>
 </thead>
-<tbody id="dataBody"></tbody>
+<tbody id="table"></tbody>
 </table>
 
 </div>
 
-</div>
-
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-const app = initializeApp({
-apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
-databaseURL:"https://tnmnp-membership-system-default-rtdb.firebaseio.com",
-projectId:"tnmnp-membership-system"
-});
-
-const db = getDatabase(app);
-
-let globalData = [];
-
-/* LOGIN */
-window.login = function(){
-
-const u = document.getElementById("user").value;
-const p = document.getElementById("pass").value;
-
-if(u==="onoe.voting.survey2026@gmail.com" && p==="nraman131069"){
-loginBox.style.display="none";
-dashboard.style.display="block";
-loadData();
-}else{
-alert("Invalid Login");
-}
-
-};
-
-/* LOAD DATA (FIXED SAFE VERSION) */
-function loadData(){
-
-loading.style.display="block";
-
-onValue(ref(db,"members"), snap=>{
-
-globalData = [];
-
-if(snap.exists()){
-snap.forEach(s=>{
-globalData.push(s.val());
-});
-}
-
-renderTable(globalData);
-
-loading.style.display="none";
-
-});
-
-}
-
-/* RENDER TABLE */
-function renderTable(data){
-
-let html="";
-
-if(data.length===0){
-html = `<tr><td colspan="4">No Data Found</td></tr>`;
-}
-
-data.forEach(d=>{
-html += `
-<tr>
-<td>${d.id||""}</td>
-<td>${d.name||""}</td>
-<td>${d.mobile||""}</td>
-<td>${d.email||""}</td>
-</tr>`;
-});
-
-dataBody.innerHTML = html;
-totalCount.innerText = data.length;
-
-}
-
-/* SEARCH */
-window.filterData = function(){
-
-let v = search.value.toLowerCase();
-
-let filtered = globalData.filter(d =>
-(d.name||"").toLowerCase().includes(v) ||
-(d.mobile||"").includes(v)
-);
-
-renderTable(filtered);
-
-};
-
-/* CSV */
-window.downloadCSV = function(){
-
-let csv="ID,Name,Mobile,Email\n";
-
-globalData.forEach(d=>{
-csv+=`${d.id},${d.name},${d.mobile},${d.email}\n`;
-});
-
-const blob = new Blob([csv], {type:"text/csv"});
-const a = document.createElement("a");
-
-a.href = URL.createObjectURL(blob);
-a.download = "TMNP-Members.csv";
-a.click();
-
-};
-
-</script>
-
+<script type="module" src="admin.js"></script>
 </body>
 </html>
