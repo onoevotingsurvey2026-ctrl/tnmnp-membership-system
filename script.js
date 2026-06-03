@@ -1,3 +1,4 @@
+```javascript
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
@@ -7,7 +8,6 @@ ref,
 set
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
 
 const firebaseConfig={
 
@@ -33,13 +33,11 @@ appId:
 
 };
 
-
 const app=
 initializeApp(firebaseConfig);
 
 const db=
 getDatabase(app);
-
 
 function generateID(){
 
@@ -47,12 +45,7 @@ return "TMNP-"+Date.now();
 
 }
 
-
-window.addEventListener(
-
-"load",
-
-()=>{
+window.onload=()=>{
 
 document.getElementById(
 "regId"
@@ -60,45 +53,37 @@ document.getElementById(
 
 generateID();
 
-}
-
-);
-
+};
 
 window.loadLogo=(e)=>{
 
 const file=e.target.files[0];
 
-if(!file)return;
+if(file){
 
-document.getElementById(
-"logoPreview"
-).src=
-
+logoPreview.src=
 URL.createObjectURL(file);
 
-};
+}
 
+};
 
 window.loadLeader=(e)=>{
 
 const file=e.target.files[0];
 
-if(!file)return;
+if(file){
 
-document.getElementById(
-"leaderPreview"
-).src=
-
+leaderPreview.src=
 URL.createObjectURL(file);
+
+}
 
 };
 
-
 window.submitMembership=()=>{
 
-const photoFile=
-
+const photo=
 document.getElementById(
 "photo"
 ).files[0];
@@ -106,44 +91,31 @@ document.getElementById(
 const member={
 
 id:
-document.getElementById(
-"regId"
-).value,
+regId.value,
 
 name:
-document.getElementById(
-"name"
-).value,
+name.value,
 
 mobile:
-document.getElementById(
-"phone"
-).value,
+phone.value,
 
 voter:
-document.getElementById(
-"voter"
-).value,
+voter.value,
 
 email:
-document.getElementById(
-"email"
-).value,
+email.value,
 
 address:
-document.getElementById(
-"address"
-).value,
+address.value,
 
 photo:
-photoFile
+photo
 ?
-photoFile.name
+photo.name
 :
 ""
 
 };
-
 
 set(
 
@@ -158,30 +130,54 @@ member
 
 .then(()=>{
 
+downloadCSV(member);
+
 alert(
-
-"Membership Registered Successfully\n\n"
-
-+
-
-member.id
-
+"Membership Registered\n"+member.id
 );
 
-document.getElementById(
-"regId"
-).value=
-
+regId.value=
 generateID();
-
-})
-
-.catch(err=>{
-
-alert(
-err
-);
 
 });
 
 };
+
+function downloadCSV(member){
+
+let csv=
+
+"ID,Name,Mobile,Voter ID,Email,Address,Photo URL\n";
+
+csv +=
+
+`"${member.id}","${member.name}","${member.mobile}","${member.voter}","${member.email}","${member.address}","${member.photo}"`;
+
+const blob=
+
+new Blob(
+
+["\uFEFF"+csv],
+
+{
+
+type:
+"text/csv;charset=utf-8"
+
+}
+
+);
+
+const a=
+document.createElement("a");
+
+a.href=
+URL.createObjectURL(blob);
+
+a.download=
+"TMNP-membership-report.csv";
+
+a.click();
+
+}
+```
