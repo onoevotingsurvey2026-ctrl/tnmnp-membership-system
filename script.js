@@ -1,4 +1,3 @@
-```javascript
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
@@ -8,6 +7,7 @@ ref,
 set
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
 
 const firebaseConfig={
 
@@ -33,89 +33,159 @@ appId:
 
 };
 
+
 const app=
 initializeApp(firebaseConfig);
 
 const db=
 getDatabase(app);
 
+
+/* GENERATE REGISTRATION ID */
+
 function generateID(){
 
-return "TMNP-"+Date.now();
+return "TMNP-"+Date.now()+"-"+Math.floor(
+Math.random()*1000
+);
 
 }
 
-window.onload=()=>{
+
+/* LOAD PAGE */
+
+window.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+createNewID();
+
+}
+
+);
+
+
+function createNewID(){
+
+const reg=
 
 document.getElementById(
 "regId"
-).value=
+);
 
+if(reg){
+
+reg.value=
 generateID();
 
-};
+}
+
+}
+
+
+/* LOGO */
 
 window.loadLogo=(e)=>{
 
 const file=e.target.files[0];
 
-if(file){
+if(!file)return;
 
-logoPreview.src=
-URL.createObjectURL(file);
+document.getElementById(
+"logoPreview"
+).src=
 
-}
+URL.createObjectURL(
+file
+);
 
 };
+
+
+/* LEADER */
 
 window.loadLeader=(e)=>{
 
 const file=e.target.files[0];
 
-if(file){
+if(!file)return;
 
-leaderPreview.src=
-URL.createObjectURL(file);
+document.getElementById(
+"leaderPreview"
+).src=
 
-}
+URL.createObjectURL(
+file
+);
 
 };
 
+
+/* SUBMIT */
+
 window.submitMembership=()=>{
 
-const photo=
+const photoFile=
+
 document.getElementById(
 "photo"
 ).files[0];
 
+
 const member={
 
 id:
-regId.value,
+
+document.getElementById(
+"regId"
+).value,
 
 name:
-name.value,
+
+document.getElementById(
+"name"
+).value,
 
 mobile:
-phone.value,
+
+document.getElementById(
+"phone"
+).value,
 
 voter:
-voter.value,
+
+document.getElementById(
+"voter"
+).value,
 
 email:
-email.value,
+
+document.getElementById(
+"email"
+).value,
 
 address:
-address.value,
+
+document.getElementById(
+"address"
+).value,
 
 photo:
-photo
+
+photoFile
+
 ?
-photo.name
+
+photoFile.name
+
 :
+
 ""
 
 };
+
 
 set(
 
@@ -130,54 +200,56 @@ member
 
 .then(()=>{
 
-downloadCSV(member);
-
 alert(
-"Membership Registered\n"+member.id
+
+"Membership Registered Successfully\n\n"
+
++
+
+member.id
+
 );
 
-regId.value=
-generateID();
+
+/* RESET FORM */
+
+document.getElementById(
+"name"
+).value="";
+
+document.getElementById(
+"phone"
+).value="";
+
+document.getElementById(
+"voter"
+).value="";
+
+document.getElementById(
+"email"
+).value="";
+
+document.getElementById(
+"address"
+).value="";
+
+document.getElementById(
+"photo"
+).value="";
+
+
+/* NEW REG ID */
+
+createNewID();
+
+})
+
+.catch(err=>{
+
+alert(
+"Error : "+err
+);
 
 });
 
 };
-
-function downloadCSV(member){
-
-let csv=
-
-"ID,Name,Mobile,Voter ID,Email,Address,Photo URL\n";
-
-csv +=
-
-`"${member.id}","${member.name}","${member.mobile}","${member.voter}","${member.email}","${member.address}","${member.photo}"`;
-
-const blob=
-
-new Blob(
-
-["\uFEFF"+csv],
-
-{
-
-type:
-"text/csv;charset=utf-8"
-
-}
-
-);
-
-const a=
-document.createElement("a");
-
-a.href=
-URL.createObjectURL(blob);
-
-a.download=
-"TMNP-membership-report.csv";
-
-a.click();
-
-}
-```
