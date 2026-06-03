@@ -6,9 +6,6 @@
 
 <title>TNMNP Membership System</title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <style>
 
 body{
@@ -19,12 +16,12 @@ background:#f2f2f2;
 }
 
 .container{
-max-width:1000px;
+max-width:900px;
 margin:auto;
-background:white;
+background:#fff;
 padding:20px;
 border-radius:10px;
-box-shadow:0 0 15px rgba(0,0,0,.1);
+box-shadow:0 0 10px rgba(0,0,0,.1);
 }
 
 /* HEADER */
@@ -33,9 +30,15 @@ box-shadow:0 0 15px rgba(0,0,0,.1);
 display:flex;
 justify-content:space-between;
 align-items:center;
-border-bottom:3px solid green;
+border-bottom:3px solid #0b5ed7;
 padding-bottom:15px;
 flex-wrap:wrap;
+}
+
+.logoBox,
+.leaderBox{
+width:130px;
+text-align:center;
 }
 
 .logoBox img,
@@ -47,135 +50,72 @@ border:1px solid #ccc;
 object-fit:cover;
 }
 
-.center{
+.centerHeader{
 flex:1;
 text-align:center;
 padding:10px;
 }
 
-.center h1{
-margin:0;
-font-size:28px;
-color:#0b5ed7;
+.centerHeader h2{
+margin:4px;
 }
 
-.center h2{
-margin:5px;
-font-size:22px;
+.centerHeader h3{
+margin:4px;
 color:green;
 }
 
-.center p{
-margin:5px;
+.box{
+background:#f8f8f8;
+padding:15px;
+margin-top:15px;
+border-radius:10px;
 }
 
-/* FORM */
-
-input,textarea{
-
+input,textarea,button{
 width:100%;
-
 padding:12px;
-
 margin-top:8px;
-
-margin-bottom:15px;
-
+margin-bottom:12px;
 box-sizing:border-box;
-
 }
 
 button{
-
-width:100%;
-
-padding:14px;
-
-border:none;
-
 background:#0b5ed7;
-
 color:white;
-
-font-size:18px;
-
+border:none;
+font-size:16px;
 cursor:pointer;
-
-border-radius:8px;
-
-}
-
-button:hover{
-
-background:#084298;
-
 }
 
 .card{
-
 display:none;
-
 margin-top:20px;
-
 padding:20px;
-
-border:2px solid green;
-
+border:2px solid #0b5ed7;
 border-radius:10px;
+background:#fff;
+}
 
-background:#f8fff8;
+.card img{
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.icons{
+
+display:flex;
+gap:20px;
+justify-content:center;
+font-size:30px;
 
 }
 
-.actions{
-
-display:none;
-
-margin-top:20px;
-
-}
-
-.iconBtn{
-
-display:inline-block;
-
-padding:12px 20px;
-
-margin:5px;
-
-background:#25D366;
-
-color:white;
+.icons a{
 
 text-decoration:none;
-
-border-radius:8px;
-
-font-size:18px;
-
-}
-
-.gmail{
-
-background:#EA4335;
-
-}
-
-.resetBtn{
-
-background:#dc3545;
-
-}
-
-.memberPhoto{
-
-width:120px;
-
-height:140px;
-
-object-fit:cover;
-
-border:1px solid #000;
 
 }
 
@@ -187,6 +127,8 @@ border:1px solid #000;
 
 <div class="container">
 
+<!-- HEADER -->
+
 <div class="header">
 
 <div class="logoBox">
@@ -194,16 +136,20 @@ border:1px solid #000;
 <img id="logoPreview">
 
 <input type="file"
-
-onchange="logoPreview.src=window.URL.createObjectURL(this.files[0])">
+onchange="previewLogo(event)">
 
 </div>
 
-<div class="center">
 
-<h1>TMNP</h1>
+<div class="centerHeader">
 
-<h2>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h2>
+<h2>Membership Registration Form</h2>
+
+<h2>
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+</h2>
+
+<h3>TMNP</h3>
 
 <p>
 
@@ -213,7 +159,7 @@ ECI Registration No:
 
 </p>
 
-<h3>
+<b>
 
 Party President / General Secretary
 
@@ -221,25 +167,20 @@ Party President / General Secretary
 
 N RAMAN
 
-</h3>
+</b>
 
 <p>
 
 No.9, 1st Floor,
-
 2nd Cross Street,
-
 Gomathipuram,
-
 Thiruninravur R.S,
 
-Pincode 602024,
+Pincode:602024,
 
 Thiruvallur District,
 
-Tamil Nadu,
-
-India
+Tamil Nadu
 
 </p>
 
@@ -261,11 +202,13 @@ https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
 
 <p>
 
+📍
+
 <a target="_blank"
 
 href="https://maps.google.com">
 
-📍 Open Google Location Map
+Open Google Map
 
 </a>
 
@@ -273,43 +216,45 @@ href="https://maps.google.com">
 
 </div>
 
+
 <div class="leaderBox">
 
 <img id="leaderPreview">
 
 <input type="file"
 
-onchange="leaderPreview.src=window.URL.createObjectURL(this.files[0])">
+onchange="previewLeader(event)">
 
 </div>
 
 </div>
 
-<h2>
 
-Membership Registration
 
-</h2>
+<!-- FORM -->
 
-<form id="form">
+<form id="memberForm">
 
-<input id="voter"
+<input id="voterid"
 
 placeholder="Voter ID"
 
 required>
 
-<input id="mobile"
 
-placeholder="Mobile Number"
+<input id="phone"
+
+placeholder="Mobile"
 
 required>
 
-<input id="gmail"
+
+<input id="email"
 
 placeholder="Gmail Address"
 
 required>
+
 
 <input id="voteName"
 
@@ -317,15 +262,15 @@ placeholder="Vote Name"
 
 required>
 
+
 <textarea
 
 id="address"
 
-placeholder="Address"
-
-required>
+placeholder="Address">
 
 </textarea>
+
 
 <label>
 
@@ -333,21 +278,27 @@ Member Photo Upload
 
 </label>
 
-<input type="file"
+<input
+
+type="file"
 
 id="photo"
 
 accept="image/*">
 
+
 <label>
 
-<input type="checkbox"
+<input
+
+type="checkbox"
 
 required>
 
 I Confirm All Details Are Correct
 
 </label>
+
 
 <button>
 
@@ -357,113 +308,94 @@ Register Member
 
 </form>
 
-<div class="card"
 
-id="card">
+<!-- CARD -->
+
+<div id="card"
+
+class="card">
 
 <h2>
 
-✅ Registered Successfully
+Registered Member
 
 </h2>
 
+<img id="memberPhoto">
+
 <p>
 
-<b>ID :</b>
+Registration ID:
 
-<span id="rid"></span>
+<span id="reg"></span>
 
 </p>
 
 <p>
 
-<b>Voter ID :</b>
+Voter ID:
 
-<span id="rvoter"></span>
-
-</p>
-
-<p>
-
-<b>Mobile :</b>
-
-<span id="rmobile"></span>
+<span id="cvoter"></span>
 
 </p>
 
 <p>
 
-<b>Gmail :</b>
+Mobile:
 
-<span id="rgmail"></span>
-
-</p>
-
-<p>
-
-<b>Vote Name :</b>
-
-<span id="rname"></span>
+<span id="cmobile"></span>
 
 </p>
 
 <p>
 
-<b>Address :</b>
+Gmail:
 
-<span id="raddress"></span>
+<span id="cemail"></span>
 
 </p>
 
-<img class="memberPhoto"
+<p>
 
-id="memberPreview">
+Vote Name:
 
-</div>
+<span id="cvote"></span>
 
-<div class="actions"
+</p>
 
-id="actions">
+<p>
 
-<a
+Address:
 
-class="iconBtn"
+<span id="caddress"></span>
 
-id="waBtn"
-
-target="_blank">
-
-<i class="fab fa-whatsapp"></i>
-
-WhatsApp
-
-</a>
-
-<a
-
-class="iconBtn gmail"
-
-id="mailBtn"
-
-target="_blank">
-
-<i class="fa fa-envelope"></i>
-
-Gmail
-
-</a>
+</p>
 
 <button
 
 onclick="window.print()">
 
-Print / PDF Save
+Print PDF
 
 </button>
 
 <button
 
-class="resetBtn"
+onclick="shareWA()">
+
+Share WhatsApp
+
+</button>
+
+<button
+
+onclick="gmailOpen()">
+
+Open Gmail
+
+</button>
+
+<button
 
 onclick="resetAll()">
 
@@ -471,47 +403,117 @@ Reset Form
 
 </button>
 
+
+<div class="icons">
+
+<a
+
+href="https://wa.me/918939324309">
+
+📱
+
+</a>
+
+<a
+
+href="mailto:tnmakkalnalvazhvuperiyakkam@gmail.com">
+
+📧
+
+</a>
+
 </div>
 
 </div>
+
+</div>
+
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
 
 <script>
 
-document.getElementById("form")
+const firebaseConfig={
 
-.addEventListener("submit",
+apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
+
+authDomain:"tnmnp-membership-system.firebaseapp.com",
+
+projectId:"tnmnp-membership-system",
+
+storageBucket:"tnmnp-membership-system.firebasestorage.app",
+
+messagingSenderId:"616857466202",
+
+appId:"1:616857466202:web:0fb4fae39e938ec0edef63"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db=firebase.firestore();
+
+
+function previewLogo(e){
+
+logoPreview.src=
+
+URL.createObjectURL(
+
+e.target.files[0]
+
+);
+
+}
+
+
+function previewLeader(e){
+
+leaderPreview.src=
+
+URL.createObjectURL(
+
+e.target.files[0]
+
+);
+
+}
+
+
+
+memberForm.addEventListener(
+
+"submit",
 
 function(e){
 
 e.preventDefault();
 
-let id="TNMNP-"+Date.now();
+let id=
 
-let voter=voter.value;
+"TNMNP-"+Date.now();
 
-let mob=mobile.value;
+reg.innerText=id;
 
-let gm=gmail.value;
+cvoter.innerText=voterid.value;
 
-let vn=voteName.value;
+cmobile.innerText=phone.value;
 
-let ad=address.value;
+cemail.innerText=email.value;
 
-rid.innerText=id;
+cvote.innerText=voteName.value;
 
-rvoter.innerText=voter;
+caddress.innerText=address.value;
 
-rmobile.innerText=mob;
-
-rgmail.innerText=gm;
-
-rname.innerText=vn;
-
-raddress.innerText=ad;
 
 if(photo.files[0]){
 
-memberPreview.src=
+memberPhoto.src=
 
 URL.createObjectURL(
 
@@ -521,35 +523,58 @@ photo.files[0]
 
 }
 
+
+db.collection("members")
+
+.add({
+
+regNo:id,
+
+voterId:voterid.value,
+
+mobile:phone.value,
+
+email:email.value,
+
+voteName:voteName.value,
+
+address:address.value
+
+});
+
+
 card.style.display="block";
 
-actions.style.display="block";
+});
+
+
+function shareWA(){
 
 let msg=
 
-`TNMNP Registration
+"TNMNP Registration : "
 
-ID:${id}
++reg.innerText;
 
-Voter:${voter}
-
-Mobile:${mob}
-
-Name:${vn}`;
-
-waBtn.href=
+window.open(
 
 "https://wa.me/918939324309?text="+
 
-encodeURIComponent(msg);
+encodeURIComponent(msg)
 
-mailBtn.href=
+);
 
-"mailto:tnmakkalnalvazhvuperiyakkam@gmail.com?subject=Membership&body="+
+}
 
-encodeURIComponent(msg);
 
-});
+function gmailOpen(){
+
+window.location=
+
+"mailto:tnmakkalnalvazhvuperiyakkam@gmail.com";
+
+}
+
 
 function resetAll(){
 
