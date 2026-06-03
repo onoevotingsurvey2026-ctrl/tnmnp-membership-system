@@ -1,3 +1,4 @@
+```javascript
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
@@ -8,34 +9,36 @@ set
 }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-
 const firebaseConfig={
 
 apiKey:"AIzaSyBJaHZfEyg4pID4jmPSyVxEbDhta4VY0kY",
 
-authDomain:"tnmnp-membership-system.firebaseapp.com",
+authDomain:
+"tnmnp-membership-system.firebaseapp.com",
 
 databaseURL:
 "https://tnmnp-membership-system-default-rtdb.firebaseio.com",
 
-projectId:"tnmnp-membership-system",
+projectId:
+"tnmnp-membership-system",
 
 storageBucket:
 "tnmnp-membership-system.firebasestorage.app",
 
-messagingSenderId:"616857466202",
+messagingSenderId:
+"616857466202",
 
 appId:
 "1:616857466202:web:0fb4fae39e938ec0edef63"
 
 };
 
-
 const app=
 initializeApp(firebaseConfig);
 
 const db=
 getDatabase(app);
+
 
 
 function generateID(){
@@ -45,15 +48,23 @@ return "TMNP-"+Date.now();
 }
 
 
-function setID(){
 
+function createID(){
+
+const reg=
 document.getElementById(
 "regId"
-).value=
+);
 
+if(reg){
+
+reg.value=
 generateID();
 
 }
+
+}
+
 
 
 document.addEventListener(
@@ -62,55 +73,96 @@ document.addEventListener(
 
 ()=>{
 
-setID();
+createID();
 
 }
 
 );
 
 
-window.loadLogo=(e)=>{
 
-logoPreview.src=
-URL.createObjectURL(
-e.target.files[0]
-);
+window.loadLogo=function(e){
 
-};
+const file=e.target.files[0];
 
+if(!file)return;
 
-window.loadLeader=(e)=>{
+document.getElementById(
+"logoPreview"
+).src=
 
-leaderPreview.src=
-URL.createObjectURL(
-e.target.files[0]
-);
+URL.createObjectURL(file);
 
 };
 
 
-window.submitMembership=()=>{
+
+window.loadLeader=function(e){
+
+const file=e.target.files[0];
+
+if(!file)return;
+
+document.getElementById(
+"leaderPreview"
+).src=
+
+URL.createObjectURL(file);
+
+};
+
+
+
+window.submitMembership=
+function(){
 
 const photoFile=
+
 document.getElementById(
 "photo"
 ).files[0];
 
+
 const member={
 
-id:regId.value,
+id:
 
-name:name.value,
+document.getElementById(
+"regId"
+).value,
 
-mobile:phone.value,
+name:
 
-voter:voter.value,
+document.getElementById(
+"name"
+).value,
 
-email:email.value,
+mobile:
 
-address:address.value,
+document.getElementById(
+"phone"
+).value,
+
+voter:
+
+document.getElementById(
+"voter"
+).value,
+
+email:
+
+document.getElementById(
+"email"
+).value,
+
+address:
+
+document.getElementById(
+"address"
+).value,
 
 photo:
+
 photoFile
 ?
 photoFile.name
@@ -118,6 +170,7 @@ photoFile.name
 ""
 
 };
+
 
 
 set(
@@ -136,20 +189,57 @@ member
 downloadCSV(member);
 
 alert(
-"Registered\n"+member.id
+
+"Membership Registered Successfully\n\n"
+
++
+
+member.id
+
 );
 
-setID();
+
+/* CLEAR */
+
+document.getElementById(
+"name"
+).value="";
+
+document.getElementById(
+"phone"
+).value="";
+
+document.getElementById(
+"voter"
+).value="";
+
+document.getElementById(
+"email"
+).value="";
+
+document.getElementById(
+"address"
+).value="";
+
+document.getElementById(
+"photo"
+).value="";
+
+
+createID();
 
 })
 
 .catch(err=>{
 
-alert(err);
+alert(
+"Error : "+err
+);
 
 });
 
 };
+
 
 
 function downloadCSV(member){
@@ -158,9 +248,11 @@ let csv=
 
 "ID,Name,Mobile,Voter ID,Email,Address,Photo\n";
 
+
 csv +=
 
 `"${member.id}","${member.name}","${member.mobile}","${member.voter}","${member.email}","${member.address}","${member.photo}"`;
+
 
 const blob=
 
@@ -177,15 +269,29 @@ type:
 
 );
 
+
 const a=
-document.createElement("a");
+document.createElement(
+"a"
+);
 
 a.href=
-URL.createObjectURL(blob);
+URL.createObjectURL(
+blob
+);
 
 a.download=
 "TMNP-membership-report.csv";
 
+document.body.appendChild(
+a
+);
+
 a.click();
 
+document.body.removeChild(
+a
+);
+
 }
+```
