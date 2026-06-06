@@ -1,126 +1,101 @@
 <!DOCTYPE html>
 <html lang="ta">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>
-TMNP Membership System
-</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TMNP Membership System</title>
 
 <style>
 
 body{
 margin:0;
 padding:20px;
-font-family:Arial;
+font-family:Arial,sans-serif;
 background:#f2f2f2;
 }
 
 .container{
-max-width:950px;
+max-width:1000px;
 margin:auto;
 background:#fff;
 padding:20px;
 border-radius:12px;
-box-shadow:0 0 10px rgba(0,0,0,.15);
+box-shadow:0 0 12px rgba(0,0,0,.15);
 }
-
-/* HEADER */
 
 .header{
 text-align:center;
 }
 
 .leader{
-
 width:170px;
-
 height:170px;
-
 border-radius:50%;
-
 object-fit:cover;
-
 border:4px solid green;
-
 }
 
 .logo{
-
 width:320px;
-
 max-width:95%;
-
 display:block;
-
-margin:auto;
-
-margin-top:15px;
-
+margin:15px auto;
 }
 
-hr{
-margin:20px 0;
-}
-
-/* FORM */
-
-.form-group{
-margin-bottom:12px;
+.row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
 }
 
 input,
 textarea{
-
 width:100%;
-
 padding:12px;
-
+margin-bottom:12px;
 border:1px solid #ccc;
-
 border-radius:8px;
-
 box-sizing:border-box;
+}
 
+.buttons{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
 }
 
 button{
-
-width:100%;
-
 padding:14px;
-
-background:#0b5d2a;
-
-color:white;
-
 border:none;
-
-font-size:18px;
-
 border-radius:8px;
-
 cursor:pointer;
-
+font-size:16px;
 }
 
+.submit{background:#0b5d2a;color:#fff;}
+.reset{background:#777;color:#fff;}
+.pdf{background:#0057b8;color:#fff;}
+.share{background:#ff6600;color:#fff;}
+
 .footer{
-
-margin-top:25px;
-
+margin-top:20px;
 text-align:center;
-
 font-weight:bold;
+}
+
+@media(max-width:700px){
+
+.row{
+grid-template-columns:1fr;
+}
+
+.buttons{
+grid-template-columns:1fr;
+}
 
 }
 
 </style>
-
 </head>
 
 <body>
@@ -129,94 +104,45 @@ font-weight:bold;
 
 <div class="header">
 
-<!-- LEADER IMAGE -->
+<!-- EMBEDDED LEADER IMAGE -->
 
 <img
 class="leader"
+src="data:image/jpeg;base64,PASTE_EMBEDDED_LEADER_IMAGE_HERE">
 
-src="data:image/jpeg;base64,PASTE_LEADER_IMAGE_BASE64_HERE"
-
->
-
-<!-- LOGO -->
+<!-- EMBEDDED LOGO -->
 
 <img
-
 class="logo"
+src="data:image/png;base64,PASTE_EMBEDDED_LOGO_IMAGE_HERE">
 
-src="data:image/png;base64,PASTE_LOGO_BASE64_HERE"
+<h1>Political Party Membership Form</h1>
 
->
+<h2>அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்</h2>
 
-<h1>
+<h3>Join Now As Membership</h3>
 
-Political Party Membership Form
+<h2>TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
 
-</h1>
-
-<h2>
-
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-
-</h2>
-
-<h3>
-
-Join Now As Membership
-
-</h3>
-
-<h2>
-
-TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
-
-</h2>
-
-<h3>
-
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-
-</h3>
+<h3>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h3>
 
 <hr>
 
-<h3>
+<h3>Election Commission of India</h3>
 
-Election Commission of India
+<p>56/219/2018-2021/PPS-I</p>
 
-</h3>
+<p>05 March 2021</p>
 
-<p>
-
-56/219/2018-2021/PPS-I
-
-</p>
+<h3>Party Office Address</h3>
 
 <p>
 
-05 March 2021
+No.9 2nd Cross Street<br>
 
-</p>
+Gomathipuram<br>
 
-<h3>
-
-Party Office Address
-
-</h3>
-
-<p>
-
-No.9 2nd Cross Street
-
-<br>
-
-Gomathipuram
-
-<br>
-
-Thiruninravur
-
-<br>
+Thiruninravur<br>
 
 Chennai
 
@@ -242,77 +168,81 @@ tnmnp2025@gmail.com
 
 </div>
 
-<h2>
+<h2>Membership Registration</h2>
 
-Membership Registration
-
-</h2>
-
-<div class="form-group">
+<label>Registration ID</label>
 
 <input
+id="regid"
+readonly>
 
-placeholder="Full Name"
+<div class="row">
 
+<input
 id="name"
+placeholder="Full Name">
 
->
+<input
+id="voter"
+placeholder="Voter ID">
 
 </div>
 
-<div class="form-group">
+<div class="row">
 
 <input
-
-placeholder="Mobile Number"
-
-id="phone"
-
->
-
-</div>
-
-<div class="form-group">
+id="mobile"
+placeholder="Mobile Number">
 
 <input
-
-placeholder="Email Address"
-
 id="email"
-
->
+placeholder="Gmail Address">
 
 </div>
-
-<div class="form-group">
 
 <input
-
 id="address"
-
-placeholder="Address"
-
->
-
-</div>
-
-<div class="form-group">
+placeholder="Address">
 
 <textarea
-
-placeholder="Remarks"
-
 rows="4"
+placeholder="Remarks"></textarea>
 
-></textarea>
+<div class="buttons">
 
-</div>
+<button
+class="submit"
+onclick="submitForm()">
 
-<button>
-
-Submit Membership
+Submit
 
 </button>
+
+<button
+class="reset"
+onclick="resetForm()">
+
+Reset
+
+</button>
+
+<button
+class="pdf"
+onclick="savePDF()">
+
+PDF
+
+</button>
+
+<button
+class="share"
+onclick="shareData()">
+
+Share
+
+</button>
+
+</div>
 
 <div class="footer">
 
@@ -324,21 +254,139 @@ TMNP Membership System
 
 <script>
 
-function initAutocomplete(){
-
-const input =
+function createRegID(){
 
 document.getElementById(
 
-"address"
+'regid'
+
+).value=
+
+'TNMNP-'+
+
+Date.now();
+
+}
+
+createRegID();
+
+function resetForm(){
+
+document
+
+.querySelectorAll(
+
+'input,textarea'
+
+)
+
+.forEach(
+
+e=>{
+
+if(
+
+e.id!='regid'
+
+)
+
+e.value='';
+
+}
 
 );
+
+createRegID();
+
+}
+
+function submitForm(){
+
+alert(
+
+'Membership Saved : '+
+
+document.getElementById(
+
+'regid'
+
+).value
+
+);
+
+}
+
+function savePDF(){
+
+window.print();
+
+}
+
+async function shareData(){
+
+const text=
+
+'Membership ID : '+
+
+document.getElementById(
+
+'regid'
+
+).value;
+
+if(
+
+navigator.share
+
+){
+
+navigator.share({
+
+title:'TMNP',
+
+text:text
+
+});
+
+}
+
+else{
+
+navigator.clipboard.writeText(
+
+text
+
+);
+
+alert(
+
+'Copied'
+
+);
+
+}
+
+}
+
+function initAutocomplete(){
+
+if(
+
+window.google
+
+){
 
 new google.maps.places.Autocomplete(
 
-input
+document.getElementById(
+
+'address'
+
+)
 
 );
+
+}
 
 }
 
@@ -348,19 +396,10 @@ initAutocomplete;
 
 </script>
 
-<!-- GOOGLE API CONFIG -->
-
 <script
-
 async
-
 defer
-
-src=
-
-"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"
-
->
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 </script>
 
