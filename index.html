@@ -12,6 +12,7 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
+/* HEADER */
 header{
 background:#0b3d91;
 color:white;
@@ -22,10 +23,13 @@ padding:15px;
 display:flex;
 align-items:center;
 justify-content:space-between;
+gap:10px;
+flex-wrap:wrap;
 }
 
 .logo,.leader{
-height:75px;
+height:80px;
+width:80px;
 border-radius:8px;
 object-fit:cover;
 }
@@ -33,8 +37,20 @@ object-fit:cover;
 .title{
 text-align:center;
 flex:1;
+min-width:250px;
 }
 
+.title h2{
+margin:5px 0;
+font-size:18px;
+}
+
+.title p{
+margin:3px 0;
+font-size:13px;
+}
+
+/* CONTAINER */
 .container{
 max-width:1000px;
 margin:auto;
@@ -48,17 +64,20 @@ input{
 width:100%;
 padding:10px;
 margin:6px 0;
+box-sizing:border-box;
 }
 
 button{
 padding:10px;
-margin:5px;
+margin:5px 0;
 border:none;
 cursor:pointer;
+border-radius:5px;
 }
 
 .btn{background:#0b3d91;color:white;}
 .btn-danger{background:red;color:white;}
+.btn-green{background:green;color:white;}
 
 table{
 width:100%;
@@ -70,6 +89,7 @@ th,td{
 border:1px solid #ddd;
 padding:8px;
 text-align:center;
+font-size:13px;
 }
 
 .member-img{
@@ -77,6 +97,14 @@ width:45px;
 height:45px;
 border-radius:5px;
 object-fit:cover;
+}
+
+.map-box{
+margin-top:10px;
+padding:10px;
+background:#f5f5f5;
+border-radius:8px;
+font-size:13px;
 }
 
 footer{
@@ -93,31 +121,23 @@ color:white;
 
 <!-- HEADER -->
 <header>
-
 <div class="header-row">
 
-<!-- LOGO (SAFE PLACEHOLDER IMAGE) -->
 <img class="logo"
-src="https://via.placeholder.com/75x75.png?text=LOGO"
-/>
+src="https://via.placeholder.com/80x80.png?text=LOGO">
 
 <div class="title">
-<h2>TMNP - Political Party Membership System அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்</h2>
-<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</p>
-<p>📧 tnmnp2025@gmail.com | 🌐 LIVE WEBSITE: onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/</p>
+<h2>TMNP - Membership System</h2>
+<p>அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்</p>
+<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
+<p>📧 tnmnp2025@gmail.com | 🌐 Membership Portal</p>
+<p>President: N RAMAN | Thiruvallur District, Tamilnadu</p>
 </div>
-தலைவர்/பொதுச் செயலாளர் ந ராமன் President/General Secretary N RAMAN 
 
-  Head Quarters: No.9, 1st Floor, 2nd Cross Street, Gomathipuram, Thiruninravur, Pincode:602024, Thiruvallur District, Tamilnadu, India 
-  Mobile No.+91 8939324309
-
-  <!-- LEADER (SAFE PLACEHOLDER IMAGE) -->
 <img class="leader"
-src="https://via.placeholder.com/75x75.png?text=LEADER"
-/>
+src="https://via.placeholder.com/80x80.png?text=LEADER">
 
 </div>
-
 </header>
 
 <!-- FORM -->
@@ -131,6 +151,11 @@ src="https://via.placeholder.com/75x75.png?text=LEADER"
 <input id="email" placeholder="Email">
 <input id="address" placeholder="Address">
 <input id="district" placeholder="District">
+
+<button class="btn-green" onclick="getLocation()">📍 Get Live Location</button>
+
+<div class="map-box" id="mapBox">Location not added</div>
+
 <input type="file" id="photo">
 
 <button class="btn" onclick="save()">Submit</button>
@@ -149,6 +174,7 @@ src="https://via.placeholder.com/75x75.png?text=LEADER"
 <th>Email</th>
 <th>Address</th>
 <th>District</th>
+<th>Map</th>
 </tr>
 </thead>
 <tbody id="tbody"></tbody>
@@ -161,8 +187,38 @@ src="https://via.placeholder.com/75x75.png?text=LEADER"
 <script>
 
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
+
+let currentLocation = null;
+
 render();
 
+/* LIVE LOCATION */
+function getLocation(){
+
+if(!navigator.geolocation){
+alert("Geolocation not supported");
+return;
+}
+
+navigator.geolocation.getCurrentPosition(pos=>{
+
+currentLocation = {
+lat: pos.coords.latitude,
+lng: pos.coords.longitude
+};
+
+document.getElementById("mapBox").innerHTML =
+`Latitude: ${currentLocation.lat}<br>
+Longitude: ${currentLocation.lng}<br>
+<a target="_blank"
+href="https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}">
+View on Google Map</a>`;
+
+});
+
+}
+
+/* SAVE DATA */
 function save(){
 
 let name=document.getElementById("name").value;
@@ -185,13 +241,16 @@ reader.onload=function(){
 let obj={
 id:"TMNP-"+Date.now(),
 name,phone,voterid,email,address,district,
-photo:reader.result
+photo:reader.result,
+location: currentLocation
 };
 
 data.push(obj);
 localStorage.setItem("tmnp",JSON.stringify(data));
 render();
 resetForm();
+currentLocation=null;
+document.getElementById("mapBox").innerHTML="Location not added";
 };
 
 if(file){
@@ -201,11 +260,18 @@ reader.onload();
 }
 }
 
+/* RENDER TABLE */
 function render(){
+
 let tbody=document.getElementById("tbody");
 tbody.innerHTML="";
 
 data.forEach(d=>{
+
+let mapLink = d.location
+? `<a target="_blank" href="https://www.google.com/maps?q=${d.location.lat},${d.location.lng}">View Map</a>`
+: "No Map";
+
 tbody.innerHTML+=`
 <tr>
 <td>${d.id}</td>
@@ -216,15 +282,20 @@ tbody.innerHTML+=`
 <td>${d.email}</td>
 <td>${d.address}</td>
 <td>${d.district}</td>
+<td>${mapLink}</td>
 </tr>`;
 });
+
 }
 
+/* RESET */
 function resetForm(){
 ["name","phone","voterid","email","address","district"].forEach(id=>{
 document.getElementById(id).value="";
 });
 document.getElementById("photo").value="";
+currentLocation=null;
+document.getElementById("mapBox").innerHTML="Location not added";
 }
 
 </script>
