@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System</title>
+<title>TMNP Membership System - ADMIN</title>
 
 <style>
 body{
@@ -12,7 +12,6 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
-/* CONTAINER */
 .container{
 max-width:1000px;
 margin:auto;
@@ -35,7 +34,6 @@ padding:15px;
 border-radius:10px;
 }
 
-/* TOP IMAGES */
 .top-row{
 display:flex;
 justify-content:space-between;
@@ -56,12 +54,6 @@ border-radius:8px;
 border:2px solid white;
 }
 
-.img-box input{
-width:120px;
-margin-top:5px;
-}
-
-/* CENTER TEXT */
 .title{
 text-align:center;
 }
@@ -76,7 +68,6 @@ line-height:1.6;
 font-size:14px;
 font-weight:900;
 color:#ff4d6d;
-margin:8px 0;
 animation:blink 1.2s infinite;
 }
 
@@ -86,43 +77,10 @@ animation:blink 1.2s infinite;
 100%{opacity:1;}
 }
 
-.form-title-en{
-font-size:18px;
-font-weight:900;
-color:#ffd700;
-margin-top:8px;
-}
-
-.form-title-ta{
-font-size:16px;
-font-weight:800;
-color:white;
-margin-top:4px;
-}
-
-.party-name{
-font-size:20px;
-font-weight:900;
-color:#ffd700;
-margin-top:8px;
-}
-
-.party-ta{
-font-size:15px;
-font-weight:700;
-margin-top:3px;
-}
-
-.info{
-font-size:13px;
-margin:6px 0;
-}
-
-/* ⭐ LIVE PORTAL YELLOW FIX */
+/* LIVE */
 .live-site{
 color:#ffea00;
 font-weight:900;
-font-size:14px;
 padding:3px 8px;
 border:1px solid #ffea00;
 border-radius:4px;
@@ -155,8 +113,8 @@ border-radius:5px;
 .btn{background:#0b3d91;color:white;}
 .btn-danger{background:red;color:white;}
 .btn-green{background:green;color:white;}
+.btn-admin{background:#222;color:#fff;}
 
-/* TABLE */
 table{
 width:100%;
 border-collapse:collapse;
@@ -177,22 +135,12 @@ object-fit:cover;
 border-radius:5px;
 }
 
-/* MAP */
 .map-box{
 margin-top:10px;
 padding:10px;
 background:#f5f5f5;
 border-radius:8px;
 font-size:13px;
-}
-
-/* FOOTER */
-footer{
-text-align:center;
-padding:15px;
-margin-top:20px;
-background:#0b3d91;
-color:white;
 }
 </style>
 </head>
@@ -202,83 +150,43 @@ color:white;
 <header>
 <div class="header-box">
 
-<!-- LOGO + LEADER UPLOAD -->
 <div class="top-row">
 
 <div class="img-box">
-<img id="logoPreview" src="">
-<br>
-<input type="file" accept="image/*" onchange="loadLogo(event)">
+<img id="logoPreview">
+<input type="file" onchange="loadLogo(event)">
 <p>Logo</p>
 </div>
 
 <div class="img-box">
-<img id="leaderPreview" src="">
-<br>
-<input type="file" accept="image/*" onchange="loadLeader(event)">
+<img id="leaderPreview">
+<input type="file" onchange="loadLeader(event)">
 <p>Leader</p>
 </div>
 
 </div>
 
-<!-- HEADER TEXT -->
 <div class="title">
 
 <div class="slogan">
 நேர்மை - நலன் - நம்பிக்கை<br>
-மக்களுக்காக மக்களால்<br>
-நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்
+மக்களுக்காக மக்களால்
 </div>
 
 <div class="join">"JOIN WITH US"</div>
 
-<div class="form-title-en">
-Political Party Membership Registration Form
-</div>
+<div>TMNP Membership System</div>
 
-<div class="form-title-ta">
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-</div>
-
-<div class="party-name">
-TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
-</div>
-
-<div class="party-ta">
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-</div>
-
-<div class="info">
-📍 Head Quarters:<br>
-No.9, 1st Floor, 2nd Cross Street, Gomathipuram,<br>
-Thiruninravur - 602024, Tamilnadu
-</div>
-
-<div class="info">
-📱 Mobile: +91 8939324309
-</div>
-
-<div class="info">
-📧 tnmnp2025@gmail.com
-</div>
-
-<!-- ⭐ YELLOW LIVE PORTAL FIX -->
-<div class="info">
-🌐 Website:
-<a class="live-site"
-href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
-target="_blank">LIVE PORTAL</a>
-</div>
+<div class="live-site">LIVE PORTAL</div>
 
 </div>
 
 </div>
 </header>
 
-<!-- FORM -->
 <div class="container">
 
-<h2>Membership Registration</h2>
+<h2>Membership Registration (ADMIN CONTROL)</h2>
 
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone">
@@ -287,14 +195,16 @@ target="_blank">LIVE PORTAL</a>
 <input id="address" placeholder="Address">
 <input id="district" placeholder="District">
 
-<input type="file" id="photo" accept="image/*">
+<input type="file" id="photo">
 
 <button class="btn-green" onclick="getLocation()">📍 Get Location</button>
 
 <div class="map-box" id="mapBox">Location not added</div>
 
 <button class="btn" onclick="save()">Submit</button>
-<button class="btn-danger" onclick="resetForm()">Reset</button>
+
+<!-- 🔥 ADMIN RESET -->
+<button class="btn-admin" onclick="adminReset()">🔐 ADMIN RESET</button>
 
 <h3>Dashboard</h3>
 
@@ -317,36 +227,25 @@ target="_blank">LIVE PORTAL</a>
 
 </div>
 
-<footer>© TMNP Membership System</footer>
-
 <script>
 
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
-let currentLocation = null;
-
-let logoData = "";
-let leaderData = "";
+let currentLocation=null;
 
 render();
 
 /* LOGO */
-function loadLogo(event){
-let reader=new FileReader();
-reader.onload=function(){
-logoData=reader.result;
-document.getElementById("logoPreview").src=logoData;
-};
-reader.readAsDataURL(event.target.files[0]);
+function loadLogo(e){
+let r=new FileReader();
+r.onload=()=>document.getElementById("logoPreview").src=r.result;
+r.readAsDataURL(e.target.files[0]);
 }
 
 /* LEADER */
-function loadLeader(event){
-let reader=new FileReader();
-reader.onload=function(){
-leaderData=reader.result;
-document.getElementById("leaderPreview").src=leaderData;
-};
-reader.readAsDataURL(event.target.files[0]);
+function loadLeader(e){
+let r=new FileReader();
+r.onload=()=>document.getElementById("leaderPreview").src=r.result;
+r.readAsDataURL(e.target.files[0]);
 }
 
 /* LOCATION */
@@ -358,10 +257,9 @@ lng:pos.coords.longitude
 };
 
 document.getElementById("mapBox").innerHTML=
-`Lat: ${currentLocation.lat}<br>
-Lng: ${currentLocation.lng}<br>
-<a target="_blank"
-href="https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}">
+`Lat:${currentLocation.lat}<br>
+Lng:${currentLocation.lng}<br>
+<a target="_blank" href="https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}">
 Open Map</a>`;
 });
 }
@@ -386,16 +284,13 @@ let reader=new FileReader();
 
 reader.onload=function(){
 
-let obj={
+data.push({
 id:"TMNP-"+Date.now(),
 name,phone,voterid,email,address,district,
 photo:reader.result,
-location:currentLocation,
-logo:logoData,
-leader:leaderData
-};
+location:currentLocation
+});
 
-data.push(obj);
 localStorage.setItem("tmnp",JSON.stringify(data));
 render();
 resetForm();
@@ -410,26 +305,26 @@ let tbody=document.getElementById("tbody");
 tbody.innerHTML="";
 
 data.forEach(d=>{
-
-let mapLink=d.location
+let map=d.location
 ? `<a target="_blank" href="https://www.google.com/maps?q=${d.location.lat},${d.location.lng}">View</a>`
 : "No Map";
 
 tbody.innerHTML+=`
 <tr>
 <td>${d.id}</td>
+<td><img class="member-img" src="${d.photo}"></td>
 <td>${d.name}</td>
 <td>${d.phone}</td>
 <td>${d.voterid}</td>
 <td>${d.email}</td>
 <td>${d.address}</td>
 <td>${d.district}</td>
-<td>${mapLink}</td>
+<td>${map}</td>
 </tr>`;
 });
 }
 
-/* RESET */
+/* NORMAL RESET */
 function resetForm(){
 ["name","phone","voterid","email","address","district"].forEach(id=>{
 document.getElementById(id).value="";
@@ -437,6 +332,37 @@ document.getElementById(id).value="";
 document.getElementById("photo").value="";
 currentLocation=null;
 document.getElementById("mapBox").innerHTML="Location not added";
+}
+
+/* 🔥 ADMIN RESET (PASSWORD + BACKUP) */
+function adminReset(){
+
+let pass = prompt("Enter ADMIN PASSWORD:");
+
+if(pass !== "TMNP2026"){
+alert("❌ Wrong Password!");
+return;
+}
+
+if(!confirm("⚠ Are you sure? All data will be deleted + backup downloaded")){
+return;
+}
+
+/* BACKUP */
+let blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+let url = URL.createObjectURL(blob);
+let a = document.createElement("a");
+a.href = url;
+a.download = "TMNP_BACKUP.json";
+a.click();
+
+/* RESET DATA */
+data=[];
+localStorage.removeItem("tmnp");
+render();
+resetForm();
+
+alert("✅ ADMIN RESET COMPLETED + BACKUP SAVED");
 }
 
 </script>
