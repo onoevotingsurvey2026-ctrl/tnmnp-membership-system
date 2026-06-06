@@ -28,16 +28,16 @@ flex-wrap:wrap;
 }
 
 .logo,.leader{
-height:80px;
-width:80px;
+height:85px;
+width:85px;
 border-radius:8px;
 object-fit:cover;
 }
 
 .title{
-text-align:center;
 flex:1;
-min-width:250px;
+text-align:center;
+min-width:300px;
 }
 
 .title h2{
@@ -48,6 +48,7 @@ font-size:18px;
 .title p{
 margin:3px 0;
 font-size:13px;
+line-height:1.4;
 }
 
 /* CONTAINER */
@@ -124,18 +125,37 @@ color:white;
 <div class="header-row">
 
 <img class="logo"
-src="https://via.placeholder.com/80x80.png?text=LOGO">
+src="https://via.placeholder.com/85x85.png?text=LOGO">
 
 <div class="title">
-<h2>TMNP - Membership System</h2>
+
+<h2>TMNP - Political Party Membership System</h2>
+
 <p>அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்</p>
-<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
-<p>📧 tnmnp2025@gmail.com | 🌐 Membership Portal</p>
-<p>President: N RAMAN | Thiruvallur District, Tamilnadu</p>
+
+<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</p>
+
+<p>
+Head Quarters/தலைமையகம்: No.9, 1st Floor, 2nd Cross Street, Gomathipuram, Thiruninravur,  
+Pincode: 602024, Thiruvallur District, Tamilnadu State, India  
+Mobile: +91 8939324309
+</p>
+
+<p>
+📧 tnmnp2025@gmail.com |
+🌐 LIVE WEBSITE:
+<a href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
+target="_blank" style="color:#ffdd57;">
+Click Here
+</a>
+</p>
+
+<p><b>President: N RAMAN | Thiruvallur District, Tamilnadu</b></p>
+
 </div>
 
 <img class="leader"
-src="https://via.placeholder.com/80x80.png?text=LEADER">
+src="https://via.placeholder.com/85x85.png?text=LEADER">
 
 </div>
 </header>
@@ -187,7 +207,6 @@ src="https://via.placeholder.com/80x80.png?text=LEADER">
 <script>
 
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
-
 let currentLocation = null;
 
 render();
@@ -212,13 +231,13 @@ document.getElementById("mapBox").innerHTML =
 Longitude: ${currentLocation.lng}<br>
 <a target="_blank"
 href="https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}">
-View on Google Map</a>`;
+Open in Google Maps</a>`;
 
 });
 
 }
 
-/* SAVE DATA */
+/* SAVE */
 function save(){
 
 let name=document.getElementById("name").value;
@@ -249,6 +268,7 @@ data.push(obj);
 localStorage.setItem("tmnp",JSON.stringify(data));
 render();
 resetForm();
+
 currentLocation=null;
 document.getElementById("mapBox").innerHTML="Location not added";
 };
@@ -260,7 +280,7 @@ reader.onload();
 }
 }
 
-/* RENDER TABLE */
+/* RENDER */
 function render(){
 
 let tbody=document.getElementById("tbody");
@@ -285,7 +305,6 @@ tbody.innerHTML+=`
 <td>${mapLink}</td>
 </tr>`;
 });
-
 }
 
 /* RESET */
