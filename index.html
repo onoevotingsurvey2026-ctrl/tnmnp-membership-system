@@ -1,692 +1,203 @@
 <!DOCTYPE html>
 <html lang="ta">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>
-
-TMNP Membership System
-
-</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMNP Membership System</title>
 
 <style>
-
 body{
-
 margin:0;
-
-padding:20px;
-
 font-family:Arial;
-
 background:#f2f2f2;
-
 }
 
-.container{
-
-max-width:1000px;
-
-margin:auto;
-
-background:#fff;
-
-padding:20px;
-
-border-radius:12px;
-
-box-shadow:0 0 12px rgba(0,0,0,.15);
-
-}
-
-.header{
-
-text-align:center;
-
-}
-
-.leader{
-
-width:170px;
-
-height:170px;
-
-border-radius:50%;
-
-object-fit:cover;
-
-border:4px solid green;
-
+header{
+background:#0b3d91;
+color:white;
+padding:15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .logo{
-
-width:320px;
-
-max-width:95%;
-
-display:block;
-
-margin:15px auto;
-
+height:60px;
 }
 
-.row{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:12px;
-
+.container{
+max-width:1000px;
+margin:auto;
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-input{
+h2{
+text-align:center;
+}
 
+input, select{
 width:100%;
-
-padding:12px;
-
-margin-bottom:12px;
-
-border:1px solid #ccc;
-
-border-radius:8px;
-
-box-sizing:border-box;
-
-}
-
-.buttons{
-
-display:grid;
-
-grid-template-columns:
-
-repeat(4,1fr);
-
-gap:10px;
-
+padding:10px;
+margin:8px 0;
 }
 
 button{
-
-padding:14px;
-
+padding:10px;
+margin:5px;
 border:none;
-
-border-radius:8px;
-
 cursor:pointer;
-
-font-size:16px;
-
 }
 
-.submit{
-
-background:#0b5d2a;
-
+.btn{
+background:#0b3d91;
 color:white;
-
 }
 
-.reset{
-
-background:#777;
-
+.btn-danger{
+background:red;
 color:white;
-
 }
 
-.pdf{
-
-background:#0057b8;
-
-color:white;
-
-}
-
-.share{
-
-background:#ff6b00;
-
-color:white;
-
-}
-
-.dashboard{
-
-display:grid;
-
-grid-template-columns:
-
-repeat(3,1fr);
-
-gap:15px;
-
+table{
+width:100%;
+border-collapse:collapse;
 margin-top:20px;
-
 }
 
-.card{
+table, th, td{
+border:1px solid #ddd;
+}
 
-padding:20px;
+th, td{
+padding:10px;
+text-align:center;
+}
 
-background:#f5f5f5;
+footer{
+text-align:center;
+padding:15px;
+margin-top:20px;
+background:#0b3d91;
+color:white;
+}
 
+.flex{
+display:flex;
+gap:20px;
+align-items:center;
+justify-content:space-between;
+}
+
+.leader{
+height:80px;
 border-radius:10px;
-
-text-align:center;
-
 }
-
-.footer{
-
-margin-top:20px;
-
-text-align:center;
-
-font-weight:bold;
-
-}
-
-@media(max-width:700px){
-
-.row{
-
-grid-template-columns:1fr;
-
-}
-
-.buttons{
-
-grid-template-columns:1fr;
-
-}
-
-.dashboard{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
 </style>
-
 </head>
 
 <body>
 
+<!-- HEADER -->
+<header>
+<img src="logo.png" class="logo" alt="Logo">
+
+<div>
+<h3>TMNP Membership System</h3>
+<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
+</div>
+
+<img src="leader.jpg" class="leader" alt="Leader">
+</header>
+
+<!-- FORM -->
 <div class="container">
 
-<div class="header">
+<h2>Membership Registration Form</h2>
 
-<!-- EMBEDDED LEADER IMAGE -->
+<input type="text" id="name" placeholder="Full Name">
+<input type="text" id="phone" placeholder="Phone Number">
+<input type="email" id="email" placeholder="Email">
+<input type="text" id="address" placeholder="Address">
+<input type="text" id="district" placeholder="District">
 
-<img
+<button class="btn" onclick="register()">Submit</button>
+<button class="btn-danger" onclick="resetForm()">Reset</button>
 
-class="leader"
+<h3>Dashboard</h3>
 
-src="data:image/jpeg;base64,PASTE_EXISTING_EMBEDDED_LEADER_IMAGE"
-
->
-
-<!-- EMBEDDED LOGO -->
-
-<img
-
-class="logo"
-
-src="data:image/png;base64,PASTE_EXISTING_EMBEDDED_LOGO_IMAGE"
-
->
-
-<h1>
-
-Political Party Membership Form
-
-</h1>
-
-<h2>
-
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-
-</h2>
-
-<h3>
-
-Join Now As Membership
-
-</h3>
-
-<h2>
-
-TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
-
-</h2>
-
-<h3>
-
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-
-</h3>
-
-<hr>
-
-<h3>
-
-Election Commission of India
-
-</h3>
-
-<p>
-
-56/219/2018-2021/PPS-I
-
-</p>
-
-<p>
-
-05 March 2021
-
-</p>
-
-<h3>
-
-Party Office Address
-
-</h3>
-
-<p>
-
-No.9 2nd Cross Street
-
-<br>
-
-Gomathipuram
-
-<br>
-
-Thiruninravur
-
-<br>
-
-Chennai
-
-</p>
-
-<p>
-
-Website: www.tnmnp.org
-
-</p>
-
-<p>
-
-Email: tnmnp2025@gmail.com
-
-</p>
-
-<hr>
+<table id="table">
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Address</th>
+<th>District</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
 
 </div>
 
-<h2>
-
-Membership Registration
-
-</h2>
-
-<label>
-
-Registration ID
-
-</label>
-
-<input
-id="regid"
-readonly>
-
-<div class="row">
-
-<input
-id="name"
-placeholder="Full Name">
-
-<input
-id="voter"
-placeholder="Voter ID">
-
-</div>
-
-<div class="row">
-
-<input
-id="mobile"
-placeholder="Mobile Number">
-
-<input
-id="email"
-placeholder="Gmail Address">
-
-</div>
-
-<input
-id="address"
-placeholder="Address">
-
-<div class="buttons">
-
-<button
-class="submit"
-onclick="submitForm()">
-
-Submit
-
-</button>
-
-<button
-class="reset"
-onclick="resetForm()">
-
-Reset
-
-</button>
-
-<button
-class="pdf"
-onclick="savePDF()">
-
-PDF
-
-</button>
-
-<button
-class="share"
-onclick="shareData()">
-
-Share
-
-</button>
-
-</div>
-
-<hr>
-
-<h2 align="center">
-
-Dashboard
-
-</h2>
-
-<div class="dashboard">
-
-<div class="card">
-
-<h3>
-
-Total Members
-
-</h3>
-
-<p id="totalMembers">
-
-0
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-
-Today's Registrations
-
-</h3>
-
-<p id="todayMembers">
-
-0
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-
-Last Registration ID
-
-</h3>
-
-<p id="lastReg">
-
--
-
-</p>
-
-</div>
-
-</div>
-
-<div class="footer">
-
-TMNP Membership System
-
-</div>
-
-</div>
+<!-- FOOTER -->
+<footer>
+© 2026 TMNP Membership System
+</footer>
 
 <script>
 
-function createRegID(){
+let idCounter = 1000;
 
-document.getElementById(
+function register(){
 
-"regid"
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let email = document.getElementById("email").value;
+let address = document.getElementById("address").value;
+let district = document.getElementById("district").value;
 
-).value=
-
-"TNMNP-"+
-
-Date.now();
-
+if(name=="" || phone==""){
+alert("Please fill required fields");
+return;
 }
 
-createRegID();
+idCounter++;
 
-function submitForm(){
+let table = document.getElementById("table").getElementsByTagName('tbody')[0];
 
-let total=
+let row = table.insertRow();
 
-Number(
+row.innerHTML = `
+<td>TMNP-${idCounter}</td>
+<td>${name}</td>
+<td>${phone}</td>
+<td>${email}</td>
+<td>${address}</td>
+<td>${district}</td>
+`;
 
-localStorage.getItem(
-
-"members"
-
-)||0
-
-);
-
-total++;
-
-localStorage.setItem(
-
-"members",
-
-total
-
-);
-
-document.getElementById(
-
-"totalMembers"
-
-).innerText=
-
-total;
-
-document.getElementById(
-
-"todayMembers"
-
-).innerText=
-
-total;
-
-document.getElementById(
-
-"lastReg"
-
-).innerText=
-
-document.getElementById(
-
-"regid"
-
-).value;
-
-alert(
-
-"Membership Saved"
-
-);
-
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("email").value="";
+document.getElementById("address").value="";
+document.getElementById("district").value="";
 }
 
 function resetForm(){
-
-document.querySelectorAll(
-
-"input"
-
-).forEach(
-
-x=>{
-
-if(
-
-x.id!="regid"
-
-)
-
-x.value="";
-
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("email").value="";
+document.getElementById("address").value="";
+document.getElementById("district").value="";
 }
-
-);
-
-createRegID();
-
-}
-
-function savePDF(){
-
-window.print();
-
-}
-
-async function shareData(){
-
-const text=
-
-document.getElementById(
-
-"regid"
-
-).value;
-
-if(
-
-navigator.share
-
-){
-
-navigator.share({
-
-text:text
-
-});
-
-}
-
-else{
-
-navigator.clipboard.writeText(
-
-text
-
-);
-
-alert(
-
-"Copied"
-
-);
-
-}
-
-}
-
-document.getElementById(
-
-"totalMembers"
-
-).innerText=
-
-localStorage.getItem(
-
-"members"
-
-)||0;
-
-function initAutocomplete(){
-
-if(
-
-window.google
-
-){
-
-new google.maps.places.Autocomplete(
-
-document.getElementById(
-
-"address"
-
-)
-
-);
-
-}
-
-}
-
-window.onload=
-
-initAutocomplete;
-
-</script>
-
-<script
-
-async
-
-defer
-
-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 </script>
 
 </body>
-
 </html>
