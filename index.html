@@ -2,36 +2,436 @@
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TMNP Membership System</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f2f2f2;
+}
+
+/* FIXED LOGO + LEADER */
+.fixed-logo,
+.fixed-leader{
+position:fixed;
+top:15px;
+width:85px;
+height:85px;
+object-fit:cover;
+border-radius:8px;
+z-index:9999;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+.fixed-logo{
+left:10px;
+}
+
+.fixed-leader{
+right:10px;
+}
+
+/* PAGE CONTAINER */
+.container{
+max-width:1000px;
+margin:auto;
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+}
+
+/* HEADER */
+header{
+background:#0b3d91;
+color:white;
+padding:18px;
+}
+
+/* HEADER BOX */
+.header-box{
+border:2px solid rgba(255,255,255,0.25);
+padding:15px;
+border-radius:10px;
+}
+
+/* FLEX */
+.header-row{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+flex-wrap:wrap;
+gap:15px;
+}
+
+/* CENTER */
+.title{
+flex:1;
+text-align:center;
+min-width:280px;
+}
+
+/* SLOGAN */
+.slogan{
+font-size:13px;
+font-weight:700;
+line-height:1.6;
+margin-bottom:8px;
+}
+
+/* JOIN */
+.join{
+font-size:14px;
+font-weight:900;
+color:#ff4d6d;
+animation:blink 1.2s infinite;
+margin:8px 0;
+}
+
+@keyframes blink{
+0%{opacity:1;}
+50%{opacity:0.3;}
+100%{opacity:1;}
+}
+
+/* TITLES */
+.form-title-en{
+font-size:18px;
+font-weight:900;
+color:#ffd700;
+margin-top:8px;
+}
+
+.form-title-ta{
+font-size:16px;
+font-weight:800;
+color:#ffffff;
+margin-top:4px;
+}
+
+/* PARTY NAME */
+.party-name{
+font-size:20px;
+font-weight:900;
+color:#ffd700;
+margin-top:8px;
+}
+
+.party-ta{
+font-size:15px;
+font-weight:700;
+color:#ffffff;
+margin-top:3px;
+}
+
+/* INFO */
+.info{
+font-size:13px;
+line-height:1.6;
+margin:6px 0;
+}
+
+/* LINKS */
+a{
+color:#ffdd57;
+font-weight:bold;
+text-decoration:none;
+}
+
+/* INPUT */
+input{
+width:100%;
+padding:10px;
+margin:6px 0;
+box-sizing:border-box;
+}
+
+/* BUTTONS */
+button{
+padding:10px;
+margin:5px 0;
+border:none;
+cursor:pointer;
+border-radius:5px;
+}
+
+.btn{background:#0b3d91;color:white;}
+.btn-danger{background:red;color:white;}
+.btn-green{background:green;color:white;}
+
+/* TABLE */
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
+font-size:13px;
+}
+
+.member-img{
+width:45px;
+height:45px;
+border-radius:5px;
+object-fit:cover;
+}
+
+/* MAP */
+.map-box{
+margin-top:10px;
+padding:10px;
+background:#f5f5f5;
+border-radius:8px;
+font-size:13px;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:15px;
+margin-top:20px;
+background:#0b3d91;
+color:white;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+.fixed-logo,.fixed-leader{
+width:65px;
+height:65px;
+}
+}
+</style>
 </head>
 
 <body>
 
-<h2>TMNP Membership System</h2>
-<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
+<!-- 🔥 FIXED LOGO (OUTSIDE HEADER BOX) -->
+<img class="fixed-logo"
+src="https://via.placeholder.com/85x85.png?text=TMNP">
 
-<!-- LOGO -->
-<img src="logo.png" width="120" alt="Logo">
+<!-- 🔥 FIXED LEADER (OUTSIDE HEADER BOX) -->
+<img class="fixed-leader"
+src="https://via.placeholder.com/85x85.png?text=LEADER">
 
-<br><br>
+<!-- HEADER -->
+<header>
+<div class="header-box">
 
-<!-- LEADER -->
-<img src="leader.jpg" width="120" alt="Leader">
+<div class="header-row">
 
-<hr>
+<div class="title">
 
-<h3>Membership Form</h3>
+<div class="slogan">
+நேர்மை - நலன் - நம்பிக்கை<br>
+மக்களுக்காக மக்களால்<br>
+நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்
+</div>
 
-<label>Name</label><br>
-<input type="text"><br><br>
+<div class="join">"JOIN WITH US"</div>
 
-<label>Mobile</label><br>
-<input type="text"><br><br>
+<div class="form-title-en">
+Political Party Membership Registration Form
+</div>
 
-<label>Address</label><br>
-<textarea></textarea><br><br>
+<div class="form-title-ta">
+அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
+</div>
 
-<button>Submit</button>
+<div class="party-name">
+TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
+</div>
+
+<div class="party-ta">
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+</div>
+
+<div class="info">
+📍 Head Quarters:<br>
+No.9, 1st Floor, 2nd Cross Street, Gomathipuram,<br>
+Thiruninravur - 602024, Tamilnadu
+</div>
+
+<div class="info">
+📱 Mobile: +91 8939324309
+</div>
+
+<div class="info">
+📧 tnmnp2025@gmail.com
+</div>
+
+<div class="info">
+🌐 Website:
+<a href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
+target="_blank">LIVE PORTAL</a>
+</div>
+
+</div>
+
+</div>
+</div>
+</header>
+
+<!-- FORM -->
+<div class="container">
+
+<h2>Membership Registration</h2>
+
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="voterid" placeholder="Voter ID">
+<input id="email" placeholder="Email">
+<input id="address" placeholder="Address">
+<input id="district" placeholder="District">
+
+<button class="btn-green" onclick="getLocation()">📍 Get Live Location</button>
+
+<div class="map-box" id="mapBox">Location not added</div>
+
+<input type="file" id="photo">
+
+<button class="btn" onclick="save()">Submit</button>
+<button class="btn-danger" onclick="resetForm()">Reset</button>
+
+<h3>Dashboard</h3>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Photo</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Voter ID</th>
+<th>Email</th>
+<th>Address</th>
+<th>District</th>
+<th>Map</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+
+</div>
+
+<footer>© TMNP Membership System</footer>
+
+<script>
+
+let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
+let currentLocation = null;
+
+render();
+
+/* LOCATION */
+function getLocation(){
+if(!navigator.geolocation){
+alert("Geolocation not supported");
+return;
+}
+
+navigator.geolocation.getCurrentPosition(pos=>{
+currentLocation = {
+lat: pos.coords.latitude,
+lng: pos.coords.longitude
+};
+
+document.getElementById("mapBox").innerHTML =
+`Latitude: ${currentLocation.lat}<br>
+Longitude: ${currentLocation.lng}<br>
+<a target="_blank"
+href="https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}">
+Open Map</a>`;
+});
+}
+
+/* SAVE */
+function save(){
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let voterid=document.getElementById("voterid").value;
+let email=document.getElementById("email").value;
+let address=document.getElementById("address").value;
+let district=document.getElementById("district").value;
+let file=document.getElementById("photo").files[0];
+
+if(!name||!phone||!voterid){
+alert("Fill required fields");
+return;
+}
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+let obj={
+id:"TMNP-"+Date.now(),
+name,phone,voterid,email,address,district,
+photo:reader.result,
+location: currentLocation
+};
+
+data.push(obj);
+localStorage.setItem("tmnp",JSON.stringify(data));
+render();
+resetForm();
+
+currentLocation=null;
+document.getElementById("mapBox").innerHTML="Location not added";
+};
+
+if(file){
+reader.readAsDataURL(file);
+}else{
+reader.onload();
+}
+}
+
+/* RENDER */
+function render(){
+
+let tbody=document.getElementById("tbody");
+tbody.innerHTML="";
+
+data.forEach(d=>{
+
+let mapLink = d.location
+? `<a target="_blank" href="https://www.google.com/maps?q=${d.location.lat},${d.location.lng}">View Map</a>`
+: "No Map";
+
+tbody.innerHTML+=`
+<tr>
+<td>${d.id}</td>
+<td><img class="member-img" src="${d.photo||''}"></td>
+<td>${d.name}</td>
+<td>${d.phone}</td>
+<td>${d.voterid}</td>
+<td>${d.email}</td>
+<td>${d.address}</td>
+<td>${d.district}</td>
+<td>${mapLink}</td>
+</tr>`;
+});
+}
+
+/* RESET */
+function resetForm(){
+["name","phone","voterid","email","address","district"].forEach(id=>{
+document.getElementById(id).value="";
+});
+document.getElementById("photo").value="";
+currentLocation=null;
+document.getElementById("mapBox").innerHTML="Location not added";
+}
+
+</script>
 
 </body>
 </html>
