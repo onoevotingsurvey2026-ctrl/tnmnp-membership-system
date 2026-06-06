@@ -12,85 +12,7 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
-/* HEADER */
-header{
-background:#0b3d91;
-color:white;
-padding:18px;
-text-align:center;
-}
-
-/* FLEX WRAP HEADER */
-.header-row{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-flex-wrap:wrap;
-gap:10px;
-}
-
-/* IMAGES */
-.logo,.leader{
-height:85px;
-width:85px;
-border-radius:8px;
-object-fit:cover;
-}
-
-/* CENTER BLOCK */
-.title{
-flex:1;
-min-width:280px;
-text-align:center;
-padding:0 10px;
-}
-
-/* SLOGAN */
-.slogan{
-font-size:14px;
-font-weight:700;
-line-height:1.6;
-color:#ffffff;
-margin-bottom:10px;
-}
-
-/* MAIN TITLE */
-.main-title{
-font-size:20px;
-font-weight:900;
-color:#ffd700;
-margin:6px 0;
-}
-
-.sub-title{
-font-size:17px;
-font-weight:800;
-color:#ffffff;
-margin:4px 0;
-}
-
-.party-name{
-font-size:15px;
-font-weight:700;
-color:#b3e5ff;
-margin:6px 0;
-}
-
-/* INFO */
-.info{
-font-size:13px;
-line-height:1.6;
-margin:6px 0;
-}
-
-/* BUTTON LINK STYLE */
-a{
-color:#ffdd57;
-text-decoration:none;
-font-weight:bold;
-}
-
-/* FORM */
+/* PAGE CONTAINER */
 .container{
 max-width:1000px;
 margin:auto;
@@ -100,6 +22,98 @@ margin-top:20px;
 border-radius:10px;
 }
 
+/* ================= HEADER ================= */
+header{
+background:#0b3d91;
+color:white;
+padding:18px;
+}
+
+/* GOVERNMENT STYLE FRAME BOX */
+.header-box{
+border:2px solid rgba(255,255,255,0.3);
+padding:15px;
+border-radius:10px;
+}
+
+/* FLEX LAYOUT */
+.header-row{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+flex-wrap:wrap;
+gap:15px;
+}
+
+/* LOGO + LEADER */
+.logo,.leader{
+height:85px;
+width:85px;
+border-radius:8px;
+object-fit:cover;
+}
+
+/* CENTER AREA */
+.title{
+flex:1;
+text-align:center;
+min-width:280px;
+}
+
+/* PARTY NAME */
+.party-name{
+font-size:22px;
+font-weight:900;
+color:#ffd700;
+margin:8px 0;
+}
+
+/* TAMIL NAME */
+.party-ta{
+font-size:18px;
+font-weight:800;
+color:#ffffff;
+margin:4px 0;
+}
+
+/* PARTY STRENGTH LINES */
+.slogan{
+font-size:13px;
+font-weight:700;
+line-height:1.6;
+margin-bottom:10px;
+}
+
+/* JOIN WITH US ANIMATION */
+.join{
+font-size:14px;
+font-weight:900;
+color:#ff4d6d;
+animation:blink 1.2s infinite;
+margin-top:5px;
+}
+
+@keyframes blink{
+0%{opacity:1;}
+50%{opacity:0.3;}
+100%{opacity:1;}
+}
+
+/* INFO BLOCKS */
+.info{
+font-size:13px;
+line-height:1.6;
+margin:6px 0;
+}
+
+/* LINKS */
+a{
+color:#ffdd57;
+font-weight:bold;
+text-decoration:none;
+}
+
+/* INPUTS */
 input{
 width:100%;
 padding:10px;
@@ -107,6 +121,7 @@ margin:6px 0;
 box-sizing:border-box;
 }
 
+/* BUTTONS */
 button{
 padding:10px;
 margin:5px 0;
@@ -119,6 +134,7 @@ border-radius:5px;
 .btn-danger{background:red;color:white;}
 .btn-green{background:green;color:white;}
 
+/* TABLE */
 table{
 width:100%;
 border-collapse:collapse;
@@ -139,6 +155,7 @@ border-radius:5px;
 object-fit:cover;
 }
 
+/* MAP BOX */
 .map-box{
 margin-top:10px;
 padding:10px;
@@ -147,12 +164,21 @@ border-radius:8px;
 font-size:13px;
 }
 
+/* FOOTER */
 footer{
 text-align:center;
 padding:15px;
 margin-top:20px;
 background:#0b3d91;
 color:white;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+.header-row{
+flex-direction:column;
+align-items:center;
+}
 }
 </style>
 </head>
@@ -161,6 +187,7 @@ color:white;
 
 <!-- HEADER -->
 <header>
+<div class="header-box">
 
 <div class="header-row">
 
@@ -168,28 +195,24 @@ color:white;
 <img class="logo"
 src="https://via.placeholder.com/85x85.png?text=TMNP">
 
-<!-- CENTER CONTENT -->
+<!-- CENTER -->
 <div class="title">
 
 <!-- SLOGAN -->
 <div class="slogan">
 நேர்மை - நலன் - நம்பிக்கை<br>
 மக்களுக்காக மக்களால்<br>
-நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்<br>
-<span style="color:#ff4d6d;font-weight:900;">"JOIN WITH US"</span>
+நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்
+<div class="join">"JOIN WITH US"</div>
 </div>
 
-<!-- MAIN TITLE -->
-<div class="main-title">
-Political Party Membership Registration Form
-</div>
-
-<div class="sub-title">
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-</div>
-
+<!-- PARTY NAME -->
 <div class="party-name">
 TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
+</div>
+
+<div class="party-ta">
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
 </div>
 
 <!-- ADDRESS -->
@@ -204,21 +227,16 @@ Thiruninravur - 602024, Tamilnadu
 📱 Mobile: +91 8939324309
 </div>
 
-<!-- EMAIL + WEBSITE -->
+<!-- EMAIL -->
 <div class="info">
-📧 tnmnp2025@gmail.com |
+📧 tnmnp2025@gmail.com
+</div>
+
+<!-- WEBSITE -->
+<div class="info">
 🌐 Website:
 <a href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
 target="_blank">LIVE PORTAL</a>
-</div>
-
-<!-- PRESIDENT -->
-<div class="info">
-<b>
-President / General Secretary:<br>
-N RAMAN<br>
-தலைவர் / பொதுச் செயலாளர் ந ராமன்
-</b>
 </div>
 
 </div>
@@ -228,7 +246,7 @@ N RAMAN<br>
 src="https://via.placeholder.com/85x85.png?text=LEADER">
 
 </div>
-
+</div>
 </header>
 
 <!-- FORM -->
@@ -282,6 +300,7 @@ let currentLocation = null;
 
 render();
 
+/* LOCATION */
 function getLocation(){
 if(!navigator.geolocation){
 alert("Geolocation not supported");
@@ -303,6 +322,7 @@ Open Map</a>`;
 });
 }
 
+/* SAVE */
 function save(){
 
 let name=document.getElementById("name").value;
@@ -345,6 +365,7 @@ reader.onload();
 }
 }
 
+/* RENDER */
 function render(){
 
 let tbody=document.getElementById("tbody");
@@ -371,6 +392,7 @@ tbody.innerHTML+=`
 });
 }
 
+/* RESET */
 function resetForm(){
 ["name","phone","voterid","email","address","district"].forEach(id=>{
 document.getElementById(id).value="";
