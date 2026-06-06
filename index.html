@@ -12,6 +12,7 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
+/* CONTAINER */
 .container{
 max-width:1000px;
 margin:auto;
@@ -34,11 +35,10 @@ padding:15px;
 border-radius:10px;
 }
 
-/* TOP IMAGE UPLOAD ROW */
+/* TOP IMAGES */
 .top-row{
 display:flex;
 justify-content:space-between;
-align-items:center;
 flex-wrap:wrap;
 gap:10px;
 margin-bottom:10px;
@@ -49,8 +49,8 @@ text-align:center;
 }
 
 .img-box img{
-width:85px;
-height:85px;
+width:80px;
+height:80px;
 object-fit:cover;
 border-radius:8px;
 border:2px solid white;
@@ -118,6 +118,24 @@ font-size:13px;
 margin:6px 0;
 }
 
+/* ⭐ LIVE PORTAL YELLOW FIX */
+.live-site{
+color:#ffea00;
+font-weight:900;
+font-size:14px;
+padding:3px 8px;
+border:1px solid #ffea00;
+border-radius:4px;
+animation:liveBlink 1s infinite;
+display:inline-block;
+}
+
+@keyframes liveBlink{
+0%{opacity:1;}
+50%{opacity:0.4;}
+100%{opacity:1;}
+}
+
 /* INPUT */
 input{
 width:100%;
@@ -126,7 +144,6 @@ margin:6px 0;
 box-sizing:border-box;
 }
 
-/* BUTTON */
 button{
 padding:10px;
 margin:5px 0;
@@ -169,6 +186,14 @@ border-radius:8px;
 font-size:13px;
 }
 
+/* FOOTER */
+footer{
+text-align:center;
+padding:15px;
+margin-top:20px;
+background:#0b3d91;
+color:white;
+}
 </style>
 </head>
 
@@ -177,7 +202,7 @@ font-size:13px;
 <header>
 <div class="header-box">
 
-<!-- 🔥 LOGO + LEADER UPLOAD (PRESENTATION KEPT) -->
+<!-- LOGO + LEADER UPLOAD -->
 <div class="top-row">
 
 <div class="img-box">
@@ -196,7 +221,7 @@ font-size:13px;
 
 </div>
 
-<!-- CENTER HEADER CONTENT -->
+<!-- HEADER TEXT -->
 <div class="title">
 
 <div class="slogan">
@@ -237,9 +262,11 @@ Thiruninravur - 602024, Tamilnadu
 📧 tnmnp2025@gmail.com
 </div>
 
+<!-- ⭐ YELLOW LIVE PORTAL FIX -->
 <div class="info">
 🌐 Website:
-<a href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
+<a class="live-site"
+href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
 target="_blank">LIVE PORTAL</a>
 </div>
 
@@ -289,6 +316,8 @@ target="_blank">LIVE PORTAL</a>
 </table>
 
 </div>
+
+<footer>© TMNP Membership System</footer>
 
 <script>
 
@@ -389,7 +418,6 @@ let mapLink=d.location
 tbody.innerHTML+=`
 <tr>
 <td>${d.id}</td>
-<td><img class="member-img" src="${d.photo}"></td>
 <td>${d.name}</td>
 <td>${d.phone}</td>
 <td>${d.voterid}</td>
