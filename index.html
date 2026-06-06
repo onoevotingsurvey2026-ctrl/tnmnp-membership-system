@@ -1,46 +1,321 @@
-<!-- HEADER -->
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+
+TMNP Membership System
+
+</title>
+
+<style>
+
+body{
+
+margin:0;
+
+padding:20px;
+
+font-family:Arial;
+
+background:#f2f2f2;
+
+}
+
+.container{
+
+max-width:1000px;
+
+margin:auto;
+
+background:#fff;
+
+padding:20px;
+
+border-radius:12px;
+
+box-shadow:0 0 12px rgba(0,0,0,.15);
+
+}
+
+.header{
+
+text-align:center;
+
+}
+
+.leader{
+
+width:170px;
+
+height:170px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:4px solid green;
+
+}
+
+.logo{
+
+width:320px;
+
+max-width:95%;
+
+display:block;
+
+margin:15px auto;
+
+}
+
+.row{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+}
+
+input{
+
+width:100%;
+
+padding:12px;
+
+margin-bottom:12px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+box-sizing:border-box;
+
+}
+
+.buttons{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(4,1fr);
+
+gap:10px;
+
+}
+
+button{
+
+padding:14px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+.submit{
+
+background:#0b5d2a;
+
+color:white;
+
+}
+
+.reset{
+
+background:#777;
+
+color:white;
+
+}
+
+.pdf{
+
+background:#0057b8;
+
+color:white;
+
+}
+
+.share{
+
+background:#ff6b00;
+
+color:white;
+
+}
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(3,1fr);
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+.card{
+
+padding:20px;
+
+background:#f5f5f5;
+
+border-radius:10px;
+
+text-align:center;
+
+}
+
+.footer{
+
+margin-top:20px;
+
+text-align:center;
+
+font-weight:bold;
+
+}
+
+@media(max-width:700px){
+
+.row{
+
+grid-template-columns:1fr;
+
+}
+
+.buttons{
+
+grid-template-columns:1fr;
+
+}
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
 
 <div class="header">
 
 <!-- EMBEDDED LEADER IMAGE -->
 
 <img
-class="leader"
-src="data:image/jpeg;base64,PASTE_YOUR_EXISTING_EMBEDDED_LEADER_IMAGE_CODE_HERE">
 
-<!-- EMBEDDED LOGO IMAGE -->
+class="leader"
+
+src="data:image/jpeg;base64,PASTE_EXISTING_EMBEDDED_LEADER_IMAGE"
+
+>
+
+<!-- EMBEDDED LOGO -->
 
 <img
+
 class="logo"
-src="data:image/png;base64,PASTE_YOUR_EXISTING_EMBEDDED_LOGO_IMAGE_CODE_HERE">
 
-<h1>Political Party Membership Form</h1>
+src="data:image/png;base64,PASTE_EXISTING_EMBEDDED_LOGO_IMAGE"
 
-<h2>அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்</h2>
+>
 
-<h3>Join Now As Membership</h3>
+<h1>
 
-<h2>TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
+Political Party Membership Form
 
-<h3>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h3>
+</h1>
+
+<h2>
+
+அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
+
+</h2>
+
+<h3>
+
+Join Now As Membership
+
+</h3>
+
+<h2>
+
+TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam
+
+</h2>
+
+<h3>
+
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+
+</h3>
 
 <hr>
 
-<h3>Election Commission of India</h3>
+<h3>
 
-<p>56/219/2018-2021/PPS-I</p>
+Election Commission of India
 
-<p>05 March 2021</p>
-
-<h3>Party Office Address</h3>
+</h3>
 
 <p>
 
-No.9 2nd Cross Street<br>
+56/219/2018-2021/PPS-I
 
-Gomathipuram<br>
+</p>
 
-Thiruninravur<br>
+<p>
+
+05 March 2021
+
+</p>
+
+<h3>
+
+Party Office Address
+
+</h3>
+
+<p>
+
+No.9 2nd Cross Street
+
+<br>
+
+Gomathipuram
+
+<br>
+
+Thiruninravur
+
+<br>
 
 Chennai
 
@@ -48,17 +323,13 @@ Chennai
 
 <p>
 
-Website:
-
-www.tnmnp.org
+Website: www.tnmnp.org
 
 </p>
 
 <p>
 
-Email:
-
-tnmnp2025@gmail.com
+Email: tnmnp2025@gmail.com
 
 </p>
 
@@ -66,9 +337,17 @@ tnmnp2025@gmail.com
 
 </div>
 
-<h2>Membership Registration</h2>
+<h2>
 
-<label>Registration ID</label>
+Membership Registration
+
+</h2>
+
+<label>
+
+Registration ID
+
+</label>
 
 <input
 id="regid"
@@ -101,8 +380,6 @@ placeholder="Gmail Address">
 <input
 id="address"
 placeholder="Address">
-
-<!-- REMARKS REMOVED -->
 
 <div class="buttons">
 
@@ -139,3 +416,277 @@ Share
 </button>
 
 </div>
+
+<hr>
+
+<h2 align="center">
+
+Dashboard
+
+</h2>
+
+<div class="dashboard">
+
+<div class="card">
+
+<h3>
+
+Total Members
+
+</h3>
+
+<p id="totalMembers">
+
+0
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+Today's Registrations
+
+</h3>
+
+<p id="todayMembers">
+
+0
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+Last Registration ID
+
+</h3>
+
+<p id="lastReg">
+
+-
+
+</p>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+TMNP Membership System
+
+</div>
+
+</div>
+
+<script>
+
+function createRegID(){
+
+document.getElementById(
+
+"regid"
+
+).value=
+
+"TNMNP-"+
+
+Date.now();
+
+}
+
+createRegID();
+
+function submitForm(){
+
+let total=
+
+Number(
+
+localStorage.getItem(
+
+"members"
+
+)||0
+
+);
+
+total++;
+
+localStorage.setItem(
+
+"members",
+
+total
+
+);
+
+document.getElementById(
+
+"totalMembers"
+
+).innerText=
+
+total;
+
+document.getElementById(
+
+"todayMembers"
+
+).innerText=
+
+total;
+
+document.getElementById(
+
+"lastReg"
+
+).innerText=
+
+document.getElementById(
+
+"regid"
+
+).value;
+
+alert(
+
+"Membership Saved"
+
+);
+
+}
+
+function resetForm(){
+
+document.querySelectorAll(
+
+"input"
+
+).forEach(
+
+x=>{
+
+if(
+
+x.id!="regid"
+
+)
+
+x.value="";
+
+}
+
+);
+
+createRegID();
+
+}
+
+function savePDF(){
+
+window.print();
+
+}
+
+async function shareData(){
+
+const text=
+
+document.getElementById(
+
+"regid"
+
+).value;
+
+if(
+
+navigator.share
+
+){
+
+navigator.share({
+
+text:text
+
+});
+
+}
+
+else{
+
+navigator.clipboard.writeText(
+
+text
+
+);
+
+alert(
+
+"Copied"
+
+);
+
+}
+
+}
+
+document.getElementById(
+
+"totalMembers"
+
+).innerText=
+
+localStorage.getItem(
+
+"members"
+
+)||0;
+
+function initAutocomplete(){
+
+if(
+
+window.google
+
+){
+
+new google.maps.places.Autocomplete(
+
+document.getElementById(
+
+"address"
+
+)
+
+);
+
+}
+
+}
+
+window.onload=
+
+initAutocomplete;
+
+</script>
+
+<script
+
+async
+
+defer
+
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+</script>
+
+</body>
+
+</html>
