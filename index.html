@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System - ADMIN</title>
+<title>TMNP Membership System</title>
 
 <style>
 body{
@@ -12,6 +12,7 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
+/* PAGE */
 .container{
 max-width:1000px;
 margin:auto;
@@ -28,18 +29,20 @@ color:white;
 padding:18px;
 }
 
+/* FRAME */
 .header-box{
 border:2px solid rgba(255,255,255,0.25);
 padding:15px;
 border-radius:10px;
 }
 
+/* TOP LOGO ROW */
 .top-row{
 display:flex;
 justify-content:space-between;
+align-items:center;
 flex-wrap:wrap;
 gap:10px;
-margin-bottom:10px;
 }
 
 .img-box{
@@ -47,28 +50,35 @@ text-align:center;
 }
 
 .img-box img{
-width:80px;
-height:80px;
+width:85px;
+height:85px;
 object-fit:cover;
 border-radius:8px;
 border:2px solid white;
 }
 
+/* CENTER TITLE */
 .title{
 text-align:center;
+flex:1;
+min-width:280px;
 }
 
+/* HEADER TEXT STYLES */
 .slogan{
 font-size:13px;
 font-weight:700;
 line-height:1.6;
+margin-bottom:8px;
+color:#ffffff;
 }
 
 .join{
-font-size:14px;
+font-size:15px;
 font-weight:900;
 color:#ff4d6d;
 animation:blink 1.2s infinite;
+margin:6px 0;
 }
 
 @keyframes blink{
@@ -77,15 +87,50 @@ animation:blink 1.2s infinite;
 100%{opacity:1;}
 }
 
-/* LIVE */
+/* FORM TITLE */
+.form-title-en{
+font-size:18px;
+font-weight:900;
+color:#ffd700;
+margin-top:8px;
+}
+
+.form-title-ta{
+font-size:16px;
+font-weight:800;
+margin-top:3px;
+}
+
+/* PARTY NAME BIG */
+.party-en{
+font-size:20px;
+font-weight:900;
+color:#ffd700;
+margin-top:10px;
+}
+
+.party-ta{
+font-size:16px;
+font-weight:800;
+margin-top:3px;
+}
+
+/* INFO BLOCKS */
+.info{
+font-size:13px;
+line-height:1.8;
+margin-top:6px;
+}
+
+/* LIVE PORTAL FIX */
 .live-site{
 color:#ffea00;
 font-weight:900;
-padding:3px 8px;
 border:1px solid #ffea00;
+padding:3px 8px;
 border-radius:4px;
-animation:liveBlink 1s infinite;
 display:inline-block;
+animation:liveBlink 1s infinite;
 }
 
 @keyframes liveBlink{
@@ -102,6 +147,7 @@ margin:6px 0;
 box-sizing:border-box;
 }
 
+/* BUTTON */
 button{
 padding:10px;
 margin:5px 0;
@@ -115,6 +161,7 @@ border-radius:5px;
 .btn-green{background:green;color:white;}
 .btn-admin{background:#222;color:#fff;}
 
+/* TABLE */
 table{
 width:100%;
 border-collapse:collapse;
@@ -135,6 +182,7 @@ object-fit:cover;
 border-radius:5px;
 }
 
+/* MAP */
 .map-box{
 margin-top:10px;
 padding:10px;
@@ -142,51 +190,90 @@ background:#f5f5f5;
 border-radius:8px;
 font-size:13px;
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
 <div class="header-box">
 
+<!-- LOGO + LEADER -->
 <div class="top-row">
 
 <div class="img-box">
 <img id="logoPreview">
-<input type="file" onchange="loadLogo(event)">
-<p>Logo</p>
+<br>
+<input type="file" accept="image/*" onchange="loadLogo(event)">
+<p>LOGO</p>
 </div>
 
 <div class="img-box">
 <img id="leaderPreview">
-<input type="file" onchange="loadLeader(event)">
-<p>Leader</p>
+<br>
+<input type="file" accept="image/*" onchange="loadLeader(event)">
+<p>LEADER</p>
 </div>
 
 </div>
 
+<!-- CENTER CONTENT -->
 <div class="title">
 
 <div class="slogan">
 நேர்மை - நலன் - நம்பிக்கை<br>
-மக்களுக்காக மக்களால்
+மக்களுக்காக மக்களால்<br>
+நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்
 </div>
 
 <div class="join">"JOIN WITH US"</div>
 
-<div>TMNP Membership System</div>
+<div class="form-title-en">
+Political Party Membership Registration Form
+</div>
 
-<div class="live-site">LIVE PORTAL</div>
+<div class="form-title-ta">
+அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
+</div>
+
+<div class="party-en">
+TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
+</div>
+
+<div class="party-ta">
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+</div>
+
+<div class="info">
+📍 Head Quarters:<br>
+No.9, 1st Floor, 2nd Cross Street, Gomathipuram,<br>
+Thiruninravur - 602024, Tamilnadu
+</div>
+
+<div class="info">
+📱 Mobile: +91 8939324309
+</div>
+
+<div class="info">
+📧 tnmnp2025@gmail.com
+</div>
+
+<div class="info">
+🌐 Website:
+<span class="live-site">LIVE PORTAL</span>
+</div>
 
 </div>
 
 </div>
 </header>
 
+<!-- FORM -->
 <div class="container">
 
-<h2>Membership Registration (ADMIN CONTROL)</h2>
+<h2>Membership Registration</h2>
 
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone">
@@ -203,7 +290,6 @@ font-size:13px;
 
 <button class="btn" onclick="save()">Submit</button>
 
-<!-- 🔥 ADMIN RESET -->
 <button class="btn-admin" onclick="adminReset()">🔐 ADMIN RESET</button>
 
 <h3>Dashboard</h3>
@@ -232,8 +318,6 @@ font-size:13px;
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
 let currentLocation=null;
 
-render();
-
 /* LOGO */
 function loadLogo(e){
 let r=new FileReader();
@@ -259,7 +343,8 @@ lng:pos.coords.longitude
 document.getElementById("mapBox").innerHTML=
 `Lat:${currentLocation.lat}<br>
 Lng:${currentLocation.lng}<br>
-<a target="_blank" href="https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}">
+<a target="_blank"
+href="https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}">
 Open Map</a>`;
 });
 }
@@ -324,7 +409,7 @@ tbody.innerHTML+=`
 });
 }
 
-/* NORMAL RESET */
+/* RESET */
 function resetForm(){
 ["name","phone","voterid","email","address","district"].forEach(id=>{
 document.getElementById(id).value="";
@@ -334,35 +419,17 @@ currentLocation=null;
 document.getElementById("mapBox").innerHTML="Location not added";
 }
 
-/* 🔥 ADMIN RESET (PASSWORD + BACKUP) */
+/* ADMIN RESET */
 function adminReset(){
+let pass=prompt("Enter ADMIN PASSWORD:");
+if(pass!=="TMNP2026"){alert("Wrong Password");return;}
+if(!confirm("Delete all data?"))return;
 
-let pass = prompt("Enter ADMIN PASSWORD:");
-
-if(pass !== "TMNP2026"){
-alert("❌ Wrong Password!");
-return;
-}
-
-if(!confirm("⚠ Are you sure? All data will be deleted + backup downloaded")){
-return;
-}
-
-/* BACKUP */
-let blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-let url = URL.createObjectURL(blob);
-let a = document.createElement("a");
-a.href = url;
-a.download = "TMNP_BACKUP.json";
-a.click();
-
-/* RESET DATA */
-data=[];
 localStorage.removeItem("tmnp");
+data=[];
 render();
 resetForm();
-
-alert("✅ ADMIN RESET COMPLETED + BACKUP SAVED");
+alert("Reset Done");
 }
 
 </script>
