@@ -1,106 +1,4 @@
-<!DOCTYPE html>
-<html lang="ta">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TMNP Membership System</title>
-
-<style>
-
-body{
-margin:0;
-padding:20px;
-font-family:Arial,sans-serif;
-background:#f2f2f2;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-background:#fff;
-padding:20px;
-border-radius:12px;
-box-shadow:0 0 12px rgba(0,0,0,.15);
-}
-
-.header{
-text-align:center;
-}
-
-.leader{
-width:170px;
-height:170px;
-border-radius:50%;
-object-fit:cover;
-border:4px solid green;
-}
-
-.logo{
-width:320px;
-max-width:95%;
-display:block;
-margin:15px auto;
-}
-
-.row{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-}
-
-input,
-textarea{
-width:100%;
-padding:12px;
-margin-bottom:12px;
-border:1px solid #ccc;
-border-radius:8px;
-box-sizing:border-box;
-}
-
-.buttons{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-}
-
-button{
-padding:14px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
-}
-
-.submit{background:#0b5d2a;color:#fff;}
-.reset{background:#777;color:#fff;}
-.pdf{background:#0057b8;color:#fff;}
-.share{background:#ff6600;color:#fff;}
-
-.footer{
-margin-top:20px;
-text-align:center;
-font-weight:bold;
-}
-
-@media(max-width:700px){
-
-.row{
-grid-template-columns:1fr;
-}
-
-.buttons{
-grid-template-columns:1fr;
-}
-
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
+<!-- HEADER -->
 
 <div class="header">
 
@@ -108,13 +6,13 @@ grid-template-columns:1fr;
 
 <img
 class="leader"
-src="data:image/jpeg;base64,PASTE_EMBEDDED_LEADER_IMAGE_HERE">
+src="data:image/jpeg;base64,PASTE_YOUR_EXISTING_EMBEDDED_LEADER_IMAGE_CODE_HERE">
 
-<!-- EMBEDDED LOGO -->
+<!-- EMBEDDED LOGO IMAGE -->
 
 <img
 class="logo"
-src="data:image/png;base64,PASTE_EMBEDDED_LOGO_IMAGE_HERE">
+src="data:image/png;base64,PASTE_YOUR_EXISTING_EMBEDDED_LOGO_IMAGE_CODE_HERE">
 
 <h1>Political Party Membership Form</h1>
 
@@ -204,9 +102,7 @@ placeholder="Gmail Address">
 id="address"
 placeholder="Address">
 
-<textarea
-rows="4"
-placeholder="Remarks"></textarea>
+<!-- REMARKS REMOVED -->
 
 <div class="buttons">
 
@@ -243,166 +139,3 @@ Share
 </button>
 
 </div>
-
-<div class="footer">
-
-TMNP Membership System
-
-</div>
-
-</div>
-
-<script>
-
-function createRegID(){
-
-document.getElementById(
-
-'regid'
-
-).value=
-
-'TNMNP-'+
-
-Date.now();
-
-}
-
-createRegID();
-
-function resetForm(){
-
-document
-
-.querySelectorAll(
-
-'input,textarea'
-
-)
-
-.forEach(
-
-e=>{
-
-if(
-
-e.id!='regid'
-
-)
-
-e.value='';
-
-}
-
-);
-
-createRegID();
-
-}
-
-function submitForm(){
-
-alert(
-
-'Membership Saved : '+
-
-document.getElementById(
-
-'regid'
-
-).value
-
-);
-
-}
-
-function savePDF(){
-
-window.print();
-
-}
-
-async function shareData(){
-
-const text=
-
-'Membership ID : '+
-
-document.getElementById(
-
-'regid'
-
-).value;
-
-if(
-
-navigator.share
-
-){
-
-navigator.share({
-
-title:'TMNP',
-
-text:text
-
-});
-
-}
-
-else{
-
-navigator.clipboard.writeText(
-
-text
-
-);
-
-alert(
-
-'Copied'
-
-);
-
-}
-
-}
-
-function initAutocomplete(){
-
-if(
-
-window.google
-
-){
-
-new google.maps.places.Autocomplete(
-
-document.getElementById(
-
-'address'
-
-)
-
-);
-
-}
-
-}
-
-window.onload=
-
-initAutocomplete;
-
-</script>
-
-<script
-async
-defer
-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-</script>
-
-</body>
-
-</html>
