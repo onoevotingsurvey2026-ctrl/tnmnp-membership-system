@@ -19,66 +19,59 @@ color:white;
 padding:15px;
 }
 
-/* HEADER FLEX */
+/* FLEX HEADER (NOT FIXED IMAGES) */
 .header-row{
 display:flex;
-align-items:center;
+align-items:flex-start;
 justify-content:space-between;
 gap:15px;
 flex-wrap:wrap;
 }
 
-/* IMAGES FIXED */
+/* IMAGES (NORMAL FLOW - NOT FIXED) */
 .logo,.leader{
 height:90px;
 width:90px;
 border-radius:8px;
 object-fit:cover;
-flex-shrink:0;
 }
 
-/* CENTER AREA */
+/* CENTER */
 .title{
 flex:1;
 text-align:center;
 min-width:320px;
 }
 
-/* 🔥 PARTY NAME ONLY STYLING */
-.party-en{
-font-size:26px;
-font-weight:900;
-color:#ffd700;
-margin:6px 0;
-letter-spacing:1px;
-}
-
-.party-ta{
-font-size:20px;
-font-weight:800;
-color:#ffffff;
-margin:4px 0;
-}
-
-.party-sub{
-font-size:16px;
-font-weight:700;
-color:#b3e5ff;
-margin:4px 0;
-}
-
-/* OTHER HEADER LINES */
-.line{
-margin:6px 0;
+/* FIRST LINE (NEW SLOGAN) */
+.slogan{
 font-size:13px;
+font-weight:600;
+color:#ffffff;
+margin:5px 0 10px 0;
 line-height:1.5;
 }
 
-.leader-name{
-margin-top:8px;
+/* BIG PARTY NAME (TAMIL ONLY - REQUESTED) */
+.party-name{
+font-size:26px;
+font-weight:900;
+color:#ffd700;
+margin:8px 0;
+}
+
+/* SUB TITLE ENGLISH REMOVED HEAVY — CLEAN */
+.sub-line{
 font-size:14px;
-font-weight:bold;
-color:#ffd1dc;
+font-weight:600;
+color:#ffffff;
+margin:5px 0;
+}
+
+/* OTHER LINES */
+.line{
+margin:6px 0;
+font-size:13px;
 line-height:1.5;
 }
 
@@ -165,19 +158,21 @@ color:white;
 <img class="logo"
 src="https://via.placeholder.com/90x90.png?text=TMNP">
 
-<!-- CENTER CONTENT -->
+<!-- CENTER -->
 <div class="title">
 
-<!-- 🔥 PARTY NAME ONLY (HIGHLIGHTED) -->
-<div class="party-en">
-TMNP – POLITICAL PARTY MEMBERSHIP SYSTEM
+<!-- 1. NEW FIRST LINE (IDEOLOGY) -->
+<div class="slogan">
+கட்சி அடிப்படைக் கொள்கை : நேர்மை - நலன் - நம்பிக்கை - மக்களுக்காக மக்களால் - நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள் "JOIN WITH US"
 </div>
 
-<div class="party-ta">
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
+<!-- 2. BIG PARTY NAME (TAMIL ONLY) -->
+<div class="party-name">
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
 </div>
 
-<div class="party-sub">
+<!-- 3. SUPPORT LINE -->
+<div class="sub-line">
 TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
 </div>
 
@@ -185,7 +180,7 @@ TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
 <div class="line">
 📍 Head Quarters:<br>
 No.9, 1st Floor, 2nd Cross Street, Gomathipuram,<br>
-Thiruninravur - 602024, Thiruvallur District, Tamilnadu
+Thiruninravur - 602024, Tamilnadu
 </div>
 
 <!-- MOBILE -->
@@ -201,12 +196,13 @@ Thiruninravur - 602024, Thiruvallur District, Tamilnadu
 target="_blank">LIVE PORTAL</a>
 </div>
 
-<!-- LEADER -->
-<div class="leader-name">
+<!-- PRESIDENT (LAST LINE UPDATED - DISTRICT REMOVED) -->
+<div class="line">
+<b>
 President / General Secretary:<br>
 N RAMAN<br>
-தலைவர் / பொதுச் செயலாளர் ந ராமன்<br>
-Thiruvallur District, Tamilnadu
+தலைவர் / பொதுச் செயலாளர் ந ராமன்
+</b>
 </div>
 
 </div>
