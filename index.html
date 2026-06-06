@@ -2,111 +2,36 @@
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TMNP Membership System</title>
-
-<style>
-body{
-    margin:0;
-    font-family:Arial;
-    background:#f2f2f2;
-}
-
-/* SAFE HEADER */
-.header{
-    background:#0b3d91;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
-
-/* SAFE IMAGES (NO POSITIONING) */
-.header img{
-    width:80px;
-    height:80px;
-    object-fit:cover;
-    display:block;
-    margin:10px auto;
-    border-radius:10px;
-    background:white;
-}
-
-/* CONTAINER */
-.container{
-    max-width:800px;
-    margin:20px auto;
-    background:white;
-    padding:20px;
-    border-radius:10px;
-}
-
-/* INPUT SAFE */
-input, textarea{
-    width:100%;
-    padding:10px;
-    margin:8px 0;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
-
-/* BUTTON SAFE */
-button{
-    width:100%;
-    padding:12px;
-    background:#0b3d91;
-    color:white;
-    border:none;
-    border-radius:5px;
-}
-
-/* FOOTER */
-.footer{
-    text-align:center;
-    padding:15px;
-    background:#ddd;
-    margin-top:20px;
-}
-</style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
+<h2>TMNP Membership System</h2>
+<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
 
-    <!-- LOGO -->
-    <img src="logo.png" alt="Logo">
+<!-- LOGO -->
+<img src="logo.png" width="120" alt="Logo">
 
-    <h2>TMNP Membership System</h2>
-    <p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
+<br><br>
 
-    <!-- LEADER -->
-    <img src="leader.jpg" alt="Leader">
+<!-- LEADER -->
+<img src="leader.jpg" width="120" alt="Leader">
 
-</div>
+<hr>
 
-<!-- FORM -->
-<div class="container">
+<h3>Membership Form</h3>
 
-    <h3>Membership Form</h3>
+<label>Name</label><br>
+<input type="text"><br><br>
 
-    <label>Name</label>
-    <input type="text">
+<label>Mobile</label><br>
+<input type="text"><br><br>
 
-    <label>Mobile</label>
-    <input type="text">
+<label>Address</label><br>
+<textarea></textarea><br><br>
 
-    <label>Address</label>
-    <textarea></textarea>
-
-    <button>Submit</button>
-
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-    © TMNP System
-</div>
+<button>Submit</button>
 
 </body>
 </html>
