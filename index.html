@@ -9,24 +9,29 @@
 body{
 margin:0;
 font-family:Arial;
-background:#f2f2f2;
+background:#eef2f7;
 }
 
+/* HEADER */
 header{
 background:#0b3d91;
 color:white;
-padding:15px;
+padding:12px;
 }
 
 .header-row{
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
+gap:10px;
 }
 
 .logo,.leader{
 height:70px;
+width:70px;
+object-fit:cover;
 border-radius:8px;
+background:white;
 }
 
 .title{
@@ -34,35 +39,58 @@ text-align:center;
 flex:1;
 }
 
+.title h2{
+margin:5px 0;
+}
+
+.title p{
+margin:2px 0;
+font-size:13px;
+}
+
+.contact{
+font-size:12px;
+text-align:center;
+margin-top:8px;
+line-height:1.5;
+}
+
+/* CONTAINER */
 .container{
-max-width:1000px;
-margin:auto;
+max-width:1050px;
+margin:20px auto;
 background:white;
 padding:20px;
-margin-top:20px;
 border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 input{
 width:100%;
 padding:10px;
 margin:6px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
-padding:10px;
-margin:5px;
+padding:10px 12px;
+margin:5px 3px;
 border:none;
 cursor:pointer;
+border-radius:5px;
 }
 
 .btn{background:#0b3d91;color:white;}
-.btn-danger{background:red;color:white;}
+.btn-danger{background:#d9534f;color:white;}
+.btn-download{background:#28a745;color:white;}
 
+/* TABLE */
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:15px;
+font-size:14px;
 }
 
 th,td{
@@ -71,13 +99,18 @@ padding:8px;
 text-align:center;
 }
 
+th{
+background:#f3f3f3;
+}
+
 .member-img{
-width:50px;
-height:50px;
+width:45px;
+height:45px;
 object-fit:cover;
 border-radius:5px;
 }
 
+/* FOOTER */
 footer{
 text-align:center;
 padding:15px;
@@ -90,39 +123,53 @@ color:white;
 
 <body>
 
+<!-- HEADER -->
 <header>
+
 <div class="header-row">
 
-<!-- BASE64 LOGO (replace if you want real permanent embed) -->
-<img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB..." />
+<!-- LOGO (embedded placeholder) -->
+<img class="logo"
+src="data:image/png;base64,PASTE_LOGO_BASE64_HERE"
+/>
 
 <div class="title">
 <h2>TMNP Membership System</h2>
 <p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
-<p>📧 tmnpofficial@gmail.com | 🌐 www.tmnp.org</p>
 </div>
 
-<!-- BASE64 LEADER IMAGE PLACEHOLDER -->
-<img class="leader" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB..." />
+<!-- LEADER IMAGE (embedded placeholder) -->
+<img class="leader"
+src="data:image/jpeg;base64,PASTE_LEADER_BASE64_HERE"
+/>
 
 </div>
+
+<div class="contact">
+📍 Party Office: No.9, 2nd Cross Street, Gomathipuram, Thirunindravur, Tamil Nadu<br>
+📧 tmnpofficial@gmail.com | 🌐 www.tmnp.org
+</div>
+
 </header>
 
+<!-- FORM -->
 <div class="container">
 
-<h2>Membership Form</h2>
+<h2>Membership Registration Form</h2>
 
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
-<input id="voterid" placeholder="Voter ID">
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Phone Number">
+<input id="voterid" placeholder="Voter ID Number">
 <input id="email" placeholder="Email">
 <input id="address" placeholder="Address">
 <input id="district" placeholder="District">
 <input type="file" id="photo">
 
+<div>
 <button class="btn" onclick="save()">Submit</button>
-<button class="btn-danger" onclick="clearAll()">Reset</button>
-<button class="btn" onclick="downloadData()">Download Backup</button>
+<button class="btn-danger" onclick="resetForm()">Reset</button>
+<button class="btn-download" onclick="downloadData()">Download Backup</button>
+</div>
 
 <h3>Dashboard</h3>
 
@@ -139,49 +186,56 @@ color:white;
 <th>District</th>
 </tr>
 </thead>
+
 <tbody id="tbody"></tbody>
 </table>
 
 </div>
 
-<footer>© TMNP System</footer>
+<footer>
+© 2026 TMNP Membership System - All Rights Reserved
+</footer>
 
 <script>
 
-let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
-
+let data = JSON.parse(localStorage.getItem("tmnp_data") || "[]");
 render();
 
 function save(){
 
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let voterid=document.getElementById("voterid").value;
-let email=document.getElementById("email").value;
-let address=document.getElementById("address").value;
-let district=document.getElementById("district").value;
-let file=document.getElementById("photo").files[0];
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let voterid = document.getElementById("voterid").value;
+let email = document.getElementById("email").value;
+let address = document.getElementById("address").value;
+let district = document.getElementById("district").value;
+let file = document.getElementById("photo").files[0];
 
-if(!name||!phone||!voterid){
-alert("Fill required fields");
+if(!name || !phone || !voterid){
+alert("Name, Phone, Voter ID required");
 return;
 }
 
-let reader=new FileReader();
+let reader = new FileReader();
 
-reader.onload=function(){
+reader.onload = function(){
 
-let obj={
-id:"TMNP-"+Date.now(),
-name,phone,voterid,email,address,district,
-photo:reader.result
+let obj = {
+id: "TMNP-" + Date.now(),
+name,
+phone,
+voterid,
+email,
+address,
+district,
+photo: reader.result
 };
 
 data.push(obj);
-localStorage.setItem("tmnp",JSON.stringify(data));
+localStorage.setItem("tmnp_data", JSON.stringify(data));
 
 render();
-clearAll();
+resetForm();
 };
 
 if(file){
@@ -193,26 +247,28 @@ reader.onload();
 
 function render(){
 
-let tbody=document.getElementById("tbody");
-tbody.innerHTML="";
+let tbody = document.getElementById("tbody");
+tbody.innerHTML = "";
 
-data.forEach(d=>{
+data.forEach(d => {
 
-tbody.innerHTML+=`
+tbody.innerHTML += `
 <tr>
 <td>${d.id}</td>
-<td><img class="member-img" src="${d.photo||''}"></td>
+<td><img class="member-img" src="${d.photo || ''}"></td>
 <td>${d.name}</td>
 <td>${d.phone}</td>
 <td>${d.voterid}</td>
 <td>${d.email}</td>
 <td>${d.address}</td>
 <td>${d.district}</td>
-</tr>`;
+</tr>
+`;
+
 });
 }
 
-function clearAll(){
+function resetForm(){
 ["name","phone","voterid","email","address","district"].forEach(id=>{
 document.getElementById(id).value="";
 });
@@ -220,10 +276,10 @@ document.getElementById("photo").value="";
 }
 
 function downloadData(){
-let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-let a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="tmnp_members.json";
+let blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+let a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.download = "TMNP_members_backup.json";
 a.click();
 }
 
