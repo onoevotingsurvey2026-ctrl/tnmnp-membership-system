@@ -12,14 +12,14 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
-/* HEADER FIXED STYLE */
+/* HEADER */
 header{
 background:#0b3d91;
 color:white;
 padding:15px;
 }
 
-/* FIXED HEADER GRID */
+/* FLEX HEADER */
 .header-row{
 display:flex;
 align-items:center;
@@ -37,30 +37,46 @@ object-fit:cover;
 flex-shrink:0;
 }
 
-/* CENTER TITLE BLOCK */
+/* CENTER BLOCK */
 .title{
 flex:1;
 text-align:center;
 min-width:320px;
 }
 
-/* TEXT STYLE */
-.title h2{
-margin:5px 0;
-font-size:18px;
+/* LINE STYLE */
+.line{
+margin:6px 0;
+font-size:13px;
+line-height:1.4;
 }
 
-.title p{
-margin:4px 0;
-font-size:13px;
-line-height:1.5;
+/* MAIN PARTY TITLE BIG */
+.party-title{
+font-size:22px;
+font-weight:bold;
+color:#ffdd57;
+margin:8px 0;
 }
 
-/* SEPARATE INFO BLOCKS */
-.info-block{
-margin-top:6px;
-font-size:13px;
-line-height:1.6;
+/* SUB TITLE */
+.sub-title{
+font-size:14px;
+font-weight:600;
+color:#ffffff;
+}
+
+/* HIGHLIGHT NAME */
+.leader-name{
+color:#ffd1dc;
+font-weight:bold;
+font-size:15px;
+}
+
+/* LINK STYLE */
+a{
+color:#ffdd57;
+text-decoration:none;
 }
 
 /* CONTAINER */
@@ -137,59 +153,61 @@ color:white;
 
 <div class="header-row">
 
-<!-- LOGO (PERMANENT FIXED) -->
+<!-- LOGO -->
 <img class="logo"
-src="https://via.placeholder.com/90x90.png?text=TMNP+LOGO"
-alt="Logo">
+src="https://via.placeholder.com/90x90.png?text=TMNP">
 
 <!-- CENTER CONTENT -->
 <div class="title">
 
-<h2>TMNP - Political Party Membership System</h2>
+<!-- 1 -->
+<div class="line sub-title">1. MEMBERSHIP HEAD</div>
 
-<p>அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்</p>
+<!-- 2 -->
+<div class="party-title">
+TMNP – POLITICAL PARTY MEMBERSHIP SYSTEM
+</div>
 
-<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் (TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM)</p>
+<!-- 3 -->
+<div class="line">
+அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்<br>
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்<br>
+TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
+</div>
 
-<!-- ADDRESS BLOCK SEPARATE -->
-<div class="info-block">
-📍 Head Quarters/தலைமையகம்:<br>
+<!-- 4 -->
+<div class="line">
+📍 Head Quarters:<br>
 No.9, 1st Floor, 2nd Cross Street, Gomathipuram,<br>
-Thiruninravur, Pincode: 602024,<br>
-Thiruvallur District, Tamilnadu State, India
+Thiruninravur - 602024, Thiruvallur District, Tamilnadu
 </div>
 
-<!-- MOBILE SEPARATE -->
-<div class="info-block">
-📱 Mobile No: +91 8939324309
+<!-- 5 -->
+<div class="line">
+📱 Mobile: +91 8939324309
 </div>
 
-<!-- EMAIL + WEBSITE -->
-<div class="info-block">
-📧 tnmnp2025@gmail.com |
+<!-- 6 -->
+<div class="line">
+📧 Gmail: tnmnp2025@gmail.com<br>
 🌐 Website:
 <a href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
-target="_blank" style="color:#ffdd57;">
-LIVE LINK
-</a>
+target="_blank">LIVE PORTAL</a>
 </div>
 
-<!-- PRESIDENT FINAL CORRECTED -->
-<div class="info-block">
-<b>
+<!-- 7 -->
+<div class="line leader-name">
 President / General Secretary:<br>
 N RAMAN<br>
 தலைவர் / பொதுச் செயலாளர் ந ராமன்<br>
-
-</b>
+Thiruvallur District, Tamilnadu
 </div>
 
 </div>
 
-<!-- LEADER IMAGE (PERMANENT FIXED) -->
+<!-- LEADER IMAGE -->
 <img class="leader"
-src="https://via.placeholder.com/90x90.png?text=LEADER"
-alt="Leader">
+src="https://via.placeholder.com/90x90.png?text=LEADER">
 
 </div>
 
