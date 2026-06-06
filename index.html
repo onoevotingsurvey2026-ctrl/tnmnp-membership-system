@@ -12,7 +12,28 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
-/* CONTAINER */
+/* FIXED LOGO + LEADER */
+.fixed-logo,
+.fixed-leader{
+position:fixed;
+top:15px;
+width:85px;
+height:85px;
+object-fit:cover;
+border-radius:8px;
+z-index:9999;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+.fixed-logo{
+left:10px;
+}
+
+.fixed-leader{
+right:10px;
+}
+
+/* PAGE CONTAINER */
 .container{
 max-width:1000px;
 margin:auto;
@@ -29,7 +50,7 @@ color:white;
 padding:18px;
 }
 
-/* FRAME */
+/* HEADER BOX */
 .header-box{
 border:2px solid rgba(255,255,255,0.25);
 padding:15px;
@@ -43,14 +64,6 @@ justify-content:space-between;
 align-items:flex-start;
 flex-wrap:wrap;
 gap:15px;
-}
-
-/* IMAGES */
-.logo,.leader{
-height:85px;
-width:85px;
-border-radius:8px;
-object-fit:cover;
 }
 
 /* CENTER */
@@ -68,7 +81,7 @@ line-height:1.6;
 margin-bottom:8px;
 }
 
-/* JOIN ANIMATION */
+/* JOIN */
 .join{
 font-size:14px;
 font-weight:900;
@@ -83,7 +96,7 @@ margin:8px 0;
 100%{opacity:1;}
 }
 
-/* FORM TITLE */
+/* TITLES */
 .form-title-en{
 font-size:18px;
 font-weight:900;
@@ -120,7 +133,7 @@ line-height:1.6;
 margin:6px 0;
 }
 
-/* LINK */
+/* LINKS */
 a{
 color:#ffdd57;
 font-weight:bold;
@@ -189,9 +202,9 @@ color:white;
 
 /* RESPONSIVE */
 @media(max-width:700px){
-.header-row{
-flex-direction:column;
-align-items:center;
+.fixed-logo,.fixed-leader{
+width:65px;
+height:65px;
 }
 }
 </style>
@@ -199,30 +212,30 @@ align-items:center;
 
 <body>
 
+<!-- 🔥 FIXED LOGO (OUTSIDE HEADER BOX) -->
+<img class="fixed-logo"
+src="https://via.placeholder.com/85x85.png?text=TMNP">
+
+<!-- 🔥 FIXED LEADER (OUTSIDE HEADER BOX) -->
+<img class="fixed-leader"
+src="https://via.placeholder.com/85x85.png?text=LEADER">
+
 <!-- HEADER -->
 <header>
 <div class="header-box">
 
 <div class="header-row">
 
-<!-- LOGO -->
-<img class="logo"
-src="https://via.placeholder.com/85x85.png?text=TMNP">
-
-<!-- CENTER -->
 <div class="title">
 
-<!-- SLOGAN -->
 <div class="slogan">
 நேர்மை - நலன் - நம்பிக்கை<br>
 மக்களுக்காக மக்களால்<br>
 நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்
 </div>
 
-<!-- JOIN -->
 <div class="join">"JOIN WITH US"</div>
 
-<!-- FORM TITLE -->
 <div class="form-title-en">
 Political Party Membership Registration Form
 </div>
@@ -231,7 +244,6 @@ Political Party Membership Registration Form
 அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
 </div>
 
-<!-- PARTY NAME -->
 <div class="party-name">
 TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
 </div>
@@ -240,24 +252,20 @@ TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
 தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
 </div>
 
-<!-- ADDRESS -->
 <div class="info">
 📍 Head Quarters:<br>
 No.9, 1st Floor, 2nd Cross Street, Gomathipuram,<br>
 Thiruninravur - 602024, Tamilnadu
 </div>
 
-<!-- MOBILE -->
 <div class="info">
 📱 Mobile: +91 8939324309
 </div>
 
-<!-- EMAIL -->
 <div class="info">
 📧 tnmnp2025@gmail.com
 </div>
 
-<!-- WEBSITE -->
 <div class="info">
 🌐 Website:
 <a href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
@@ -265,10 +273,6 @@ target="_blank">LIVE PORTAL</a>
 </div>
 
 </div>
-
-<!-- LEADER -->
-<img class="leader"
-src="https://via.placeholder.com/85x85.png?text=LEADER">
 
 </div>
 </div>
