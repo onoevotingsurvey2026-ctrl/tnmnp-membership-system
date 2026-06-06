@@ -29,14 +29,13 @@ color:white;
 padding:18px;
 }
 
-/* FRAME */
 .header-box{
 border:2px solid rgba(255,255,255,0.25);
 padding:15px;
 border-radius:10px;
 }
 
-/* TOP LOGO ROW */
+/* TOP LOGO AREA */
 .top-row{
 display:flex;
 justify-content:space-between;
@@ -57,20 +56,17 @@ border-radius:8px;
 border:2px solid white;
 }
 
-/* CENTER TITLE */
 .title{
 text-align:center;
 flex:1;
 min-width:280px;
 }
 
-/* HEADER TEXT STYLES */
+/* HEADER TEXT */
 .slogan{
 font-size:13px;
 font-weight:700;
 line-height:1.6;
-margin-bottom:8px;
-color:#ffffff;
 }
 
 .join{
@@ -87,21 +83,7 @@ margin:6px 0;
 100%{opacity:1;}
 }
 
-/* FORM TITLE */
-.form-title-en{
-font-size:18px;
-font-weight:900;
-color:#ffd700;
-margin-top:8px;
-}
-
-.form-title-ta{
-font-size:16px;
-font-weight:800;
-margin-top:3px;
-}
-
-/* PARTY NAME BIG */
+/* PARTY NAME */
 .party-en{
 font-size:20px;
 font-weight:900;
@@ -112,17 +94,17 @@ margin-top:10px;
 .party-ta{
 font-size:16px;
 font-weight:800;
-margin-top:3px;
+margin-top:4px;
 }
 
-/* INFO BLOCKS */
+/* INFO */
 .info{
 font-size:13px;
 line-height:1.8;
 margin-top:6px;
 }
 
-/* LIVE PORTAL FIX */
+/* LIVE PORTAL */
 .live-site{
 color:#ffea00;
 font-weight:900;
@@ -190,7 +172,6 @@ background:#f5f5f5;
 border-radius:8px;
 font-size:13px;
 }
-
 </style>
 </head>
 
@@ -229,14 +210,6 @@ font-size:13px;
 </div>
 
 <div class="join">"JOIN WITH US"</div>
-
-<div class="form-title-en">
-Political Party Membership Registration Form
-</div>
-
-<div class="form-title-ta">
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-</div>
 
 <div class="party-en">
 TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
@@ -422,14 +395,25 @@ document.getElementById("mapBox").innerHTML="Location not added";
 /* ADMIN RESET */
 function adminReset(){
 let pass=prompt("Enter ADMIN PASSWORD:");
-if(pass!=="TMNP2026"){alert("Wrong Password");return;}
-if(!confirm("Delete all data?"))return;
+if(pass!=="TNMNP@2026ADMIN"){
+alert("Wrong Password");
+return;
+}
+if(!confirm("Delete all data? Backup will be downloaded"))return;
+
+let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+let url=URL.createObjectURL(blob);
+let a=document.createElement("a");
+a.href=url;
+a.download="TMNP_BACKUP.json";
+a.click();
 
 localStorage.removeItem("tmnp");
 data=[];
 render();
 resetForm();
-alert("Reset Done");
+
+alert("ADMIN RESET COMPLETED");
 }
 
 </script>
