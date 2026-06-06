@@ -1,6 +1,4 @@
-/* ==========================
-GLOBAL
-========================== */
+<style>
 
 body{
 margin:0;
@@ -10,498 +8,115 @@ background:#f2f2f2;
 }
 
 .container{
-
 max-width:900px;
-
 margin:auto;
-
-background:#ffffff;
-
+background:white;
 padding:20px;
-
 border-radius:10px;
-
 box-shadow:0 0 10px rgba(0,0,0,.1);
-
 }
 
-/* ==========================
-HEADER
-========================== */
-
 .header{
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
-border-bottom:3px solid #0b5ed7;
-
-padding-bottom:15px;
-
 flex-wrap:wrap;
-
+border-bottom:3px solid #0b5ed7;
+padding-bottom:15px;
 }
 
 .logoBox,
 .leaderBox{
-
 width:130px;
-
 text-align:center;
-
 }
 
 .logoBox img,
 .leaderBox img{
-
 width:120px;
-
 height:120px;
-
-border-radius:10px;
-
-border:1px solid #ccc;
-
 object-fit:cover;
-
-background:white;
-
+border-radius:10px;
+border:1px solid #ccc;
 }
 
 .centerHeader{
-
 flex:1;
-
 text-align:center;
-
 padding:10px;
-
 }
 
 .centerHeader h2{
-
 margin:4px;
-
-font-size:28px;
-
 }
 
 .centerHeader h3{
-
 margin:4px;
-
 color:green;
-
-font-size:22px;
-
 }
-
-.centerHeader p{
-
-margin:8px 0;
-
-line-height:1.5;
-
-}
-
-/* ==========================
-BOX SECTION
-========================== */
-
-.box{
-
-background:#f8f8f8;
-
-padding:15px;
-
-margin-top:15px;
-
-border-radius:10px;
-
-}
-
-/* ==========================
-FORM
-========================== */
 
 input,
 textarea,
 button{
-
 width:100%;
-
 padding:12px;
-
 margin-top:8px;
-
 margin-bottom:12px;
-
 box-sizing:border-box;
-
-font-size:16px;
-
-}
-
-textarea{
-
-min-height:100px;
-
-resize:vertical;
-
 }
 
 button{
-
 background:#0b5ed7;
-
 color:white;
-
 border:none;
-
-font-size:16px;
-
 cursor:pointer;
-
-border-radius:6px;
-
-transition:.3s;
-
 }
-
-button:hover{
-
-opacity:.9;
-
-}
-
-/* ==========================
-CARD
-========================== */
 
 .card{
-
 display:none;
-
 margin-top:20px;
-
 padding:20px;
-
 border:2px solid #0b5ed7;
-
 border-radius:10px;
-
-background:#fff;
-
-box-shadow:0 2px 10px rgba(0,0,0,.1);
-
+background:white;
 }
 
 .card img{
-
 width:120px;
-
 height:120px;
-
 object-fit:cover;
-
 border-radius:10px;
-
-border:1px solid #ccc;
-
 }
-
-/* ==========================
-ICONS
-========================== */
 
 .icons{
-
 display:flex;
-
 justify-content:center;
-
-gap:25px;
-
-font-size:34px;
-
-margin-top:20px;
-
+gap:20px;
+font-size:30px;
 }
 
-.icons a{
-
-text-decoration:none;
-
-}
-
-/* ==========================
-MAP
-========================== */
-
-#map{
-
-height:300px;
-
-width:100%;
-
-margin-top:15px;
-
-border-radius:10px;
-
-border:1px solid #ccc;
-
-overflow:hidden;
-
-}
-
-/* ==========================
-ROW
-========================== */
-
-.row{
-
-display:flex;
-
-gap:10px;
-
-}
-
-.row input{
-
-flex:1;
-
-}
-
-/* ==========================
-MOBILE MODE
-========================== */
-
-@media screen and (max-width:768px){
-
-body{
-
-padding:10px;
-
-}
-
-.container{
-
-width:100%;
-
-padding:12px;
-
-box-sizing:border-box;
-
-}
+@media(max-width:768px){
 
 .header{
-
 flex-direction:column;
-
 text-align:center;
-
-}
-
-.logoBox,
-.leaderBox{
-
-width:100%;
-
-margin-bottom:15px;
-
 }
 
 .logoBox img,
 .leaderBox img{
-
 width:100px;
-
 height:100px;
-
-}
-
-.centerHeader{
-
-width:100%;
-
-}
-
-.centerHeader h2{
-
-font-size:20px;
-
-}
-
-.centerHeader h3{
-
-font-size:18px;
-
-}
-
-.centerHeader p{
-
-font-size:14px;
-
-}
-
-.row{
-
-flex-direction:column;
-
-}
-
-.card{
-
-width:100%;
-
-box-sizing:border-box;
-
-}
-
-.icons{
-
-font-size:28px;
-
 }
 
 }
 
-/* ==========================
-TABLET MODE
-========================== */
+@page{
 
-@media screen and (min-width:769px) and (max-width:1200px){
+size:A4 portrait;
 
-.container{
-
-max-width:95%;
+margin:10mm;
 
 }
-
-.logoBox img,
-.leaderBox img{
-
-width:130px;
-
-height:130px;
-
-}
-
-}
-
-/* ==========================
-TV MODE
-========================== */
-
-@media screen and (min-width:1400px){
-
-body{
-
-font-size:22px;
-
-background:#eef2f7;
-
-}
-
-.container{
-
-max-width:1600px;
-
-padding:40px;
-
-}
-
-.centerHeader h2{
-
-font-size:40px;
-
-}
-
-.centerHeader h3{
-
-font-size:30px;
-
-}
-
-.centerHeader p{
-
-font-size:22px;
-
-}
-
-.logoBox img,
-.leaderBox img{
-
-width:180px;
-
-height:180px;
-
-}
-
-input,
-textarea,
-button{
-
-font-size:24px;
-
-padding:20px;
-
-}
-
-button{
-
-min-height:70px;
-
-}
-
-.card{
-
-font-size:24px;
-
-padding:40px;
-
-}
-
-.icons{
-
-font-size:45px;
-
-}
-
-}
-
-/* ==========================
-ULTRA LARGE TV
-========================== */
-
-@media screen and (min-width:1900px){
-
-.container{
-
-max-width:1800px;
-
-}
-
-.centerHeader h2{
-
-font-size:48px;
-
-}
-
-.centerHeader h3{
-
-font-size:36px;
-
-}
-
-}
-
-/* ==========================
-PRINT MODE
-========================== */
 
 @media print{
 
@@ -511,9 +126,9 @@ display:none;
 
 }
 
-body{
+input[type=file]{
 
-background:white;
+display:none;
 
 }
 
@@ -523,6 +138,18 @@ box-shadow:none;
 
 border:none;
 
+width:100%;
+
+padding:0;
+
+}
+
+body{
+
+background:white;
+
 }
 
 }
+
+</style>
