@@ -1,155 +1,31 @@
 <style>
-
-body{
-margin:0;
-padding:20px;
-font-family:Arial,sans-serif;
-background:#f2f2f2;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,.1);
-}
-
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-border-bottom:3px solid #0b5ed7;
-padding-bottom:15px;
-}
-
-.logoBox,
-.leaderBox{
-width:130px;
-text-align:center;
-}
-
-.logoBox img,
-.leaderBox img{
-width:120px;
-height:120px;
+.fixed-logo,
+.fixed-leader{
+position:fixed;
+top:15px;
+width:85px;
+height:85px;
 object-fit:cover;
-border-radius:10px;
-border:1px solid #ccc;
+border-radius:8px;
+z-index:9999;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
 }
 
-.centerHeader{
-flex:1;
-text-align:center;
-padding:10px;
+/* LEFT SIDE LOGO */
+.fixed-logo{
+left:10px;
 }
 
-.centerHeader h2{
-margin:4px;
+/* RIGHT SIDE LEADER */
+.fixed-leader{
+right:10px;
 }
 
-.centerHeader h3{
-margin:4px;
-color:green;
+/* MOBILE SAFE */
+@media(max-width:700px){
+.fixed-logo,.fixed-leader{
+position:absolute;
+top:10px;
 }
-
-input,
-textarea,
-button{
-width:100%;
-padding:12px;
-margin-top:8px;
-margin-bottom:12px;
-box-sizing:border-box;
 }
-
-button{
-background:#0b5ed7;
-color:white;
-border:none;
-cursor:pointer;
-}
-
-.card{
-display:none;
-margin-top:20px;
-padding:20px;
-border:2px solid #0b5ed7;
-border-radius:10px;
-background:white;
-}
-
-.card img{
-width:120px;
-height:120px;
-object-fit:cover;
-border-radius:10px;
-}
-
-.icons{
-display:flex;
-justify-content:center;
-gap:20px;
-font-size:30px;
-}
-
-@media(max-width:768px){
-
-.header{
-flex-direction:column;
-text-align:center;
-}
-
-.logoBox img,
-.leaderBox img{
-width:100px;
-height:100px;
-}
-
-}
-
-@page{
-
-size:A4 portrait;
-
-margin:10mm;
-
-}
-
-@media print{
-
-button{
-
-display:none;
-
-}
-
-input[type=file]{
-
-display:none;
-
-}
-
-.container{
-
-box-shadow:none;
-
-border:none;
-
-width:100%;
-
-padding:0;
-
-}
-
-body{
-
-background:white;
-
-}
-
-}
-
 </style>
