@@ -3,59 +3,87 @@
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TMNP Membership Form</title>
 
 <style>
+
 body{
     margin:0;
-    font-family:Arial;
+    font-family:Arial, sans-serif;
     background:#f2f2f2;
 }
 
+/* MAIN CONTAINER */
 .container{
     max-width:900px;
-    margin:auto;
+    margin:20px auto;
     background:#fff;
     padding:20px;
     border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 /* HEADER */
 .header{
     text-align:center;
-    padding:10px;
+    padding:15px;
     border-bottom:2px solid #ddd;
 }
 
 .header img{
-    width:100px;
+    width:120px;
     height:auto;
-    margin:10px;
+    margin:10px 0;
 }
 
-.title{
-    font-size:20px;
+/* TITLES */
+.title-main{
+    font-size:18px;
     font-weight:bold;
-    margin-top:10px;
+    color:#000;
+    margin:5px 0;
+}
+
+.title-sub{
+    font-size:16px;
+    color:#444;
 }
 
 /* FORM */
 .form-group{
-    margin:10px 0;
+    margin:12px 0;
 }
 
 label{
-    display:block;
     font-weight:bold;
+    display:block;
+    margin-bottom:5px;
 }
 
-input{
+input, select, textarea{
     width:100%;
-    padding:8px;
-    margin-top:5px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
 }
+
+/* BUTTON */
+button{
+    background:#007bff;
+    color:white;
+    padding:10px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -65,39 +93,52 @@ input{
     <!-- HEADER -->
     <div class="header">
 
-        <!-- LOGO (EMBEDDED IMAGE) -->
+        <!-- LOGO (SAFE EMBED PLACEHOLDER) -->
         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+X2n0AAAAASUVORK5CYII=">
 
-        <div class="title">
+        <div class="title-main">
             Political Party Membership Form<br>
             அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
         </div>
 
-        <h3>Join Now As Membership</h3>
+        <div class="title-sub">
+            Join Now As Membership
+        </div>
 
         <h2>TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
         <h3>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h3>
 
-        <!-- BANNER IMAGE (EMBEDDED) -->
+        <!-- BANNER IMAGE -->
         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+X2n0AAAAASUVORK5CYII=">
 
     </div>
 
-    <!-- FORM -->
-    <div class="form-group">
-        <label>Name</label>
-        <input type="text">
-    </div>
+    <!-- FORM START -->
+    <form>
 
-    <div class="form-group">
-        <label>Mobile</label>
-        <input type="text">
-    </div>
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter name">
+        </div>
 
-    <div class="form-group">
-        <label>Email</label>
-        <input type="text">
-    </div>
+        <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="text" placeholder="Enter mobile">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="Enter email">
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            <textarea rows="3"></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+
+    </form>
 
 </div>
 
