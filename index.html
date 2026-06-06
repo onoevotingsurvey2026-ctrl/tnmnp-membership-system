@@ -1,146 +1,227 @@
 <!DOCTYPE html>
 <html lang="ta">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TMNP Membership Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMNP Membership System</title>
 
 <style>
-
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f2f2f2;
+margin:0;
+font-family:Arial;
+background:#f2f2f2;
 }
 
-/* MAIN CONTAINER */
+header{
+background:#0b3d91;
+color:white;
+padding:15px;
+}
+
+.header-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo,.leader{
+height:75px;
+border-radius:8px;
+object-fit:cover;
+}
+
+.title{
+text-align:center;
+flex:1;
+}
+
 .container{
-    max-width:900px;
-    margin:20px auto;
-    background:#fff;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+max-width:1000px;
+margin:auto;
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
 }
 
-/* HEADER */
-.header{
-    text-align:center;
-    padding:15px;
-    border-bottom:2px solid #ddd;
+input{
+width:100%;
+padding:10px;
+margin:6px 0;
 }
 
-.header img{
-    width:120px;
-    height:auto;
-    margin:10px 0;
-}
-
-/* TITLES */
-.title-main{
-    font-size:18px;
-    font-weight:bold;
-    color:#000;
-    margin:5px 0;
-}
-
-.title-sub{
-    font-size:16px;
-    color:#444;
-}
-
-/* FORM */
-.form-group{
-    margin:12px 0;
-}
-
-label{
-    font-weight:bold;
-    display:block;
-    margin-bottom:5px;
-}
-
-input, select, textarea{
-    width:100%;
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
-
-/* BUTTON */
 button{
-    background:#007bff;
-    color:white;
-    padding:10px 15px;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
+padding:10px;
+margin:5px;
+border:none;
+cursor:pointer;
 }
 
-button:hover{
-    background:#0056b3;
+.btn{background:#0b3d91;color:white;}
+.btn-danger{background:red;color:white;}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
 }
 
+th,td{
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
+}
+
+.member-img{
+width:45px;
+height:45px;
+border-radius:5px;
+object-fit:cover;
+}
+
+footer{
+text-align:center;
+padding:15px;
+margin-top:20px;
+background:#0b3d91;
+color:white;
+}
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<!-- HEADER -->
+<header>
+<div class="header-row">
 
-    <!-- HEADER -->
-    <div class="header">
+<!-- LOGO (BASE64 SLOT) -->
+<img class="logo"
+src="data:image/png;base64,REPLACE_LOGO_BASE64_HERE"
+/>
 
-        <!-- LOGO (SAFE EMBED PLACEHOLDER) -->
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+X2n0AAAAASUVORK5CYII=">
+<div class="title">
+<h2>TMNP Membership System</h2>
+<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
+<p>📧 tmnpofficial@gmail.com | 🌐 www.tmnp.org</p>
+</div>
 
-        <div class="title-main">
-            Political Party Membership Form<br>
-            அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-        </div>
-
-        <div class="title-sub">
-            Join Now As Membership
-        </div>
-
-        <h2>TMNP – Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
-        <h3>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h3>
-
-        <!-- BANNER IMAGE -->
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+X2n0AAAAASUVORK5CYII=">
-
-    </div>
-
-    <!-- FORM START -->
-    <form>
-
-        <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Enter name">
-        </div>
-
-        <div class="form-group">
-            <label>Mobile Number</label>
-            <input type="text" placeholder="Enter mobile">
-        </div>
-
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="Enter email">
-        </div>
-
-        <div class="form-group">
-            <label>Address</label>
-            <textarea rows="3"></textarea>
-        </div>
-
-        <button type="submit">Submit</button>
-
-    </form>
+<!-- LEADER IMAGE (BASE64 SLOT) -->
+<img class="leader"
+src="data:image/png;base64,REPLACE_LEADER_BASE64_HERE"
+/>
 
 </div>
+</header>
+
+<!-- FORM -->
+<div class="container">
+
+<h2>Membership Registration</h2>
+
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="voterid" placeholder="Voter ID">
+<input id="email" placeholder="Email">
+<input id="address" placeholder="Address">
+<input id="district" placeholder="District">
+<input type="file" id="photo">
+
+<button class="btn" onclick="save()">Submit</button>
+<button class="btn-danger" onclick="resetForm()">Reset</button>
+
+<h3>Dashboard</h3>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Photo</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Voter ID</th>
+<th>Email</th>
+<th>Address</th>
+<th>District</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+
+</div>
+
+<footer>© TMNP Membership System</footer>
+
+<script>
+
+let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
+render();
+
+function save(){
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let voterid=document.getElementById("voterid").value;
+let email=document.getElementById("email").value;
+let address=document.getElementById("address").value;
+let district=document.getElementById("district").value;
+let file=document.getElementById("photo").files[0];
+
+if(!name||!phone||!voterid){
+alert("Fill required fields");
+return;
+}
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+let obj={
+id:"TMNP-"+Date.now(),
+name,phone,voterid,email,address,district,
+photo:reader.result
+};
+
+data.push(obj);
+localStorage.setItem("tmnp",JSON.stringify(data));
+render();
+resetForm();
+};
+
+if(file){
+reader.readAsDataURL(file);
+}else{
+reader.onload();
+}
+}
+
+function render(){
+let tbody=document.getElementById("tbody");
+tbody.innerHTML="";
+
+data.forEach(d=>{
+tbody.innerHTML+=`
+<tr>
+<td>${d.id}</td>
+<td><img class="member-img" src="${d.photo||''}"></td>
+<td>${d.name}</td>
+<td>${d.phone}</td>
+<td>${d.voterid}</td>
+<td>${d.email}</td>
+<td>${d.address}</td>
+<td>${d.district}</td>
+</tr>`;
+});
+}
+
+function resetForm(){
+["name","phone","voterid","email","address","district"].forEach(id=>{
+document.getElementById(id).value="";
+});
+document.getElementById("photo").value="";
+}
+
+</script>
 
 </body>
 </html>
