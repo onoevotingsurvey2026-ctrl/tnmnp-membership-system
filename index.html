@@ -12,19 +12,36 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
+/* HEADER */
 header{
 background:#0b3d91;
 color:white;
 padding:15px;
+}
+
+.header-row{
 display:flex;
 align-items:center;
 justify-content:space-between;
+gap:15px;
 }
 
-.logo{
-height:60px;
+.logo{height:70px;}
+.leader{height:80px;border-radius:10px;}
+
+.title-box{
+text-align:center;
+flex:1;
 }
 
+.contact-bar{
+margin-top:10px;
+font-size:13px;
+text-align:center;
+line-height:1.6;
+}
+
+/* CONTAINER */
 .container{
 max-width:1000px;
 margin:auto;
@@ -35,11 +52,7 @@ border-radius:10px;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-h2{
-text-align:center;
-}
-
-input, select{
+input{
 width:100%;
 padding:10px;
 margin:8px 0;
@@ -52,15 +65,8 @@ border:none;
 cursor:pointer;
 }
 
-.btn{
-background:#0b3d91;
-color:white;
-}
-
-.btn-danger{
-background:red;
-color:white;
-}
+.btn{background:#0b3d91;color:white;}
+.btn-danger{background:red;color:white;}
 
 table{
 width:100%;
@@ -68,11 +74,8 @@ border-collapse:collapse;
 margin-top:20px;
 }
 
-table, th, td{
-border:1px solid #ddd;
-}
-
 th, td{
+border:1px solid #ddd;
 padding:10px;
 text-align:center;
 }
@@ -84,18 +87,6 @@ margin-top:20px;
 background:#0b3d91;
 color:white;
 }
-
-.flex{
-display:flex;
-gap:20px;
-align-items:center;
-justify-content:space-between;
-}
-
-.leader{
-height:80px;
-border-radius:10px;
-}
 </style>
 </head>
 
@@ -103,23 +94,33 @@ border-radius:10px;
 
 <!-- HEADER -->
 <header>
-<img src="logo.png" class="logo" alt="Logo">
+<div class="header-row">
 
-<div>
-<h3>TMNP Membership System</h3>
+<img src="logo.png" class="logo">
+
+<div class="title-box">
+<h2>TMNP Membership System</h2>
 <p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
 </div>
 
-<img src="leader.jpg" class="leader" alt="Leader">
+<img src="leader.jpg" class="leader">
+
+</div>
+
+<div class="contact-bar">
+📍 Party Office: No.9, 2nd Cross Street, Gomathipuram, Thirunindravur<br>
+📧 Email: tmnpofficial@gmail.com | 🌐 www.tmnp.org
+</div>
 </header>
 
 <!-- FORM -->
 <div class="container">
 
-<h2>Membership Registration Form</h2>
+<h2>Membership Registration</h2>
 
 <input type="text" id="name" placeholder="Full Name">
 <input type="text" id="phone" placeholder="Phone Number">
+<input type="text" id="voterid" placeholder="Voter ID Number">
 <input type="email" id="email" placeholder="Email">
 <input type="text" id="address" placeholder="Address">
 <input type="text" id="district" placeholder="District">
@@ -135,6 +136,7 @@ border-radius:10px;
 <th>ID</th>
 <th>Name</th>
 <th>Phone</th>
+<th>Voter ID</th>
 <th>Email</th>
 <th>Address</th>
 <th>District</th>
@@ -145,7 +147,6 @@ border-radius:10px;
 
 </div>
 
-<!-- FOOTER -->
 <footer>
 © 2026 TMNP Membership System
 </footer>
@@ -158,11 +159,12 @@ function register(){
 
 let name = document.getElementById("name").value;
 let phone = document.getElementById("phone").value;
+let voterid = document.getElementById("voterid").value;
 let email = document.getElementById("email").value;
 let address = document.getElementById("address").value;
 let district = document.getElementById("district").value;
 
-if(name=="" || phone==""){
+if(name=="" || phone=="" || voterid==""){
 alert("Please fill required fields");
 return;
 }
@@ -177,21 +179,19 @@ row.innerHTML = `
 <td>TMNP-${idCounter}</td>
 <td>${name}</td>
 <td>${phone}</td>
+<td>${voterid}</td>
 <td>${email}</td>
 <td>${address}</td>
 <td>${district}</td>
 `;
 
-document.getElementById("name").value="";
-document.getElementById("phone").value="";
-document.getElementById("email").value="";
-document.getElementById("address").value="";
-document.getElementById("district").value="";
+resetForm();
 }
 
 function resetForm(){
 document.getElementById("name").value="";
 document.getElementById("phone").value="";
+document.getElementById("voterid").value="";
 document.getElementById("email").value="";
 document.getElementById("address").value="";
 document.getElementById("district").value="";
