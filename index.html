@@ -16,244 +16,9 @@ TNMNP Membership System
 
 </title>
 
-<style>
+<link rel="stylesheet"
 
-body{
-
-margin:0;
-
-padding:20px;
-
-font-family:Arial,sans-serif;
-
-background:#f2f2f2;
-
-}
-
-.container{
-
-max-width:900px;
-
-margin:auto;
-
-background:#fff;
-
-padding:20px;
-
-border-radius:10px;
-
-box-shadow:0 0 10px rgba(0,0,0,.1);
-
-}
-
-/* HEADER */
-
-.header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-border-bottom:3px solid #0b5ed7;
-
-padding-bottom:15px;
-
-flex-wrap:wrap;
-
-}
-
-.logoBox,
-.leaderBox{
-
-width:130px;
-
-text-align:center;
-
-}
-
-.logoBox img,
-.leaderBox img{
-
-width:120px;
-
-height:120px;
-
-border-radius:10px;
-
-border:1px solid #ccc;
-
-object-fit:cover;
-
-}
-
-.centerHeader{
-
-flex:1;
-
-text-align:center;
-
-padding:10px;
-
-}
-
-.centerHeader h2,
-.centerHeader h3,
-.centerHeader p{
-
-margin:5px;
-
-}
-
-.centerHeader h3{
-
-color:green;
-
-}
-
-input,
-textarea,
-button{
-
-width:100%;
-
-padding:12px;
-
-margin-top:8px;
-
-margin-bottom:12px;
-
-box-sizing:border-box;
-
-}
-
-button{
-
-background:#0b5ed7;
-
-color:#fff;
-
-border:none;
-
-font-size:16px;
-
-cursor:pointer;
-
-border-radius:5px;
-
-}
-
-.card{
-
-display:none;
-
-margin-top:20px;
-
-padding:20px;
-
-border:2px solid #0b5ed7;
-
-border-radius:10px;
-
-background:#fff;
-
-}
-
-.memberImage{
-
-width:120px;
-
-height:120px;
-
-object-fit:cover;
-
-border-radius:10px;
-
-border:1px solid #ccc;
-
-}
-
-.actionButtons{
-
-display:flex;
-
-flex-wrap:wrap;
-
-gap:10px;
-
-}
-
-.actionButtons button{
-
-flex:1;
-
-min-width:120px;
-
-}
-
-@media(max-width:600px){
-
-.header{
-
-flex-direction:column;
-
-}
-
-.logoBox,
-.leaderBox{
-
-width:auto;
-
-}
-
-}
-
-@page{
-
-size:A4 portrait;
-
-margin:10mm;
-
-}
-
-@media print{
-
-body{
-
-background:#fff;
-
-padding:0;
-
-}
-
-.container{
-
-box-shadow:none;
-
-border:none;
-
-padding:0;
-
-width:100%;
-
-}
-
-button{
-
-display:none;
-
-}
-
-input[type=file]{
-
-display:none;
-
-}
-
-}
-
-</style>
+href="style.css">
 
 </head>
 
@@ -261,11 +26,15 @@ display:none;
 
 <div class="container">
 
+<!-- HEADER -->
+
 <div class="header">
 
 <div class="logoBox">
 
-<img src="logo.png">
+<img src="logo.png"
+
+alt="Logo">
 
 </div>
 
@@ -313,19 +82,13 @@ N RAMAN
 
 <p>
 
-No.9 1st Floor,
+No.9, 1st Floor,
 
 2nd Cross Street,
 
 Gomathipuram,
 
-Thiruninravur R.S
-
-</p>
-
-<p>
-
-Thiruvallur District
+Thiruninravur R.S,
 
 Tamil Nadu - 602024
 
@@ -341,11 +104,15 @@ Tamil Nadu - 602024
 
 <div class="leaderBox">
 
-<img src="leaderphoto.jpg">
+<img src="leaderphoto.jpg"
+
+alt="Leader">
 
 </div>
 
 </div>
+
+<!-- FORM -->
 
 <form id="memberForm">
 
@@ -413,7 +180,7 @@ type="checkbox"
 
 required>
 
-I confirm details are correct
+I Confirm All Details Are Correct
 
 </label>
 
@@ -424,6 +191,8 @@ Register Member
 </button>
 
 </form>
+
+<!-- CARD -->
 
 <div
 
@@ -439,17 +208,13 @@ Registered Member
 
 <img
 
-id="memberPhoto"
-
-class="memberImage">
+id="memberPhoto">
 
 <p>
 
 Registration ID:
 
-<span id="reg">
-
-</span>
+<span id="reg"></span>
 
 </p>
 
@@ -457,9 +222,7 @@ Registration ID:
 
 Voter ID:
 
-<span id="cvoter">
-
-</span>
+<span id="cvoter"></span>
 
 </p>
 
@@ -467,9 +230,7 @@ Voter ID:
 
 Mobile:
 
-<span id="cmobile">
-
-</span>
+<span id="cmobile"></span>
 
 </p>
 
@@ -477,9 +238,7 @@ Mobile:
 
 Email:
 
-<span id="cemail">
-
-</span>
+<span id="cemail"></span>
 
 </p>
 
@@ -487,9 +246,7 @@ Email:
 
 Vote Name:
 
-<span id="cvote">
-
-</span>
+<span id="cvote"></span>
 
 </p>
 
@@ -497,29 +254,27 @@ Vote Name:
 
 Address:
 
-<span id="caddress">
-
-</span>
+<span id="caddress"></span>
 
 </p>
 
-<div class="actionButtons">
+<div class="icons">
 
 <button
 
-onclick="window.print()"
+type="button"
 
-type="button">
+onclick="window.print()">
 
-Print PDF
+PDF
 
 </button>
 
 <button
 
-onclick="shareWA()"
+type="button"
 
-type="button">
+onclick="shareWA()">
 
 WhatsApp
 
@@ -527,19 +282,19 @@ WhatsApp
 
 <button
 
-onclick="gmailOpen()"
+type="button"
 
-type="button">
+onclick="gmailOpen()">
 
-Email
+Gmail
 
 </button>
 
 <button
 
-onclick="resetAll()"
+type="button"
 
-type="button">
+onclick="resetAll()">
 
 Reset
 
@@ -573,9 +328,16 @@ appId:"1:616857466202:web:0fb4fae39e938ec0edef63"
 
 };
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(
 
-const db=firebase.firestore();
+firebaseConfig
+
+);
+
+const db=
+
+firebase.firestore();
+
 
 memberForm.addEventListener(
 
@@ -589,17 +351,30 @@ const regId=
 
 "TNMNP-"+Date.now();
 
-reg.innerText=regId;
+reg.innerText=
 
-cvoter.innerText=voterid.value;
+regId;
 
-cmobile.innerText=phone.value;
+cvoter.innerText=
 
-cemail.innerText=email.value;
+voterid.value;
 
-cvote.innerText=voteName.value;
+cmobile.innerText=
 
-caddress.innerText=address.value;
+phone.value;
+
+cemail.innerText=
+
+email.value;
+
+cvote.innerText=
+
+voteName.value;
+
+caddress.innerText=
+
+address.value;
+
 
 memberPhoto.src=
 
@@ -608,6 +383,7 @@ URL.createObjectURL(
 photo.files[0]
 
 );
+
 
 db.collection(
 
@@ -629,7 +405,10 @@ address:address.value
 
 });
 
-card.style.display="block";
+
+card.style.display=
+
+"block";
 
 window.scrollTo(
 
@@ -646,11 +425,21 @@ document.body.scrollHeight
 
 function shareWA(){
 
-const msg=
+let msg=
 
-"TNMNP Registration ID : "
+"TMNP Membership Registration\n\n"+
 
-+reg.innerText;
+"Registration ID : "
+
++reg.innerText+
+
+"\nMobile : "
+
++cmobile.innerText+
+
+"\nName : "
+
++cvote.innerText;
 
 window.open(
 
@@ -665,9 +454,29 @@ encodeURIComponent(msg)
 
 function gmailOpen(){
 
+let body=
+
+"TMNP Registration\n\n"+
+
+"Registration ID : "
+
++reg.innerText+
+
+"\nMobile : "
+
++cmobile.innerText+
+
+"\nName : "
+
++cvote.innerText;
+
 window.location=
 
-"mailto:tnmakkalnalvazhvuperiyakkam@gmail.com";
+"mailto:tnmakkalnalvazhvuperiyakkam@gmail.com"+
+
+"?subject=TMNP Membership Registration"+
+
+"&body="+encodeURIComponent(body);
 
 }
 
