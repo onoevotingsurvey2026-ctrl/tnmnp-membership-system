@@ -6,19 +6,11 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-content="width=device-width,initial-scale=1">
+<title>TNMNP Membership System</title>
 
-<title>
-
-TNMNP Membership System
-
-</title>
-
-<link rel="stylesheet"
-
-href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -26,43 +18,23 @@ href="style.css">
 
 <div class="container">
 
-<!-- HEADER -->
-
 <div class="header">
 
 <div class="logoBox">
 
-<img src="logo.png"
-
-alt="Logo">
+<img src="logo.png" alt="Logo">
 
 </div>
 
 <div class="centerHeader">
 
-<h2>
+<h2>Political Party Membership Registration Form</h2>
 
-Political Party Membership Registration Form
+<h2>அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்</h2>
 
-</h2>
+<h2>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</h2>
 
-<h2>
-
-அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
-
-</h2>
-
-<h2>
-
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-
-</h2>
-
-<h3>
-
-TMNP - TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
-
-</h3>
+<h3>TMNP - TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</h3>
 
 <p>
 
@@ -104,87 +76,58 @@ Tamil Nadu - 602024
 
 <div class="leaderBox">
 
-<img src="leaderphoto.jpg"
-
-alt="Leader">
+<img src="leaderphoto.jpg" alt="Leader">
 
 </div>
 
 </div>
-
-<!-- FORM -->
 
 <form id="memberForm">
 
 <input
-
 id="voterid"
-
 placeholder="Voter ID"
-
 required>
 
 <input
-
 id="phone"
-
 placeholder="Mobile Number"
-
 required>
 
 <input
-
 id="email"
-
 placeholder="Gmail Address"
-
 required>
 
 <input
-
 id="voteName"
-
 placeholder="Vote Name"
-
 required>
 
 <textarea
-
 id="address"
-
-placeholder="Address">
-
-</textarea>
+placeholder="Address"></textarea>
 
 <label>
 
-Member Photo Upload
+Member Photo Upload (Optional)
 
 </label>
 
 <input
-
 type="file"
-
 id="photo"
-
-accept="image/*"
-
-required>
+accept="image/*">
 
 <label>
 
-<input
-
-type="checkbox"
-
-required>
+<input type="checkbox" required>
 
 I Confirm All Details Are Correct
 
 </label>
 
-<button>
+<button type="submit">
 
 Register Member
 
@@ -192,13 +135,7 @@ Register Member
 
 </form>
 
-<!-- CARD -->
-
-<div
-
-id="card"
-
-class="card">
+<div id="card" class="card">
 
 <h2>
 
@@ -206,9 +143,7 @@ Registered Member
 
 </h2>
 
-<img
-
-id="memberPhoto">
+<img id="memberPhoto">
 
 <p>
 
@@ -261,9 +196,7 @@ Address:
 <div class="icons">
 
 <button
-
 type="button"
-
 onclick="window.print()">
 
 PDF
@@ -271,9 +204,7 @@ PDF
 </button>
 
 <button
-
 type="button"
-
 onclick="shareWA()">
 
 WhatsApp
@@ -281,9 +212,7 @@ WhatsApp
 </button>
 
 <button
-
 type="button"
-
 onclick="gmailOpen()">
 
 Gmail
@@ -291,9 +220,7 @@ Gmail
 </button>
 
 <button
-
 type="button"
-
 onclick="resetAll()">
 
 Reset
@@ -328,18 +255,17 @@ appId:"1:616857466202:web:0fb4fae39e938ec0edef63"
 
 };
 
-firebase.initializeApp(
+firebase.initializeApp(firebaseConfig);
 
-firebaseConfig
-
-);
-
-const db=
-
-firebase.firestore();
+const db=firebase.firestore();
 
 
-memberForm.addEventListener(
+
+document.getElementById(
+
+"memberForm"
+
+).addEventListener(
 
 "submit",
 
@@ -347,42 +273,102 @@ function(e){
 
 e.preventDefault();
 
+
 const regId=
 
 "TNMNP-"+Date.now();
 
-reg.innerText=
 
-regId;
+document.getElementById(
 
-cvoter.innerText=
+"reg"
 
-voterid.value;
+).innerText=regId;
 
-cmobile.innerText=
+document.getElementById(
 
-phone.value;
+"cvoter"
 
-cemail.innerText=
+).innerText=
 
-email.value;
+document.getElementById(
 
-cvote.innerText=
+"voterid"
 
-voteName.value;
+).value;
 
-caddress.innerText=
+document.getElementById(
 
-address.value;
+"cmobile"
+
+).innerText=
+
+document.getElementById(
+
+"phone"
+
+).value;
+
+document.getElementById(
+
+"cemail"
+
+).innerText=
+
+document.getElementById(
+
+"email"
+
+).value;
+
+document.getElementById(
+
+"cvote"
+
+).innerText=
+
+document.getElementById(
+
+"voteName"
+
+).value;
+
+document.getElementById(
+
+"caddress"
+
+).innerText=
+
+document.getElementById(
+
+"address"
+
+).value;
 
 
-memberPhoto.src=
+const photo=
+
+document.getElementById(
+
+"photo"
+
+);
+
+if(photo.files.length){
+
+document.getElementById(
+
+"memberPhoto"
+
+).src=
 
 URL.createObjectURL(
 
 photo.files[0]
 
 );
+
+}
 
 
 db.collection(
@@ -393,20 +379,56 @@ db.collection(
 
 regNo:regId,
 
-voterId:voterid.value,
+voterId:
 
-mobile:phone.value,
+document.getElementById(
 
-email:email.value,
+"voterid"
 
-voteName:voteName.value,
+).value,
 
-address:address.value
+mobile:
+
+document.getElementById(
+
+"phone"
+
+).value,
+
+email:
+
+document.getElementById(
+
+"email"
+
+).value,
+
+voteName:
+
+document.getElementById(
+
+"voteName"
+
+).value,
+
+address:
+
+document.getElementById(
+
+"address"
+
+).value,
+
+createdAt:new Date()
 
 });
 
 
-card.style.display=
+document.getElementById(
+
+"card"
+
+).style.display=
 
 "block";
 
@@ -423,23 +445,28 @@ document.body.scrollHeight
 );
 
 
+
 function shareWA(){
 
 let msg=
 
-"TMNP Membership Registration\n\n"+
+"TMNP Registration\n\n"+
 
-"Registration ID : "
+"ID : "+
 
-+reg.innerText+
+document.getElementById(
 
-"\nMobile : "
+"reg"
 
-+cmobile.innerText+
+).innerText+
 
-"\nName : "
+"\nMobile : "+
 
-+cvote.innerText;
+document.getElementById(
+
+"cmobile"
+
+).innerText;
 
 window.open(
 
@@ -452,23 +479,20 @@ encodeURIComponent(msg)
 }
 
 
+
 function gmailOpen(){
 
 let body=
 
 "TMNP Registration\n\n"+
 
-"Registration ID : "
+"ID : "+
 
-+reg.innerText+
+document.getElementById(
 
-"\nMobile : "
+"reg"
 
-+cmobile.innerText+
-
-"\nName : "
-
-+cvote.innerText;
+).innerText;
 
 window.location=
 
@@ -476,9 +500,12 @@ window.location=
 
 "?subject=TMNP Membership Registration"+
 
-"&body="+encodeURIComponent(body);
+"&body="+
+
+encodeURIComponent(body);
 
 }
+
 
 
 function resetAll(){
