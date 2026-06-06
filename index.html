@@ -12,7 +12,6 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
-/* HEADER */
 header{
 background:#0b3d91;
 color:white;
@@ -21,27 +20,20 @@ padding:15px;
 
 .header-row{
 display:flex;
-align-items:center;
 justify-content:space-between;
-gap:15px;
+align-items:center;
 }
 
-.logo{height:70px;}
-.leader{height:80px;border-radius:10px;}
+.logo,.leader{
+height:70px;
+border-radius:8px;
+}
 
-.title-box{
+.title{
 text-align:center;
 flex:1;
 }
 
-.contact-bar{
-margin-top:10px;
-font-size:13px;
-text-align:center;
-line-height:1.6;
-}
-
-/* CONTAINER */
 .container{
 max-width:1000px;
 margin:auto;
@@ -49,13 +41,12 @@ background:white;
 padding:20px;
 margin-top:20px;
 border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 input{
 width:100%;
 padding:10px;
-margin:8px 0;
+margin:6px 0;
 }
 
 button{
@@ -71,13 +62,20 @@ cursor:pointer;
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:20px;
+margin-top:15px;
 }
 
-th, td{
+th,td{
 border:1px solid #ddd;
-padding:10px;
+padding:8px;
 text-align:center;
+}
+
+.member-img{
+width:50px;
+height:50px;
+object-fit:cover;
+border-radius:5px;
 }
 
 footer{
@@ -92,48 +90,47 @@ color:white;
 
 <body>
 
-<!-- HEADER -->
 <header>
 <div class="header-row">
 
-<img src="logo.png" class="logo">
+<!-- BASE64 LOGO (replace if you want real permanent embed) -->
+<img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB..." />
 
-<div class="title-box">
+<div class="title">
 <h2>TMNP Membership System</h2>
 <p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</p>
+<p>📧 tmnpofficial@gmail.com | 🌐 www.tmnp.org</p>
 </div>
 
-<img src="leader.jpg" class="leader">
+<!-- BASE64 LEADER IMAGE PLACEHOLDER -->
+<img class="leader" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB..." />
 
-</div>
-
-<div class="contact-bar">
-📍 Party Office: No.9, 2nd Cross Street, Gomathipuram, Thirunindravur<br>
-📧 Email: tmnpofficial@gmail.com | 🌐 www.tmnp.org
 </div>
 </header>
 
-<!-- FORM -->
 <div class="container">
 
-<h2>Membership Registration</h2>
+<h2>Membership Form</h2>
 
-<input type="text" id="name" placeholder="Full Name">
-<input type="text" id="phone" placeholder="Phone Number">
-<input type="text" id="voterid" placeholder="Voter ID Number">
-<input type="email" id="email" placeholder="Email">
-<input type="text" id="address" placeholder="Address">
-<input type="text" id="district" placeholder="District">
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="voterid" placeholder="Voter ID">
+<input id="email" placeholder="Email">
+<input id="address" placeholder="Address">
+<input id="district" placeholder="District">
+<input type="file" id="photo">
 
-<button class="btn" onclick="register()">Submit</button>
-<button class="btn-danger" onclick="resetForm()">Reset</button>
+<button class="btn" onclick="save()">Submit</button>
+<button class="btn-danger" onclick="clearAll()">Reset</button>
+<button class="btn" onclick="downloadData()">Download Backup</button>
 
 <h3>Dashboard</h3>
 
-<table id="table">
+<table>
 <thead>
 <tr>
 <th>ID</th>
+<th>Photo</th>
 <th>Name</th>
 <th>Phone</th>
 <th>Voter ID</th>
@@ -142,59 +139,92 @@ color:white;
 <th>District</th>
 </tr>
 </thead>
-<tbody></tbody>
+<tbody id="tbody"></tbody>
 </table>
 
 </div>
 
-<footer>
-© 2026 TMNP Membership System
-</footer>
+<footer>© TMNP System</footer>
 
 <script>
 
-let idCounter = 1000;
+let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
 
-function register(){
+render();
 
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-let voterid = document.getElementById("voterid").value;
-let email = document.getElementById("email").value;
-let address = document.getElementById("address").value;
-let district = document.getElementById("district").value;
+function save(){
 
-if(name=="" || phone=="" || voterid==""){
-alert("Please fill required fields");
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let voterid=document.getElementById("voterid").value;
+let email=document.getElementById("email").value;
+let address=document.getElementById("address").value;
+let district=document.getElementById("district").value;
+let file=document.getElementById("photo").files[0];
+
+if(!name||!phone||!voterid){
+alert("Fill required fields");
 return;
 }
 
-idCounter++;
+let reader=new FileReader();
 
-let table = document.getElementById("table").getElementsByTagName('tbody')[0];
+reader.onload=function(){
 
-let row = table.insertRow();
+let obj={
+id:"TMNP-"+Date.now(),
+name,phone,voterid,email,address,district,
+photo:reader.result
+};
 
-row.innerHTML = `
-<td>TMNP-${idCounter}</td>
-<td>${name}</td>
-<td>${phone}</td>
-<td>${voterid}</td>
-<td>${email}</td>
-<td>${address}</td>
-<td>${district}</td>
-`;
+data.push(obj);
+localStorage.setItem("tmnp",JSON.stringify(data));
 
-resetForm();
+render();
+clearAll();
+};
+
+if(file){
+reader.readAsDataURL(file);
+}else{
+reader.onload();
+}
 }
 
-function resetForm(){
-document.getElementById("name").value="";
-document.getElementById("phone").value="";
-document.getElementById("voterid").value="";
-document.getElementById("email").value="";
-document.getElementById("address").value="";
-document.getElementById("district").value="";
+function render(){
+
+let tbody=document.getElementById("tbody");
+tbody.innerHTML="";
+
+data.forEach(d=>{
+
+tbody.innerHTML+=`
+<tr>
+<td>${d.id}</td>
+<td><img class="member-img" src="${d.photo||''}"></td>
+<td>${d.name}</td>
+<td>${d.phone}</td>
+<td>${d.voterid}</td>
+<td>${d.email}</td>
+<td>${d.address}</td>
+<td>${d.district}</td>
+</tr>`;
+});
+}
+
+function clearAll(){
+["name","phone","voterid","email","address","district"].forEach(id=>{
+document.getElementById(id).value="";
+});
+document.getElementById("photo").value="";
+}
+
+function downloadData(){
+let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+let a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="tmnp_members.json";
+a.click();
 }
 
 </script>
