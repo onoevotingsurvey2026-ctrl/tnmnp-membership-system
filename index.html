@@ -12,27 +12,6 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
-/* FIXED LOGO + LEADER */
-.fixed-logo,
-.fixed-leader{
-position:fixed;
-top:15px;
-width:85px;
-height:85px;
-object-fit:cover;
-border-radius:8px;
-z-index:9999;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
-}
-
-.fixed-logo{
-left:10px;
-}
-
-.fixed-leader{
-right:10px;
-}
-
 /* PAGE CONTAINER */
 .container{
 max-width:1000px;
@@ -57,20 +36,9 @@ padding:15px;
 border-radius:10px;
 }
 
-/* FLEX */
-.header-row{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-flex-wrap:wrap;
-gap:15px;
-}
-
 /* CENTER */
 .title{
-flex:1;
 text-align:center;
-min-width:280px;
 }
 
 /* SLOGAN */
@@ -199,32 +167,14 @@ margin-top:20px;
 background:#0b3d91;
 color:white;
 }
-
-/* RESPONSIVE */
-@media(max-width:700px){
-.fixed-logo,.fixed-leader{
-width:65px;
-height:65px;
-}
-}
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 FIXED LOGO (OUTSIDE HEADER BOX) -->
-<img class="fixed-logo"
-src="https://via.placeholder.com/85x85.png?text=TMNP">
-
-<!-- 🔥 FIXED LEADER (OUTSIDE HEADER BOX) -->
-<img class="fixed-leader"
-src="https://via.placeholder.com/85x85.png?text=LEADER">
-
 <!-- HEADER -->
 <header>
 <div class="header-box">
-
-<div class="header-row">
 
 <div class="title">
 
@@ -270,8 +220,6 @@ Thiruninravur - 602024, Tamilnadu
 🌐 Website:
 <a href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
 target="_blank">LIVE PORTAL</a>
-</div>
-
 </div>
 
 </div>
@@ -409,7 +357,6 @@ let mapLink = d.location
 tbody.innerHTML+=`
 <tr>
 <td>${d.id}</td>
-<td><img class="member-img" src="${d.photo||''}"></td>
 <td>${d.name}</td>
 <td>${d.phone}</td>
 <td>${d.voterid}</td>
