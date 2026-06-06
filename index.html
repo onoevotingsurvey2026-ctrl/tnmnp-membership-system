@@ -12,7 +12,6 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
-/* PAGE */
 .container{
 max-width:1000px;
 margin:auto;
@@ -141,7 +140,6 @@ border-radius:5px;
 .btn{background:#0b3d91;color:white;}
 .btn-danger{background:red;color:white;}
 .btn-green{background:green;color:white;}
-.btn-admin{background:#222;color:#fff;}
 
 /* TABLE */
 table{
@@ -177,11 +175,9 @@ font-size:13px;
 
 <body>
 
-<!-- HEADER -->
 <header>
 <div class="header-box">
 
-<!-- LOGO + LEADER -->
 <div class="top-row">
 
 <div class="img-box">
@@ -200,7 +196,6 @@ font-size:13px;
 
 </div>
 
-<!-- CENTER CONTENT -->
 <div class="title">
 
 <div class="slogan">
@@ -262,8 +257,6 @@ Thiruninravur - 602024, Tamilnadu
 <div class="map-box" id="mapBox">Location not added</div>
 
 <button class="btn" onclick="save()">Submit</button>
-
-<button class="btn-admin" onclick="adminReset()">🔐 ADMIN RESET</button>
 
 <h3>Dashboard</h3>
 
@@ -382,7 +375,7 @@ tbody.innerHTML+=`
 });
 }
 
-/* RESET */
+/* RESET FORM ONLY */
 function resetForm(){
 ["name","phone","voterid","email","address","district"].forEach(id=>{
 document.getElementById(id).value="";
@@ -390,30 +383,6 @@ document.getElementById(id).value="";
 document.getElementById("photo").value="";
 currentLocation=null;
 document.getElementById("mapBox").innerHTML="Location not added";
-}
-
-/* ADMIN RESET */
-function adminReset(){
-let pass=prompt("Enter ADMIN PASSWORD:");
-if(pass!=="TNMNP@2026ADMIN"){
-alert("Wrong Password");
-return;
-}
-if(!confirm("Delete all data? Backup will be downloaded"))return;
-
-let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-let url=URL.createObjectURL(blob);
-let a=document.createElement("a");
-a.href=url;
-a.download="TMNP_BACKUP.json";
-a.click();
-
-localStorage.removeItem("tmnp");
-data=[];
-render();
-resetForm();
-
-alert("ADMIN RESET COMPLETED");
 }
 
 </script>
