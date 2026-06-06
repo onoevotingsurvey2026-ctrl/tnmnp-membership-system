@@ -1,121 +1,255 @@
 <!DOCTYPE html>
-<html lang="ta">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>TNMNP Membership System</title>
+<html lang="ta">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+
+content="width=device-width,initial-scale=1">
+
+<title>
+
+TNMNP Membership System
+
+</title>
 
 <style>
 
 body{
+
 margin:0;
+
 padding:20px;
-font-family:Arial;
+
+font-family:Arial,sans-serif;
+
 background:#f2f2f2;
+
 }
 
 .container{
+
 max-width:900px;
+
 margin:auto;
+
 background:#fff;
+
 padding:20px;
+
 border-radius:10px;
+
 box-shadow:0 0 10px rgba(0,0,0,.1);
+
 }
 
 /* HEADER */
 
 .header{
+
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
+
 border-bottom:3px solid #0b5ed7;
+
 padding-bottom:15px;
+
 flex-wrap:wrap;
+
 }
 
 .logoBox,
 .leaderBox{
+
 width:130px;
+
 text-align:center;
+
 }
 
 .logoBox img,
 .leaderBox img{
+
 width:120px;
+
 height:120px;
+
 border-radius:10px;
+
 border:1px solid #ccc;
+
 object-fit:cover;
+
 }
 
 .centerHeader{
+
 flex:1;
+
 text-align:center;
+
 padding:10px;
+
 }
 
-.centerHeader h2{
-margin:4px;
+.centerHeader h2,
+.centerHeader h3,
+.centerHeader p{
+
+margin:5px;
+
 }
 
 .centerHeader h3{
-margin:4px;
+
 color:green;
+
 }
 
-.box{
-background:#f8f8f8;
-padding:15px;
-margin-top:15px;
-border-radius:10px;
-}
+input,
+textarea,
+button{
 
-input,textarea,button{
 width:100%;
+
 padding:12px;
+
 margin-top:8px;
+
 margin-bottom:12px;
+
 box-sizing:border-box;
+
 }
 
 button{
+
 background:#0b5ed7;
-color:white;
+
+color:#fff;
+
 border:none;
+
 font-size:16px;
+
 cursor:pointer;
+
+border-radius:5px;
+
 }
 
 .card{
+
 display:none;
+
 margin-top:20px;
+
 padding:20px;
+
 border:2px solid #0b5ed7;
+
 border-radius:10px;
+
 background:#fff;
+
 }
 
-.card img{
+.memberImage{
+
 width:120px;
+
 height:120px;
+
 object-fit:cover;
+
 border-radius:10px;
+
+border:1px solid #ccc;
+
 }
 
-.icons{
+.actionButtons{
 
 display:flex;
-gap:20px;
-justify-content:center;
-font-size:30px;
+
+flex-wrap:wrap;
+
+gap:10px;
 
 }
 
-.icons a{
+.actionButtons button{
 
-text-decoration:none;
+flex:1;
+
+min-width:120px;
+
+}
+
+@media(max-width:600px){
+
+.header{
+
+flex-direction:column;
+
+}
+
+.logoBox,
+.leaderBox{
+
+width:auto;
+
+}
+
+}
+
+@page{
+
+size:A4 portrait;
+
+margin:10mm;
+
+}
+
+@media print{
+
+body{
+
+background:#fff;
+
+padding:0;
+
+}
+
+.container{
+
+box-shadow:none;
+
+border:none;
+
+padding:0;
+
+width:100%;
+
+}
+
+button{
+
+display:none;
+
+}
+
+input[type=file]{
+
+display:none;
+
+}
 
 }
 
@@ -127,141 +261,125 @@ text-decoration:none;
 
 <div class="container">
 
-<!-- HEADER -->
-
 <div class="header">
 
 <div class="logoBox">
 
-<img id="logoPreview">
-
-<input type="file"
-onchange="previewLogo(event)">
+<img src="logo.png">
 
 </div>
 
-
 <div class="centerHeader">
 
-<h2> Political Party Membership Registration Form அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்</h2>
-
 <h2>
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+
+Political Party Membership Registration Form
+
 </h2>
 
-<h3>TMNP - TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</h3>
+<h2>
+
+அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்
+
+</h2>
+
+<h2>
+
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+
+</h2>
+
+<h3>
+
+TMNP - TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
+
+</h3>
 
 <p>
 
-இந்திய தேர்தல் ஆணையம் பதிவு எண்:
+Election Commission Registration
 
-56/219/2018-2021/PPS-I Dated 05th March 2021
+56/219/2018-2021/PPS-I
 
 </p>
 
 <b>
 
-Party President / General Secretary N RAMAN
+Party President / General Secretary
 
-<br>
-
-தலைவர்  / பொதுச் செயலாளர் ந ராமன் 
+N RAMAN
 
 </b>
 
 <p>
 
-No.9, 1st Floor,
+No.9 1st Floor,
+
 2nd Cross Street,
+
 Gomathipuram,
-Thiruninravur R.S,
 
-Pincode:602024,
-
-Thiruvallur District,
-
-Tamil Nadu
+Thiruninravur R.S
 
 </p>
 
 <p>
 
-📧
+Thiruvallur District
 
-tnmakkalnalvazhvuperiyakkam@gmail.com
-
-</p>
-
-<p>
-
-🌐Live website:
-
-https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
+Tamil Nadu - 602024
 
 </p>
 
 <p>
 
-📍
-
-<a target="_blank"
-
-href="https://maps.google.com">
-
-Open Google Map
-
-</a>
+[tnmakkalnalvazhvuperiyakkam@gmail.com](mailto:tnmakkalnalvazhvuperiyakkam@gmail.com)
 
 </p>
 
 </div>
-
 
 <div class="leaderBox">
 
-<img id="leaderPreview">
-
-<input type="file"
-
-onchange="previewLeader(event)">
+<img src="leaderphoto.jpg">
 
 </div>
 
 </div>
-
-
-
-<!-- FORM -->
 
 <form id="memberForm">
 
-<input id="voterid"
+<input
+
+id="voterid"
 
 placeholder="Voter ID"
 
 required>
 
+<input
 
-<input id="phone"
+id="phone"
 
-placeholder="Mobile"
+placeholder="Mobile Number"
 
 required>
 
+<input
 
-<input id="email"
+id="email"
 
 placeholder="Gmail Address"
 
 required>
 
+<input
 
-<input id="voteName"
+id="voteName"
 
 placeholder="Vote Name"
 
 required>
-
 
 <textarea
 
@@ -270,7 +388,6 @@ id="address"
 placeholder="Address">
 
 </textarea>
-
 
 <label>
 
@@ -284,8 +401,9 @@ type="file"
 
 id="photo"
 
-accept="image/*">
+accept="image/*"
 
+required>
 
 <label>
 
@@ -295,10 +413,9 @@ type="checkbox"
 
 required>
 
-I Confirm All Details Are Correct
+I confirm details are correct
 
 </label>
-
 
 <button>
 
@@ -308,10 +425,9 @@ Register Member
 
 </form>
 
+<div
 
-<!-- CARD -->
-
-<div id="card"
+id="card"
 
 class="card">
 
@@ -321,13 +437,19 @@ Registered Member
 
 </h2>
 
-<img id="memberPhoto">
+<img
+
+id="memberPhoto"
+
+class="memberImage">
 
 <p>
 
 Registration ID:
 
-<span id="reg"></span>
+<span id="reg">
+
+</span>
 
 </p>
 
@@ -335,7 +457,9 @@ Registration ID:
 
 Voter ID:
 
-<span id="cvoter"></span>
+<span id="cvoter">
+
+</span>
 
 </p>
 
@@ -343,15 +467,19 @@ Voter ID:
 
 Mobile:
 
-<span id="cmobile"></span>
+<span id="cmobile">
+
+</span>
 
 </p>
 
 <p>
 
-Gmail:
+Email:
 
-<span id="cemail"></span>
+<span id="cemail">
+
+</span>
 
 </p>
 
@@ -359,7 +487,9 @@ Gmail:
 
 Vote Name:
 
-<span id="cvote"></span>
+<span id="cvote">
+
+</span>
 
 </p>
 
@@ -367,13 +497,19 @@ Vote Name:
 
 Address:
 
-<span id="caddress"></span>
+<span id="caddress">
+
+</span>
 
 </p>
 
+<div class="actionButtons">
+
 <button
 
-onclick="window.print()">
+onclick="window.print()"
+
+type="button">
 
 Print PDF
 
@@ -381,60 +517,43 @@ Print PDF
 
 <button
 
-onclick="shareWA()">
+onclick="shareWA()"
 
-Share WhatsApp
+type="button">
 
-</button>
-
-<button
-
-onclick="gmailOpen()">
-
-Open Gmail
+WhatsApp
 
 </button>
 
 <button
 
-onclick="resetAll()">
+onclick="gmailOpen()"
 
-Reset Form
+type="button">
+
+Email
 
 </button>
 
+<button
 
-<div class="icons">
+onclick="resetAll()"
 
-<a
+type="button">
 
-href="https://wa.me/918939324309">
+Reset
 
-📱
-
-</a>
-
-<a
-
-href="mailto:tnmakkalnalvazhvuperiyakkam@gmail.com">
-
-📧
-
-</a>
+</button>
 
 </div>
 
 </div>
 
 </div>
-
-
-<!-- FIREBASE -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-
 
 <script>
 
@@ -458,34 +577,6 @@ firebase.initializeApp(firebaseConfig);
 
 const db=firebase.firestore();
 
-
-function previewLogo(e){
-
-logoPreview.src=
-
-URL.createObjectURL(
-
-e.target.files[0]
-
-);
-
-}
-
-
-function previewLeader(e){
-
-leaderPreview.src=
-
-URL.createObjectURL(
-
-e.target.files[0]
-
-);
-
-}
-
-
-
 memberForm.addEventListener(
 
 "submit",
@@ -494,11 +585,11 @@ function(e){
 
 e.preventDefault();
 
-let id=
+const regId=
 
 "TNMNP-"+Date.now();
 
-reg.innerText=id;
+reg.innerText=regId;
 
 cvoter.innerText=voterid.value;
 
@@ -510,9 +601,6 @@ cvote.innerText=voteName.value;
 
 caddress.innerText=address.value;
 
-
-if(photo.files[0]){
-
 memberPhoto.src=
 
 URL.createObjectURL(
@@ -521,14 +609,13 @@ photo.files[0]
 
 );
 
-}
+db.collection(
 
+"members"
 
-db.collection("members")
+).add({
 
-.add({
-
-regNo:id,
+regNo:regId,
 
 voterId:voterid.value,
 
@@ -542,17 +629,26 @@ address:address.value
 
 });
 
-
 card.style.display="block";
 
-});
+window.scrollTo(
+
+0,
+
+document.body.scrollHeight
+
+);
+
+}
+
+);
 
 
 function shareWA(){
 
-let msg=
+const msg=
 
-"TNMNP Registration : "
+"TNMNP Registration ID : "
 
 +reg.innerText;
 
