@@ -12,43 +12,55 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
-/* HEADER */
+/* HEADER FIXED STYLE */
 header{
 background:#0b3d91;
 color:white;
 padding:15px;
 }
 
+/* FIXED HEADER GRID */
 .header-row{
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:10px;
+gap:15px;
 flex-wrap:wrap;
 }
 
+/* FIXED IMAGES */
 .logo,.leader{
-height:85px;
-width:85px;
+height:90px;
+width:90px;
 border-radius:8px;
 object-fit:cover;
+flex-shrink:0;
 }
 
+/* CENTER TITLE BLOCK */
 .title{
 flex:1;
 text-align:center;
-min-width:300px;
+min-width:320px;
 }
 
+/* TEXT STYLE */
 .title h2{
 margin:5px 0;
 font-size:18px;
 }
 
 .title p{
-margin:3px 0;
+margin:4px 0;
 font-size:13px;
-line-height:1.4;
+line-height:1.5;
+}
+
+/* SEPARATE INFO BLOCKS */
+.info-block{
+margin-top:6px;
+font-size:13px;
+line-height:1.6;
 }
 
 /* CONTAINER */
@@ -122,42 +134,65 @@ color:white;
 
 <!-- HEADER -->
 <header>
+
 <div class="header-row">
 
+<!-- LOGO (PERMANENT FIXED) -->
 <img class="logo"
-src="https://via.placeholder.com/85x85.png?text=LOGO">
+src="https://via.placeholder.com/90x90.png?text=TMNP+LOGO"
+alt="Logo">
 
+<!-- CENTER CONTENT -->
 <div class="title">
 
 <h2>TMNP - Political Party Membership System</h2>
 
 <p>அரசியல் கட்சி உறுப்பினர் சேர்க்கை படிவம்</p>
 
-<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</p>
+<p>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் (TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM)</p>
 
-<p>
-Head Quarters/தலைமையகம்: No.9, 1st Floor, 2nd Cross Street, Gomathipuram, Thiruninravur,  
-Pincode: 602024, Thiruvallur District, Tamilnadu State, India  
-Mobile: +91 8939324309
-</p>
+<!-- ADDRESS BLOCK SEPARATE -->
+<div class="info-block">
+📍 Head Quarters/தலைமையகம்:<br>
+No.9, 1st Floor, 2nd Cross Street, Gomathipuram,<br>
+Thiruninravur, Pincode: 602024,<br>
+Thiruvallur District, Tamilnadu State, India
+</div>
 
-<p>
+<!-- MOBILE SEPARATE -->
+<div class="info-block">
+📱 Mobile No: +91 8939324309
+</div>
+
+<!-- EMAIL + WEBSITE -->
+<div class="info-block">
 📧 tnmnp2025@gmail.com |
-🌐 LIVE WEBSITE:
+🌐 Website:
 <a href="https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/"
 target="_blank" style="color:#ffdd57;">
-Click Here
+LIVE LINK
 </a>
-</p>
+</div>
 
-<p><b>President: N RAMAN | Thiruvallur District, Tamilnadu</b></p>
+<!-- PRESIDENT FINAL CORRECTED -->
+<div class="info-block">
+<b>
+President / General Secretary:<br>
+N RAMAN<br>
+தலைவர் / பொதுச் செயலாளர் ந ராமன்<br>
+Thiruvallur District, Tamilnadu
+</b>
+</div>
 
 </div>
 
+<!-- LEADER IMAGE (PERMANENT FIXED) -->
 <img class="leader"
-src="https://via.placeholder.com/85x85.png?text=LEADER">
+src="https://via.placeholder.com/90x90.png?text=LEADER"
+alt="Leader">
 
 </div>
+
 </header>
 
 <!-- FORM -->
@@ -211,16 +246,14 @@ let currentLocation = null;
 
 render();
 
-/* LIVE LOCATION */
+/* LOCATION */
 function getLocation(){
-
 if(!navigator.geolocation){
 alert("Geolocation not supported");
 return;
 }
 
 navigator.geolocation.getCurrentPosition(pos=>{
-
 currentLocation = {
 lat: pos.coords.latitude,
 lng: pos.coords.longitude
@@ -231,10 +264,8 @@ document.getElementById("mapBox").innerHTML =
 Longitude: ${currentLocation.lng}<br>
 <a target="_blank"
 href="https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}">
-Open in Google Maps</a>`;
-
+Open Map</a>`;
 });
-
 }
 
 /* SAVE */
