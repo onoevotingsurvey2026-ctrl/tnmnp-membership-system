@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System</title>
+<title>TMNP Membership System V2</title>
 
 <style>
+
 body{
 margin:0;
 font-family:Arial;
@@ -15,30 +16,27 @@ background:#f2f2f2;
 .container{
 max-width:1000px;
 margin:auto;
-background:white;
+background:#fff;
 padding:20px;
 margin-top:20px;
 border-radius:10px;
 }
 
-/* HEADER */
 header{
 background:#0b3d91;
-color:white;
+color:#fff;
 padding:18px;
 }
 
 .header-box{
-border:2px solid rgba(255,255,255,0.25);
+border:2px solid rgba(255,255,255,.25);
 padding:15px;
 border-radius:10px;
 }
 
-/* TOP LOGO AREA */
 .top-row{
 display:flex;
 justify-content:space-between;
-align-items:center;
 flex-wrap:wrap;
 gap:10px;
 }
@@ -52,75 +50,46 @@ width:85px;
 height:85px;
 object-fit:cover;
 border-radius:8px;
-border:2px solid white;
+border:2px solid #fff;
 }
 
 .title{
 text-align:center;
-flex:1;
-min-width:280px;
 }
 
-/* HEADER TEXT */
 .slogan{
 font-size:13px;
-font-weight:700;
+font-weight:bold;
 line-height:1.6;
 }
 
 .join{
-font-size:15px;
 font-weight:900;
 color:#ff4d6d;
-animation:blink 1.2s infinite;
-margin:6px 0;
+margin:10px 0;
 }
 
-@keyframes blink{
-0%{opacity:1;}
-50%{opacity:0.3;}
-100%{opacity:1;}
-}
-
-/* PARTY NAME */
 .party-en{
-font-size:20px;
+font-size:22px;
 font-weight:900;
 color:#ffd700;
-margin-top:10px;
 }
 
 .party-ta{
-font-size:16px;
+font-size:18px;
 font-weight:800;
-margin-top:4px;
 }
 
-/* INFO */
 .info{
+margin-top:8px;
 font-size:13px;
-line-height:1.8;
-margin-top:6px;
 }
 
-/* LIVE PORTAL */
 .live-site{
 color:#ffea00;
-font-weight:900;
-border:1px solid #ffea00;
-padding:3px 8px;
-border-radius:4px;
-display:inline-block;
-animation:liveBlink 1s infinite;
+font-weight:bold;
 }
 
-@keyframes liveBlink{
-0%{opacity:1;}
-50%{opacity:0.4;}
-100%{opacity:1;}
-}
-
-/* INPUT */
 input{
 width:100%;
 padding:10px;
@@ -128,70 +97,101 @@ margin:6px 0;
 box-sizing:border-box;
 }
 
-/* BUTTON */
 button{
 padding:10px;
-margin:5px 0;
 border:none;
 cursor:pointer;
 border-radius:5px;
+margin:5px 0;
 }
 
-.btn{background:#0b3d91;color:white;}
-.btn-danger{background:red;color:white;}
-.btn-green{background:green;color:white;}
-
-/* TABLE */
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:15px;
+.btn{
+background:#0b3d91;
+color:#fff;
 }
 
-th,td{
-border:1px solid #ddd;
-padding:8px;
-text-align:center;
-font-size:13px;
+.btn-green{
+background:green;
+color:#fff;
 }
 
-.member-img{
-width:50px;
-height:50px;
-object-fit:cover;
-border-radius:5px;
-}
-
-/* MAP */
 .map-box{
-margin-top:10px;
+
 padding:10px;
 background:#f5f5f5;
 border-radius:8px;
-font-size:13px;
+margin-top:10px;
+
 }
+
+#idCard{
+
+margin-top:20px;
+
+}
+
+.card{
+
+border:2px solid #0b3d91;
+
+padding:20px;
+
+background:white;
+
+max-width:650px;
+
+border-radius:10px;
+
+}
+
+.member-img{
+
+width:100px;
+
+height:100px;
+
+object-fit:cover;
+
+border-radius:6px;
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <div class="header-box">
 
 <div class="top-row">
 
 <div class="img-box">
+
 <img id="logoPreview">
-<br>
-<input type="file" accept="image/*" onchange="loadLogo(event)">
+
+<input
+type="file"
+accept="image/*"
+onchange="loadLogo(event)">
+
 <p>LOGO</p>
+
 </div>
 
 <div class="img-box">
+
 <img id="leaderPreview">
-<br>
-<input type="file" accept="image/*" onchange="loadLeader(event)">
+
+<input
+type="file"
+accept="image/*"
+onchange="loadLeader(event)">
+
 <p>LEADER</p>
+
 </div>
 
 </div>
@@ -199,190 +199,459 @@ font-size:13px;
 <div class="title">
 
 <div class="slogan">
+
 நேர்மை - நலன் - நம்பிக்கை<br>
+
 மக்களுக்காக மக்களால்<br>
+
 நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்
+
 </div>
 
-<div class="join">"JOIN WITH US"</div>
+<div class="join">
+
+JOIN WITH US
+
+</div>
 
 <div class="party-en">
+
 TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
+
 </div>
 
 <div class="party-ta">
+
 தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+
 </div>
 
 <div class="info">
+
 📍 Head Quarters:<br>
-No.9, 1st Floor, 2nd Cross Street, Gomathipuram,<br>
-Thiruninravur - 602024, Tamilnadu
+
+No.9 1st Floor 2nd Cross Street Gomathipuram<br>
+
+Thiruninravur - 602024 Tamilnadu
+
 </div>
 
 <div class="info">
-📱 Mobile: +91 8939324309
+
+📱 +91 8939324309
+
 </div>
 
 <div class="info">
+
 📧 tnmnp2025@gmail.com
+
 </div>
 
 <div class="info">
-🌐 Website:
-<span class="live-site">LIVE PORTAL</span>
-</div>
+
+🌐
+
+<span class="live-site">
+
+LIVE PORTAL
+
+</span>
 
 </div>
 
 </div>
+
+</div>
+
 </header>
 
-<!-- FORM -->
 <div class="container">
 
-<h2>Membership Registration</h2>
+<h2>
+
+Membership Registration
+
+</h2>
 
 <input id="name" placeholder="Name">
+
 <input id="phone" placeholder="Phone">
+
 <input id="voterid" placeholder="Voter ID">
+
 <input id="email" placeholder="Email">
+
 <input id="address" placeholder="Address">
+
 <input id="district" placeholder="District">
 
 <input type="file" id="photo">
 
-<button class="btn-green" onclick="getLocation()">📍 Get Location</button>
+<button
+class="btn-green"
+onclick="getLocation()">
 
-<div class="map-box" id="mapBox">Location not added</div>
+📍 Get Location
 
-<button class="btn" onclick="save()">Submit</button>
+</button>
 
-<h3>Dashboard</h3>
+<div
+class="map-box"
+id="mapBox">
 
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Photo</th>
-<th>Name</th>
-<th>Phone</th>
-<th>Voter ID</th>
-<th>Email</th>
-<th>Address</th>
-<th>District</th>
-<th>Map</th>
-</tr>
-</thead>
-<tbody id="tbody"></tbody>
-</table>
+Location not added
+
+</div>
+
+<button
+class="btn"
+onclick="save()">
+
+Submit
+
+</button>
+
+<h3>
+
+Membership Card
+
+</h3>
+
+<div id="idCard"></div>
+
+<button
+class="btn-green"
+onclick="downloadPDF()">
+
+Download PDF
+
+</button>
+
+<button
+class="btn-green"
+onclick="exportExcel()">
+
+Download Excel
+
+</button>
 
 </div>
 
 <script>
 
-let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
+let data=
+JSON.parse(
+localStorage.getItem("tmnp")
+||"[]"
+);
+
 let currentLocation=null;
 
-/* LOGO */
 function loadLogo(e){
-let r=new FileReader();
-r.onload=()=>document.getElementById("logoPreview").src=r.result;
-r.readAsDataURL(e.target.files[0]);
+
+let r=
+new FileReader();
+
+r.onload=
+()=>logoPreview.src=r.result;
+
+r.readAsDataURL(
+e.target.files[0]
+);
+
 }
 
-/* LEADER */
 function loadLeader(e){
-let r=new FileReader();
-r.onload=()=>document.getElementById("leaderPreview").src=r.result;
-r.readAsDataURL(e.target.files[0]);
+
+let r=
+new FileReader();
+
+r.onload=
+()=>leaderPreview.src=r.result;
+
+r.readAsDataURL(
+e.target.files[0]
+);
+
 }
 
-/* LOCATION */
 function getLocation(){
+
 navigator.geolocation.getCurrentPosition(pos=>{
+
 currentLocation={
+
 lat:pos.coords.latitude,
+
 lng:pos.coords.longitude
+
 };
 
-document.getElementById("mapBox").innerHTML=
-`Lat:${currentLocation.lat}<br>
-Lng:${currentLocation.lng}<br>
-<a target="_blank"
-href="https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}">
-Open Map</a>`;
+mapBox.innerHTML=
+
+`Lat:
+
+${currentLocation.lat}
+
+<br>
+
+Lng:
+
+${currentLocation.lng}
+
+`;
+
 });
+
 }
 
-/* SAVE */
 function save(){
 
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let voterid=document.getElementById("voterid").value;
-let email=document.getElementById("email").value;
-let address=document.getElementById("address").value;
-let district=document.getElementById("district").value;
-let file=document.getElementById("photo").files[0];
+let file=
+photo.files[0];
 
-if(!name||!phone||!voterid){
-alert("Fill required fields");
+if(!name.value||!phone.value){
+
+alert("Required");
+
 return;
+
 }
 
-let reader=new FileReader();
+let reader=
+new FileReader();
 
 reader.onload=function(){
 
-data.push({
-id:"TMNP-"+Date.now(),
-name,phone,voterid,email,address,district,
-photo:reader.result,
-location:currentLocation
-});
+let member={
 
-localStorage.setItem("tmnp",JSON.stringify(data));
-render();
-resetForm();
+id:
+"TMNP-"+Date.now(),
+
+timestamp:
+new Date().toLocaleString(),
+
+name:name.value,
+
+phone:phone.value,
+
+voterid:voterid.value,
+
+email:email.value,
+
+address:address.value,
+
+district:district.value,
+
+photo:reader.result,
+
+location:currentLocation
+
 };
 
+data.push(member);
+
+localStorage.setItem(
+"tmnp",
+JSON.stringify(data)
+);
+
+renderCard(member);
+
+resetForm();
+
+};
+
+if(file){
+
 reader.readAsDataURL(file);
+
+}else{
+
+reader.onload();
+
 }
 
-/* RENDER */
-function render(){
-let tbody=document.getElementById("tbody");
-tbody.innerHTML="";
+}
+
+function renderCard(m){
+
+idCard.innerHTML=
+
+`
+
+<div class="card">
+
+<h2>
+
+TMNP MEMBERSHIP CARD
+
+</h2>
+
+<img
+
+class="member-img"
+
+src="${m.photo||''}"
+
+>
+
+<p>
+
+<b>ID:</b>
+
+${m.id}
+
+</p>
+
+<p>
+
+<b>Name:</b>
+
+${m.name}
+
+</p>
+
+<p>
+
+<b>Phone:</b>
+
+${m.phone}
+
+</p>
+
+<p>
+
+<b>District:</b>
+
+${m.district}
+
+</p>
+
+<p>
+
+<b>Timestamp:</b>
+
+${m.timestamp}
+
+</p>
+
+</div>
+
+`;
+
+}
+
+function downloadPDF(){
+
+window.print();
+
+}
+
+function exportExcel(){
+
+let rows=[];
+
+rows.push([
+
+"ID",
+
+"Timestamp",
+
+"Name",
+
+"Phone",
+
+"VoterID",
+
+"Email",
+
+"Address",
+
+"District",
+
+"Latitude",
+
+"Longitude"
+
+]);
 
 data.forEach(d=>{
-let map=d.location
-? `<a target="_blank" href="https://www.google.com/maps?q=${d.location.lat},${d.location.lng}">View</a>`
-: "No Map";
 
-tbody.innerHTML+=`
-<tr>
-<td>${d.id}</td>
-<td><img class="member-img" src="${d.photo}"></td>
-<td>${d.name}</td>
-<td>${d.phone}</td>
-<td>${d.voterid}</td>
-<td>${d.email}</td>
-<td>${d.address}</td>
-<td>${d.district}</td>
-<td>${map}</td>
-</tr>`;
+rows.push([
+
+d.id,
+
+d.timestamp,
+
+d.name,
+
+d.phone,
+
+d.voterid,
+
+d.email,
+
+d.address,
+
+d.district,
+
+d.location?.lat||"",
+
+d.location?.lng||""
+
+]);
+
 });
+
+let csv=
+rows.map(
+r=>r.join(",")
+).join("\n");
+
+let blob=
+new Blob(
+[csv],
+{
+type:"text/csv"
+}
+);
+
+let a=
+document.createElement("a");
+
+a.href=
+URL.createObjectURL(blob);
+
+a.download=
+"TMNP_REPORT.csv";
+
+a.click();
+
 }
 
-/* RESET FORM ONLY */
 function resetForm(){
-["name","phone","voterid","email","address","district"].forEach(id=>{
-document.getElementById(id).value="";
-});
-document.getElementById("photo").value="";
-currentLocation=null;
-document.getElementById("mapBox").innerHTML="Location not added";
+
+[
+"name",
+"phone",
+"voterid",
+"email",
+"address",
+"district"
+
+].forEach(
+
+x=>document.getElementById(x).value=""
+
+);
+
+photo.value="";
+
+mapBox.innerHTML=
+"Location not added";
+
 }
 
 </script>
