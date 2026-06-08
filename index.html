@@ -57,6 +57,39 @@ border:2px solid #fff;
 text-align:center;
 }
 
+.slogan{
+font-size:13px;
+font-weight:bold;
+line-height:1.6;
+}
+
+.join{
+font-weight:900;
+color:#ff4d6d;
+margin:10px 0;
+}
+
+.party-en{
+font-size:22px;
+font-weight:900;
+color:#ffd700;
+}
+
+.party-ta{
+font-size:18px;
+font-weight:800;
+}
+
+.info{
+margin-top:8px;
+font-size:13px;
+}
+
+.live-site{
+color:#ffea00;
+font-weight:bold;
+}
+
 input{
 width:100%;
 padding:10px;
@@ -92,8 +125,8 @@ margin-top:10px;
 .card{
 border:2px solid #0b3d91;
 padding:20px;
-border-radius:10px;
 background:white;
+border-radius:10px;
 margin-top:20px;
 }
 
@@ -104,9 +137,114 @@ object-fit:cover;
 }
 
 </style>
+
 </head>
 
 <body>
+
+<header>
+
+<div class="header-box">
+
+<div class="top-row">
+
+<div class="img-box">
+
+<img id="logoPreview">
+
+<input
+type="file"
+accept="image/*"
+onchange="loadLogo(event)">
+
+<p>LOGO</p>
+
+</div>
+
+<div class="img-box">
+
+<img id="leaderPreview">
+
+<input
+type="file"
+accept="image/*"
+onchange="loadLeader(event)">
+
+<p>LEADER</p>
+
+</div>
+
+</div>
+
+<div class="title">
+
+<div class="slogan">
+
+நேர்மை - நலன் - நம்பிக்கை<br>
+
+மக்களுக்காக மக்களால்<br>
+
+நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்
+
+</div>
+
+<div class="join">
+
+JOIN WITH US
+
+</div>
+
+<div class="party-en">
+
+TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
+
+</div>
+
+<div class="party-ta">
+
+தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
+
+</div>
+
+<div class="info">
+
+📍 Head Quarters:<br>
+
+No.9 1st Floor 2nd Cross Street Gomathipuram<br>
+
+Thiruninravur - 602024 Tamilnadu
+
+</div>
+
+<div class="info">
+
+📱 +91 8939324309
+
+</div>
+
+<div class="info">
+
+📧 tnmnp2025@gmail.com
+
+</div>
+
+<div class="info">
+
+🌐
+
+<span class="live-site">
+
+LIVE PORTAL
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
 
 <div class="container">
 
@@ -128,11 +266,11 @@ object-fit:cover;
 
 <button class="btn-green" onclick="getLocation()">
 
-Get Location
+📍 Get Location
 
 </button>
 
-<div id="mapBox" class="map-box">
+<div class="map-box" id="mapBox">
 
 Location not added
 
@@ -171,6 +309,32 @@ localStorage.getItem("tmnp")
 );
 
 let currentLocation=null;
+
+function loadLogo(e){
+
+let r=new FileReader();
+
+r.onload=
+()=>logoPreview.src=r.result;
+
+r.readAsDataURL(
+e.target.files[0]
+);
+
+}
+
+function loadLeader(e){
+
+let r=new FileReader();
+
+r.onload=
+()=>leaderPreview.src=r.result;
+
+r.readAsDataURL(
+e.target.files[0]
+);
+
+}
 
 function getLocation(){
 
@@ -216,7 +380,13 @@ reader.onload=function(){
 
 let now=new Date();
 
-let formattedTimestamp=
+let member={
+
+id:
+
+"TMNP-"+Date.now(),
+
+timestamp:
 
 String(now.getDate()).padStart(2,'0')
 
@@ -224,7 +394,9 @@ String(now.getDate()).padStart(2,'0')
 
 +
 
-String(now.getMonth()+1).padStart(2,'0')
+String(now.getMonth()+1)
+
+.padStart(2,'0')
 
 +"/"
 
@@ -238,49 +410,23 @@ now.getFullYear()
 
 +
 
-now.toLocaleTimeString();
+now.toLocaleTimeString(),
 
-let member={
+name:name.value,
 
-id:
+phone:phone.value,
 
-"TMNP-"+Date.now(),
+voterid:voterid.value,
 
-timestamp:
+email:email.value,
 
-formattedTimestamp,
+address:address.value,
 
-name:
+district:district.value,
 
-name.value,
+photo:reader.result,
 
-phone:
-
-phone.value,
-
-voterid:
-
-voterid.value,
-
-email:
-
-email.value,
-
-address:
-
-address.value,
-
-district:
-
-district.value,
-
-photo:
-
-reader.result,
-
-location:
-
-currentLocation
+location:currentLocation
 
 };
 
@@ -322,7 +468,7 @@ idCard.innerHTML=
 
 <h2>
 
-TMNP Membership Card
+TMNP MEMBERSHIP CARD
 
 </h2>
 
@@ -330,15 +476,15 @@ TMNP Membership Card
 
 src="${m.photo||''}">
 
-<p>ID : ${m.id}</p>
+<p>ID: ${m.id}</p>
 
-<p>Name : ${m.name}</p>
+<p>Name: ${m.name}</p>
 
-<p>Phone : ${m.phone}</p>
+<p>Phone: ${m.phone}</p>
 
-<p>District : ${m.district}</p>
+<p>District: ${m.district}</p>
 
-<p>Timestamp : ${m.timestamp}</p>
+<p>Timestamp: ${m.timestamp}</p>
 
 </div>
 
@@ -382,24 +528,6 @@ rows.push([
 
 data.forEach(d=>{
 
-let locationData="";
-
-if(d.location){
-
-locationData=
-
-(d.location.lat||"")
-
-+
-
-","
-
-+
-
-(d.location.lng||"");
-
-}
-
 rows.push([
 
 d.id,
@@ -418,15 +546,15 @@ d.address,
 
 d.district,
 
-d.photo ?
+d.photo ? "Photo Uploaded" : "",
 
-"Photo Uploaded"
+d.location ?
+
+d.location.lat+","+d.location.lng
 
 :
 
-"",
-
-locationData
+""
 
 ]);
 
@@ -450,13 +578,7 @@ new Blob(
 
 [csv],
 
-{
-
-type:
-
-"text/csv"
-
-}
+{type:"text/csv"}
 
 );
 
@@ -479,17 +601,11 @@ a.click();
 function resetForm(){
 
 name.value="";
-
 phone.value="";
-
 voterid.value="";
-
 email.value="";
-
 address.value="";
-
 district.value="";
-
 photo.value="";
 
 mapBox.innerHTML=
