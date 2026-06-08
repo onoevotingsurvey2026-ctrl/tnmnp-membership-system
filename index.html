@@ -1,3 +1,6 @@
+Replace your existing index.html with this version.
+
+```html
 <!DOCTYPE html>
 <html lang="ta">
 <head>
@@ -57,39 +60,6 @@ border:2px solid #fff;
 text-align:center;
 }
 
-.slogan{
-font-size:13px;
-font-weight:bold;
-line-height:1.6;
-}
-
-.join{
-font-weight:900;
-color:#ff4d6d;
-margin:10px 0;
-}
-
-.party-en{
-font-size:22px;
-font-weight:900;
-color:#ffd700;
-}
-
-.party-ta{
-font-size:18px;
-font-weight:800;
-}
-
-.info{
-margin-top:8px;
-font-size:13px;
-}
-
-.live-site{
-color:#ffea00;
-font-weight:bold;
-}
-
 input{
 width:100%;
 padding:10px;
@@ -107,12 +77,12 @@ margin:5px 0;
 
 .btn{
 background:#0b3d91;
-color:#fff;
+color:white;
 }
 
 .btn-green{
 background:green;
-color:#fff;
+color:white;
 }
 
 .map-box{
@@ -122,23 +92,18 @@ border-radius:8px;
 margin-top:10px;
 }
 
-#idCard{
-margin-top:20px;
-}
-
 .card{
 border:2px solid #0b3d91;
 padding:20px;
-background:white;
-max-width:650px;
 border-radius:10px;
+background:white;
+margin-top:20px;
 }
 
 .member-img{
 width:100px;
 height:100px;
 object-fit:cover;
-border-radius:6px;
 }
 
 </style>
@@ -146,85 +111,40 @@ border-radius:6px;
 
 <body>
 
-<header>
-
-<div class="header-box">
-
-<div class="top-row">
-
-<div class="img-box">
-<img id="logoPreview">
-<input type="file" accept="image/*" onchange="loadLogo(event)">
-<p>LOGO</p>
-</div>
-
-<div class="img-box">
-<img id="leaderPreview">
-<input type="file" accept="image/*" onchange="loadLeader(event)">
-<p>LEADER</p>
-</div>
-
-</div>
-
-<div class="title">
-
-<div class="slogan">
-நேர்மை - நலன் - நம்பிக்கை<br>
-மக்களுக்காக மக்களால்<br>
-நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்
-</div>
-
-<div class="join">JOIN WITH US</div>
-
-<div class="party-en">
-TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
-</div>
-
-<div class="party-ta">
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-</div>
-
-<div class="info">
-📍 Head Quarters:<br>
-No.9 1st Floor 2nd Cross Street Gomathipuram<br>
-Thiruninravur - 602024 Tamilnadu
-</div>
-
-<div class="info">📱 +91 8939324309</div>
-<div class="info">📧 tnmnp2025@gmail.com</div>
-
-<div class="info">
-🌐 <span class="live-site">LIVE PORTAL</span>
-</div>
-
-</div>
-</div>
-
-</header>
-
 <div class="container">
 
 <h2>Membership Registration</h2>
 
 <input id="name" placeholder="Name">
+
 <input id="phone" placeholder="Phone">
+
 <input id="voterid" placeholder="Voter ID">
+
 <input id="email" placeholder="Email">
+
 <input id="address" placeholder="Address">
+
 <input id="district" placeholder="District">
 
 <input type="file" id="photo">
 
 <button class="btn-green" onclick="getLocation()">
-📍 Get Location
+
+Get Location
+
 </button>
 
-<div class="map-box" id="mapBox">
+<div id="mapBox" class="map-box">
+
 Location not added
+
 </div>
 
 <button class="btn" onclick="save()">
+
 Submit
+
 </button>
 
 <h3>Membership Card</h3>
@@ -232,11 +152,15 @@ Submit
 <div id="idCard"></div>
 
 <button class="btn-green" onclick="downloadPDF()">
+
 Download PDF
+
 </button>
 
 <button class="btn-green" onclick="exportExcel()">
+
 Download Excel
+
 </button>
 
 </div>
@@ -251,29 +175,11 @@ localStorage.getItem("tmnp")
 
 let currentLocation=null;
 
-function loadLogo(e){
-
-let r=new FileReader();
-
-r.onload=()=>logoPreview.src=r.result;
-
-r.readAsDataURL(e.target.files[0]);
-
-}
-
-function loadLeader(e){
-
-let r=new FileReader();
-
-r.onload=()=>leaderPreview.src=r.result;
-
-r.readAsDataURL(e.target.files[0]);
-
-}
-
 function getLocation(){
 
-navigator.geolocation.getCurrentPosition(pos=>{
+navigator.geolocation.getCurrentPosition(
+
+pos=>{
 
 currentLocation={
 
@@ -285,10 +191,13 @@ lng:pos.coords.longitude
 
 mapBox.innerHTML=
 
-`Lat:${currentLocation.lat}<br>
-Lng:${currentLocation.lng}`;
+"Lat:"+currentLocation.lat+
 
-});
+"<br>Lng:"+currentLocation.lng;
+
+}
+
+);
 
 }
 
@@ -308,35 +217,84 @@ let reader=new FileReader();
 
 reader.onload=function(){
 
+let now=new Date();
+
+let formattedTimestamp=
+
+String(now.getDate()).padStart(2,'0')
+
++"/"
+
++
+
+String(now.getMonth()+1).padStart(2,'0')
+
++"/"
+
++
+
+now.getFullYear()
+
++
+
+" "
+
++
+
+now.toLocaleTimeString();
+
 let member={
 
-id:"TMNP-"+Date.now(),
+id:
 
-timestamp:new Date().toLocaleString(),
+"TMNP-"+Date.now(),
 
-name:name.value,
+timestamp:
 
-phone:phone.value,
+formattedTimestamp,
 
-voterid:voterid.value,
+name:
 
-email:email.value,
+name.value,
 
-address:address.value,
+phone:
 
-district:district.value,
+phone.value,
 
-photo:reader.result,
+voterid:
 
-location:currentLocation
+voterid.value,
+
+email:
+
+email.value,
+
+address:
+
+address.value,
+
+district:
+
+district.value,
+
+photo:
+
+reader.result,
+
+location:
+
+currentLocation
 
 };
 
 data.push(member);
 
 localStorage.setItem(
+
 "tmnp",
+
 JSON.stringify(data)
+
 );
 
 renderCard(member);
@@ -365,20 +323,25 @@ idCard.innerHTML=
 
 <div class="card">
 
-<h2>TMNP MEMBERSHIP CARD</h2>
+<h2>
+
+TMNP Membership Card
+
+</h2>
 
 <img class="member-img"
+
 src="${m.photo||''}">
 
-<p><b>ID:</b> ${m.id}</p>
+<p>ID : ${m.id}</p>
 
-<p><b>Name:</b> ${m.name}</p>
+<p>Name : ${m.name}</p>
 
-<p><b>Phone:</b> ${m.phone}</p>
+<p>Phone : ${m.phone}</p>
 
-<p><b>District:</b> ${m.district}</p>
+<p>District : ${m.district}</p>
 
-<p><b>Timestamp:</b> ${m.timestamp}</p>
+<p>Timestamp : ${m.timestamp}</p>
 
 </div>
 
@@ -392,8 +355,6 @@ window.print();
 
 }
 
-/* UPDATED EXCEL FUNCTION */
-
 function exportExcel(){
 
 let rows=[];
@@ -401,14 +362,23 @@ let rows=[];
 rows.push([
 
 "Membership ID",
+
 "Datestamp",
+
 "Name",
+
 "Mobile No",
+
 "Voter ID",
+
 "Gmail ID",
+
 "Address",
+
 "District",
+
 "Member Photo",
+
 "Get Location"
 
 ]);
@@ -420,45 +390,58 @@ let locationData="";
 if(d.location){
 
 locationData=
+
 (d.location.lat||"")
+
 +
+
 ","
+
 +
+
 (d.location.lng||"");
-
-}
-
-let photoStatus="";
-
-if(d.photo){
-
-photoStatus="Photo Uploaded";
 
 }
 
 rows.push([
 
-d.id||"",
-d.timestamp||"",
-d.name||"",
-d.phone||"",
-d.voterid||"",
-d.email||"",
-d.address||"",
-d.district||"",
-photoStatus,
+d.id,
+
+d.timestamp,
+
+d.name,
+
+d.phone,
+
+d.voterid,
+
+d.email,
+
+d.address,
+
+d.district,
+
+d.photo ?
+
+"Photo Uploaded"
+
+:
+
+"",
+
 locationData
 
 ]);
 
 });
 
-let csvContent=
+let csv=
+
 rows.map(
 
-row=>row.map(
+r=>r.map(
 
-col=>`"${String(col).replace(/"/g,'""')}"`
+x=>`"${x}"`
 
 ).join(",")
 
@@ -468,52 +451,52 @@ let blob=
 
 new Blob(
 
-[csvContent],
+[csv],
 
 {
 
-type:"text/csv;charset=utf-8;"
+type:
+
+"text/csv"
 
 }
 
 );
 
 let a=
+
 document.createElement("a");
 
 a.href=
+
 URL.createObjectURL(blob);
 
 a.download=
+
 "TMNP_REPORT.csv";
 
-document.body.appendChild(a);
-
 a.click();
-
-document.body.removeChild(a);
 
 }
 
 function resetForm(){
 
-[
-"name",
-"phone",
-"voterid",
-"email",
-"address",
-"district"
+name.value="";
 
-].forEach(
+phone.value="";
 
-x=>document.getElementById(x).value=""
+voterid.value="";
 
-);
+email.value="";
+
+address.value="";
+
+district.value="";
 
 photo.value="";
 
 mapBox.innerHTML=
+
 "Location not added";
 
 }
@@ -521,4 +504,6 @@ mapBox.innerHTML=
 </script>
 
 </body>
+
 </html>
+```
