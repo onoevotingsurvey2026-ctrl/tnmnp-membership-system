@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html lang="ta">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TMNP Membership System V2</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+
+content="width=device-width,initial-scale=1.0">
+
+<title>
+
+TMNP Membership System V2
+
+</title>
 
 <style>
 
 body{
+
 margin:0;
+
 font-family:Arial;
+
 background:#f2f2f2;
+
 }
 
 header{
+
 background:#0b3d91;
+
 color:white;
+
 padding:18px;
+
 }
 
 .header-box{
 
-border:2px solid rgba(255,255,255,.3);
-
 padding:15px;
 
 border-radius:10px;
+
+border:2px solid rgba(255,255,255,.3);
 
 }
 
@@ -52,9 +69,9 @@ width:85px;
 
 height:85px;
 
-border-radius:8px;
-
 object-fit:cover;
+
+border-radius:8px;
 
 border:2px solid white;
 
@@ -72,7 +89,7 @@ font-size:13px;
 
 font-weight:bold;
 
-line-height:1.5;
+line-height:1.6;
 
 }
 
@@ -85,24 +102,6 @@ font-weight:900;
 color:#ff4d6d;
 
 animation:blink 1s infinite;
-
-}
-
-.party-en{
-
-font-size:22px;
-
-font-weight:900;
-
-color:#ffd700;
-
-}
-
-.party-ta{
-
-font-size:18px;
-
-font-weight:bold;
 
 }
 
@@ -132,9 +131,9 @@ max-width:1000px;
 
 margin:auto;
 
-padding:20px;
-
 background:white;
+
+padding:20px;
 
 margin-top:20px;
 
@@ -184,15 +183,25 @@ color:white;
 
 }
 
+.map-box{
+
+background:#f5f5f5;
+
+padding:10px;
+
+border-radius:8px;
+
+}
+
 .card{
 
 border:2px solid #0b3d91;
 
 padding:20px;
 
-border-radius:10px;
-
 margin-top:20px;
+
+border-radius:10px;
 
 }
 
@@ -203,16 +212,6 @@ width:100px;
 height:100px;
 
 object-fit:cover;
-
-}
-
-.map-box{
-
-background:#f5f5f5;
-
-padding:10px;
-
-border-radius:8px;
 
 }
 
@@ -262,7 +261,7 @@ onchange="loadLeader(event)">
 
 <div class="slogan">
 
-நேர்மை • நலன் • நம்பிக்கை<br>
+நேர்மை - நலன் - நம்பிக்கை<br>
 
 மக்களுக்காக மக்களால்<br>
 
@@ -276,19 +275,19 @@ JOIN WITH US
 
 </div>
 
-<div class="party-en">
+<h2>
 
 TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
 
-</div>
+</h2>
 
-<div class="party-ta">
+<h3>
 
 தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
 
-</div>
+</h3>
 
-<br>
+<p>
 
 📍 Head Quarters<br>
 
@@ -298,19 +297,23 @@ No.9 First Floor<br>
 
 Gomathipuram<br>
 
-Thiruninravur-602024<br>
+Thiruninravur-602024
 
-Tamil Nadu
+</p>
 
-<br><br>
+<p>
 
 📱 +91 8939324309
 
-<br><br>
+</p>
+
+<p>
 
 📧 tnmnp2025@gmail.com
 
-<br><br>
+</p>
+
+<p>
 
 🌐
 
@@ -319,6 +322,8 @@ Tamil Nadu
 WEBSITE PORTAL
 
 </span>
+
+</p>
 
 </div>
 
@@ -432,35 +437,25 @@ const n=new Date();
 
 return n.getFullYear()+"-"+
 
-String(n.getMonth()+1)
-
-.padStart(2,'0')
+String(n.getMonth()+1).padStart(2,'0')
 
 +"-"+
 
-String(n.getDate())
-
-.padStart(2,'0')
+String(n.getDate()).padStart(2,'0')
 
 +"_"
 
 +
 
-String(n.getHours())
-
-.padStart(2,'0')
+String(n.getHours()).padStart(2,'0')
 
 +"-"+
 
-String(n.getMinutes())
-
-.padStart(2,'0')
+String(n.getMinutes()).padStart(2,'0')
 
 +"-"+
 
-String(n.getSeconds())
-
-.padStart(2,'0');
+String(n.getSeconds()).padStart(2,'0');
 
 }
 
@@ -526,7 +521,9 @@ function save(){
 
 let file=
 
-photo.files[0];
+document.getElementById("photo")
+
+.files[0];
 
 let reader=
 
@@ -540,17 +537,29 @@ id:"TMNP-"+Date.now(),
 
 timestamp:getDateStamp(),
 
-name:name.value,
+name:
 
-phone:phone.value,
+document.getElementById("name").value,
 
-voterid:voterid.value,
+phone:
 
-email:email.value,
+document.getElementById("phone").value,
 
-address:address.value,
+voterid:
 
-district:district.value,
+document.getElementById("voterid").value,
+
+email:
+
+document.getElementById("email").value,
+
+address:
+
+document.getElementById("address").value,
+
+district:
+
+document.getElementById("district").value,
 
 photo:reader.result,
 
@@ -569,6 +578,8 @@ JSON.stringify(data)
 );
 
 renderCard(m);
+
+resetForm();
 
 };
 
@@ -626,7 +637,7 @@ function exportExcel(){
 
 let rows=[
 
-["Membership ID","Datestamp","Name","Mobile","Voter ID","Email","Address","District","Photo","Location"]
+["Membership ID","Datestamp","Name","Phone","Voter ID","Email","Address","District","Photo","Location"]
 
 ];
 
@@ -650,9 +661,7 @@ d.address,
 
 d.district,
 
-d.photo?
-
-"Uploaded":"",
+d.photo?"Uploaded":"",
 
 d.location?
 
@@ -691,6 +700,28 @@ getDateStamp()+
 ".csv";
 
 a.click();
+
+}
+
+function resetForm(){
+
+document.getElementById("name").value="";
+
+document.getElementById("phone").value="";
+
+document.getElementById("voterid").value="";
+
+document.getElementById("email").value="";
+
+document.getElementById("address").value="";
+
+document.getElementById("district").value="";
+
+document.getElementById("photo").value="";
+
+mapBox.innerHTML=
+
+"Location not added";
 
 }
 
