@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System V2</title>
+<title>TMNP Membership System V3</title>
 
 <style>
-
 body{
 margin:0;
 font-family:Arial;
@@ -22,6 +21,7 @@ margin-top:20px;
 border-radius:10px;
 }
 
+/* HEADER */
 header{
 background:#0b3d91;
 color:#fff;
@@ -34,62 +34,32 @@ padding:15px;
 border-radius:10px;
 }
 
-.top-row{
+/* NAV */
+.nav{
 display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
 gap:10px;
-}
-
-.img-box{
-text-align:center;
-}
-
-.img-box img{
-width:85px;
-height:85px;
-object-fit:cover;
-border-radius:8px;
-border:2px solid #fff;
-}
-
-.title{
-text-align:center;
-}
-
-.slogan{
-font-size:13px;
-font-weight:bold;
-line-height:1.6;
-}
-
-.join{
-font-weight:900;
-color:#ff4d6d;
+flex-wrap:wrap;
 margin:10px 0;
 }
 
-.party-en{
-font-size:22px;
-font-weight:900;
-color:#ffd700;
-}
-
-.party-ta{
-font-size:18px;
-font-weight:800;
-}
-
-.info{
-margin-top:8px;
-font-size:13px;
-}
-
-.live-site{
-color:#ffea00;
+.nav button{
+padding:10px 15px;
+border:none;
+cursor:pointer;
+border-radius:5px;
 font-weight:bold;
 }
 
+.active{
+background:#0b3d91;
+color:#fff;
+}
+
+.inactive{
+background:#ddd;
+}
+
+/* INPUT */
 input{
 width:100%;
 padding:10px;
@@ -105,553 +75,247 @@ border-radius:5px;
 margin:5px 0;
 }
 
-.btn{
-background:#0b3d91;
-color:#fff;
-}
-
-.btn-green{
-background:green;
-color:#fff;
-}
+.btn-green{background:green;color:#fff;}
+.btn-blue{background:#0b3d91;color:#fff;}
 
 .map-box{
-
 padding:10px;
 background:#f5f5f5;
 border-radius:8px;
 margin-top:10px;
-
-}
-
-#idCard{
-
-margin-top:20px;
-
 }
 
 .card{
-
 border:2px solid #0b3d91;
-
 padding:20px;
-
-background:white;
-
-max-width:650px;
-
+margin-top:10px;
 border-radius:10px;
-
+background:#fff;
 }
 
 .member-img{
-
-width:100px;
-
-height:100px;
-
+width:90px;
+height:90px;
 object-fit:cover;
-
 border-radius:6px;
-
 }
 
+.hidden{display:none;}
 </style>
-
 </head>
 
 <body>
 
 <header>
-
 <div class="header-box">
-
-<div class="top-row">
-
-<div class="img-box">
-
-<img id="logoPreview">
-
-<input
-type="file"
-accept="image/*"
-onchange="loadLogo(event)">
-
-<p>LOGO</p>
-
+<h2>TMNP Membership System</h2>
 </div>
-
-<div class="img-box">
-
-<img id="leaderPreview">
-
-<input
-type="file"
-accept="image/*"
-onchange="loadLeader(event)">
-
-<p>LEADER</p>
-
-</div>
-
-</div>
-
-<div class="title">
-
-<div class="slogan">
-
-நேர்மை - நலன் - நம்பிக்கை<br>
-
-மக்களுக்காக மக்களால்<br>
-
-நல்லாட்சி மலர - மாற்றத்திற்கு இன்றே இணையுங்கள்
-
-</div>
-
-<div class="join">
-
-JOIN WITH US
-
-</div>
-
-<div class="party-en">
-
-TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
-
-</div>
-
-<div class="party-ta">
-
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-
-</div>
-
-<div class="info">
-
-📍 Head Quarters:<br>
-
-No.9 1st Floor 2nd Cross Street Gomathipuram<br>
-
-Thiruninravur - 602024 Tamilnadu
-
-</div>
-
-<div class="info">
-
-📱 +91 8939324309
-
-</div>
-
-<div class="info">
-
-📧 tnmnp2025@gmail.com
-
-</div>
-
-<div class="info">
-
-🌐
-
-<span class="live-site">
-
-LIVE PORTAL
-
-</span>
-
-</div>
-
-</div>
-
-</div>
-
 </header>
 
 <div class="container">
 
-<h2>
+<!-- NAV -->
+<div class="nav">
+<button class="active" onclick="showTab('register')">Register</button>
+<button class="inactive" onclick="showTab('members')">Members</button>
+<button class="inactive" onclick="showTab('reports')">Reports</button>
+</div>
 
-Membership Registration
+<!-- REGISTER -->
+<div id="registerTab">
 
-</h2>
+<h3>Membership Registration</h3>
 
 <input id="name" placeholder="Name">
-
 <input id="phone" placeholder="Phone">
-
 <input id="voterid" placeholder="Voter ID">
-
 <input id="email" placeholder="Email">
-
 <input id="address" placeholder="Address">
-
 <input id="district" placeholder="District">
-
 <input type="file" id="photo">
 
-<button
-class="btn-green"
-onclick="getLocation()">
+<button class="btn-green" onclick="getLocation()">📍 Get Location</button>
 
-📍 Get Location
+<div class="map-box" id="mapBox">Location not added</div>
 
-</button>
+<button class="btn-blue" onclick="save()">Submit</button>
 
-<div
-class="map-box"
-id="mapBox">
-
-Location not added
+<h3>Membership Card</h3>
+<div id="idCard"></div>
 
 </div>
 
-<button
-class="btn"
-onclick="save()">
+<!-- MEMBERS -->
+<div id="membersTab" class="hidden">
+<h3>All Members</h3>
+<div id="membersList"></div>
+</div>
 
-Submit
+<!-- REPORTS -->
+<div id="reportsTab" class="hidden">
+<h3>Reports</h3>
 
-</button>
-
-<h3>
-
-Membership Card
-
-</h3>
-
-<div id="idCard"></div>
-
-<button
-class="btn-green"
-onclick="downloadPDF()">
-
-Download PDF
-
-</button>
-
-<button
-class="btn-green"
-onclick="exportExcel()">
-
-Download Excel
-
-</button>
+<button class="btn-green" onclick="downloadPDF()">Download PDF</button>
+<button class="btn-green" onclick="exportExcel()">Download Excel</button>
+</div>
 
 </div>
 
 <script>
 
-let data=
-JSON.parse(
-localStorage.getItem("tmnp")
-||"[]"
-);
+let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
+let currentLocation = null;
 
-let currentLocation=null;
+/* TAB SWITCH */
+function showTab(tab){
 
-function loadLogo(e){
+document.getElementById("registerTab").classList.add("hidden");
+document.getElementById("membersTab").classList.add("hidden");
+document.getElementById("reportsTab").classList.add("hidden");
 
-let r=
-new FileReader();
-
-r.onload=
-()=>logoPreview.src=r.result;
-
-r.readAsDataURL(
-e.target.files[0]
-);
-
-}
-
-function loadLeader(e){
-
-let r=
-new FileReader();
-
-r.onload=
-()=>leaderPreview.src=r.result;
-
-r.readAsDataURL(
-e.target.files[0]
-);
-
-}
-
-function getLocation(){
-
-navigator.geolocation.getCurrentPosition(pos=>{
-
-currentLocation={
-
-lat:pos.coords.latitude,
-
-lng:pos.coords.longitude
-
-};
-
-mapBox.innerHTML=
-
-`Lat:
-
-${currentLocation.lat}
-
-<br>
-
-Lng:
-
-${currentLocation.lng}
-
-`;
-
+document.querySelectorAll(".nav button").forEach(b=>{
+b.classList.remove("active");
+b.classList.add("inactive");
 });
 
+if(tab==="register"){
+registerTab.classList.remove("hidden");
 }
 
+if(tab==="members"){
+membersTab.classList.remove("hidden");
+renderMembers();
+}
+
+if(tab==="reports"){
+reportsTab.classList.remove("hidden");
+}
+
+event.target.classList.add("active");
+}
+
+/* LOCATION */
+function getLocation(){
+navigator.geolocation.getCurrentPosition(pos=>{
+currentLocation={
+lat:pos.coords.latitude,
+lng:pos.coords.longitude
+};
+
+mapBox.innerHTML =
+`Lat: ${currentLocation.lat}<br>Lng: ${currentLocation.lng}`;
+});
+}
+
+/* SAVE */
 function save(){
 
-let file=
-photo.files[0];
+let file = photo.files[0];
 
-if(!name.value||!phone.value){
-
-alert("Required");
-
+if(!name.value || !phone.value){
+alert("Name & Phone required");
 return;
-
 }
 
-let reader=
-new FileReader();
+let reader = new FileReader();
 
-reader.onload=function(){
+reader.onload = function(){
 
-let member={
-
-id:
-"TMNP-"+Date.now(),
-
-timestamp:
-new Date().toLocaleString(),
-
+let member = {
+id:"TMNP-"+Date.now(),
+timestamp:new Date().toLocaleString(),
 name:name.value,
-
 phone:phone.value,
-
 voterid:voterid.value,
-
 email:email.value,
-
 address:address.value,
-
 district:district.value,
-
-photo:reader.result,
-
+photo:reader.result || "",
 location:currentLocation
-
 };
 
 data.push(member);
-
-localStorage.setItem(
-"tmnp",
-JSON.stringify(data)
-);
+localStorage.setItem("tmnp", JSON.stringify(data));
 
 renderCard(member);
-
 resetForm();
-
 };
 
 if(file){
-
 reader.readAsDataURL(file);
-
 }else{
-
 reader.onload();
-
+}
 }
 
-}
-
+/* CARD */
 function renderCard(m){
 
-idCard.innerHTML=
-
-`
-
+idCard.innerHTML = `
 <div class="card">
-
-<h2>
-
-TMNP MEMBERSHIP CARD
-
-</h2>
-
-<img
-
-class="member-img"
-
-src="${m.photo||''}"
-
->
-
-<p>
-
-<b>ID:</b>
-
-${m.id}
-
-</p>
-
-<p>
-
-<b>Name:</b>
-
-${m.name}
-
-</p>
-
-<p>
-
-<b>Phone:</b>
-
-${m.phone}
-
-</p>
-
-<p>
-
-<b>District:</b>
-
-${m.district}
-
-</p>
-
-<p>
-
-<b>Timestamp:</b>
-
-${m.timestamp}
-
-</p>
-
+<h3>TMNP MEMBER CARD</h3>
+<img class="member-img" src="${m.photo}">
+<p><b>ID:</b> ${m.id}</p>
+<p><b>Name:</b> ${m.name}</p>
+<p><b>Phone:</b> ${m.phone}</p>
+<p><b>District:</b> ${m.district}</p>
+<p><b>Time:</b> ${m.timestamp}</p>
 </div>
-
 `;
-
 }
 
-function downloadPDF(){
+/* MEMBERS LIST */
+function renderMembers(){
 
-window.print();
+let html = "";
 
-}
-
-function exportExcel(){
-
-let rows=[];
-
-rows.push([
-
-"ID",
-
-"Timestamp",
-
-"Name",
-
-"Phone",
-
-"VoterID",
-
-"Email",
-
-"Address",
-
-"District",
-
-"Latitude",
-
-"Longitude"
-
-]);
-
-data.forEach(d=>{
-
-rows.push([
-
-d.id,
-
-d.timestamp,
-
-d.name,
-
-d.phone,
-
-d.voterid,
-
-d.email,
-
-d.address,
-
-d.district,
-
-d.location?.lat||"",
-
-d.location?.lng||""
-
-]);
-
+data.forEach(m=>{
+html += `
+<div class="card">
+<p><b>${m.name}</b> (${m.id})</p>
+<p>${m.phone} | ${m.district}</p>
+</div>
+`;
 });
 
-let csv=
-rows.map(
-r=>r.join(",")
-).join("\n");
-
-let blob=
-new Blob(
-[csv],
-{
-type:"text/csv"
-}
-);
-
-let a=
-document.createElement("a");
-
-a.href=
-URL.createObjectURL(blob);
-
-a.download=
-"TMNP_REPORT.csv";
-
-a.click();
-
+membersList.innerHTML = html || "No members yet";
 }
 
+/* RESET */
 function resetForm(){
-
-[
-"name",
-"phone",
-"voterid",
-"email",
-"address",
-"district"
-
-].forEach(
-
-x=>document.getElementById(x).value=""
-
-);
+["name","phone","voterid","email","address","district"]
+.forEach(x=>document.getElementById(x).value="");
 
 photo.value="";
+mapBox.innerHTML="Location not added";
+}
 
-mapBox.innerHTML=
-"Location not added";
+/* PDF */
+function downloadPDF(){
+window.print();
+}
 
+/* EXCEL */
+function exportExcel(){
+
+let rows = [["ID","Time","Name","Phone","VoterID","Email","Address","District","Lat","Lng"]];
+
+data.forEach(d=>{
+rows.push([
+d.id,d.timestamp,d.name,d.phone,d.voterid,
+d.email,d.address,d.district,
+d.location?.lat||"",d.location?.lng||""
+]);
+});
+
+let csv = rows.map(r=>r.join(",")).join("\n");
+
+let blob = new Blob([csv],{type:"text/csv"});
+let a = document.createElement("a");
+
+a.href = URL.createObjectURL(blob);
+a.download = "TMNP_REPORT.csv";
+a.click();
 }
 
 </script>
