@@ -1,351 +1,134 @@
-```css
-/* ==================================
-   TMNP V5 GOLD PREMIUM THEME
-================================== */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
-}
-
 body{
-background:#f4f1e8;
-color:#222;
+margin:0;
+font-family:Arial;
+background:#eef2f7;
 }
 
 /* HEADER */
-
 header{
-background:linear-gradient(135deg,#0b2345,#142d57);
-padding:20px;
-color:white;
-box-shadow:0 4px 15px rgba(0,0,0,.2);
-}
-
-.header-box{
-max-width:1200px;
-margin:auto;
-}
-
-.top-row{
-display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
-gap:20px;
-}
-
-.img-box{
+background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);
 text-align:center;
+padding:15px;
+color:#000;
 }
 
-.img-box img{
-width:90px;
-height:90px;
-border-radius:12px;
-object-fit:cover;
-border:3px solid gold;
-background:white;
-}
-
-.title{
-text-align:center;
-margin-top:15px;
-}
-
-.slogan{
-font-size:14px;
-font-weight:600;
-line-height:1.7;
-}
-
-.join{
-font-size:22px;
+.header-title{
+font-size:18px;
 font-weight:900;
-color:#ffd700;
-margin-top:10px;
 }
 
-.party-en{
-font-size:26px;
-font-weight:900;
-color:#ffd700;
-margin-top:10px;
+.header-sub{
+font-size:12px;
+margin-top:4px;
 }
 
-.party-ta{
-font-size:20px;
-font-weight:800;
-margin-top:10px;
-}
-
-.info{
-margin-top:8px;
-font-size:14px;
-}
-
-.live-site{
-color:#ffeb3b;
-font-weight:bold;
-}
-
-/* MAIN */
-
+/* LAYOUT */
 .container{
-max-width:1200px;
-margin:20px auto;
+display:flex;
+gap:20px;
+max-width:1100px;
+margin:auto;
 padding:20px;
-background:white;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.1);
 }
 
-.container h2{
-color:#8b6b00;
-margin-bottom:15px;
-}
-
-/* FORM */
-
-input,
-select,
-textarea{
-width:100%;
-padding:12px;
-margin:8px 0;
-border:1px solid #ccc;
-border-radius:8px;
-font-size:15px;
-}
-
-input:focus{
-outline:none;
-border-color:#d4af37;
-box-shadow:0 0 5px rgba(212,175,55,.4);
-}
-
-/* BUTTONS */
-
-button{
-padding:12px 18px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-margin:5px;
-}
-
-.btn{
-background:#0b3d91;
-color:white;
-}
-
-.btn:hover{
-background:#082d6a;
-}
-
-.btn-green{
-background:#1e7e34;
-color:white;
-}
-
-.btn-green:hover{
-background:#155d27;
-}
-
-.btn-gold{
-background:linear-gradient(
-135deg,
-#d4af37,
-#f9e27d
-);
-color:#222;
-}
-
-.btn-gold:hover{
-opacity:.9;
-}
-
-/* LOCATION BOX */
-
-.map-box{
-margin-top:10px;
-padding:12px;
-background:#f9f6ee;
-border:1px solid #d4af37;
+.left{
+flex:1;
+background:#fff;
+padding:20px;
 border-radius:10px;
 }
 
-/* MEMBERSHIP CARD */
-
-#idCard{
-margin-top:25px;
+.right{
+flex:1;
 display:flex;
 justify-content:center;
+align-items:center;
+background:#fff;
+border-radius:10px;
+padding:20px;
 }
 
+/* INPUT */
+input{
+width:100%;
+padding:10px;
+margin:6px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+/* BUTTONS */
+button{
+width:100%;
+padding:10px;
+margin-top:6px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.btn{background:#b8860b;color:#fff;}
+.btn-green{background:green;color:#fff;}
+.btn-blue{background:#0b3d91;color:#fff;}
+
+/* CARD ANIMATION */
+@keyframes floatCard{
+0%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
+100%{transform:translateY(0);}
+}
+
+@keyframes glow{
+0%{box-shadow:0 0 10px #b8860b;}
+50%{box-shadow:0 0 25px #ffd700;}
+100%{box-shadow:0 0 10px #b8860b;}
+}
+
+/* CARD */
 .card{
 width:100%;
-max-width:700px;
-background:white;
-border:4px solid #d4af37;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
+max-width:350px;
+border-radius:18px;
+animation: floatCard 3s ease-in-out infinite;
+border:2px solid #b8860b;
 }
-
-/* CARD HEADER */
 
 .card-header{
-background:linear-gradient(
-135deg,
-#b8860b,
-#ffd700
-);
-padding:15px;
+background:linear-gradient(45deg,#b8860b,#ffd700,#ff8c00);
 text-align:center;
-color:#222;
+padding:10px;
+font-weight:900;
 }
-
-.card-header h2{
-margin:0;
-font-size:22px;
-}
-
-.card-header p{
-font-size:13px;
-font-weight:bold;
-}
-
-/* CARD BODY */
 
 .card-body{
-padding:20px;
+padding:15px;
 text-align:center;
 }
 
-.member-img{
-width:120px;
-height:120px;
-border-radius:15px;
-object-fit:cover;
-border:4px solid gold;
-margin-bottom:15px;
+.card img{
+width:90px;
+height:90px;
+border-radius:50%;
+border:3px solid #ffd700;
+animation: glow 2s infinite;
 }
-
-.member-id{
-font-size:18px;
-font-weight:900;
-color:#8b6b00;
-margin-bottom:10px;
-}
-
-.member-name{
-font-size:24px;
-font-weight:900;
-color:#0b2345;
-margin-bottom:10px;
-}
-
-.member-info{
-font-size:15px;
-line-height:1.8;
-}
-
-/* LIFETIME BADGE */
 
 .badge{
+background:#b8860b;
+color:#fff;
+padding:5px 10px;
+border-radius:20px;
 display:inline-block;
-padding:8px 15px;
-background:gold;
-color:black;
-font-weight:900;
-border-radius:25px;
-margin-top:12px;
+margin:5px;
 }
 
-/* CARD FOOTER */
-
-.card-footer{
-background:#0b2345;
-color:white;
-text-align:center;
-padding:12px;
-font-size:12px;
+.smalltxt{
+font-size:13px;
+margin:4px;
 }
 
-/* QR BOX */
-
-.qr-box{
-margin-top:15px;
+@media(max-width:900px){
+.container{
+flex-direction:column;
 }
-
-/* TABLE */
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
 }
-
-table th{
-background:#0b2345;
-color:white;
-padding:10px;
-}
-
-table td{
-padding:10px;
-border:1px solid #ddd;
-}
-
-/* PRINT */
-
-@media print{
-
-button,
-input,
-select,
-textarea,
-header{
-display:none;
-}
-
-.card{
-border:3px solid black;
-box-shadow:none;
-}
-
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.party-en{
-font-size:18px;
-}
-
-.party-ta{
-font-size:16px;
-}
-
-.card{
-width:100%;
-}
-
-.member-img{
-width:100px;
-height:100px;
-}
-
-.member-name{
-font-size:20px;
-}
-
-}
-```
-
-```
-```
