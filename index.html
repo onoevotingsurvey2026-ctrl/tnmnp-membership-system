@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System V10</title>
+<title>TMNP Membership System</title>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
@@ -32,7 +32,7 @@ font-size:12px;
 margin-top:3px;
 }
 
-/* MAIN LAYOUT */
+/* LAYOUT */
 .container{
 display:flex;
 gap:20px;
@@ -70,7 +70,6 @@ width:100%;
 
 .btn{background:#b8860b;color:#fff;}
 .btn-green{background:green;color:#fff;}
-.btn-blue{background:#0b3d91;color:#fff;}
 
 /* CARD */
 .right{
@@ -89,7 +88,6 @@ width:100%;
 max-width:350px;
 background:#fff;
 border-radius:15px;
-overflow:hidden;
 border-top:8px solid #b8860b;
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 text-align:center;
@@ -128,7 +126,6 @@ font-size:13px;
 margin:3px;
 }
 
-/* RESPONSIVE */
 @media(max-width:900px){
 .container{flex-direction:column;}
 }
@@ -142,15 +139,10 @@ margin:3px;
 <div class="header-title">TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</div>
 
 <div class="small">தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</div>
-
 <div class="small">Leader: N. RAMAN (President / General Secretary)</div>
-
-<div class="small">🏢 Head Quarter: No.9, 1st Floor, 2nd Cross Street, Gomathipuram, Thiruninravur - 602024</div>
-
+<div class="small">🏢 No.9, 1st Floor, 2nd Cross Street, Gomathipuram, Thiruninravur - 602024</div>
 <div class="small">📧 tnmnp2025@gmail.com</div>
-
 <div class="small">🌐 https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/</div>
-
 <div class="small" id="liveLoc">📍 Location: Not Activated</div>
 </header>
 
@@ -173,9 +165,8 @@ margin:3px;
 <button class="btn-green" onclick="getLocation()">📍 Get Location</button>
 <button class="btn" onclick="save()">Submit</button>
 
-<button class="btn-blue" onclick="downloadImage()">🪪 Download Card Image</button>
-<button class="btn-blue" onclick="printCard()">🧾 Print A4</button>
-<button class="btn-green" onclick="shareWhatsApp()">📲 WhatsApp Share</button>
+<!-- UPDATED BUTTON -->
+<button class="btn-green" onclick="downloadImage()">🪪 Download Card Image / Share WhatsApp</button>
 
 </div>
 
@@ -254,9 +245,7 @@ function renderCard(m){
 document.getElementById("cardArea").innerHTML = `
 <div class="card" id="tmnpCard">
 
-<div class="card-header">
-TMNP MEMBER CARD
-</div>
+<div class="card-header">TMNP MEMBER CARD</div>
 
 <div class="card-body">
 
@@ -289,67 +278,28 @@ document.getElementById(id).value="";
 document.getElementById("photo").value="";
 }
 
-/* SCREENSHOT DOWNLOAD */
+/* IMAGE DOWNLOAD */
 function downloadImage(){
 
 html2canvas(document.getElementById("tmnpCard")).then(canvas=>{
-let a=document.createElement("a");
-a.download="TMNP_CARD.png";
-a.href=canvas.toDataURL();
+
+let img = canvas.toDataURL("image/png");
+
+/* DOWNLOAD */
+let a = document.createElement("a");
+a.href = img;
+a.download = "TMNP_MEMBER_CARD.png";
 a.click();
-});
-}
-
-/* PRINT A4 */
-function printCard(){
-
-let w = window.open("", "_blank");
-
-w.document.write(`
-<html>
-<head>
-<title>TMNP CARD</title>
-</head>
-<body style="text-align:center;font-family:Arial;">
-
-<h2>TMNP OFFICIAL ID CARD</h2>
-
-<div style="border:2px solid #b8860b;padding:20px;width:400px;margin:auto;">
-${document.getElementById("tmnpCard").innerHTML}
-</div>
-
-</body>
-</html>
-`);
-
-w.print();
-}
 
 /* WHATSAPP SHARE */
-function shareWhatsApp(){
-
-if(!data.length){
-alert("No member found");
-return;
-}
-
-let m = data[data.length-1];
-
-let msg =
-`TMNP MEMBER CARD
-Name: ${m.name}
-Phone: ${m.phone}
-ID: ${m.id}
-Address: ${m.address}
-District: ${m.district}
-Location: ${m.location?.lat || ''},${m.location?.lng || ''}`;
-
-let url =
-`https://wa.me/918939324309?text=` + encodeURIComponent(msg);
+let text = "TMNP MEMBER CARD - OFFICIAL";
+let url = "https://wa.me/918939324309?text=" + encodeURIComponent(text);
 
 window.open(url,"_blank");
-}
 
+});
+
+}
 </script>
 
 </body>
