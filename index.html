@@ -22,11 +22,6 @@ text-align:center;
 color:#000;
 }
 
-.header-title{
-font-size:20px;
-font-weight:900;
-}
-
 .small{
 font-size:12px;
 margin-top:3px;
@@ -70,6 +65,8 @@ width:100%;
 
 .btn{background:#b8860b;color:#fff;}
 .btn-green{background:green;color:#fff;}
+.btn-blue{background:#0b3d91;color:#fff;}
+.btn-cloud{background:#6f42c1;color:#fff;}
 
 /* CARD */
 .right{
@@ -96,11 +93,6 @@ text-align:center;
 .card-header{
 background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);
 padding:10px;
-font-weight:900;
-}
-
-.card-body{
-padding:15px;
 }
 
 .card img{
@@ -136,14 +128,31 @@ margin:3px;
 
 <!-- HEADER -->
 <header>
-<div class="header-title">TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</div>
 
-<div class="small">தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</div>
-<div class="small">Leader: N. RAMAN (President / General Secretary)</div>
-<div class="small">🏢 No.9, 1st Floor, 2nd Cross Street, Gomathipuram, Thiruninravur - 602024</div>
-<div class="small">📧 tnmnp2025@gmail.com</div>
-<div class="small">🌐 https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/</div>
-<div class="small" id="liveLoc">📍 Location: Not Activated</div>
+<div class="small" style="font-weight:900;font-size:14px;">
+TMNP - தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் - நிரந்தர உறுப்பினர் அடையாளம்
+</div>
+
+<div class="small">
+TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - PERMANENT MEMBERSHIP IDENTITY ☁️
+</div>
+
+<div class="small">
+Leader: N. RAMAN (President / General Secretary)
+</div>
+
+<div class="small">
+🏢 No.9, 1st Floor, 2nd Cross Street, Gomathipuram, Thiruninravur - 602024
+</div>
+
+<div class="small">
+📧 tnmnp2025@gmail.com
+</div>
+
+<div class="small" id="liveLoc">
+📍 Location: Not Activated
+</div>
+
 </header>
 
 <!-- BODY -->
@@ -165,16 +174,15 @@ margin:3px;
 <button class="btn-green" onclick="getLocation()">📍 Get Location</button>
 <button class="btn" onclick="save()">Submit</button>
 
-<!-- UPDATED BUTTON -->
-<button class="btn-green" onclick="downloadImage()">🪪 Download Card Image / Share WhatsApp</button>
+<button class="btn-blue" onclick="showAllMembers()">📊 Consolidated Report</button>
+
+<button class="btn-green" onclick="downloadImage()">🪪 Download Card / WhatsApp Share</button>
 
 </div>
 
 <!-- RIGHT CARD -->
 <div class="right" id="cardArea">
-
 <div>No Member Yet</div>
-
 </div>
 
 </div>
@@ -245,9 +253,19 @@ function renderCard(m){
 document.getElementById("cardArea").innerHTML = `
 <div class="card" id="tmnpCard">
 
-<div class="card-header">TMNP MEMBER CARD</div>
+<div class="card-header">
 
-<div class="card-body">
+<div style="text-align:center;font-weight:900;">
+TMNP - தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் - நிரந்தர உறுப்பினர் அடையாளம்
+</div>
+
+<div style="text-align:center;font-size:13px;">
+TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - PERMANENT MEMBERSHIP IDENTITY ☁️
+</div>
+
+</div>
+
+<div style="padding:15px;">
 
 <img src="${m.photo || ''}">
 <div class="badge">${m.id}</div>
@@ -278,7 +296,7 @@ document.getElementById(id).value="";
 document.getElementById("photo").value="";
 }
 
-/* IMAGE DOWNLOAD */
+/* DOWNLOAD + WHATSAPP */
 function downloadImage(){
 
 html2canvas(document.getElementById("tmnpCard")).then(canvas=>{
@@ -292,14 +310,45 @@ a.download = "TMNP_MEMBER_CARD.png";
 a.click();
 
 /* WHATSAPP SHARE */
-let text = "TMNP MEMBER CARD - OFFICIAL";
-let url = "https://wa.me/918939324309?text=" + encodeURIComponent(text);
+let msg = "TMNP MEMBER CARD - OFFICIAL";
+let url = "https://wa.me/918939324309?text=" + encodeURIComponent(msg);
 
 window.open(url,"_blank");
 
 });
 
 }
+
+/* CONSOLIDATED REPORT */
+function showAllMembers(){
+
+let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
+
+if(!data.length){
+alert("No members found");
+return;
+}
+
+let html = "<h2>TMNP MEMBERS REPORT</h2>";
+
+data.forEach((m,i)=>{
+html += `
+<div style="border:1px solid #ccc;padding:10px;margin:10px;">
+<b>${i+1}. ${m.name}</b><br>
+📱 ${m.phone}<br>
+🪪 ${m.id}<br>
+🏠 ${m.address}<br>
+📍 ${m.district}<br>
+🌐 ${m.location?.lat || ''}, ${m.location?.lng || ''}
+</div>
+`;
+});
+
+let w = window.open("","_blank");
+w.document.write(html);
+w.print();
+}
+
 </script>
 
 </body>
