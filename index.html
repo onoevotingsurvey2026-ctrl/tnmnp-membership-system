@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System V8</title>
+<title>TMNP Membership System V10</title>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <style>
 body{
@@ -30,7 +32,7 @@ font-size:12px;
 margin-top:3px;
 }
 
-/* MAIN */
+/* MAIN LAYOUT */
 .container{
 display:flex;
 gap:20px;
@@ -40,7 +42,7 @@ padding:20px;
 align-items:stretch;
 }
 
-/* LEFT */
+/* FORM */
 .left{
 flex:1;
 background:#fff;
@@ -49,26 +51,14 @@ border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* RIGHT */
-.right{
-flex:1;
-background:#fff;
-padding:20px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-/* INPUT */
 input{
 width:100%;
 padding:10px;
 margin:6px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
-/* BUTTONS */
 button{
 padding:10px;
 border:none;
@@ -83,11 +73,23 @@ width:100%;
 .btn-blue{background:#0b3d91;color:#fff;}
 
 /* CARD */
+.right{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
 .card{
 width:100%;
 max-width:350px;
 background:#fff;
 border-radius:15px;
+overflow:hidden;
 border-top:8px solid #b8860b;
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 text-align:center;
@@ -108,6 +110,7 @@ width:90px;
 height:90px;
 border-radius:50%;
 border:3px solid #b8860b;
+margin-top:10px;
 }
 
 .badge{
@@ -115,9 +118,9 @@ background:#b8860b;
 color:#fff;
 padding:5px 10px;
 display:inline-block;
-margin:5px;
 border-radius:5px;
 font-size:12px;
+margin:5px;
 }
 
 .smalltxt{
@@ -125,10 +128,7 @@ font-size:13px;
 margin:3px;
 }
 
-.actions button{
-margin-top:5px;
-}
-
+/* RESPONSIVE */
 @media(max-width:900px){
 .container{flex-direction:column;}
 }
@@ -142,9 +142,10 @@ margin-top:5px;
 <div class="header-title">TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</div>
 
 <div class="small">தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</div>
-<div class="small">Head Office: No.9, Gomathipuram, Thiruninravur, Tamil Nadu</div>
 
 <div class="small">Leader: N. RAMAN (President / General Secretary)</div>
+
+<div class="small">🏢 Head Quarter: No.9, 1st Floor, 2nd Cross Street, Gomathipuram, Thiruninravur - 602024</div>
 
 <div class="small">📧 tnmnp2025@gmail.com</div>
 
@@ -156,7 +157,7 @@ margin-top:5px;
 <!-- BODY -->
 <div class="container">
 
-<!-- FORM -->
+<!-- LEFT FORM -->
 <div class="left">
 
 <h3>Membership Registration</h3>
@@ -172,13 +173,13 @@ margin-top:5px;
 <button class="btn-green" onclick="getLocation()">📍 Get Location</button>
 <button class="btn" onclick="save()">Submit</button>
 
-<button class="btn-blue" onclick="downloadPDF()">Download PDF</button>
-<button class="btn-blue" onclick="downloadExcel()">Download Excel</button>
-<button class="btn-green" onclick="shareWhatsApp()">Share WhatsApp</button>
+<button class="btn-blue" onclick="downloadImage()">🪪 Download Card Image</button>
+<button class="btn-blue" onclick="printCard()">🧾 Print A4</button>
+<button class="btn-green" onclick="shareWhatsApp()">📲 WhatsApp Share</button>
 
 </div>
 
-<!-- CARD -->
+<!-- RIGHT CARD -->
 <div class="right" id="cardArea">
 
 <div>No Member Yet</div>
@@ -251,9 +252,11 @@ reader.onload();
 function renderCard(m){
 
 document.getElementById("cardArea").innerHTML = `
-<div class="card">
+<div class="card" id="tmnpCard">
 
-<div class="card-header">TMNP MEMBER CARD</div>
+<div class="card-header">
+TMNP MEMBER CARD
+</div>
 
 <div class="card-body">
 
@@ -286,36 +289,47 @@ document.getElementById(id).value="";
 document.getElementById("photo").value="";
 }
 
-/* PDF */
-function downloadPDF(){
-window.print();
-}
+/* SCREENSHOT DOWNLOAD */
+function downloadImage(){
 
-/* EXCEL */
-function downloadExcel(){
-let rows=[["ID","Name","Phone","VoterID","Email","Address","District","Lat","Lng"]];
-
-data.forEach(d=>{
-rows.push([
-d.id,d.name,d.phone,d.voterid,d.email,d.address,d.district,
-d.location?.lat||"",d.location?.lng||""
-]);
-});
-
-let csv=rows.map(r=>r.join(",")).join("\n");
-
-let blob=new Blob([csv],{type:"text/csv"});
+html2canvas(document.getElementById("tmnpCard")).then(canvas=>{
 let a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="TMNP_REPORT.csv";
+a.download="TMNP_CARD.png";
+a.href=canvas.toDataURL();
 a.click();
+});
 }
 
-/* WHATSAPP */
+/* PRINT A4 */
+function printCard(){
+
+let w = window.open("", "_blank");
+
+w.document.write(`
+<html>
+<head>
+<title>TMNP CARD</title>
+</head>
+<body style="text-align:center;font-family:Arial;">
+
+<h2>TMNP OFFICIAL ID CARD</h2>
+
+<div style="border:2px solid #b8860b;padding:20px;width:400px;margin:auto;">
+${document.getElementById("tmnpCard").innerHTML}
+</div>
+
+</body>
+</html>
+`);
+
+w.print();
+}
+
+/* WHATSAPP SHARE */
 function shareWhatsApp(){
 
-if(data.length==0){
-alert("No member to share");
+if(!data.length){
+alert("No member found");
 return;
 }
 
@@ -326,6 +340,7 @@ let msg =
 Name: ${m.name}
 Phone: ${m.phone}
 ID: ${m.id}
+Address: ${m.address}
 District: ${m.district}
 Location: ${m.location?.lat || ''},${m.location?.lng || ''}`;
 
