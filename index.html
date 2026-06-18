@@ -9,49 +9,57 @@
 body{
 margin:0;
 font-family:Arial;
-background:#f2f2f2;
+background:#eef2f7;
 }
 
-/* HEADER */
-header{
+/* SIDEBAR */
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:220px;
+height:100%;
 background:#0b3d91;
 color:#fff;
-padding:18px;
+padding-top:20px;
+}
+
+.sidebar h2{
 text-align:center;
-font-size:20px;
-font-weight:bold;
+font-size:18px;
 }
 
-/* CONTAINER */
-.container{
-max-width:1000px;
-margin:auto;
-background:#fff;
-padding:20px;
-margin-top:20px;
-border-radius:10px;
-}
-
-/* NAV */
-.nav{
-display:flex;
-gap:10px;
-margin-bottom:15px;
-flex-wrap:wrap;
-}
-
-.nav button{
-padding:10px 15px;
+.sidebar button{
+width:100%;
+padding:12px;
 border:none;
+background:transparent;
+color:#fff;
+text-align:left;
 cursor:pointer;
-border-radius:5px;
-font-weight:bold;
+font-size:14px;
 }
 
-.active{background:#0b3d91;color:#fff;}
-.inactive{background:#ddd;}
+.sidebar button:hover{
+background:rgba(255,255,255,0.2);
+}
 
-/* INPUT */
+/* MAIN */
+.main{
+margin-left:220px;
+padding:20px;
+}
+
+/* SECTION */
+.section{
+display:none;
+}
+
+.active-section{
+display:block;
+}
+
+/* FORM */
 input{
 width:100%;
 padding:10px;
@@ -59,7 +67,6 @@ margin:6px 0;
 box-sizing:border-box;
 }
 
-/* BUTTONS */
 button{
 padding:10px;
 border:none;
@@ -67,46 +74,72 @@ cursor:pointer;
 border-radius:5px;
 }
 
-.btn-green{background:green;color:#fff;}
-.btn-blue{background:#0b3d91;color:#fff;}
+.btn{
+background:#0b3d91;
+color:#fff;
+}
 
-/* CARD */
+.btn-green{
+background:green;
+color:#fff;
+}
+
+/* CARD DESIGN */
 .card{
-border:2px solid #0b3d91;
-padding:15px;
-margin-top:10px;
-border-radius:10px;
-background:#fff;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+max-width:400px;
+margin-top:15px;
+border-left:6px solid #0b3d91;
 }
 
-.hidden{display:none;}
+.card h3{
+margin:0;
+color:#0b3d91;
+}
 
-.map-box{
-background:#eee;
-padding:10px;
-margin-top:10px;
+.badge{
+display:inline-block;
+padding:5px 10px;
+background:#0b3d91;
+color:#fff;
 border-radius:5px;
+font-size:12px;
+margin-top:10px;
 }
+
+/* TOP BAR */
+.topbar{
+background:#0b3d91;
+color:#fff;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
 </style>
 </head>
 
 <body>
 
-<header>
-TMNP Membership System V5
-</header>
+<div class="sidebar">
+<h2>TMNP SYSTEM</h2>
 
-<div class="container">
+<button onclick="show('register')">📌 Register</button>
+<button onclick="show('members')">👥 Members</button>
+<button onclick="show('reports')">📊 Reports</button>
+</div>
 
-<!-- NAV -->
-<div class="nav">
-<button class="active" onclick="showTab('register',event)">Register</button>
-<button class="inactive" onclick="showTab('members',event)">Members</button>
-<button class="inactive" onclick="showTab('reports',event)">Reports</button>
+<div class="main">
+
+<div class="topbar">
+TMNP Membership System V5 - Professional Portal
 </div>
 
 <!-- REGISTER -->
-<div id="registerTab">
+<div id="register" class="section active-section">
 
 <h3>Membership Registration</h3>
 
@@ -118,76 +151,45 @@ TMNP Membership System V5
 <input id="district" placeholder="District">
 <input type="file" id="photo">
 
-<button class="btn-green" onclick="getLocation()">📍 Get Location</button>
+<button class="btn-green" onclick="save()">Submit</button>
 
-<div class="map-box" id="mapBox">Location not added</div>
-
-<button class="btn-blue" onclick="save()">Submit</button>
-
-<h3>Membership Card</h3>
-<div id="idCard"></div>
+<div id="cardArea"></div>
 
 </div>
 
 <!-- MEMBERS -->
-<div id="membersTab" class="hidden">
+<div id="members" class="section">
+
 <h3>Members List</h3>
 <div id="membersList"></div>
+
 </div>
 
 <!-- REPORTS -->
-<div id="reportsTab" class="hidden">
+<div id="reports" class="section">
+
 <h3>Reports</h3>
-<button class="btn-green" onclick="downloadPDF()">Download PDF</button>
-<button class="btn-green" onclick="exportExcel()">Download Excel</button>
+
+<button class="btn" onclick="downloadExcel()">Download Excel</button>
+
 </div>
 
 </div>
 
 <script>
 
-/* DATA */
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
-let currentLocation = null;
 
-/* TAB SYSTEM FIXED */
-function showTab(tab, event){
+/* NAV */
+function show(tab){
 
-document.getElementById("registerTab").classList.add("hidden");
-document.getElementById("membersTab").classList.add("hidden");
-document.getElementById("reportsTab").classList.add("hidden");
-
-document.querySelectorAll(".nav button").forEach(b=>{
-b.classList.remove("active");
-b.classList.add("inactive");
+document.querySelectorAll(".section").forEach(s=>{
+s.classList.remove("active-section");
 });
 
-if(tab==="register") document.getElementById("registerTab").classList.remove("hidden");
-if(tab==="members"){
-document.getElementById("membersTab").classList.remove("hidden");
-renderMembers();
-}
-if(tab==="reports") document.getElementById("reportsTab").classList.remove("hidden");
+document.getElementById(tab).classList.add("active-section");
 
-event.target.classList.add("active");
-}
-
-/* LOCATION */
-function getLocation(){
-if(!navigator.geolocation){
-alert("Location not supported");
-return;
-}
-
-navigator.geolocation.getCurrentPosition(pos=>{
-currentLocation={
-lat:pos.coords.latitude,
-lng:pos.coords.longitude
-};
-
-document.getElementById("mapBox").innerHTML =
-"Lat: " + currentLocation.lat + "<br>Lng: " + currentLocation.lng;
-});
+if(tab==="members") renderMembers();
 }
 
 /* SAVE */
@@ -196,7 +198,7 @@ function save(){
 let name = document.getElementById("name").value;
 let phone = document.getElementById("phone").value;
 
-if(name.trim()==="" || phone.trim()===""){
+if(!name || !phone){
 alert("Name & Phone required");
 return;
 }
@@ -206,24 +208,22 @@ let reader = new FileReader();
 
 reader.onload = function(){
 
-let member = {
+let m = {
 id:"TMNP-"+Date.now(),
-timestamp:new Date().toLocaleString(),
 name:name,
 phone:phone,
 voterid:document.getElementById("voterid").value,
 email:document.getElementById("email").value,
 address:document.getElementById("address").value,
 district:document.getElementById("district").value,
-photo:reader.result || "",
-location:currentLocation
+photo:reader.result || ""
 };
 
-data.push(member);
+data.push(m);
 localStorage.setItem("tmnp", JSON.stringify(data));
 
-renderCard(member);
-resetForm();
+renderCard(m);
+reset();
 };
 
 if(file){
@@ -233,17 +233,16 @@ reader.onload();
 }
 }
 
-/* CARD */
+/* CARD DESIGN */
 function renderCard(m){
 
-document.getElementById("idCard").innerHTML = `
+document.getElementById("cardArea").innerHTML = `
 <div class="card">
-<h3>TMNP MEMBERSHIP CARD</h3>
-<p><b>ID:</b> ${m.id}</p>
+<h3>TMNP MEMBER CARD</h3>
+<div class="badge">${m.id}</div>
 <p><b>Name:</b> ${m.name}</p>
 <p><b>Phone:</b> ${m.phone}</p>
 <p><b>District:</b> ${m.district}</p>
-<p><b>Time:</b> ${m.timestamp}</p>
 </div>
 `;
 }
@@ -251,13 +250,14 @@ document.getElementById("idCard").innerHTML = `
 /* MEMBERS */
 function renderMembers(){
 
-let html = "";
+let html="";
 
 data.forEach(m=>{
 html += `
 <div class="card">
-<b>${m.name}</b><br>
-${m.phone} | ${m.district}
+<h3>${m.name}</h3>
+<p>${m.phone}</p>
+<p>${m.district}</p>
 </div>
 `;
 });
@@ -267,40 +267,29 @@ html || "No members found";
 }
 
 /* RESET */
-function resetForm(){
-
+function reset(){
 ["name","phone","voterid","email","address","district"].forEach(id=>{
 document.getElementById(id).value="";
 });
 
 document.getElementById("photo").value="";
-document.getElementById("mapBox").innerHTML="Location not added";
 }
 
-/* PDF */
-function downloadPDF(){
-window.print();
-}
+/* EXCEL */
+function downloadExcel(){
 
-/* CSV */
-function exportExcel(){
-
-let rows = [["ID","Time","Name","Phone","VoterID","Email","Address","District","Lat","Lng"]];
+let rows=[["ID","Name","Phone","VoterID","Email","Address","District"]];
 
 data.forEach(d=>{
-rows.push([
-d.id,d.timestamp,d.name,d.phone,d.voterid,
-d.email,d.address,d.district,
-d.location?.lat||"",d.location?.lng||""
-]);
+rows.push([d.id,d.name,d.phone,d.voterid,d.email,d.address,d.district]);
 });
 
 let csv = rows.map(r=>r.join(",")).join("\n");
 
 let blob = new Blob([csv],{type:"text/csv"});
-let a = document.createElement("a");
-a.href = URL.createObjectURL(blob);
-a.download = "TMNP_REPORT.csv";
+let a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="TMNP_REPORT.csv";
 a.click();
 }
 
