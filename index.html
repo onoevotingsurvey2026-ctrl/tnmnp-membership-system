@@ -3,76 +3,191 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System</title>
+<title>TMNP V6 CLEAN SYSTEM</title>
 
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
-<!-- REQUIRED LIBRARIES -->
+<!-- LIBRARIES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<link rel="stylesheet" href="gold-style.css">
+<style>
+body{font-family:Arial;margin:0;background:#f4f4f4}
+.container{display:flex;gap:10px;padding:10px}
+.left{width:40%;background:#fff;padding:10px}
+.right{width:60%;background:#fff;padding:10px}
+input{width:100%;padding:8px;margin:5px 0}
+button{padding:8px;margin:5px;cursor:pointer}
+.card{width:350px;margin:auto;border:2px solid gold;border-radius:15px;overflow:hidden;background:#fff}
+.card-header{background:gold;padding:10px;text-align:center;font-weight:bold}
+.card-body{text-align:center;padding:10px}
+.card img{width:90px;height:90px;border-radius:50%;border:3px solid gold}
+.badge{background:gold;padding:5px 10px;display:inline-block;margin:5px;border-radius:10px}
+.smalltxt{font-size:13px;margin:3px}
+.qr-box{margin-top:10px}
+</style>
 </head>
 
 <body>
 
-<header>
-<div class="header-title">
-TMNP - தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் - நிரந்தர உறுப்பினர் அடையாளம்
-</div>
-
-<div class="header-sub">
-TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - PERMANENT MEMBERSHIP IDENTITY ☁️
-</div>
-
-<div class="header-sub">Leader: N. RAMAN</div>
-<div class="header-sub">📧 tnmnp2025@gmail.com</div>
-
-<div id="liveLoc" class="header-sub">📍 Location: Not Activated</div>
-</header>
+<h2 style="text-align:center">TMNP V6 CLEAN SYSTEM</h2>
 
 <div class="container">
 
+<!-- FORM -->
 <div class="left">
-
-<h3>Membership Registration</h3>
 
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone">
-<input id="voterid" placeholder="Voter ID">
-<input id="email" placeholder="Email">
-<input id="address" placeholder="Address">
 <input id="district" placeholder="District">
+<input id="email" placeholder="Email">
+<input id="voterid" placeholder="Voter ID">
 <input type="file" id="photo">
 
-<button class="btn-green" onclick="getLocation()">📍 Get Location</button>
-<button class="btn" onclick="saveMember()">Submit</button>
-<button class="btn-blue" onclick="downloadPDF()">🪪 Download Card</button>
+<button onclick="getLocation()">📍 Get Location</button>
+<button onclick="saveMember()">💾 Save Member</button>
+<button onclick="downloadPDF()">📄 Download PDF</button>
+
+<div id="liveLoc">Location: Not Set</div>
 
 </div>
 
-<div class="right" id="cardArea">
+<!-- CARD -->
+<div class="right">
 <div id="idCard">No Member Yet</div>
 </div>
 
 </div>
 
-<!-- V6 JS FILES -->
-<script src="storage.js"></script>
-<script src="core.js"></script>
-<script src="ui.js"></script>
-<script src="qr.js"></script>
-<script src="pdf.js"></script>
-<script src="admin.js"></script>
-
 <script>
+
+/* DATABASE */
+let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
+let currentLocation = null;
 
 /* LOCATION */
 function getLocation(){
 navigator.geolocation.getCurrentPosition(pos=>{
-document.getElementById("liveLoc").innerHTML =
-"📍 LIVE: " + pos.coords.latitude + " , " + pos.coords.longitude;
+currentLocation = {
+lat:pos.coords.latitude,
+lng:pos.coords.longitude
+};
+document.getElementById("liveLoc").innerText =
+"📍 " + currentLocation.lat + "," + currentLocation.lng;
 });
+}
+
+/* ID GENERATOR */
+function generateID(){
+return "TMNP-" + Date.now();
+}
+
+/* SAVE MEMBER */
+function saveMember(){
+
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+
+if(!name || !phone){
+alert("Name & Phone required");
+return;
+}
+
+let file = document.getElementById("photo").files[0];
+let reader = new FileReader();
+
+reader.onload = function(){
+
+let m = {
+id:generateID(),
+name,
+phone,
+district:document.getElementById("district").value,
+email:document.getElementById("email").value,
+voterid:document.getElementById("voterid").value,
+photo:reader.result || "",
+location:currentLocation,
+timestamp:new Date().toLocaleString()
+};
+
+data.push(m);
+localStorage.setItem("tmnp", JSON.stringify(data));
+
+renderCard(m);
+resetForm();
+
+};
+
+if(file) reader.readAsDataURL(file);
+else reader.onload();
+}
+
+/* RENDER CARD */
+function renderCard(m){
+
+document.getElementById("idCard").innerHTML = `
+<div class="card" id="card">
+
+<div class="card-header">
+TMNP GOLD CARD
+</div>
+
+<div class="card-body">
+
+<img src="${m.photo || 'https://via.placeholder.com/90'}">
+
+<div class="badge">${m.id}</div>
+
+<div class="smalltxt">${m.name}</div>
+<div class="smalltxt">${m.phone}</div>
+<div class="smalltxt">${m.district}</div>
+
+<div class="smalltxt">${m.email}</div>
+<div class="smalltxt">${m.timestamp}</div>
+
+<div class="qr-box" id="qrcode"></div>
+
+</div>
+</div>
+`;
+
+setTimeout(()=>{
+new QRCode(document.getElementById("qrcode"),{
+text:m.id,
+width:100,
+height:100
+});
+},100);
+
+}
+
+/* RESET */
+function resetForm(){
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("district").value="";
+document.getElementById("email").value="";
+document.getElementById("voterid").value="";
+document.getElementById("photo").value="";
+}
+
+/* PDF DOWNLOAD */
+async function downloadPDF(){
+
+const { jsPDF } = window.jspdf;
+
+const card = document.getElementById("card");
+
+if(!card){
+alert("No Card Found");
+return;
+}
+
+const canvas = await html2canvas(card);
+const img = canvas.toDataURL("image/png");
+
+const pdf = new jsPDF("p","mm","a4");
+pdf.addImage(img,"PNG",10,10,190,250);
+pdf.save("TMNP_CARD.pdf");
 }
 
 </script>
