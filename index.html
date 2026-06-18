@@ -9,29 +9,28 @@
 body{
 margin:0;
 font-family:Arial;
-background:#f1f4f9;
+background:#eef2f7;
 }
 
-/* HEADER DESIGN */
+/* HEADER */
 header{
 background:#0b3d91;
 color:#fff;
-padding:20px;
+padding:15px;
 text-align:center;
 }
 
-header h1{
+header h2{
 margin:0;
-font-size:22px;
 }
 
-header p{
-margin:5px 0 0;
+.header-info{
 font-size:13px;
-opacity:0.9;
+margin-top:5px;
+line-height:1.5;
 }
 
-/* CONTAINER */
+/* MAIN LAYOUT */
 .container{
 max-width:1100px;
 margin:auto;
@@ -41,7 +40,7 @@ grid-template-columns:1fr 1fr;
 gap:20px;
 }
 
-/* LEFT FORM */
+/* FORM */
 .form-box{
 background:#fff;
 padding:20px;
@@ -62,7 +61,6 @@ padding:10px;
 border:none;
 cursor:pointer;
 border-radius:5px;
-margin-top:8px;
 }
 
 .btn{
@@ -77,16 +75,14 @@ color:#fff;
 width:100%;
 }
 
-/* RIGHT CARD */
+/* CARD */
 .card-box{
 display:flex;
 justify-content:center;
-align-items:flex-start;
 }
 
-/* MEMBERSHIP CARD DESIGN */
 .card{
-width:320px;
+width:350px;
 background:#fff;
 border-radius:15px;
 overflow:hidden;
@@ -97,8 +93,8 @@ border-top:8px solid #0b3d91;
 .card-header{
 background:#0b3d91;
 color:#fff;
-padding:10px;
 text-align:center;
+padding:10px;
 font-weight:bold;
 }
 
@@ -116,11 +112,6 @@ border:3px solid #0b3d91;
 margin-bottom:10px;
 }
 
-.card p{
-margin:5px 0;
-font-size:14px;
-}
-
 .badge{
 background:#0b3d91;
 color:#fff;
@@ -128,23 +119,32 @@ padding:5px 10px;
 display:inline-block;
 border-radius:5px;
 font-size:12px;
-margin-top:5px;
+margin:5px 0;
 }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-.container{
-grid-template-columns:1fr;
+p{
+margin:4px 0;
+font-size:14px;
 }
+
+.location-box{
+font-size:12px;
+color:#444;
+margin-top:5px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
-<h1>TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</h1>
-<p>Membership Registration Portal</p>
+<h2>TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</h2>
+
+<div class="header-info">
+📍 No.9, 2nd Cross Street, Gomathipuram, Thiruninravur, Tamilnadu<br>
+🌐 www.tnmnp.org | 📧 tnmnp2025@gmail.com | 📱 +91 8939324309
+</div>
 </header>
 
 <div class="container">
@@ -162,18 +162,22 @@ grid-template-columns:1fr;
 <input id="district" placeholder="District">
 <input type="file" id="photo">
 
-<button class="btn-green" onclick="save()">Submit</button>
+<button class="btn-green" onclick="getLocation()">📍 Get Location</button>
+
+<p id="locText">Location not added</p>
+
+<button class="btn" onclick="save()">Submit</button>
 
 </div>
 
-<!-- CARD PREVIEW -->
+<!-- CARD -->
 <div class="card-box">
 
 <div id="cardArea">
 <div class="card">
 <div class="card-header">TMNP MEMBER CARD</div>
 <div class="card-body">
-<p>No Data</p>
+<p>No Data Yet</p>
 </div>
 </div>
 </div>
@@ -185,6 +189,20 @@ grid-template-columns:1fr;
 <script>
 
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
+let currentLocation = null;
+
+/* LOCATION */
+function getLocation(){
+navigator.geolocation.getCurrentPosition(pos=>{
+currentLocation = {
+lat: pos.coords.latitude,
+lng: pos.coords.longitude
+};
+
+document.getElementById("locText").innerHTML =
+"Lat: " + currentLocation.lat + "<br>Lng: " + currentLocation.lng;
+});
+}
 
 /* SAVE */
 function save(){
@@ -210,7 +228,8 @@ voterid:document.getElementById("voterid").value,
 email:document.getElementById("email").value,
 address:document.getElementById("address").value,
 district:document.getElementById("district").value,
-photo:reader.result || ""
+photo:reader.result || "",
+location: currentLocation
 };
 
 data.push(m);
@@ -227,7 +246,7 @@ reader.onload();
 }
 }
 
-/* CARD DESIGN */
+/* CARD RENDER */
 function renderCard(m){
 
 document.getElementById("cardArea").innerHTML = `
@@ -235,26 +254,36 @@ document.getElementById("cardArea").innerHTML = `
 <div class="card-header">TMNP MEMBER CARD</div>
 
 <div class="card-body">
+
 <img src="${m.photo || ''}">
+
 <div class="badge">${m.id}</div>
 
 <p><b>Name:</b> ${m.name}</p>
 <p><b>Phone:</b> ${m.phone}</p>
-<p><b>Voter ID:</b> ${m.voterid}</p>
+<p><b>Email:</b> ${m.email}</p>
 <p><b>District:</b> ${m.district}</p>
+
+<div class="location-box">
+<b>Latitude:</b> ${m.location?.lat || 'Not Found'}<br>
+<b>Longitude:</b> ${m.location?.lng || 'Not Found'}
 </div>
 
+</div>
 </div>
 `;
 }
 
 /* RESET */
 function reset(){
+
 ["name","phone","voterid","email","address","district"].forEach(id=>{
 document.getElementById(id).value="";
 });
 
 document.getElementById("photo").value="";
+document.getElementById("locText").innerHTML="Location not added";
+currentLocation = null;
 }
 
 </script>
