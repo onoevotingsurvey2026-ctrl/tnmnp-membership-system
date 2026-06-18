@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System V3 FIX</title>
+<title>TMNP Membership System V5</title>
 
 <style>
 body{
@@ -12,15 +12,17 @@ font-family:Arial;
 background:#f2f2f2;
 }
 
+/* HEADER */
 header{
 background:#0b3d91;
 color:#fff;
-padding:20px;
+padding:18px;
 text-align:center;
-font-size:22px;
+font-size:20px;
 font-weight:bold;
 }
 
+/* CONTAINER */
 .container{
 max-width:1000px;
 margin:auto;
@@ -35,24 +37,29 @@ border-radius:10px;
 display:flex;
 gap:10px;
 margin-bottom:15px;
+flex-wrap:wrap;
 }
 
 .nav button{
-padding:10px;
+padding:10px 15px;
 border:none;
 cursor:pointer;
 border-radius:5px;
+font-weight:bold;
 }
 
 .active{background:#0b3d91;color:#fff;}
 .inactive{background:#ddd;}
 
+/* INPUT */
 input{
 width:100%;
 padding:10px;
 margin:6px 0;
+box-sizing:border-box;
 }
 
+/* BUTTONS */
 button{
 padding:10px;
 border:none;
@@ -63,11 +70,13 @@ border-radius:5px;
 .btn-green{background:green;color:#fff;}
 .btn-blue{background:#0b3d91;color:#fff;}
 
+/* CARD */
 .card{
 border:2px solid #0b3d91;
 padding:15px;
 margin-top:10px;
 border-radius:10px;
+background:#fff;
 }
 
 .hidden{display:none;}
@@ -76,6 +85,7 @@ border-radius:10px;
 background:#eee;
 padding:10px;
 margin-top:10px;
+border-radius:5px;
 }
 </style>
 </head>
@@ -83,11 +93,12 @@ margin-top:10px;
 <body>
 
 <header>
-TMNP Membership System
+TMNP Membership System V5
 </header>
 
 <div class="container">
 
+<!-- NAV -->
 <div class="nav">
 <button class="active" onclick="showTab('register',event)">Register</button>
 <button class="inactive" onclick="showTab('members',event)">Members</button>
@@ -105,7 +116,6 @@ TMNP Membership System
 <input id="email" placeholder="Email">
 <input id="address" placeholder="Address">
 <input id="district" placeholder="District">
-
 <input type="file" id="photo">
 
 <button class="btn-green" onclick="getLocation()">📍 Get Location</button>
@@ -121,69 +131,77 @@ TMNP Membership System
 
 <!-- MEMBERS -->
 <div id="membersTab" class="hidden">
-<h3>Members</h3>
+<h3>Members List</h3>
 <div id="membersList"></div>
 </div>
 
 <!-- REPORTS -->
 <div id="reportsTab" class="hidden">
 <h3>Reports</h3>
-<button class="btn-green" onclick="downloadPDF()">PDF</button>
-<button class="btn-green" onclick="exportExcel()">Excel</button>
+<button class="btn-green" onclick="downloadPDF()">Download PDF</button>
+<button class="btn-green" onclick="exportExcel()">Download Excel</button>
 </div>
 
 </div>
 
 <script>
 
+/* DATA */
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
 let currentLocation = null;
 
-/* TAB FIX */
+/* TAB SYSTEM FIXED */
 function showTab(tab, event){
 
-registerTab.classList.add("hidden");
-membersTab.classList.add("hidden");
-reportsTab.classList.add("hidden");
+document.getElementById("registerTab").classList.add("hidden");
+document.getElementById("membersTab").classList.add("hidden");
+document.getElementById("reportsTab").classList.add("hidden");
 
 document.querySelectorAll(".nav button").forEach(b=>{
 b.classList.remove("active");
 b.classList.add("inactive");
 });
 
-if(tab==="register") registerTab.classList.remove("hidden");
-if(tab==="members") { membersTab.classList.remove("hidden"); renderMembers(); }
-if(tab==="reports") reportsTab.classList.remove("hidden");
+if(tab==="register") document.getElementById("registerTab").classList.remove("hidden");
+if(tab==="members"){
+document.getElementById("membersTab").classList.remove("hidden");
+renderMembers();
+}
+if(tab==="reports") document.getElementById("reportsTab").classList.remove("hidden");
 
 event.target.classList.add("active");
 }
 
 /* LOCATION */
 function getLocation(){
+if(!navigator.geolocation){
+alert("Location not supported");
+return;
+}
+
 navigator.geolocation.getCurrentPosition(pos=>{
 currentLocation={
 lat:pos.coords.latitude,
 lng:pos.coords.longitude
 };
 
-mapBox.innerHTML =
+document.getElementById("mapBox").innerHTML =
 "Lat: " + currentLocation.lat + "<br>Lng: " + currentLocation.lng;
 });
 }
 
-/* SAVE FIXED */
+/* SAVE */
 function save(){
-
-let file = document.getElementById("photo").files[0];
 
 let name = document.getElementById("name").value;
 let phone = document.getElementById("phone").value;
 
-if(!name || !phone){
+if(name.trim()==="" || phone.trim()===""){
 alert("Name & Phone required");
 return;
 }
 
+let file = document.getElementById("photo").files[0];
 let reader = new FileReader();
 
 reader.onload = function(){
@@ -197,7 +215,7 @@ voterid:document.getElementById("voterid").value,
 email:document.getElementById("email").value,
 address:document.getElementById("address").value,
 district:document.getElementById("district").value,
-photo:reader.result,
+photo:reader.result || "",
 location:currentLocation
 };
 
@@ -234,25 +252,29 @@ document.getElementById("idCard").innerHTML = `
 function renderMembers(){
 
 let html = "";
+
 data.forEach(m=>{
 html += `
 <div class="card">
 <b>${m.name}</b><br>
-${m.phone} - ${m.district}
-</div>`;
+${m.phone} | ${m.district}
+</div>
+`;
 });
 
-document.getElementById("membersList").innerHTML = html || "No members";
+document.getElementById("membersList").innerHTML =
+html || "No members found";
 }
 
 /* RESET */
 function resetForm(){
+
 ["name","phone","voterid","email","address","district"].forEach(id=>{
-document.getElementById(id).value = "";
+document.getElementById(id).value="";
 });
 
-document.getElementById("photo").value = "";
-document.getElementById("mapBox").innerHTML = "Location not added";
+document.getElementById("photo").value="";
+document.getElementById("mapBox").innerHTML="Location not added";
 }
 
 /* PDF */
