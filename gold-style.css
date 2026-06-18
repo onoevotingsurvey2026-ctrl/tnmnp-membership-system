@@ -1,96 +1,64 @@
 body{
 margin:0;
 font-family:Arial;
-background:#eef2f7;
+background:linear-gradient(120deg,#eef2f7,#ffffff,#eef2f7);
 }
 
-/* HEADER */
+/* HEADER ANIMATION */
 header{
-background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);
+background:linear-gradient(90deg,#b8860b,#ffd700,#ff8c00,#b8860b);
+background-size:300% 300%;
+animation: headerMove 6s infinite linear;
 text-align:center;
 padding:15px;
 color:#000;
 }
 
-.header-title{
-font-size:18px;
-font-weight:900;
+@keyframes headerMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
-.header-sub{
-font-size:12px;
-margin-top:4px;
-}
-
-/* LAYOUT */
+/* FLOAT EFFECT */
 .container{
 display:flex;
 gap:20px;
+padding:20px;
 max-width:1100px;
 margin:auto;
-padding:20px;
 }
 
-.left{
-flex:1;
+.left,.right{
 background:#fff;
 padding:20px;
-border-radius:10px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
-
-.right{
-flex:1;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#fff;
-border-radius:10px;
-padding:20px;
-}
-
-/* INPUT */
-input{
-width:100%;
-padding:10px;
-margin:6px 0;
-border:1px solid #ccc;
-border-radius:5px;
-}
-
-/* BUTTONS */
-button{
-width:100%;
-padding:10px;
-margin-top:6px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
-
-.btn{background:#b8860b;color:#fff;}
-.btn-green{background:green;color:#fff;}
-.btn-blue{background:#0b3d91;color:#fff;}
 
 /* CARD ANIMATION */
 @keyframes floatCard{
 0%{transform:translateY(0);}
-50%{transform:translateY(-6px);}
+50%{transform:translateY(-10px);}
 100%{transform:translateY(0);}
 }
 
 @keyframes glow{
-0%{box-shadow:0 0 10px #b8860b;}
+0%{box-shadow:0 0 8px #b8860b;}
 50%{box-shadow:0 0 25px #ffd700;}
-100%{box-shadow:0 0 10px #b8860b;}
+100%{box-shadow:0 0 8px #b8860b;}
 }
 
-/* CARD */
 .card{
-width:100%;
 max-width:350px;
 border-radius:18px;
 animation: floatCard 3s ease-in-out infinite;
 border:2px solid #b8860b;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.03);
 }
 
 .card-header{
@@ -98,11 +66,6 @@ background:linear-gradient(45deg,#b8860b,#ffd700,#ff8c00);
 text-align:center;
 padding:10px;
 font-weight:900;
-}
-
-.card-body{
-padding:15px;
-text-align:center;
 }
 
 .card img{
@@ -113,22 +76,12 @@ border:3px solid #ffd700;
 animation: glow 2s infinite;
 }
 
-.badge{
-background:#b8860b;
-color:#fff;
-padding:5px 10px;
-border-radius:20px;
-display:inline-block;
-margin:5px;
+/* BUTTONS ANIMATION */
+button{
+transition:0.3s;
 }
 
-.smalltxt{
-font-size:13px;
-margin:4px;
-}
-
-@media(max-width:900px){
-.container{
-flex-direction:column;
-}
+button:hover{
+transform:scale(1.05);
+opacity:0.9;
 }
