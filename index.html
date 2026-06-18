@@ -3,77 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System V6</title>
+<title>TMNP Membership System V7</title>
 
 <style>
+body{
+margin:0;
+font-family:Arial;
+background:#eef2f7;
+}
 
-/* GOLD HEADER */
+/* HEADER */
 header{
 background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);
 color:#000;
-padding:15px;
 text-align:center;
-position:relative;
-overflow:hidden;
-}
-
-/* ANIMATION EFFECT */
-header::before{
-content:"";
-position:absolute;
-width:200%;
-height:200%;
-background:rgba(255,255,255,0.15);
-transform:rotate(45deg);
-animation:shine 4s infinite linear;
-top:-50%;
-left:-50%;
-}
-
-@keyframes shine{
-0%{transform:translateX(-100%) rotate(45deg);}
-100%{transform:translateX(100%) rotate(45deg);}
-}
-
-/* LOGO */
-.logo{
-font-size:22px;
-font-weight:900;
-letter-spacing:1px;
-}
-
-/* SUB TEXT */
-.sub{
-font-size:14px;
+padding:15px;
 font-weight:bold;
 }
 
-.small{
-font-size:12px;
-}
-
-/* CONTAINER */
+/* MAIN GRID (EQUAL HEIGHT) */
 .container{
+display:flex;
+gap:20px;
 max-width:1100px;
 margin:auto;
 padding:20px;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
+align-items:stretch;
 }
 
-/* FORM */
-.form{
+/* LEFT FORM */
+.left{
+flex:1;
 background:#fff;
 padding:20px;
 border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
+display:flex;
+flex-direction:column;
 }
 
+/* RIGHT CARD */
+.right{
+flex:1;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* INPUT */
 input{
 width:100%;
 padding:10px;
 margin:6px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 /* BUTTON */
@@ -82,6 +69,7 @@ padding:10px;
 border:none;
 cursor:pointer;
 border-radius:5px;
+margin-top:8px;
 }
 
 .btn{
@@ -90,25 +78,26 @@ color:#fff;
 width:100%;
 }
 
-/* CARD */
+/* CARD DESIGN */
 .card{
+width:100%;
+max-width:350px;
 background:#fff;
 border-radius:15px;
 overflow:hidden;
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 border-top:8px solid #b8860b;
+text-align:center;
 }
 
 .card-header{
 background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);
 padding:10px;
-text-align:center;
-font-weight:900;
+font-weight:bold;
 }
 
 .card-body{
 padding:15px;
-text-align:center;
 }
 
 .card img{
@@ -116,6 +105,7 @@ width:90px;
 height:90px;
 border-radius:50%;
 border:3px solid #b8860b;
+margin-top:10px;
 }
 
 .badge{
@@ -123,55 +113,35 @@ background:#b8860b;
 color:#fff;
 padding:5px 10px;
 display:inline-block;
-margin-top:5px;
 border-radius:5px;
-}
-
-.loc{
-font-size:12px;
 margin-top:5px;
-color:#333;
+font-size:12px;
 }
 
+.small{
+font-size:13px;
+margin:4px 0;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+.container{
+flex-direction:column;
+}
+}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
-
-<div class="logo">
-TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM
-</div>
-
-<div class="sub">
-தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்
-</div>
-
-<div class="small">
-President / General Secretary : N. RAMAN
-</div>
-
-<div class="small">
-🏢 Head Office: No.9, 2nd Cross Street, Gomathipuram, Thiruninravur, Tamil Nadu - 602024
-</div>
-
-<div class="small">
-🌐 https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
-</div>
-
-<div class="small" id="liveLoc">
-📍 Location: Not Activated
-</div>
-
+TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - MEMBERSHIP SYSTEM
 </header>
 
-<!-- BODY -->
 <div class="container">
 
-<!-- FORM -->
-<div class="form">
+<!-- LEFT SIDE FORM -->
+<div class="left">
 
 <h3>Membership Registration</h3>
 
@@ -183,13 +153,16 @@ President / General Secretary : N. RAMAN
 <input id="district" placeholder="District">
 <input type="file" id="photo">
 
-<button class="btn" onclick="getLocation()">📍 Activate Location</button>
 <button class="btn" onclick="save()">Submit</button>
 
 </div>
 
-<!-- CARD -->
-<div id="cardArea"></div>
+<!-- RIGHT SIDE CARD -->
+<div class="right" id="cardArea">
+
+<div style="color:#777;">Submit after registration to generate card</div>
+
+</div>
 
 </div>
 
@@ -197,20 +170,6 @@ President / General Secretary : N. RAMAN
 
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
 let currentLocation = null;
-
-/* LOCATION */
-function getLocation(){
-navigator.geolocation.getCurrentPosition(pos=>{
-
-currentLocation = {
-lat: pos.coords.latitude,
-lng: pos.coords.longitude
-};
-
-document.getElementById("liveLoc").innerHTML =
-"📍 LIVE LOCATION: " + currentLocation.lat + " , " + currentLocation.lng;
-});
-}
 
 /* SAVE */
 function save(){
@@ -236,8 +195,7 @@ voterid:document.getElementById("voterid").value,
 email:document.getElementById("email").value,
 address:document.getElementById("address").value,
 district:document.getElementById("district").value,
-photo:reader.result || "",
-location:currentLocation
+photo:reader.result || ""
 };
 
 data.push(m);
@@ -267,18 +225,15 @@ TMNP MEMBER CARD
 <div class="card-body">
 
 <img src="${m.photo || ''}">
+
 <div class="badge">${m.id}</div>
 
-<p><b>Name:</b> ${m.name}</p>
-<p><b>Phone:</b> ${m.phone}</p>
-<p><b>Voter ID:</b> ${m.voterid}</p>
-<p><b>Address:</b> ${m.address}</p>
-<p><b>District:</b> ${m.district}</p>
-
-<div class="loc">
-<b>Latitude:</b> ${m.location?.lat || 'N/A'}<br>
-<b>Longitude:</b> ${m.location?.lng || 'N/A'}
-</div>
+<div class="small"><b>Name:</b> ${m.name}</div>
+<div class="small"><b>Phone:</b> ${m.phone}</div>
+<div class="small"><b>Voter ID:</b> ${m.voterid}</div>
+<div class="small"><b>Email:</b> ${m.email}</div>
+<div class="small"><b>Address:</b> ${m.address}</div>
+<div class="small"><b>District:</b> ${m.district}</div>
 
 </div>
 </div>
