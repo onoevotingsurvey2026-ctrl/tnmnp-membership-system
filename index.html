@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP Membership System V7</title>
+<title>TMNP Membership System V8</title>
 
 <style>
 body{
@@ -15,13 +15,22 @@ background:#eef2f7;
 /* HEADER */
 header{
 background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);
-color:#000;
-text-align:center;
 padding:15px;
-font-weight:bold;
+text-align:center;
+color:#000;
 }
 
-/* MAIN GRID (EQUAL HEIGHT) */
+.header-title{
+font-size:20px;
+font-weight:900;
+}
+
+.small{
+font-size:12px;
+margin-top:3px;
+}
+
+/* MAIN */
 .container{
 display:flex;
 gap:20px;
@@ -31,18 +40,16 @@ padding:20px;
 align-items:stretch;
 }
 
-/* LEFT FORM */
+/* LEFT */
 .left{
 flex:1;
 background:#fff;
 padding:20px;
 border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
-display:flex;
-flex-direction:column;
 }
 
-/* RIGHT CARD */
+/* RIGHT */
 .right{
 flex:1;
 background:#fff;
@@ -50,8 +57,8 @@ padding:20px;
 border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 }
 
 /* INPUT */
@@ -59,41 +66,37 @@ input{
 width:100%;
 padding:10px;
 margin:6px 0;
-border:1px solid #ccc;
-border-radius:5px;
 }
 
-/* BUTTON */
+/* BUTTONS */
 button{
 padding:10px;
 border:none;
 cursor:pointer;
 border-radius:5px;
-margin-top:8px;
-}
-
-.btn{
-background:#b8860b;
-color:#fff;
+margin-top:6px;
 width:100%;
 }
 
-/* CARD DESIGN */
+.btn{background:#b8860b;color:#fff;}
+.btn-green{background:green;color:#fff;}
+.btn-blue{background:#0b3d91;color:#fff;}
+
+/* CARD */
 .card{
 width:100%;
 max-width:350px;
 background:#fff;
 border-radius:15px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
 border-top:8px solid #b8860b;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 text-align:center;
 }
 
 .card-header{
 background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);
 padding:10px;
-font-weight:bold;
+font-weight:900;
 }
 
 .card-body{
@@ -105,7 +108,6 @@ width:90px;
 height:90px;
 border-radius:50%;
 border:3px solid #b8860b;
-margin-top:10px;
 }
 
 .badge{
@@ -113,34 +115,48 @@ background:#b8860b;
 color:#fff;
 padding:5px 10px;
 display:inline-block;
+margin:5px;
 border-radius:5px;
-margin-top:5px;
 font-size:12px;
 }
 
-.small{
+.smalltxt{
 font-size:13px;
-margin:4px 0;
+margin:3px;
 }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-.container{
-flex-direction:column;
+.actions button{
+margin-top:5px;
 }
+
+@media(max-width:900px){
+.container{flex-direction:column;}
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
-TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - MEMBERSHIP SYSTEM
+<div class="header-title">TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM</div>
+
+<div class="small">தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</div>
+<div class="small">Head Office: No.9, Gomathipuram, Thiruninravur, Tamil Nadu</div>
+
+<div class="small">Leader: N. RAMAN (President / General Secretary)</div>
+
+<div class="small">📧 tnmnp2025@gmail.com</div>
+
+<div class="small">🌐 https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/</div>
+
+<div class="small" id="liveLoc">📍 Location: Not Activated</div>
 </header>
 
+<!-- BODY -->
 <div class="container">
 
-<!-- LEFT SIDE FORM -->
+<!-- FORM -->
 <div class="left">
 
 <h3>Membership Registration</h3>
@@ -153,14 +169,19 @@ TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - MEMBERSHIP SYSTEM
 <input id="district" placeholder="District">
 <input type="file" id="photo">
 
+<button class="btn-green" onclick="getLocation()">📍 Get Location</button>
 <button class="btn" onclick="save()">Submit</button>
+
+<button class="btn-blue" onclick="downloadPDF()">Download PDF</button>
+<button class="btn-blue" onclick="downloadExcel()">Download Excel</button>
+<button class="btn-green" onclick="shareWhatsApp()">Share WhatsApp</button>
 
 </div>
 
-<!-- RIGHT SIDE CARD -->
+<!-- CARD -->
 <div class="right" id="cardArea">
 
-<div style="color:#777;">Submit after registration to generate card</div>
+<div>No Member Yet</div>
 
 </div>
 
@@ -170,6 +191,19 @@ TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - MEMBERSHIP SYSTEM
 
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
 let currentLocation = null;
+
+/* LOCATION */
+function getLocation(){
+navigator.geolocation.getCurrentPosition(pos=>{
+currentLocation = {
+lat:pos.coords.latitude,
+lng:pos.coords.longitude
+};
+
+document.getElementById("liveLoc").innerHTML =
+"📍 LIVE: " + currentLocation.lat + " , " + currentLocation.lng;
+});
+}
 
 /* SAVE */
 function save(){
@@ -195,7 +229,8 @@ voterid:document.getElementById("voterid").value,
 email:document.getElementById("email").value,
 address:document.getElementById("address").value,
 district:document.getElementById("district").value,
-photo:reader.result || ""
+photo:reader.result || "",
+location:currentLocation
 };
 
 data.push(m);
@@ -218,22 +253,24 @@ function renderCard(m){
 document.getElementById("cardArea").innerHTML = `
 <div class="card">
 
-<div class="card-header">
-TMNP MEMBER CARD
-</div>
+<div class="card-header">TMNP MEMBER CARD</div>
 
 <div class="card-body">
 
 <img src="${m.photo || ''}">
-
 <div class="badge">${m.id}</div>
 
-<div class="small"><b>Name:</b> ${m.name}</div>
-<div class="small"><b>Phone:</b> ${m.phone}</div>
-<div class="small"><b>Voter ID:</b> ${m.voterid}</div>
-<div class="small"><b>Email:</b> ${m.email}</div>
-<div class="small"><b>Address:</b> ${m.address}</div>
-<div class="small"><b>District:</b> ${m.district}</div>
+<div class="smalltxt"><b>Name:</b> ${m.name}</div>
+<div class="smalltxt"><b>Phone:</b> ${m.phone}</div>
+<div class="smalltxt"><b>Voter ID:</b> ${m.voterid}</div>
+<div class="smalltxt"><b>Email:</b> ${m.email}</div>
+<div class="smalltxt"><b>Address:</b> ${m.address}</div>
+<div class="smalltxt"><b>District:</b> ${m.district}</div>
+
+<div class="smalltxt">
+<b>Lat:</b> ${m.location?.lat || 'N/A'}<br>
+<b>Lng:</b> ${m.location?.lng || 'N/A'}
+</div>
 
 </div>
 </div>
@@ -247,6 +284,55 @@ document.getElementById(id).value="";
 });
 
 document.getElementById("photo").value="";
+}
+
+/* PDF */
+function downloadPDF(){
+window.print();
+}
+
+/* EXCEL */
+function downloadExcel(){
+let rows=[["ID","Name","Phone","VoterID","Email","Address","District","Lat","Lng"]];
+
+data.forEach(d=>{
+rows.push([
+d.id,d.name,d.phone,d.voterid,d.email,d.address,d.district,
+d.location?.lat||"",d.location?.lng||""
+]);
+});
+
+let csv=rows.map(r=>r.join(",")).join("\n");
+
+let blob=new Blob([csv],{type:"text/csv"});
+let a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="TMNP_REPORT.csv";
+a.click();
+}
+
+/* WHATSAPP */
+function shareWhatsApp(){
+
+if(data.length==0){
+alert("No member to share");
+return;
+}
+
+let m = data[data.length-1];
+
+let msg =
+`TMNP MEMBER CARD
+Name: ${m.name}
+Phone: ${m.phone}
+ID: ${m.id}
+District: ${m.district}
+Location: ${m.location?.lat || ''},${m.location?.lng || ''}`;
+
+let url =
+`https://wa.me/918939324309?text=` + encodeURIComponent(msg);
+
+window.open(url,"_blank");
 }
 
 </script>
