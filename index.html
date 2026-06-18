@@ -7,7 +7,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-<link rel="stylesheet" href="style.css">
+<!-- REQUIRED LIBRARIES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<link rel="stylesheet" href="gold-style.css">
 </head>
 
 <body>
@@ -21,7 +25,7 @@ TMNP - தமிழ்நாடு மக்கள் நல்வாழ்வ�
 TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - PERMANENT MEMBERSHIP IDENTITY ☁️
 </div>
 
-<div class="header-sub">Leader: N. RAMAN (President / General Secretary)</div>
+<div class="header-sub">Leader: N. RAMAN</div>
 <div class="header-sub">📧 tnmnp2025@gmail.com</div>
 
 <div id="liveLoc" class="header-sub">📍 Location: Not Activated</div>
@@ -29,7 +33,6 @@ TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - PERMANENT MEMBERSHIP IDENTITY ☁️
 
 <div class="container">
 
-<!-- FORM -->
 <div class="left">
 
 <h3>Membership Registration</h3>
@@ -43,141 +46,35 @@ TAMILNADU MAKKAL NALVAZHVU PERIYAKKAM - PERMANENT MEMBERSHIP IDENTITY ☁️
 <input type="file" id="photo">
 
 <button class="btn-green" onclick="getLocation()">📍 Get Location</button>
-<button class="btn" onclick="save()">Submit</button>
-
-<button class="btn-blue" onclick="downloadCard()">🪪 Download Card / WhatsApp</button>
+<button class="btn" onclick="saveMember()">Submit</button>
+<button class="btn-blue" onclick="downloadPDF()">🪪 Download Card</button>
 
 </div>
 
-<!-- CARD -->
 <div class="right" id="cardArea">
-<div>No Member Yet</div>
+<div id="idCard">No Member Yet</div>
 </div>
 
 </div>
+
+<!-- V6 JS FILES -->
+<script src="storage.js"></script>
+<script src="core.js"></script>
+<script src="ui.js"></script>
+<script src="qr.js"></script>
+<script src="pdf.js"></script>
+<script src="admin.js"></script>
 
 <script>
-
-let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
-let currentLocation = null;
 
 /* LOCATION */
 function getLocation(){
 navigator.geolocation.getCurrentPosition(pos=>{
-currentLocation = {
-lat:pos.coords.latitude,
-lng:pos.coords.longitude
-};
-
 document.getElementById("liveLoc").innerHTML =
-"📍 LIVE: " + currentLocation.lat + " , " + currentLocation.lng;
+"📍 LIVE: " + pos.coords.latitude + " , " + pos.coords.longitude;
 });
 }
 
-/* SAVE */
-function save(){
-
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-
-if(!name || !phone){
-alert("Name & Phone required");
-return;
-}
-
-let file = document.getElementById("photo").files[0];
-let reader = new FileReader();
-
-reader.onload = function(){
-
-let m = {
-id:"TMNP-"+Date.now(),
-name,
-phone,
-voterid:document.getElementById("voterid").value,
-email:document.getElementById("email").value,
-address:document.getElementById("address").value,
-district:document.getElementById("district").value,
-photo:reader.result || "",
-location:currentLocation
-};
-
-data.push(m);
-localStorage.setItem("tmnp", JSON.stringify(data));
-
-renderCard(m);
-reset();
-};
-
-if(file){
-reader.readAsDataURL(file);
-}else{
-reader.onload();
-}
-}
-
-/* CARD */
-function renderCard(m){
-
-document.getElementById("cardArea").innerHTML = `
-<div class="card" id="tmnpCard">
-
-<div class="card-header">
-<div class="title">TMNP IDENTITY</div>
-<div class="subtitle">PERMANENT MEMBERSHIP CARD ☁️</div>
-</div>
-
-<div class="card-body">
-
-<img src="${m.photo || ''}">
-<div class="badge">${m.id}</div>
-
-<div class="smalltxt"><b>Name:</b> ${m.name}</div>
-<div class="smalltxt"><b>Phone:</b> ${m.phone}</div>
-<div class="smalltxt"><b>Voter ID:</b> ${m.voterid}</div>
-<div class="smalltxt"><b>Email:</b> ${m.email}</div>
-<div class="smalltxt"><b>Address:</b> ${m.address}</div>
-<div class="smalltxt"><b>District:</b> ${m.district}</div>
-
-<div class="smalltxt">
-<b>Lat:</b> ${m.location?.lat || 'N/A'}<br>
-<b>Lng:</b> ${m.location?.lng || 'N/A'}
-</div>
-
-</div>
-</div>
-`;
-}
-
-/* RESET */
-function reset(){
-["name","phone","voterid","email","address","district"].forEach(id=>{
-document.getElementById(id).value="";
-});
-document.getElementById("photo").value="";
-}
-
-/* DOWNLOAD + WHATSAPP */
-function downloadCard(){
-
-html2canvas(document.getElementById("tmnpCard")).then(canvas=>{
-
-let img = canvas.toDataURL("image/png");
-
-/* DOWNLOAD */
-let a = document.createElement("a");
-a.href = img;
-a.download = "TMNP_CARD.png";
-a.click();
-
-/* WHATSAPP */
-let msg = "TMNP MEMBER CARD";
-let url = "https://wa.me/918939324309?text=" + encodeURIComponent(msg);
-window.open(url,"_blank");
-
-});
-
-}
 </script>
 
 </body>
