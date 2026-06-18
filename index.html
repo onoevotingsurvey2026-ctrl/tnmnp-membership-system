@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TMNP V6 CLEAN SYSTEM</title>
+<title>TMNP GOLD SYSTEM V6</title>
 
 <!-- LIBRARIES -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -15,21 +15,76 @@ body{font-family:Arial;margin:0;background:#f4f4f4}
 .container{display:flex;gap:10px;padding:10px}
 .left{width:40%;background:#fff;padding:10px}
 .right{width:60%;background:#fff;padding:10px}
+
 input{width:100%;padding:8px;margin:5px 0}
 button{padding:8px;margin:5px;cursor:pointer}
-.card{width:350px;margin:auto;border:2px solid gold;border-radius:15px;overflow:hidden;background:#fff}
-.card-header{background:gold;padding:10px;text-align:center;font-weight:bold}
-.card-body{text-align:center;padding:10px}
-.card img{width:90px;height:90px;border-radius:50%;border:3px solid gold}
-.badge{background:gold;padding:5px 10px;display:inline-block;margin:5px;border-radius:10px}
-.smalltxt{font-size:13px;margin:3px}
-.qr-box{margin-top:10px}
+
+.card{
+width:350px;margin:auto;
+border:2px solid gold;
+border-radius:15px;
+overflow:hidden;
+background:white;
+}
+
+.card-header{
+background:gold;
+text-align:center;
+padding:10px;
+font-weight:bold;
+}
+
+.card-body{
+text-align:center;
+padding:10px;
+}
+
+.card img{
+width:90px;height:90px;
+border-radius:50%;
+border:3px solid gold;
+}
+
+.badge{
+background:gold;
+padding:5px 10px;
+display:inline-block;
+margin:5px;
+border-radius:10px;
+font-weight:bold;
+}
+
+.smalltxt{
+font-size:13px;
+margin:3px;
+}
+
+.qr-box{
+margin-top:10px;
+}
+
+.card-options{
+margin-top:10px;
+display:flex;
+gap:5px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.card-options button{
+background:gold;
+border:none;
+padding:5px 8px;
+border-radius:5px;
+font-size:12px;
+cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
-<h2 style="text-align:center">TMNP V6 CLEAN SYSTEM</h2>
+<h2 style="text-align:center">TMNP GOLD MEMBERSHIP SYSTEM</h2>
 
 <div class="container">
 
@@ -38,9 +93,10 @@ button{padding:8px;margin:5px;cursor:pointer}
 
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone">
-<input id="district" placeholder="District">
-<input id="email" placeholder="Email">
 <input id="voterid" placeholder="Voter ID">
+<input id="address" placeholder="Address">
+<input id="email" placeholder="Email">
+<input id="district" placeholder="District">
 <input type="file" id="photo">
 
 <button onclick="getLocation()">📍 Get Location</button>
@@ -60,7 +116,6 @@ button{padding:8px;margin:5px;cursor:pointer}
 
 <script>
 
-/* DATABASE */
 let data = JSON.parse(localStorage.getItem("tmnp") || "[]");
 let currentLocation = null;
 
@@ -76,12 +131,12 @@ document.getElementById("liveLoc").innerText =
 });
 }
 
-/* ID GENERATOR */
+/* ID */
 function generateID(){
 return "TMNP-" + Date.now();
 }
 
-/* SAVE MEMBER */
+/* SAVE */
 function saveMember(){
 
 let name = document.getElementById("name").value;
@@ -98,15 +153,16 @@ let reader = new FileReader();
 reader.onload = function(){
 
 let m = {
-id:generateID(),
+id: generateID(),
 name,
 phone,
-district:document.getElementById("district").value,
-email:document.getElementById("email").value,
-voterid:document.getElementById("voterid").value,
-photo:reader.result || "",
-location:currentLocation,
-timestamp:new Date().toLocaleString()
+voterid: document.getElementById("voterid").value,
+address: document.getElementById("address").value,
+email: document.getElementById("email").value,
+district: document.getElementById("district").value,
+photo: reader.result || "",
+location: currentLocation,
+timestamp: new Date().toLocaleString()
 };
 
 data.push(m);
@@ -121,14 +177,14 @@ if(file) reader.readAsDataURL(file);
 else reader.onload();
 }
 
-/* RENDER CARD */
+/* CARD */
 function renderCard(m){
 
 document.getElementById("idCard").innerHTML = `
 <div class="card" id="card">
 
 <div class="card-header">
-TMNP GOLD CARD
+TMNP GOLD MEMBERSHIP CARD
 </div>
 
 <div class="card-body">
@@ -137,13 +193,28 @@ TMNP GOLD CARD
 
 <div class="badge">${m.id}</div>
 
-<div class="smalltxt">${m.name}</div>
-<div class="smalltxt">${m.phone}</div>
-<div class="smalltxt">${m.district}</div>
+<div class="smalltxt"><b>Name:</b> ${m.name}</div>
+<div class="smalltxt"><b>Phone:</b> ${m.phone}</div>
+<div class="smalltxt"><b>Voter ID:</b> ${m.voterid}</div>
+<div class="smalltxt"><b>Address:</b> ${m.address}</div>
+<div class="smalltxt"><b>Email:</b> ${m.email}</div>
+<div class="smalltxt"><b>District:</b> ${m.district}</div>
+<div class="smalltxt"><b>Date:</b> ${m.timestamp}</div>
 
-<div class="smalltxt">${m.email}</div>
-<div class="smalltxt">${m.timestamp}</div>
+<div class="smalltxt">
+<b>Location:</b> ${m.location?.lat || 'N/A'}, ${m.location?.lng || 'N/A'}
+</div>
 
+<!-- OPTIONS -->
+<div class="card-options">
+
+<button onclick="downloadPDF()">PDF</button>
+<button onclick="window.print()">Print</button>
+<button onclick="shareWhatsApp()">WhatsApp</button>
+
+</div>
+
+<!-- QR -->
 <div class="qr-box" id="qrcode"></div>
 
 </div>
@@ -164,13 +235,14 @@ height:100
 function resetForm(){
 document.getElementById("name").value="";
 document.getElementById("phone").value="";
-document.getElementById("district").value="";
-document.getElementById("email").value="";
 document.getElementById("voterid").value="";
+document.getElementById("address").value="";
+document.getElementById("email").value="";
+document.getElementById("district").value="";
 document.getElementById("photo").value="";
 }
 
-/* PDF DOWNLOAD */
+/* PDF */
 async function downloadPDF(){
 
 const { jsPDF } = window.jspdf;
@@ -188,6 +260,22 @@ const img = canvas.toDataURL("image/png");
 const pdf = new jsPDF("p","mm","a4");
 pdf.addImage(img,"PNG",10,10,190,250);
 pdf.save("TMNP_CARD.pdf");
+}
+
+/* WHATSAPP */
+function shareWhatsApp(){
+
+const card = document.getElementById("card");
+
+html2canvas(card).then(canvas=>{
+
+let msg = "TMNP GOLD CARD GENERATED";
+
+let url = "https://wa.me/918939324309?text=" + encodeURIComponent(msg);
+
+window.open(url,"_blank");
+
+});
 }
 
 </script>
