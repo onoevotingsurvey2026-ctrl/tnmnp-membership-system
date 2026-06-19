@@ -60,9 +60,10 @@ margin:3px;
 }
 
 .qr-box{
-margin-top:10px;
+margin-top:15px;
+display:flex;
+justify-content:center;
 }
-
 .card-options{
 margin-top:10px;
 display:flex;
@@ -147,10 +148,11 @@ https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
 <button onclick="getLocation()">📍 Get Location</button>
 <button onclick="saveMember()">💾 Membership Submit</button>
 <button onclick="downloadPDF()">📄 PDF</button>
+<button onclick="downloadPNG()">🖼 PNG</button>
 <button onclick="window.print()">🖨 Print</button>
 <button onclick="shareWhatsApp()">📲 WhatsApp</button>
-<div id="liveLoc">Location: Not Set</div>
 
+<div id="liveLoc">Location: Not Set</div>
 </div>
 
 <!-- CARD -->
@@ -167,16 +169,27 @@ let currentLocation = null;
 
 /* LOCATION */
 function getLocation(){
-navigator.geolocation.getCurrentPosition(pos=>{
+
+navigator.geolocation.getCurrentPosition(
+
+pos=>{
 currentLocation = {
-lat:pos.coords.latitude,
-lng:pos.coords.longitude
+lat: pos.coords.latitude,
+lng: pos.coords.longitude
 };
+
 document.getElementById("liveLoc").innerText =
 "📍 " + currentLocation.lat + "," + currentLocation.lng;
-});
+
+},
+
+err=>{
+alert("Location Permission Denied");
 }
 
+);
+
+}
 /* ID */
 function generateID(){
 return "TMNP-" + Date.now();
@@ -208,9 +221,8 @@ email: document.getElementById("email").value,
 district: document.getElementById("district").value,
 photo: reader.result || "",
 location: currentLocation,
-timestamp: new Date().toLocaleString()
+timestamp: new Date().toISOString()
 };
-
 data.push(m);
 localStorage.setItem("tmnp", JSON.stringify(data));
 
@@ -231,101 +243,61 @@ document.getElementById("idCard").innerHTML = `
 
 <div style="text-align:center;padding:15px;background:linear-gradient(90deg,#b8860b,#ffd700,#ff8c00);color:#000;">
 
-<h2> TMNP GOLD MEMBERSHIP CARD</h2>
+<h3>TMNP GOLD MEMBERSHIP CARD</h3>
 
-<div><b>Tamilnadu Makkal Nalvazhvu Periyakkam Permanent Membership Identity</b></div>
+<div><b>Tamilnadu Makkal Nalvazhvu Periyakkam</b></div>
+<div><b>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</b></div>
 
-<div><b>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம் நிரந்தர உறுப்பினர் அடையாளம்</b></div>
-
-<div><b>இந்திய தேர்தல் ஆணையம் பதிவு எண்:56/219/2018-2021/PPS-I நாள்: 05.03.2021</b></div>
-
-<br>
-
-<div>
-<b>Party Leader / President & General Secretary:</b>
-N. Raman
+<div style="font-size:12px;margin-top:5px;">
+Election Commission Reg. No:
+56/219/2018-2021/PPS-I
 </div>
 
-<div>
-<b>Head Quarters Address:</b><br>
-No.9, First Floor,<br>
-2nd Cross Street,<br>
-Gomathipuram,<br>
-Thiruninravur, Pincode – 602024 <br>
-Thiruvallur District<br>
-Tamil Nadu, India
+<div style="font-size:12px;">
+President & General Secretary: N. Raman
 </div>
-
-<div>
-<b>Email:</b>
-tnmnp2025@gmail.com
-</div>
-
-<div>
-<b>Website:</b><br>
-https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
-</div>
-
-<br>
-
-<div>நேர்மை • நலன் • நம்பிக்கை</div>
-
-<div>மக்களுக்காக • மக்களால் • நல்லாட்சி மலர இன்றே உறுப்பினராகுங்கள்</div>
-
-<div><b>🌟 JOIN WITH US 🌟</b></div>
 
 </div>
 
-<div class="container">
+<div class="card-body">
 
-<!-- FORM -->
-<div class="left">
-
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
-<input id="voterid" placeholder="Voter ID">
-<input id="address" placeholder="Address">
-<input id="email" placeholder="Email">
-<input id="district" placeholder="District">
-<input type="file" id="photo">
-
-<button onclick="getLocation()">📍 Get Location</button>
-<button onclick="saveMember()">💾 Membership Submit</button>
-<button onclick="downloadPDF()">📄 PDF</button>
-<button onclick="window.print()">🖨 Print</button>
-<button onclick="shareWhatsApp()">📲 WhatsApp</button>
-<div id="liveLoc">Location: Not Set</div>
-
-</div>
-
-</div><div class="card-body">
-
-<img src="${m.photo || 'https://via.placeholder.com/90'}">
-
+<img src="${m.photo || 'member.png'}">
 <div class="badge">${m.id}</div>
 
 <div class="smalltxt"><b>Name:</b> ${m.name}</div>
 <div class="smalltxt"><b>Phone:</b> ${m.phone}</div>
+
 <div class="smalltxt"><b>Voter ID:</b> ${m.voterid}</div>
+
 <div class="smalltxt"><b>Address:</b> ${m.address}</div>
+
 <div class="smalltxt"><b>Email:</b> ${m.email}</div>
+
 <div class="smalltxt"><b>District:</b> ${m.district}</div>
-<div class="smalltxt"><b>Date:</b> ${m.timestamp}</div>
 
 <div class="smalltxt">
-<b>Location:</b> ${m.location?.lat || 'N/A'}, ${m.location?.lng || 'N/A'}
+<b>Date:</b>
+${new Date(m.timestamp).toLocaleString('en-IN',{
+day:'2-digit',
+month:'2-digit',
+year:'numeric',
+hour:'2-digit',
+minute:'2-digit',
+second:'2-digit'
+})}
 </div>
 
-<!-- OPTIONS -->
-<div class="card-options">
+<div class="smalltxt">
+📍 ${m.location ?
+`${m.location.lat.toFixed(6)}, ${m.location.lng.toFixed(6)}`
+: 'Location Not Available'}
+</div>
 
-<button onclick="downloadPDF()">📄 PDF</button>
-
+<div class="card-options"><button onclick="downloadPDF()">📄 PDF</button>
+<button onclick="downloadPNG()">🖼 PNG</button>
 <button onclick="window.print()">🖨 Print</button>
-
 <button onclick="shareWhatsApp()">📲 WhatsApp</button>
-
-</div><!-- QR -->
+</div>
 <div class="qr-box" id="qrcode"></div>
 
 </div>
@@ -333,11 +305,19 @@ https://onoevotingsurvey2026-ctrl.github.io/tnmnp-membership-system/
 `;
 
 setTimeout(()=>{
-new QRCode(document.getElementById("qrcode"),{
-text:m.id,
+const qr = document.getElementById("qrcode");
+qr.innerHTML = "";
+
+new QRCode(qr,{
+text:
+"ID: " + m.id +
+"\nName: " + m.name +
+"\nPhone: " + m.phone +
+"\nDistrict: " + m.district,
 width:100,
 height:100
 });
+
 },100);
 
 }
@@ -351,9 +331,31 @@ document.getElementById("address").value="";
 document.getElementById("email").value="";
 document.getElementById("district").value="";
 document.getElementById("photo").value="";
+
+}
+/* PNG DOWNLOAD */
+async function downloadPNG(){
+
+const card = document.getElementById("card");
+
+if(!card){
+alert("No Card Found");
+return;
 }
 
-/* PDF */
+const canvas = await html2canvas(card,{
+scale:2,
+useCORS:true
+});
+
+const link = document.createElement("a");
+link.download = "TMNP_CARD.png";
+link.href = canvas.toDataURL("image/png");
+link.click();
+
+}
+
+/* PDF DOWNLOAD */
 async function downloadPDF(){
 
 const { jsPDF } = window.jspdf;
@@ -365,30 +367,39 @@ alert("No Card Found");
 return;
 }
 
-const canvas = await html2canvas(card);
+const canvas = await html2canvas(card,{
+scale:2,
+useCORS:true
+});
+
 const img = canvas.toDataURL("image/png");
 
 const pdf = new jsPDF("p","mm","a4");
-pdf.addImage(img,"PNG",10,10,190,250);
-pdf.save("TMNP_CARD.pdf");
-}
 
-/* WHATSAPP */
+const pdfWidth = 190;
+const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+pdf.addImage(img,"PNG",10,10,pdfWidth,pdfHeight);pdf.save("TMNP_CARD.pdf");
+
+}
 function shareWhatsApp(){
 
 const card = document.getElementById("card");
 
-html2canvas(card).then(canvas=>{
+if(!card){
+alert("No Card Found");
+return;
+}
 
 let msg = "TMNP GOLD CARD GENERATED";
 
-let url = "https://wa.me/918939324309?text=" + encodeURIComponent(msg);
+let url =
+"https://wa.me/918939324309?text=" +
+encodeURIComponent(msg);
 
 window.open(url,"_blank");
 
-});
 }
-
 </script>
 
 </body>
