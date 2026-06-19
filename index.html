@@ -84,8 +84,23 @@ cursor:pointer;
 
 <body>
 
-<h2 style="text-align:center">TMNP GOLD MEMBERSHIP SYSTEM</h2>
+<div style="text-align:center;padding:15px;background:linear-gradient(90deg,#b8860b,#ffd700,#ff8c00);color:#000;">
 
+<h2>TMNP - Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
+
+<div><b>Permanent Membership Identity</b></div>
+
+<div><b>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</b></div>
+
+<div><b>நிரந்தர உறுப்பினர் அடையாளம்</b></div>
+
+<div>நேர்மை • நலன் • நம்பிக்கை</div>
+
+<div>மக்களுக்காக • மக்களால் • நல்லாட்சி மலர</div>
+
+<div><b>🌟 JOIN WITH US 🌟</b></div>
+
+</div>
 <div class="container">
 
 <!-- FORM -->
@@ -100,9 +115,10 @@ cursor:pointer;
 <input type="file" id="photo">
 
 <button onclick="getLocation()">📍 Get Location</button>
-<button onclick="saveMember()">💾 Save Member</button>
-<button onclick="downloadPDF()">📄 Download PDF</button>
-
+<button onclick="saveMember()">💾 Membership Submit</button>
+<button onclick="downloadPDF()">📄 PDF</button>
+<button onclick="window.print()">🖨 Print</button>
+<button onclick="shareWhatsApp()">📲 WhatsApp</button>
 <div id="liveLoc">Location: Not Set</div>
 
 </div>
@@ -183,10 +199,23 @@ function renderCard(m){
 document.getElementById("idCard").innerHTML = `
 <div class="card" id="card">
 
-<div class="card-header">
-TMNP GOLD MEMBERSHIP CARD
-</div>
+<div style="text-align:center;padding:15px;background:linear-gradient(90deg,#b8860b,#ffd700,#ff8c00);color:#000;">
 
+<h2>TMNP - Tamilnadu Makkal Nalvazhvu Periyakkam</h2>
+
+<div><b>Permanent Membership Identity</b></div>
+
+<div><b>தமிழ்நாடு மக்கள் நல்வாழ்வு பேரியக்கம்</b></div>
+
+<div><b>நிரந்தர உறுப்பினர் அடையாளம்</b></div>
+
+<div>நேர்மை • நலன் • நம்பிக்கை</div>
+
+<div>மக்களுக்காக • மக்களால் • நல்லாட்சி மலர</div>
+
+<div><b>🌟 JOIN WITH US 🌟</b></div>
+
+</div>
 <div class="card-body">
 
 <img src="${m.photo || 'https://via.placeholder.com/90'}">
@@ -208,13 +237,13 @@ TMNP GOLD MEMBERSHIP CARD
 <!-- OPTIONS -->
 <div class="card-options">
 
-<button onclick="downloadPDF()">PDF</button>
-<button onclick="window.print()">Print</button>
-<button onclick="shareWhatsApp()">WhatsApp</button>
+<button onclick="downloadPDF()">📄 PDF</button>
 
-</div>
+<button onclick="window.print()">🖨 Print</button>
 
-<!-- QR -->
+<button onclick="shareWhatsApp()">📲 WhatsApp</button>
+
+</div><!-- QR -->
 <div class="qr-box" id="qrcode"></div>
 
 </div>
